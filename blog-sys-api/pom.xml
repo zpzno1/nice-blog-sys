@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!--项目基本信息-->
+    <parent>
+        <artifactId>kiwipeach-blog-root</artifactId>
+        <groupId>cn.kiwipeach.blog</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>cn.kiwipeach.blog</groupId>
+    <artifactId>blog-sys-api</artifactId>
+    <description>博客系统访问数据库的访问接口以及实现类</description>
+
+    <!--项目依赖-->
+    <dependencies>
+        <!--博客项目核心库-->
+        <dependency>
+            <groupId>cn.kiwipeach.blog</groupId>
+            <artifactId>blog-sys-core</artifactId><!--bloy-sys-core-->
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <!--mybaits-plus的场景启动器-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId><!-- mybatis-plus 替换原来Mybatis官网提供的 -->
+            <version>${mybatis-plus-boot-starter.version}</version>
+        </dependency>
+
+    </dependencies>
+
+</project>

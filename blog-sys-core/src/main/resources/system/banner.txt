@@ -1,0 +1,18 @@
+${AnsiColor.BLUE}
+-------------------欢迎来到我的个人博客网站:http://www.kiwipeach.cn-------------------
+${AnsiColor.BLUE}
+${AnsiColor.YELLOW}
+  _    _        _  _          _  __ _            _  _____                    _
+ | |  | |      | || |        | |/ /(_)          (_)|  __ \                  | |
+ | |__| |  ___ | || |  ___   | ' /  _ __      __ _ | |__) |___   __ _   ___ | |__
+ |  __  | / _ \| || | / _ \  |  <  | |\ \ /\ / /| ||  ___// _ \ / _` | / __|| '_ \
+ | |  | ||  __/| || || (_) | | . \ | | \ V  V / | || |   |  __/| (_| || (__ | | | |
+ |_|  |_| \___||_||_| \___/  |_|\_\|_|  \_/\_/  |_||_|    \___| \__,_| \___||_| |_|
+${AnsiColor.YELLOW}
+${AnsiColor.GREEN}
+Application Version: ${application.version}${application.formatted-version}
+Spring Boot Version: ${spring-boot.version}${spring-boot.formatted-version}
+${AnsiColor.GREEN}
+${AnsiColor.BLUE}
+-------------------欢迎来到我的个人博客网站:http://www.kiwipeach.cn-------------------
+${AnsiColor.BLUE}
