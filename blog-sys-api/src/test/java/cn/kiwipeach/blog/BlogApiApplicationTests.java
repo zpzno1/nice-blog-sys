@@ -1,6 +1,6 @@
 package cn.kiwipeach.blog;
 
-import cn.kiwipeach.blog.domain.User;
+import cn.kiwipeach.blog.domain.SysUser;
 import cn.kiwipeach.blog.mapper.UserMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,7 +30,7 @@ public class BlogApiApplicationTests {
 
     @Test
 	public void testUserMapper(){
-        User user = userMapper.selectById("1099501218");
+        SysUser user = userMapper.selectById("1099501218");
         System.out.println(user);
     }
 

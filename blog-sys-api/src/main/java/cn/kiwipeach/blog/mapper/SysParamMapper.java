@@ -22,7 +22,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * 系统参数 Mapper 接口
  *
  * @author kiwipeach [1099501218@qq.com]
- * @create 2018-07-29
+ * @create 2018-08-05
  */
 public interface SysParamMapper extends BaseMapper<SysParam> {
 

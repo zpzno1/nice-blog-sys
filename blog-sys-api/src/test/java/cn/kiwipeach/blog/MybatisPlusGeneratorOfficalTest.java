@@ -105,7 +105,7 @@ public class MybatisPlusGeneratorOfficalTest {
                         // .setDbColumnUnderline(true)//全局下划线命名
                         .setTablePrefix(new String[]{"t_"})// 此处可以修改为您的表前缀
                         .setNaming(NamingStrategy.underline_to_camel)// 表名生成策略
-                        .setInclude(new String[]{"T_USER","T_BLOG","R_TAG_BLOG","SYS_PARAM","SYS_PERMISSION","T_BLOG_CATEGORY","T_BLOG_TAG","T_COMMENT","T_LEAVE_MSG"}) // 需要生成的表
+                        .setInclude(new String[]{"SYS_USER","T_BLOG","R_TAG_BLOG","SYS_PARAM","T_BLOG_CATEGORY","T_BLOG_TAG","T_COMMENT","T_LEAVE_MSG"}) // 需要生成的表
                         // .setExclude(new String[]{"test"}) // 排除生成的表
                         // 自定义实体父类
                         // .setSuperEntityClass("com.baomidou.demo.TestEntity")
@@ -124,7 +124,7 @@ public class MybatisPlusGeneratorOfficalTest {
                 // public static final String ID = "test_id";
                 // .setEntityColumnConstant(true)
                 // 【实体】是否为构建者模型（默认 false）
-                // public User setName(String name) {this.name = name; return this;}
+                // public SysUser setName(String name) {this.name = name; return this;}
                 // .setEntityBuilderModel(true)
                 // 【实体】是否为lombok模型（默认 false）<a href="https://projectlombok.org/">document</a>
                 // .setEntityLombokModel(true)

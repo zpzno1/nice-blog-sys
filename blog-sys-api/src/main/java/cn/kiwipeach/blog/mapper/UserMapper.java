@@ -15,7 +15,7 @@
  */
 package cn.kiwipeach.blog.mapper;
 
-import cn.kiwipeach.blog.domain.User;
+import cn.kiwipeach.blog.domain.SysUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -24,6 +24,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author kiwipeach [1099501218@qq.com]
  * @create 2018-07-29
  */
-public interface UserMapper extends BaseMapper<User> {
+public interface UserMapper extends BaseMapper<SysUser> {
 
 }

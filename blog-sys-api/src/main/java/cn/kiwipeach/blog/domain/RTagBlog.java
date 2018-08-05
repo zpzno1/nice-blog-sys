@@ -24,7 +24,7 @@ import java.io.Serializable;
  * 标签-博客对照表
  *
  * @author kiwipeach [1099501218@qq.com]
- * @create 2018-07-29
+ * @create 2018-08-05
  */
 @TableName("R_TAG_BLOG")
 public class RTagBlog implements Serializable {
