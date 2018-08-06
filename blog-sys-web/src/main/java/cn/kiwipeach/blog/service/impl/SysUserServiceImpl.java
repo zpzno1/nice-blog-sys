@@ -13,20 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.controller;
+package cn.kiwipeach.blog.service.impl;
 
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import cn.kiwipeach.blog.domain.SysUser;
+import cn.kiwipeach.blog.mapper.SysUserMapper;
+import cn.kiwipeach.blog.service.ISysUserService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
- * 网站用户 前端控制器
+ * 网站用户 服务实现类
  *
  * @author kiwipeach [1099501218@qq.com]
- * @create 2018-07-29
+ * @create 2018-08-05
  */
-@Controller
-@RequestMapping("/user")
-public class UserController {
+@Service
+public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements ISysUserService {
 
 }

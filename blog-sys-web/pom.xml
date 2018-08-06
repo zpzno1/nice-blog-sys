@@ -20,12 +20,7 @@
 		<!--项目模块依赖 -->
 		<dependency>
 			<groupId>cn.kiwipeach.blog</groupId>
-			<artifactId>blog-sys-core</artifactId><!--core-->
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>cn.kiwipeach.blog</groupId>
-			<artifactId>blog-sys-api</artifactId><!--api-->
+			<artifactId>blog-sys-auto-config</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<!--springboot场景启动器-->

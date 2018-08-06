@@ -15,15 +15,15 @@
  */
 package cn.kiwipeach.blog.service;
 
-import cn.kiwipeach.blog.domain.SysPermission;
+import cn.kiwipeach.blog.domain.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
- * 权限 服务接口类
+ * 网站用户 服务接口类
  *
  * @author kiwipeach [1099501218@qq.com]
- * @create 2018-07-29
+ * @create 2018-08-05
  */
-public interface ISysPermissionService extends IService<SysPermission> {
+public interface ISysUserService extends IService<SysUser> {
 
 }

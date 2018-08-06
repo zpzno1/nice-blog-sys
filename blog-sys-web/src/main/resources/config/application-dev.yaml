@@ -1,0 +1,88 @@
+
+# 1)系统启动广告
+banner:
+  location: classpath:system/banner.txt
+
+spring:
+# 2)thymeleaf 模板引擎
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    content-type: text/html
+    encoding: UTF-8
+    cache: false
+# 3)数据源配置
+  datasource:
+    username: kiwipeach
+    password: Cnzg8hutIv6NPHhylRPqjvC7OkQOqdb543vwfW5JCfsBnBDtMctnENGO3MfMF3VJo8Q/Ixou8Q/6d2hipLBEew==
+    url: jdbc:oracle:thin:@localhost:1521:ORCL
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    filters: config,stat,wall,slf4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: config.decrypt=true;druid.stat.logSlowSql=true;druid.stat.slowSqlMillis=200;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMDHEqPdRifJ9Y0ci1y3Lt6q1XVXwLJlYYnDnT4O6vTI6fpvsC0msjEUVtHaUUDEgFgv0ekPSuCq68zq4+r8LYkCAwEAAQ==
+
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  typeAliasesPackage: cn.kiwipeach.blog.domain
+#  typeEnumsPackage: com.baomidou.springboot.entity.enums
+  global-config:
+    #刷新mapper 调试神器
+    db-config:
+      #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+      id-type: id_worker
+      #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+      field-strategy: not_empty
+      #驼峰下划线转换
+#      column-underline: false
+      #数据库大写下划线转换
+#      capital-mode: true
+      #逻辑删除配置
+      logic-delete-value: 0
+      logic-not-delete-value: 1
+      db-type: oracle
+    refresh: true
+      #自定义填充策略接口实现
+      #meta-object-handler: com.baomidou.springboot.xxx
+      #自定义SQL注入器
+      #sql-injector: com.baomidou.springboot.xxx
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+server:
+  port: 8825
+
+#shiro配置
+kiwipeach:
+  blog:
+    cookie:
+      name: shrio_remember
+      maxAge: 600
+      domain: localhost
+      httpOnly: true
+    cacheManager:
+      cacheManagerConfigFile: classpath:ehcache.xml
+    credentialsMatcher:
+      hashAlgorithmName: SHA1
+      hashIterations: 1024
+    shiroFilter:
+      loginUrl: /login
+      successUrl: /login/success
+      unauthorizedUrl: /unauthorize
+
+

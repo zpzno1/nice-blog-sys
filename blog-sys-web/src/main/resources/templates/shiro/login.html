@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shiro</title>
+</head>
+<body>
+<h3>测试用户:kiwipeach/123456,其他账号均不能正常登陆</h3>
+<form action="/shrio/login" th:attr="action=@{/user/login}" method="post">
+    <input type="text" value="kiwipeach" name="userName"><br>
+    <input type="password" value="123456" name="password"><br>
+    <input type="checkbox" name="remember" value="1">记住我？<br>
+    <input type="submit" value="提交"><br>
+</form>
+<a href="#" th:href="@{login/success}">登陆成功页面【必须认证】</a>
+<br>
+<a href="#" th:href="@{/remember}">前往记住我页面【认证或者记住我均可】</a>
+</body>
+</html>

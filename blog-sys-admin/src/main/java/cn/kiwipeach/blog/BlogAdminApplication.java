@@ -1,12 +1,12 @@
-package cn.kiwipeach.blog.blogsysadmin;
+package cn.kiwipeach.blog;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BlogSysAdminApplication {
+public class BlogAdminApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BlogSysAdminApplication.class, args);
+		SpringApplication.run(BlogAdminApplication.class, args);
 	}
 }

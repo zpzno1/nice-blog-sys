@@ -6,7 +6,7 @@ banner:
 spring:
 # 2)thymeleaf 模板引擎
   thymeleaf:
-    prefix: /thymeleaf
+    prefix: classpath:/templates/
     suffix: .html
     mode: HTML5
     content-type: text/html

@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 博客分类 前端控制器
  *
  * @author kiwipeach [1099501218@qq.com]
- * @create 2018-07-29
+ * @create 2018-08-05
  */
 @Controller
 @RequestMapping("/blogCategory")

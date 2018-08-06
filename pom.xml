@@ -48,6 +48,7 @@
     <modules>
         <module>blog-sys-core</module>
         <module>blog-sys-api</module>
+        <module>blog-sys-auto-config</module>
         <module>blog-sys-web</module>
         <module>blog-sys-admin</module>
     </modules>
@@ -99,6 +100,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId><!--devtools热部署插件依赖-->
+            <optional>true</optional> <!-- 这个需要为 true 热部署才有效 -->
         </dependency>
     </dependencies>
 
@@ -119,6 +121,16 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <!--maven surefire-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <!--·忽略测试true-->
+                    <skipTests>true</skipTests>
                 </configuration>
             </plugin>
         </plugins>

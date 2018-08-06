@@ -15,10 +15,11 @@
 
     <!--项目依赖-->
     <dependencies>
-        <!--博客项目核心库-->
+
+        <!--博客核心依赖-->
         <dependency>
             <groupId>cn.kiwipeach.blog</groupId>
-            <artifactId>blog-sys-core</artifactId><!--bloy-sys-core-->
+            <artifactId>blog-sys-core</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <!--mybaits-plus的场景启动器-->
@@ -27,7 +28,11 @@
             <artifactId>mybatis-plus-boot-starter</artifactId><!-- mybatis-plus 替换原来Mybatis官网提供的 -->
             <version>${mybatis-plus-boot-starter.version}</version>
         </dependency>
-
+        <!--项目模块依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId><!--springboot web-->
+        </dependency>
     </dependencies>
 
 </project>

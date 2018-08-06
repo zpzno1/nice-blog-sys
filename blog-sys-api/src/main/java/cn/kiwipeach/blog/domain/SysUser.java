@@ -15,7 +15,6 @@
  */
 package cn.kiwipeach.blog.domain;
 
-import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -31,7 +30,6 @@ import java.io.Serializable;
 public class SysUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     /**
      * 用户编号
      */
@@ -51,6 +49,12 @@ public class SysUser implements Serializable {
     private String userName;
 
     /**
+     * 密码
+     */
+    @TableField("PASSWORD")
+    private String password;
+
+    /**
      * 用户昵称
      */
     @TableField("NICK_NAME")
@@ -67,12 +71,6 @@ public class SysUser implements Serializable {
      */
     @TableField("EMAIL")
     private String email;
-
-    /**
-     * 用户状态[-1 禁用 0:未激活 1正常会员]
-     */
-    @TableField("STATUS")
-    private BigDecimal status;
 
     /**
      * 创建时间
@@ -107,6 +105,13 @@ public class SysUser implements Serializable {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     public String getNickName() {
         return nickName;
     }
@@ -127,13 +132,6 @@ public class SysUser implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-    public BigDecimal getStatus() {
-        return status;
-    }
-
-    public void setStatus(BigDecimal status) {
-        this.status = status;
     }
     public LocalDateTime getCreateTime() {
         return createTime;
@@ -156,10 +154,10 @@ public class SysUser implements Serializable {
         "id=" + id +
         ", thirdUserId=" + thirdUserId +
         ", userName=" + userName +
+        ", password=" + password +
         ", nickName=" + nickName +
         ", headUrl=" + headUrl +
         ", email=" + email +
-        ", status=" + status +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +
         "}";

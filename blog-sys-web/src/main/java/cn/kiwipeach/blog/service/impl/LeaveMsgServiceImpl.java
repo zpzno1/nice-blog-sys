@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
  * 留言 服务实现类
  *
  * @author kiwipeach [1099501218@qq.com]
- * @create 2018-07-29
+ * @create 2018-08-05
  */
 @Service
 public class LeaveMsgServiceImpl extends ServiceImpl<LeaveMsgMapper, LeaveMsg> implements ILeaveMsgService {

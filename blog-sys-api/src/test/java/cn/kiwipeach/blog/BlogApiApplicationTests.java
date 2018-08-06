@@ -1,7 +1,7 @@
 package cn.kiwipeach.blog;
 
 import cn.kiwipeach.blog.domain.SysUser;
-import cn.kiwipeach.blog.mapper.UserMapper;
+import cn.kiwipeach.blog.mapper.SysUserMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class BlogApiApplicationTests {
 	private DataSource dataSource;
 
 	@Autowired
-	private UserMapper userMapper;
+	private SysUserMapper sysUserMapper;
 
 	@Test
 	public void contextLoads() throws SQLException {
@@ -29,8 +29,8 @@ public class BlogApiApplicationTests {
     }
 
     @Test
-	public void testUserMapper(){
-        SysUser user = userMapper.selectById("1099501218");
+    public void testUserMapper(){
+        SysUser user = sysUserMapper.selectById("1099501218");
         System.out.println(user);
     }
 

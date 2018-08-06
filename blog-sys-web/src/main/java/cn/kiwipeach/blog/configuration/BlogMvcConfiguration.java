@@ -25,6 +25,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * @create 2018/07/28
  */
 @Configuration
-public class KiWiPeachMvcConfiguration extends WebMvcConfigurerAdapter {
+public class BlogMvcConfiguration extends WebMvcConfigurerAdapter {
+
 
 }

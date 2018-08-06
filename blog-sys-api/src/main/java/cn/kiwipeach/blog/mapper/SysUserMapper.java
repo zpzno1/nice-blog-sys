@@ -13,28 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.configuration;
+package cn.kiwipeach.blog.mapper;
 
-import com.alibaba.druid.pool.DruidDataSource;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-import javax.sql.DataSource;
+import cn.kiwipeach.blog.domain.SysUser;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
- * druid数据源相关配置类
+ * 网站用户 Mapper 接口
  *
  * @author kiwipeach [1099501218@qq.com]
- * @create 2018/07/28
+ * @create 2018-08-05
  */
-@Configuration
-public class DruidConfiguration {
-
-    @ConfigurationProperties(prefix = "spring.datasource")
-    @Bean
-    public DataSource druid(){
-        return  new DruidDataSource();
-    }
+public interface SysUserMapper extends BaseMapper<SysUser> {
 
 }
