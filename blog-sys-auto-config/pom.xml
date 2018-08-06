@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!--项目基本信息-->
+    <parent>
+        <artifactId>kiwipeach-blog-root</artifactId>
+        <groupId>cn.kiwipeach.blog</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>cn.kiwipeach.blog</groupId>
+    <artifactId>blog-sys-auto-config</artifactId>
+    <description>博客springboot自动配置依赖</description>
+    <!--项目依赖-->
+    <dependencies>
+        <!--项目模块依赖-->
+        <dependency>
+            <groupId>cn.kiwipeach.blog</groupId>
+            <artifactId>blog-sys-api</artifactId><!--api-->
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId><!--springboot web-->
+        </dependency>
+        <!--shiro begin-->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+        <!--shiro end-->
+    </dependencies>
+
+</project>
