@@ -13,19 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.configuration;
+package cn.kiwipeach.blog.configuration.web;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * springmvc拓展类
+ * springmvc拓展类,拓展拦截器，过滤器，监听器等等组件。
  *
  * @author kiwipeach [1099501218@qq.com]
  * @create 2018/07/28
  */
 @Configuration
 public class BlogMvcConfiguration extends WebMvcConfigurerAdapter {
-
 
 }

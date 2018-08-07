@@ -214,11 +214,4 @@ public class ShiroConfiguration {
         return new AuthorizationAttributeSourceAdvisor();
     }
     //endregion
-
-
-
-
-
-
-
 }

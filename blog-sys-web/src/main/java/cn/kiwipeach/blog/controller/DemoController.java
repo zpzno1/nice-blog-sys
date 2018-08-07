@@ -16,6 +16,7 @@
 package cn.kiwipeach.blog.controller;
 
 import cn.kiwipeach.blog.domain.SysUser;
+import cn.kiwipeach.blog.exception.BlogException;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -41,8 +42,15 @@ public class DemoController {
         return "demo/demo";
     }
 
-    /*shiro 测试地址 begin*/
+    @GetMapping("exception")
+    public String test500InternalException() {
+        if (true) {
+            throw new BlogException(101, "测试SpringBoot业务异常");
+        }
+        return null;
+    }
 
+    //region shiro测试地址
     @GetMapping("login")
     public String toLoginPage() {
         return "shiro/login";
@@ -86,7 +94,7 @@ public class DemoController {
     public String toRememberPage() {
         return "shiro/remember";
     }
+    //endregion
 
-    /*shiro 测试地址 end*/
 
 }
