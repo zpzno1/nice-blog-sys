@@ -20,10 +20,11 @@
             <artifactId>blog-sys-api</artifactId><!--api-->
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
-        <dependency>
+        <!--blog-sys-api已经依赖-->
+       <!-- <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId><!--springboot web-->
-        </dependency>
+            <artifactId>spring-boot-starter-web</artifactId>&lt;!&ndash;springboot web&ndash;&gt;
+        </dependency>-->
         <!--shiro begin-->
         <dependency>
             <groupId>org.apache.shiro</groupId>

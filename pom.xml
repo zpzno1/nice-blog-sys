@@ -39,7 +39,7 @@
             <organization>www.kiwipeach.cn</organization>
             <organizationUrl>http://www.kiwipeach.cn</organizationUrl>
             <roles>
-                <role>Web Master</role>
+                <role>website master</role>
             </roles>
         </developer>
     </developers>
@@ -102,6 +102,13 @@
             <artifactId>spring-boot-devtools</artifactId><!--devtools热部署插件依赖-->
             <optional>true</optional> <!-- 这个需要为 true 热部署才有效 -->
         </dependency>
+        <!--lombok 插件-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.2</version>
+            <scope>provided</scope><!--构建周期生效-->
+        </dependency>
     </dependencies>
 
     <!--构建依赖-->
@@ -116,7 +123,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${compiler.plugin.verson}</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -127,11 +133,27 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.18.1</version>
                 <configuration>
                     <!--·忽略测试true-->
                     <skipTests>true</skipTests>
                 </configuration>
+            </plugin>
+            <!--source plugin-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>install</phase><!--本地安装的同时生成源码包-->
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
