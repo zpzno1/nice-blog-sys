@@ -24,7 +24,8 @@ spring:
     testOnBorrow: false
     testOnReturn: false
     poolPreparedStatements: true
-    filters: config,stat,wall,slf4j
+#    filters: config,stat,wall,slf4j
+    filters: config,stat,wall
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
     connectionProperties: config.decrypt=true;druid.stat.logSlowSql=true;druid.stat.slowSqlMillis=200;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMDHEqPdRifJ9Y0ci1y3Lt6q1XVXwLJlYYnDnT4O6vTI6fpvsC0msjEUVtHaUUDEgFgv0ekPSuCq68zq4+r8LYkCAwEAAQ==

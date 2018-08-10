@@ -16,10 +16,19 @@
 package cn.kiwipeach.blog.service.impl;
 
 import cn.kiwipeach.blog.domain.Blog;
+import cn.kiwipeach.blog.exception.BlogException;
 import cn.kiwipeach.blog.mapper.BlogMapper;
 import cn.kiwipeach.blog.service.IBlogService;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 博客 服务实现类
@@ -28,6 +37,23 @@ import org.springframework.stereotype.Service;
  * @create 2018-08-05
  */
 @Service
+@Slf4j
 public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IBlogService {
 
+    @Autowired
+    private BlogMapper blogMapper;
+
+    public IPage<Blog> selectBlogPage(Page<Blog> page,String userId){
+        return page.setRecords(baseMapper.selectBlogList(page,userId));
+    }
+
+
+    @Override
+    public void testTranactional(Blog blog) {
+        Integer updateRow = baseMapper.updateById(blog);
+        log.info("博客标题更新结果:{}", updateRow);
+        if (true) {
+            throw new BlogException(1001, "博客异常");
+        }
+    }
 }

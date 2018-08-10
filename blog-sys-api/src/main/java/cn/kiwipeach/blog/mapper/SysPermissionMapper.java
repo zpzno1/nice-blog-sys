@@ -15,23 +15,15 @@
  */
 package cn.kiwipeach.blog.mapper;
 
-import cn.kiwipeach.blog.domain.Blog;
+import cn.kiwipeach.blog.domain.SysPermission;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import javafx.scene.control.Pagination;
-import org.apache.catalina.User;
-import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 /**
- * 博客 Mapper 接口
+ * 用户权限 Mapper 接口
  *
  * @author kiwipeach [1099501218@qq.com]
- * @create 2018-08-05
+ * @create 2018-08-09
  */
-public interface BlogMapper extends BaseMapper<Blog> {
-
-    List<Blog> selectBlogList(Page<Blog> page, @Param("userId") String userId);
+public interface SysPermissionMapper extends BaseMapper<SysPermission> {
 
 }

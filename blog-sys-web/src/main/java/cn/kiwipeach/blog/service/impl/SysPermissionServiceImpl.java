@@ -13,25 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.mapper;
+package cn.kiwipeach.blog.service.impl;
 
-import cn.kiwipeach.blog.domain.Blog;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import javafx.scene.control.Pagination;
-import org.apache.catalina.User;
-import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
+import cn.kiwipeach.blog.domain.SysPermission;
+import cn.kiwipeach.blog.mapper.SysPermissionMapper;
+import cn.kiwipeach.blog.service.ISysPermissionService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
 
 /**
- * 博客 Mapper 接口
+ * 用户权限 服务实现类
  *
  * @author kiwipeach [1099501218@qq.com]
- * @create 2018-08-05
+ * @create 2018-08-09
  */
-public interface BlogMapper extends BaseMapper<Blog> {
-
-    List<Blog> selectBlogList(Page<Blog> page, @Param("userId") String userId);
+@Service
+public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, SysPermission> implements ISysPermissionService {
 
 }

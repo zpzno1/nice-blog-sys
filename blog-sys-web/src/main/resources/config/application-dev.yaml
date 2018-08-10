@@ -1,3 +1,7 @@
+# 端口
+server:
+  port: 8825
+  context-path: /
 
 # 1)系统启动广告
 banner:
@@ -35,8 +39,7 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
     connectionProperties: config.decrypt=true;druid.stat.logSlowSql=true;druid.stat.slowSqlMillis=200;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMDHEqPdRifJ9Y0ci1y3Lt6q1XVXwLJlYYnDnT4O6vTI6fpvsC0msjEUVtHaUUDEgFgv0ekPSuCq68zq4+r8LYkCAwEAAQ==
-
-#mybatis
+# 4)mybatis-plus配置
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
   typeAliasesPackage: cn.kiwipeach.blog.domain
@@ -64,12 +67,10 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
-server:
-  port: 8825
 
-#shiro配置
-kiwipeach:
-  blog:
+# 5)shiro配置
+blog:
+  shiro:
     cookie:
       name: shrio_remember
       maxAge: 600

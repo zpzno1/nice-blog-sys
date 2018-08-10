@@ -15,31 +15,15 @@
  */
 package cn.kiwipeach.blog.service;
 
-import cn.kiwipeach.blog.domain.Blog;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import cn.kiwipeach.blog.domain.SysPermission;
 import com.baomidou.mybatisplus.extension.service.IService;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 博客 服务接口类
+ * 用户权限 服务接口类
  *
  * @author kiwipeach [1099501218@qq.com]
- * @create 2018-08-05
+ * @create 2018-08-09
  */
-public interface IBlogService extends IService<Blog> {
+public interface ISysPermissionService extends IService<SysPermission> {
 
-    /**
-     * 测试mybatis分页
-     * @param page
-     * @param userId
-     * @return
-     */
-    IPage<Blog> selectBlogPage(Page<Blog> page,String userId);
-    /**
-     * 事务测试服务
-     */
-    @Transactional
-    void testTranactional(Blog blog);
 }

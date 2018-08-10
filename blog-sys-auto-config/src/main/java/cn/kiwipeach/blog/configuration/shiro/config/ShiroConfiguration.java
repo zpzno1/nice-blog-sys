@@ -86,7 +86,7 @@ public class ShiroConfiguration {
      * @return shiroFilterFactoryBean
      */
     @Bean(name = "shiroFilter")
-    @ConfigurationProperties(prefix = "kiwipeach.blog.shiroFilter")
+    @ConfigurationProperties(prefix = "blog.shiro.shiroFilter")
     public ShiroFilterFactoryBean shiroFilterFactoryBean(
             @Autowired DefaultWebSecurityManager securityManager,
             @Autowired ResourceFilterMapFactory resourceFilterMapFactory) {
@@ -150,7 +150,7 @@ public class ShiroConfiguration {
      * @return credentialsMatcher
      */
     @Bean
-    @ConfigurationProperties(prefix = "kiwipeach.blog.credentialsMatcher")
+    @ConfigurationProperties(prefix = "blog.shiro.credentialsMatcher")
     public CredentialsMatcher credentialsMatcher() {
         return new HashedCredentialsMatcher();
     }
@@ -162,7 +162,7 @@ public class ShiroConfiguration {
      *
      * @return cacheManager
      */
-    @ConfigurationProperties(prefix = "kiwipeach.blog.cacheManager")
+    @ConfigurationProperties(prefix = "blog.shiro.cacheManager")
     @Bean
     public EhCacheManager cacheManager() {
         return new EhCacheManager();
@@ -175,7 +175,7 @@ public class ShiroConfiguration {
      *
      * @return cookie
      */
-    @ConfigurationProperties(prefix = "kiwipeach.blog.cookie")
+    @ConfigurationProperties(prefix = "blog.shiro.cookie")
     @Bean
     public Cookie shiroCookie() {
         return new SimpleCookie();
@@ -187,7 +187,7 @@ public class ShiroConfiguration {
      * @return cookieRememberMeManager
      */
     @Bean
-    @ConfigurationProperties(prefix = "kiwipeach.blog.cookieRememberMeManager")
+    @ConfigurationProperties(prefix = "blog.shiro.cookieRememberMeManager")
     public CookieRememberMeManager cookieRememberMeManager(@Autowired Cookie cookie) {
         CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
         cookieRememberMeManager.setCookie(cookie);

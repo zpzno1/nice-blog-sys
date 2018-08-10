@@ -35,12 +35,12 @@
         </encoder>
     </appender>
     <!--自定义目标包体下的日志输出级别-->
-    <logger name="cn.kiwipeach.blog.service" level="trace" />
+   <!-- <logger name="cn.kiwipeach.blog.service" level="trace" />-->
     <springProfile name="dev">
-        <logger name="cn.kiwipeach.blog.service" level="debug" />
+        <logger name="cn.kiwipeach.blog.mapper" level="debug" />
     </springProfile>
     <springProfile name="prod">
-        <logger name="cn.kiwipeach.blog.service" level="warn" />
+        <logger name="cn.kiwipeach.blog.mapper" level="warn" />
     </springProfile>
     <!-- 日志级别TRACE<DEBUG<INFO<WARN<ERROR -->
     <root level="INFO">

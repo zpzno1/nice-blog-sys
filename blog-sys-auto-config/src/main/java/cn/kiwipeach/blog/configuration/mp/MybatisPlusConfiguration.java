@@ -13,25 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.mapper;
+package cn.kiwipeach.blog.configuration.mp;
 
-import cn.kiwipeach.blog.domain.Blog;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import javafx.scene.control.Pagination;
-import org.apache.catalina.User;
-import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
- * 博客 Mapper 接口
+ * mybatisplus相关配置
  *
  * @author kiwipeach [1099501218@qq.com]
- * @create 2018-08-05
+ * @create 2018/08/09
  */
-public interface BlogMapper extends BaseMapper<Blog> {
+@Configuration
+@MapperScan(value = {"cn.kiwipeach.blog.mapper"})
+public class MybatisPlusConfiguration {
 
-    List<Blog> selectBlogList(Page<Blog> page, @Param("userId") String userId);
+    /**
+     * 分页插件
+     * @return paginationInterceptor
+     */
+    @Bean
+    public PaginationInterceptor paginationInterceptor(){
+     return new PaginationInterceptor();
+    }
 
 }

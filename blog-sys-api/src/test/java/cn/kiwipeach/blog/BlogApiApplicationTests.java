@@ -1,6 +1,8 @@
 package cn.kiwipeach.blog;
 
+import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.domain.SysUser;
+import cn.kiwipeach.blog.mapper.BlogMapper;
 import cn.kiwipeach.blog.mapper.SysUserMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,22 +18,22 @@ import java.sql.SQLException;
 @SpringBootTest(classes = BlogApiApplication.class)
 public class BlogApiApplicationTests {
 
-	@Autowired
-	private DataSource dataSource;
+    @Autowired
+    private DataSource dataSource;
 
-	@Autowired
-	private SysUserMapper sysUserMapper;
+    @Autowired
+    private BlogMapper blogMapper;
 
-	@Test
-	public void contextLoads() throws SQLException {
+    @Test
+    public void contextLoads() throws SQLException {
         Connection connection = dataSource.getConnection();
         System.out.println(connection);
     }
 
     @Test
-    public void testUserMapper(){
-        SysUser user = sysUserMapper.selectById("1099501218");
-        System.out.println(user);
+    public void testUserMapper() {
+        Blog blog = blogMapper.selectById("100");
+        System.out.println(blog);
     }
 
 }
