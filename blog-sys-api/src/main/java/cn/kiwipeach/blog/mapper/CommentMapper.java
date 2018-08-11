@@ -16,7 +16,7 @@
 package cn.kiwipeach.blog.mapper;
 
 import cn.kiwipeach.blog.domain.Comment;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**
  * 评论 Mapper 接口

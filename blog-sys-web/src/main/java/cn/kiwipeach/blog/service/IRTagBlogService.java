@@ -16,7 +16,7 @@
 package cn.kiwipeach.blog.service;
 
 import cn.kiwipeach.blog.domain.RTagBlog;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.service.IService;
 
 /**
  * 标签-博客对照表 服务接口类

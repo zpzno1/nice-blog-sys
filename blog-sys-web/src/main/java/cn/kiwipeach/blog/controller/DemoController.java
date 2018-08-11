@@ -15,26 +15,28 @@
  */
 package cn.kiwipeach.blog.controller;
 
-import cn.kiwipeach.blog.domain.SysUser;
-import cn.kiwipeach.blog.exception.BlogException;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
+
+import cn.kiwipeach.blog.service.IDemoService;
+import com.baomidou.mybatisplus.plugins.Page;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * 测试控制器
+ * 博客 前端控制器
  *
  * @author kiwipeach [1099501218@qq.com]
- * @create 2018/07/28
+ * @create 2018-08-05
  */
 @Controller
+@RequestMapping("/demo")
 public class DemoController {
+    @Autowired
+    private IDemoService iDemoService;
 
     @GetMapping("hello")
     public String test(Model model) {
@@ -42,59 +44,24 @@ public class DemoController {
         return "demo/demo";
     }
 
-    @GetMapping("exception")
-    public String test500InternalException() {
-        if (true) {
-            throw new BlogException(101, "测试SpringBoot业务异常");
-        }
-        return null;
+    /**
+     * 使用BaseService中的分页函数
+     * http://localhost:8825/demo/page1?size=2&current=2
+     */
+    @RequestMapping("page1")
+    @ResponseBody
+    public Page page1(Page page) {
+        return iDemoService.selectPage(page, null);
     }
 
-    //region shiro测试地址
-    @GetMapping("login")
-    public String toLoginPage() {
-        return "shiro/login";
+     /**
+     * 使用自定义的分页查询
+     * http://localhost:8825/demo/page2?userId=10086&size=2&current=2
+     */
+    @RequestMapping("page2")
+    @ResponseBody
+    public Page page2(Page page, @RequestParam(value = "userId", required = true) String userId) {
+        return iDemoService.selectBlogPage(page, userId);
     }
-
-    @PostMapping("user/login")
-    public String userLoginAction(SysUser loginUser, @RequestParam(value = "remember", defaultValue = "0") Boolean remember) {
-        Subject currentUser = SecurityUtils.getSubject();
-        //2.判断是否认证过，否则进行重新认证
-        if (!currentUser.isAuthenticated()) {
-            //UsernamePasswordToken token = new UsernamePasswordToken(secUser.getUserName(), secUser.get());
-            UsernamePasswordToken token = new UsernamePasswordToken(loginUser.getUserName(), loginUser.getPassword());
-            //1.设置rememberMe
-            token.setRememberMe(remember);
-            try {
-                currentUser.login(token);
-            } catch (AuthenticationException e) {
-                System.out.println("用户信息登陆失败,失败原因:" + e.getLocalizedMessage());
-            }
-        }
-        //登陆成功，则用户认证成功，进入成功页面；登陆失败，则认证失败，会被拦截到登陆地址。
-        return "redirect:/login/success";
-    }
-
-    @GetMapping("login/success")
-    public String toLoginSuccessPage() {
-        return "shiro/success";
-    }
-
-    @GetMapping("login/fail")
-    public String toLoginFailPage() {
-        return "shiro/fail";
-    }
-
-    @GetMapping("/unauthorized")
-    public String toUnauthorizedPage() {
-        return "shiro/unauthorized";
-    }
-
-    @GetMapping("/remember")
-    public String toRememberPage() {
-        return "shiro/remember";
-    }
-    //endregion
-
 
 }

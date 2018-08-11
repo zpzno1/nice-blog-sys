@@ -17,8 +17,9 @@ package cn.kiwipeach.blog.service.impl;
 
 import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.exception.BlogException;
-import cn.kiwipeach.blog.mapper.BlogMapper;
-import cn.kiwipeach.blog.service.IBlogService;
+import cn.kiwipeach.blog.mapper.DemoMapper;
+import cn.kiwipeach.blog.service.IDemoService;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Slf4j
-public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IBlogService {
+public class DemoServiceImpl extends ServiceImpl<DemoMapper, Blog> implements IDemoService {
+
+    @Override
+    public Page<Blog> selectBlogPage(Page<Blog> page, String userId){
+        return page.setRecords(baseMapper.selectBlogList(page,userId));
+    }
 
 
     @Override

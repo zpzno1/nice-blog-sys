@@ -13,23 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.service;
+package cn.kiwipeach.blog.configuration.mybatis;
 
-import cn.kiwipeach.blog.domain.Blog;
-import com.baomidou.mybatisplus.service.IService;
-import org.springframework.transaction.annotation.Transactional;
+import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
- * 博客 服务接口类
+ * mybatis插件相关配置
  *
  * @author kiwipeach [1099501218@qq.com]
- * @create 2018-08-05
+ * @create 2018/08/09
  */
-public interface IBlogService extends IService<Blog> {
-
+@Configuration
+@MapperScan(value = {"cn.kiwipeach.blog.mapper"})
+public class MybatisPluginsConfiguration {
     /**
-     * 事务测试服务
+     * 分页插件,mybaits-plus官网提供
+     * @return paginationInterceptor
      */
-    @Transactional
-    void testTranactional(Blog blog);
+    @Bean
+    public PaginationInterceptor paginationInterceptor(){
+     return new PaginationInterceptor();
+    }
+
+    //@Bean
+
+
 }

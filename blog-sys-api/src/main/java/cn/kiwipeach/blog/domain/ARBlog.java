@@ -15,57 +15,73 @@
  */
 package cn.kiwipeach.blog.domain;
 
-import java.time.LocalDateTime;
+
+
+import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 /**
- * 评论
+ * 测试mybatis-plus的AR操作
  *
  * @author kiwipeach [1099501218@qq.com]
  * @create 2018-08-05
  */
-@TableName("T_COMMENT")
-public class Comment implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@TableName("T_BLOG")
+public class ARBlog extends Model<ARBlog> {
 
     /**
-     * 评论编号
+     * 博客编号
      */
     @TableId("ID")
     private String id;
 
     /**
-     * 评论回复对象(0：博客一级评论,1：博客二级评论 2：留言一级评论 3：留言二级评论)类型
+     * 用户编号
      */
-    @TableField("PARENT_COMMENT_TYPE")
-    private String parentCommentType;
+    @TableField("USER_ID")
+    private String userId;
 
     /**
-     * 评论回复对象(0：博客一级评论,1：博客二级评论 2：留言一级评论 3：留言二级评论)编号
+     * 分类编号
      */
-    @TableField("TARGET_ID")
-    private String targetId;
+    @TableField("CATE_ID")
+    private String cateId;
 
     /**
-     * 角色A
+     * 博客标题
      */
-    @TableField("USER_AID")
-    private String userAid;
+    @TableField("TITLE")
+    private String title;
 
     /**
-     * 角色B
-     */
-    @TableField("USER_BID")
-    private String userBid;
-
-    /**
-     * 评论内容
+     * 博客内容
      */
     @TableField("CONTENT")
     private String content;
+
+    /**
+     * 博客点赞
+     */
+    @TableField("STAR_COUNT")
+    private BigDecimal starCount;
+
+    /**
+     * 浏览总量
+     */
+    @TableField("VIEWS")
+    private BigDecimal views;
+
+    /**
+     * 是否置顶
+     */
+    @TableField("TOP")
+    private BigDecimal top;
 
     /**
      * 创建时间
@@ -86,33 +102,26 @@ public class Comment implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
-    public String getParentCommentType() {
-        return parentCommentType;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setParentCommentType(String parentCommentType) {
-        this.parentCommentType = parentCommentType;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
-    public String getTargetId() {
-        return targetId;
-    }
-
-    public void setTargetId(String targetId) {
-        this.targetId = targetId;
-    }
-    public String getUserAid() {
-        return userAid;
+    public String getCateId() {
+        return cateId;
     }
 
-    public void setUserAid(String userAid) {
-        this.userAid = userAid;
+    public void setCateId(String cateId) {
+        this.cateId = cateId;
     }
-    public String getUserBid() {
-        return userBid;
+    public String getTitle() {
+        return title;
     }
 
-    public void setUserBid(String userBid) {
-        this.userBid = userBid;
+    public void setTitle(String title) {
+        this.title = title;
     }
     public String getContent() {
         return content;
@@ -120,6 +129,27 @@ public class Comment implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+    public BigDecimal getStarCount() {
+        return starCount;
+    }
+
+    public void setStarCount(BigDecimal starCount) {
+        this.starCount = starCount;
+    }
+    public BigDecimal getViews() {
+        return views;
+    }
+
+    public void setViews(BigDecimal views) {
+        this.views = views;
+    }
+    public BigDecimal getTop() {
+        return top;
+    }
+
+    public void setTop(BigDecimal top) {
+        this.top = top;
     }
     public LocalDateTime getCreateTime() {
         return createTime;
@@ -138,15 +168,22 @@ public class Comment implements Serializable {
 
     @Override
     public String toString() {
-        return "Comment{" +
+        return "Blog{" +
         "id=" + id +
-        ", parentCommentType=" + parentCommentType +
-        ", targetId=" + targetId +
-        ", userAid=" + userAid +
-        ", userBid=" + userBid +
+        ", userId=" + userId +
+        ", cateId=" + cateId +
+        ", title=" + title +
         ", content=" + content +
+        ", starCount=" + starCount +
+        ", views=" + views +
+        ", top=" + top +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +
         "}";
+    }
+
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
     }
 }

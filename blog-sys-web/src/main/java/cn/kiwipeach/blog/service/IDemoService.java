@@ -13,17 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.mapper;
+package cn.kiwipeach.blog.service;
 
-import cn.kiwipeach.blog.domain.LeaveMsg;
-import com.baomidou.mybatisplus.mapper.BaseMapper;
+import cn.kiwipeach.blog.domain.Blog;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.IService;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 留言 Mapper 接口
+ * 博客 服务接口类
  *
  * @author kiwipeach [1099501218@qq.com]
  * @create 2018-08-05
  */
-public interface LeaveMsgMapper extends BaseMapper<LeaveMsg> {
+public interface IDemoService extends IService<Blog> {
 
+    /**
+     * 测试mybatis分页
+     * @param page
+     * @param userId
+     * @return
+     */
+    Page<Blog> selectBlogPage(Page<Blog> page, String userId);
+    /**
+     * 事务测试服务
+     */
+    @Transactional
+    void testTranactional(Blog blog);
 }

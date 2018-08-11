@@ -73,7 +73,8 @@
         <!--mybatis oracle-->
         <oracle.version>11.2.0.4</oracle.version>
         <druid.version>1.0.18</druid.version>
-        <mybatis-plus-boot-starter.version>3.0-beta</mybatis-plus-boot-starter.version>
+        <!--<mybatis-plus-boot-starter.version>3.0-beta</mybatis-plus-boot-starter.version>--><!--存在很多问题-->
+        <mybatis-plus-boot-starter.version>2.3</mybatis-plus-boot-starter.version>
         <oracle.version>11.2.0.4</oracle.version>
         <mybatis.generator.version>1.3.5</mybatis.generator.version>
     </properties>
@@ -81,11 +82,6 @@
     <!--项目公共依赖-->
     <dependencies>
         <!--springboot基础依场景启动器-->
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId><!--springboot-starter-->
-            <version>1.3.2</version>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId><!--sprintboot-test-->

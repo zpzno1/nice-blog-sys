@@ -16,10 +16,10 @@
 package cn.kiwipeach.blog.domain;
 
 import java.math.BigDecimal;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 /**
  * 用户权限
@@ -36,7 +36,7 @@ public class SysPermission implements Serializable {
      * 权限编号
      */
     @TableId("ID")
-    private String id;
+    private Long id;
 
     /**
      * 权限名称
@@ -68,11 +68,11 @@ public class SysPermission implements Serializable {
     @TableField("UPDATE_TIME")
     private LocalDateTime updateTime;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getName() {

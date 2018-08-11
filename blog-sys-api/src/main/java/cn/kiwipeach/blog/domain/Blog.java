@@ -15,11 +15,15 @@
  */
 package cn.kiwipeach.blog.domain;
 
+import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
+
 import java.math.BigDecimal;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
+
+
 import java.io.Serializable;
 /**
  * 博客
@@ -28,7 +32,7 @@ import java.io.Serializable;
  * @create 2018-08-05
  */
 @TableName("T_BLOG")
-public class Blog implements Serializable {
+public class Blog extends Model<Blog> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -177,5 +181,10 @@ public class Blog implements Serializable {
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +
         "}";
+    }
+
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
     }
 }

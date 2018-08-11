@@ -16,13 +16,8 @@
 package cn.kiwipeach.blog.mapper;
 
 import cn.kiwipeach.blog.domain.Blog;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import javafx.scene.control.Pagination;
-import org.apache.catalina.User;
-import org.apache.ibatis.annotations.Param;
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 
-import java.util.List;
 
 /**
  * 博客 Mapper 接口
@@ -32,6 +27,5 @@ import java.util.List;
  */
 public interface BlogMapper extends BaseMapper<Blog> {
 
-    List<Blog> selectBlogList(Page<Blog> page, @Param("userId") String userId);
 
 }

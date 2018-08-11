@@ -15,31 +15,36 @@
  */
 package cn.kiwipeach.blog;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.baomidou.mybatisplus.annotation.DbType;
-import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.enums.FieldFill;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
-import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
-import com.baomidou.mybatisplus.generator.config.FileOutConfig;
-import com.baomidou.mybatisplus.generator.config.GlobalConfig;
-import com.baomidou.mybatisplus.generator.config.PackageConfig;
-import com.baomidou.mybatisplus.generator.config.StrategyConfig;
-import com.baomidou.mybatisplus.generator.config.TemplateConfig;
-import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
+import com.baomidou.mybatisplus.generator.config.*;
+import com.baomidou.mybatisplus.generator.config.converts.OracleTypeConvert;
 import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
+import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
+import java.util.*;
+
 /**
  * 官方的生成代码方式
+ *
+ * new AutoGenerator().setGlobalConfig(
+ *     ...
+ * ).setDataSource(
+ *     ...
+ * ).setStrategy(
+ *     ...
+ * ).setPackageInfo(
+ *     ...
+ * ).setCfg(
+ *     ...
+ * ).setTemplate(
+ *     ...
+ * ).execute();
  *
  * @author kiwipeach [1099501218@qq.com]
  * @create 2018/07/29
@@ -68,7 +73,7 @@ public class MybatisPlusGeneratorOfficalTest {
                         //.setKotlin(true) 是否生成 kotlin 代码
                         .setAuthor("kiwipeach")
                         // 自定义文件命名，注意 %s 会自动填充表实体属性！
-                        .setEntityName("%s")
+                        //.setEntityName("%s")
                         .setMapperName("%sMapper")
                         .setXmlName("%sMapper")
                         .setServiceName("I%sService")
@@ -79,19 +84,19 @@ public class MybatisPlusGeneratorOfficalTest {
                 // 数据源配置
                 new DataSourceConfig()
                         .setDbType(DbType.ORACLE)// 数据库类型
-                        .setTypeConvert(new MySqlTypeConvert() {
+                        .setTypeConvert(new OracleTypeConvert() {
                             // 自定义数据库表字段类型转换【可选】
                             @Override
-                            public DbColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
-                                System.out.println("自动检测到数据库类型：" + fieldType);
-                                //金额或者敏感数值单位需要精确
-                                if (fieldType.equalsIgnoreCase("NUMBER")) {
-                                    return DbColumnType.BIG_DECIMAL;
-                                    //编码枚举数值类型或者布尔类型使用整形表示
-                                } else if (fieldType.equalsIgnoreCase("INTEGER") || fieldType.equalsIgnoreCase("TINYINT")) {
-                                    return DbColumnType.INTEGER;
-                                }
-                                return super.processTypeConvert(globalConfig, fieldType);
+                            public DbColumnType processTypeConvert(String fieldType) {
+                                    System.out.println("自动检测到数据库类型：" + fieldType);
+                                    //金额或者敏感数值单位需要精确
+                                    if (fieldType.equalsIgnoreCase("NUMBER")) {
+                                        return DbColumnType.BIG_DECIMAL;
+                                        //编码枚举数值类型或者布尔类型使用整形表示
+                                    } else if (fieldType.equalsIgnoreCase("INTEGER") || fieldType.equalsIgnoreCase("TINYINT")) {
+                                        return DbColumnType.INTEGER;
+                                    }
+                                    return super.processTypeConvert(fieldType);
                             }
                         })
                         .setDriverName("oracle.jdbc.driver.OracleDriver")
@@ -136,7 +141,7 @@ public class MybatisPlusGeneratorOfficalTest {
         ).setPackageInfo(
                 // 包配置
                 new PackageConfig()
-                        .setModuleName("blog")
+                        .setModuleName("generate")
                         .setParent("cn.kiwipeach")// 自定义包路径
                         .setController("controller")// 这里是控制器包名，默认 web
                         .setEntity("domain")
