@@ -19,7 +19,7 @@ import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.exception.BlogException;
 import cn.kiwipeach.blog.mapper.BlogMapper;
 import cn.kiwipeach.blog.service.IBlogService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

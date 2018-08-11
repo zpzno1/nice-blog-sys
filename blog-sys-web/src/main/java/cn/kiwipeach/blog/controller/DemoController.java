@@ -17,7 +17,8 @@ package cn.kiwipeach.blog.controller;
 
 
 import cn.kiwipeach.blog.service.IDemoService;
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,18 +51,18 @@ public class DemoController {
      */
     @RequestMapping("page1")
     @ResponseBody
-    public Page page1(Page page) {
-        return iDemoService.selectPage(page, null);
+    public IPage page1(Page page) {
+        return iDemoService.page(page, null);
     }
 
-     /**
+    /**
      * 使用自定义的分页查询
      * http://localhost:8825/demo/page2?userId=10086&size=2&current=2
      */
     @RequestMapping("page2")
     @ResponseBody
-    public Page page2(Page page, @RequestParam(value = "userId", required = true) String userId) {
-        return iDemoService.selectBlogPage(page, userId);
+    public IPage page2(Page page, @RequestParam(value = "userId", required = true) String userId) {
+        return iDemoService.queryBlogListDemo(page, userId);
     }
 
 }

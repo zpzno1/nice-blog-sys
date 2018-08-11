@@ -15,7 +15,8 @@
  */
 package cn.kiwipeach.blog;
 
-import com.baomidou.mybatisplus.enums.FieldFill;
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
@@ -23,7 +24,6 @@ import com.baomidou.mybatisplus.generator.config.converts.OracleTypeConvert;
 import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
-import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
@@ -73,7 +73,7 @@ public class MybatisPlusGeneratorOfficalTest {
                         //.setKotlin(true) 是否生成 kotlin 代码
                         .setAuthor("kiwipeach")
                         // 自定义文件命名，注意 %s 会自动填充表实体属性！
-                        //.setEntityName("%s")
+                        .setEntityName("%s")
                         .setMapperName("%sMapper")
                         .setXmlName("%sMapper")
                         .setServiceName("I%sService")
@@ -87,16 +87,16 @@ public class MybatisPlusGeneratorOfficalTest {
                         .setTypeConvert(new OracleTypeConvert() {
                             // 自定义数据库表字段类型转换【可选】
                             @Override
-                            public DbColumnType processTypeConvert(String fieldType) {
-                                    System.out.println("自动检测到数据库类型：" + fieldType);
-                                    //金额或者敏感数值单位需要精确
-                                    if (fieldType.equalsIgnoreCase("NUMBER")) {
-                                        return DbColumnType.BIG_DECIMAL;
-                                        //编码枚举数值类型或者布尔类型使用整形表示
-                                    } else if (fieldType.equalsIgnoreCase("INTEGER") || fieldType.equalsIgnoreCase("TINYINT")) {
-                                        return DbColumnType.INTEGER;
-                                    }
-                                    return super.processTypeConvert(fieldType);
+                            public DbColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
+                                System.out.println("自动检测到数据库类型：" + fieldType);
+                                //金额或者敏感数值单位需要精确
+                                if (fieldType.equalsIgnoreCase("NUMBER")) {
+                                    return DbColumnType.BIG_DECIMAL;
+                                    //编码枚举数值类型或者布尔类型使用整形表示
+                                } else if (fieldType.equalsIgnoreCase("INTEGER") || fieldType.equalsIgnoreCase("TINYINT")) {
+                                    return DbColumnType.INTEGER;
+                                }
+                                return super.processTypeConvert(globalConfig, fieldType);
                             }
                         })
                         .setDriverName("oracle.jdbc.driver.OracleDriver")

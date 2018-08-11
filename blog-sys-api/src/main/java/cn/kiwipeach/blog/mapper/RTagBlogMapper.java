@@ -16,7 +16,7 @@
 package cn.kiwipeach.blog.mapper;
 
 import cn.kiwipeach.blog.domain.RTagBlog;
-import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * 标签-博客对照表 Mapper 接口

@@ -16,7 +16,7 @@
 package cn.kiwipeach.blog.service;
 
 import cn.kiwipeach.blog.domain.Blog;
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.transaction.annotation.Transactional;
 
 /**

@@ -2,7 +2,8 @@ package cn.kiwipeach.blog.service;
 
 import cn.kiwipeach.blog.BlogWebApplicationTests;
 import cn.kiwipeach.blog.domain.Blog;
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
@@ -23,20 +24,20 @@ public class IDemoServiceTest extends BlogWebApplicationTests {
 
     @Test
     public void 测试业务逻辑层的简单查询(){
-        idemoService.selectById("100");
+        idemoService.getById("100");
     }
 
     @Test
     public void 测试业务逻辑层的默认分页查询(){
         Page<Blog> page = new Page<>();
-        Page<Blog> blogIPage = idemoService.selectPage(page,null);
+        IPage<Blog> blogIPage = idemoService.page(page,null);
         System.out.println(blogIPage);
     }
 
     @Test
     public void 测试业务逻辑层的自定义分页查询(){
-        Page<Blog> page = new Page<>(0,3);
-        Page<Blog> blogIPage = idemoService.selectBlogPage(page, "10086");
+        Page<Blog> page = new Page<>(1,3);
+        IPage<Blog> blogIPage = idemoService.queryBlogListDemo(page, "10086");
         System.out.println(blogIPage);
     }
 }

@@ -16,7 +16,7 @@
 package cn.kiwipeach.blog.service;
 
 import cn.kiwipeach.blog.domain.SysPermission;
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * 用户权限 服务接口类

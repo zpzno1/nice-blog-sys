@@ -1,12 +1,11 @@
 package cn.kiwipeach.blog.mapper;
 
 import cn.kiwipeach.blog.BlogApiApplicationTests;
-import cn.kiwipeach.blog.domain.ARBlog;
 import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.domain.SysPermission;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.mapper.Wrapper;
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,19 +34,33 @@ public class DemoMapperTest extends BlogApiApplicationTests {
 
     @Test
     public void 测试selectList查询() {
-        Wrapper<Blog> Wrapper = new EntityWrapper<Blog>().eq("cate_id", "1");
+        QueryWrapper<Blog> Wrapper = new QueryWrapper<Blog>().eq("cate_id", "1");
         List<Blog> blogs = demoMapper.selectList(Wrapper);
         log.info("selectList==>{}", blogs);
     }
 
+    /**
+     * mybatis-plus提供的分页功能
+     */
     @Test
     public void 测试分页selectPage查询() {
-        Wrapper<Blog> Wrapper = new EntityWrapper<Blog>().eq("user_id", "10086");
+        QueryWrapper<Blog> Wrapper = new QueryWrapper<Blog>().eq("user_id", "10086");
         // 分页结果中不含有total信息，默认首页为:1
-        Page<Object> blogPage = new Page<>(2, 3);
-        List<Blog> blogs = demoMapper.selectPage(blogPage, Wrapper);
-        log.info("selectPage==>{}", blogs);
+        IPage<Blog> blogPage = new Page<Blog>(2, 3);
+        IPage<Blog> blogIPage = demoMapper.selectPage(blogPage, Wrapper);
+        log.info("selectPage==>{}", blogIPage);
     }
+
+    /**
+     * 自定义的分页功能
+     */
+    @Test
+    public void 测试selectBlogList分页功能() {
+        Page<Blog> page = new Page<>(2, 3);
+        List<Blog> blogs = demoMapper.selectBlogListDemo(page, "10086");
+        log.info("selectBlogList==>{}", page);
+    }
+
 
     @Rollback(value = false)
     @Test
@@ -92,8 +105,8 @@ public class DemoMapperTest extends BlogApiApplicationTests {
         log.info("删除结果:{}", deleteFlag);
 
         //分页操作
-        Page<Blog> blogPage = new Blog().selectPage(new Page<Blog>(1, 3), null);
-        log.info("分页结果:{}", blogPage);
+        IPage<Blog> blogIPage = new Blog().selectPage(new Page<Blog>(1, 3), null);
+        log.info("分页结果:{}", blogIPage);
 
     }
 

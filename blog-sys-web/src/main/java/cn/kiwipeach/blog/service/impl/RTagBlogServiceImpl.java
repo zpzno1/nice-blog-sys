@@ -18,7 +18,7 @@ package cn.kiwipeach.blog.service.impl;
 import cn.kiwipeach.blog.domain.RTagBlog;
 import cn.kiwipeach.blog.mapper.RTagBlogMapper;
 import cn.kiwipeach.blog.service.IRTagBlogService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

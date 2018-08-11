@@ -18,7 +18,7 @@ package cn.kiwipeach.blog.service.impl;
 import cn.kiwipeach.blog.domain.Comment;
 import cn.kiwipeach.blog.mapper.CommentMapper;
 import cn.kiwipeach.blog.service.ICommentService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

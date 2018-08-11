@@ -15,7 +15,7 @@
  */
 package cn.kiwipeach.blog.configuration.mybatis;
 
-import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,6 +29,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @MapperScan(value = {"cn.kiwipeach.blog.mapper"})
 public class MybatisPluginsConfiguration {
+
     /**
      * 分页插件,mybaits-plus官网提供
      * @return paginationInterceptor
@@ -38,7 +39,7 @@ public class MybatisPluginsConfiguration {
      return new PaginationInterceptor();
     }
 
-    //@Bean
+
 
 
 }

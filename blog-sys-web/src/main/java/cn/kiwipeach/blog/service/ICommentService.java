@@ -16,7 +16,7 @@
 package cn.kiwipeach.blog.service;
 
 import cn.kiwipeach.blog.domain.Comment;
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * 评论 服务接口类
