@@ -1,6 +1,7 @@
 package cn.kiwipeach.blog.mapper;
 
 import cn.kiwipeach.blog.BlogApiApplicationTests;
+import cn.kiwipeach.blog.domain.ARBlog;
 import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.domain.SysPermission;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -86,9 +87,9 @@ public class DemoMapperTest extends BlogApiApplicationTests {
     @Test
     public void AR操作测试() {
         //查询报错
-        //ARBlog arBlog = new ARBlog();
-        //arBlog.selectById("100");
-        //System.out.println(arBlog);
+        ARBlog arBlog = new ARBlog();
+        ARBlog arResult = arBlog.selectById("100");
+        log.info("查询结果:{}", arResult);
 
         //查询操作
         Blog blog = new Blog().selectById("100");

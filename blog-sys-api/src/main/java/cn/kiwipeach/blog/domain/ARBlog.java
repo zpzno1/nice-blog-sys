@@ -16,9 +16,6 @@
 package cn.kiwipeach.blog.domain;
 
 
-
-
-
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -35,7 +32,7 @@ import java.time.LocalDateTime;
  * @create 2018-08-05
  */
 @TableName("T_BLOG")
-public class ARBlog extends Model<ARBlog> {
+public class ARBlog extends Model<ARBlog> /*implements Serializable */{
 
     /**
      * 博客编号
@@ -104,6 +101,7 @@ public class ARBlog extends Model<ARBlog> {
     public void setId(String id) {
         this.id = id;
     }
+
     public String getUserId() {
         return userId;
     }
@@ -111,6 +109,7 @@ public class ARBlog extends Model<ARBlog> {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
     public String getCateId() {
         return cateId;
     }
@@ -118,6 +117,7 @@ public class ARBlog extends Model<ARBlog> {
     public void setCateId(String cateId) {
         this.cateId = cateId;
     }
+
     public String getTitle() {
         return title;
     }
@@ -125,6 +125,7 @@ public class ARBlog extends Model<ARBlog> {
     public void setTitle(String title) {
         this.title = title;
     }
+
     public String getContent() {
         return content;
     }
@@ -132,6 +133,7 @@ public class ARBlog extends Model<ARBlog> {
     public void setContent(String content) {
         this.content = content;
     }
+
     public BigDecimal getStarCount() {
         return starCount;
     }
@@ -139,6 +141,7 @@ public class ARBlog extends Model<ARBlog> {
     public void setStarCount(BigDecimal starCount) {
         this.starCount = starCount;
     }
+
     public BigDecimal getViews() {
         return views;
     }
@@ -146,6 +149,7 @@ public class ARBlog extends Model<ARBlog> {
     public void setViews(BigDecimal views) {
         this.views = views;
     }
+
     public BigDecimal getTop() {
         return top;
     }
@@ -153,6 +157,7 @@ public class ARBlog extends Model<ARBlog> {
     public void setTop(BigDecimal top) {
         this.top = top;
     }
+
     public LocalDateTime getCreateTime() {
         return createTime;
     }
@@ -160,6 +165,7 @@ public class ARBlog extends Model<ARBlog> {
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
+
     public LocalDateTime getUpdateTime() {
         return updateTime;
     }
@@ -171,17 +177,17 @@ public class ARBlog extends Model<ARBlog> {
     @Override
     public String toString() {
         return "Blog{" +
-        "id=" + id +
-        ", userId=" + userId +
-        ", cateId=" + cateId +
-        ", title=" + title +
-        ", content=" + content +
-        ", starCount=" + starCount +
-        ", views=" + views +
-        ", top=" + top +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        "}";
+                "id=" + id +
+                ", userId=" + userId +
+                ", cateId=" + cateId +
+                ", title=" + title +
+                ", content=" + content +
+                ", starCount=" + starCount +
+                ", views=" + views +
+                ", top=" + top +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                "}";
     }
 
     @Override

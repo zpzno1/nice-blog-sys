@@ -45,8 +45,9 @@ public class DemoServiceImpl extends ServiceImpl<DemoMapper, Blog> implements ID
 
     @Override
     public Page<Blog> queryBlogListDemo(Page<Blog> page, String userId) {
-        List<Blog> blogs = demoMapper.selectBlogListDemo(page, userId);
-        return (Page<Blog>) page.setRecords(blogs);
+        List<Blog> blogs1 = demoMapper.selectBlogListDemo(page, userId);
+        List<Blog> blogs2 = baseMapper.selectBlogListDemo(page, userId);
+        return (Page<Blog>) page.setRecords(blogs2);
     }
 
     @Override
