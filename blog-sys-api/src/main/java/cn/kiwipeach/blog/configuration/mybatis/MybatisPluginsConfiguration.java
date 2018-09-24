@@ -16,7 +16,11 @@
 package cn.kiwipeach.blog.configuration.mybatis;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnNotWebApplication;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -37,6 +41,19 @@ public class MybatisPluginsConfiguration {
     @Bean
     public PaginationInterceptor paginationInterceptor(){
      return new PaginationInterceptor();
+    }
+
+    /**
+     * 性能分析插件,mybaits-plus官网提供，在Web环境下将自动失效
+     * @return performanceInterceptor
+     */
+    @Bean
+    public PerformanceInterceptor performanceInterceptor(){
+        PerformanceInterceptor performanceInterceptor = new PerformanceInterceptor();
+        //执行时间和是否格式化,毫秒
+        performanceInterceptor.setMaxTime(3000);
+        performanceInterceptor.setFormat(false);
+        return performanceInterceptor;
     }
 
 

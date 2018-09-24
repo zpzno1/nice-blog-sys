@@ -90,13 +90,15 @@ public class MybatisPlusGeneratorOfficalTest {
                             public DbColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
                                 System.out.println("自动检测到数据库类型：" + fieldType);
                                 //金额或者敏感数值单位需要精确
-                                if (fieldType.equalsIgnoreCase("NUMBER")) {
+                                if (fieldType.contains("NUMBER(")&&fieldType.contains("2)")) {//含有这种格式的识别为金额类型
                                     return DbColumnType.BIG_DECIMAL;
                                     //编码枚举数值类型或者布尔类型使用整形表示
-                                } else if (fieldType.equalsIgnoreCase("INTEGER") || fieldType.equalsIgnoreCase("TINYINT")) {
+                                } else if (fieldType.contains("NUMBER")&&!fieldType.contains(",")) {
                                     return DbColumnType.INTEGER;
+                                }else {
+                                    //使用默认的
+                                    return super.processTypeConvert(globalConfig, fieldType);
                                 }
-                                return super.processTypeConvert(globalConfig, fieldType);
                             }
                         })
                         .setDriverName("oracle.jdbc.driver.OracleDriver")
@@ -141,7 +143,7 @@ public class MybatisPlusGeneratorOfficalTest {
         ).setPackageInfo(
                 // 包配置
                 new PackageConfig()
-                        .setModuleName("generate")
+                        .setModuleName("generator")
                         .setParent("cn.kiwipeach")// 自定义包路径
                         .setController("controller")// 这里是控制器包名，默认 web
                         .setEntity("domain")
@@ -164,7 +166,7 @@ public class MybatisPlusGeneratorOfficalTest {
                     // 自定义输出文件目录
                     @Override
                     public String outputFile(TableInfo tableInfo) {
-                        return "E:\\Gitee\\201803Blog\\kiwipeach-blog-root\\blog-sys-api\\src\\main\\resources\\mapper\\" + tableInfo.getEntityName() + "Mapper.xml";
+                        return "E:\\Gitee\\201803Blog\\kiwipeach-blog-root\\blog-sys-api\\src\\main\\resources\\generator\\" + tableInfo.getEntityName() + "Mapper.xml";
                     }
                 }))
         ).setTemplate(

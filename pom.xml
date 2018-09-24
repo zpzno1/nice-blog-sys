@@ -49,6 +49,7 @@
         <module>blog-sys-core</module>
         <module>blog-sys-api</module>
         <module>blog-sys-auto-config</module>
+        <module>blog-sys-oauth</module>
         <module>blog-sys-web</module>
         <module>blog-sys-admin</module>
     </modules>
@@ -75,7 +76,7 @@
         <druid.version>1.0.18</druid.version>
         <!--<mybatis-plus-boot-starter.version>3.0-beta</mybatis-plus-boot-starter.version>--><!--存在很多问题-->
         <!--<mybatis-plus-boot-starter.version>2.3</mybatis-plus-boot-starter.version>-->
-        <mybatis-plus-boot-starter.version>3.0-RC2</mybatis-plus-boot-starter.version>
+        <mybatis-plus-boot-starter.version>3.0-RELEASE</mybatis-plus-boot-starter.version>
         <!--<mybatis-plus-boot-starter.version>3.0-RC2</mybatis-plus-boot-starter.version>-->
         <oracle.version>11.2.0.4</oracle.version>
         <mybatis.generator.version>1.3.5</mybatis.generator.version>

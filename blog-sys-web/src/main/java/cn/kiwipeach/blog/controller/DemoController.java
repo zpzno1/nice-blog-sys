@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * 博客 前端控制器
+ * 博客 前端控制器  【开播提醒群号:679722876】，不定时随缘直播，今天调试直播间，不写代码
  *
  * @author kiwipeach [1099501218@qq.com]
  * @create 2018-08-05
