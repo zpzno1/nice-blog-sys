@@ -26,9 +26,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @create 2018/08/13
  */
 @Controller
-@RequestMapping("qq/oauth2.0")
+@RequestMapping("github/oauth2.0")
 @Slf4j
-public class QQLoginController {
+public class GithubLoginController {
 
     @RequestMapping("login")
     public String toQQLoginPage() {
