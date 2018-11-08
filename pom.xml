@@ -11,13 +11,13 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.kiwipeach.blog</groupId>
-    <artifactId>kiwipeach-blog-root</artifactId>
+    <artifactId>kiwipeach-blog-sys</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <!--项目信息-->
     <description>博客仲裁中心，所有博客相关模块的父容器</description>
-    <url>http://www.gitee.com/kiwipeach/kiwipeach-blog-root</url>
+    <url>http://www.gitee.com/kiwipeach/kiwipeach-blog-sys</url>
     <organization>
         <name>刘卜铷的个人博客</name>
         <url>http://www.kiwipeach.cn</url>
@@ -29,7 +29,7 @@
         </license>
     </licenses>
     <scm>
-        <url>http://www.gitee.com/kiwipeach/kiwipeach-blog-root</url>
+        <url>http://www.gitee.com/kiwipeach/kiwipeach-blog-sys</url>
     </scm>
     <developers>
         <developer>
