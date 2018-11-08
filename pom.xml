@@ -48,10 +48,9 @@
     <modules>
         <module>blog-sys-core</module>
         <module>blog-sys-api</module>
-        <module>blog-sys-auto-config</module>
-        <module>blog-sys-oauth</module>
         <module>blog-sys-web</module>
         <module>blog-sys-admin</module>
+        <module>blog-sys-starters</module>
     </modules>
 
     <!--项目版本仲裁-->
@@ -114,10 +113,6 @@
     <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
             <!--jdk compiler version-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

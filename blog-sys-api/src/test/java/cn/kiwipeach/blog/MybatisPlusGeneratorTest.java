@@ -38,7 +38,7 @@ public class MybatisPlusGeneratorTest {
         GlobalConfig config = new GlobalConfig();
         config.setActiveRecord(true) // 是否支持AR模式
                 .setAuthor("kiwipeach") // 作者
-                .setOutputDir("E:\\Gitee\\201803Blog\\kiwipeach-blog-root\\blog-sys-web\\src\\main\\java") // 生成路径
+                .setOutputDir("E:\\Gitee\\201803Blog\\kiwipeach-blog-sys\\blog-sys-web\\src\\main\\java") // 生成路径
                 .setFileOverride(true)// 是否覆盖文件
                 .setServiceName("I%sService")
                 .setActiveRecord(true)// 开启 activeRecord 模式

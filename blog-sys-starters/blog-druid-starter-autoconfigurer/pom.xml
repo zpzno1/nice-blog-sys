@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>blog-sys-starters</artifactId>
+        <groupId>cn.kiwipeach.blog</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.kiwipeach.blog</groupId>
+    <artifactId>blog-druid-starter-autoconfigurer</artifactId>
+
+    <dependencies>
+        <!--[Oracle、MySQL]驱动和数据源-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId><!--duird数据源-->
+            <version>${druid.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.kiwipeach</groupId>
+            <artifactId>ojdbc6</artifactId><!--oracle数据库驱动-->
+            <version>${oracle.version}</version>
+        </dependency>
+        <!--项目模块依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId><!--springboot web-->
+        </dependency>
+    </dependencies>
+
+</project>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <configuration debug="false">
-    <property name="logDir" value="E:/Gitee/201803Blog/kiwipeach-blog-root/blog-sys-web/target/logs"/>
+    <property name="logDir" value="E:/Gitee/201803Blog/kiwipeach-blog-sys/blog-sys-web/target/logs"/>
 
     <!--文件滚动日志-->
     <appender name="ROLL_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">

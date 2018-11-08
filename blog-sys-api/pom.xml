@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <!--项目基本信息-->
     <parent>
-        <artifactId>kiwipeach-blog-root</artifactId>
+        <artifactId>kiwipeach-blog-sys</artifactId>
         <groupId>cn.kiwipeach.blog</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
@@ -21,16 +21,17 @@
             <artifactId>blog-sys-core</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
+        <!--博客druid启动器-->
+        <dependency>
+            <groupId>cn.kiwipeach.blog</groupId>
+            <artifactId>blog-druid-starter</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
         <!--mybaits-plus的场景启动器-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId><!-- mybatis-plus 替换原来Mybatis官网提供的 -->
             <version>${mybatis-plus-boot-starter.version}</version>
-        </dependency>
-        <!--项目模块依赖-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId><!--springboot web-->
         </dependency>
         <!--mybatis代码生成器所需-->
         <!-- 模板引擎，需要指定 mpg.setTemplateEngine(new FreemarkerTemplateEngine()); -->

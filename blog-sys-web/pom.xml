@@ -5,7 +5,7 @@
 	<!--项目基本信息-->
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>kiwipeach-blog-root</artifactId>
+		<artifactId>kiwipeach-blog-sys</artifactId>
 		<groupId>cn.kiwipeach.blog</groupId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
@@ -20,18 +20,29 @@
 		<!--项目模块依赖 -->
 		<dependency>
 			<groupId>cn.kiwipeach.blog</groupId>
-			<artifactId>blog-sys-auto-config</artifactId>
+			<artifactId>blog-shiro-starter</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>cn.kiwipeach.blog</groupId>
+			<artifactId>blog-web-starter</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.kiwipeach.blog</groupId>
+			<artifactId>blog-oauth-starter</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+
 		<!--springboot场景启动器-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId><!--springboot thymeleaf-->
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId><!--springboot web-->
-		</dependency>
+			<artifactId>spring-boot-starter-web</artifactId>&lt;!&ndash;springboot web&ndash;&gt;
+		</dependency>-->
 	</dependencies>
 
 </project>

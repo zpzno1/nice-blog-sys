@@ -56,7 +56,4 @@ public class MybatisPluginsConfiguration {
         return performanceInterceptor;
     }
 
-
-
-
 }

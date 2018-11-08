@@ -64,7 +64,7 @@ public class MybatisPlusGeneratorOfficalTest {
         AutoGenerator mpg = new AutoGenerator().setGlobalConfig(
                 // 全局配置
                 new GlobalConfig()
-                        .setOutputDir("E:\\Gitee\\201803Blog\\kiwipeach-blog-root\\blog-sys-api\\src\\main\\java")//输出目录
+                        .setOutputDir("E:\\Gitee\\201803Blog\\kiwipeach-blog-sys\\blog-sys-api\\src\\main\\java")//输出目录
                         .setFileOverride(true)// 是否覆盖文件
                         .setActiveRecord(false)// 开启 activeRecord 模式
                         .setEnableCache(false)// XML 二级缓存
@@ -166,7 +166,7 @@ public class MybatisPlusGeneratorOfficalTest {
                     // 自定义输出文件目录
                     @Override
                     public String outputFile(TableInfo tableInfo) {
-                        return "E:\\Gitee\\201803Blog\\kiwipeach-blog-root\\blog-sys-api\\src\\main\\resources\\generator\\" + tableInfo.getEntityName() + "Mapper.xml";
+                        return "E:\\Gitee\\201803Blog\\kiwipeach-blog-sys\\blog-sys-api\\src\\main\\resources\\generator\\" + tableInfo.getEntityName() + "Mapper.xml";
                     }
                 }))
         ).setTemplate(
