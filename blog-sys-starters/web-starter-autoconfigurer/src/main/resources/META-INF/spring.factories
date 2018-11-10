@@ -1,0 +1,7 @@
+# Auto Configure 自动配置启动类设置
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.kiwipeach.blog.shiro.config.ShiroConfiguration,\
+org.kiwipeach.blog.web.exception.CustomErrorAttributes,\
+org.kiwipeach.blog.web.exception.CustomErrorAttributes,\
+org.kiwipeach.blog.web.web.BlogMvcConfiguration
+  

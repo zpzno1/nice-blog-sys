@@ -24,13 +24,13 @@
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>cn.kiwipeach.blog</groupId>
-			<artifactId>blog-web-starter</artifactId>
+			<groupId>org.kiwipeach.blog</groupId>
+			<artifactId>web-starter</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>cn.kiwipeach.blog</groupId>
-			<artifactId>blog-oauth-starter</artifactId>
+			<groupId>org.kiwipeach.blog</groupId>
+			<artifactId>oauth-starter</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 

@@ -9,16 +9,16 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cn.kiwipeach.blog</groupId>
+    <groupId>org.kiwipeach.blog</groupId>
     <artifactId>blog-sys-starters</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>blog-druid-starter-autoconfigurer</module>
-        <module>blog-druid-starter</module>
-        <module>blog-web-starter</module>
-        <module>blog-web-starter-autoconfigurer</module>
-        <module>blog-oauth-starter</module>
-        <module>blog-oauth-starter-autoconfigurer</module>
+        <module>druid-starter-autoconfigurer</module>
+        <module>druid-starter</module>
+        <module>web-starter</module>
+        <module>web-starter-autoconfigurer</module>
+        <module>oauth-starter</module>
+        <module>oauth-starter-autoconfigurer</module>
     </modules>
 
     <dependencies>
