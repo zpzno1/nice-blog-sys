@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.oauth.controller;
+package cn.kiwipeach.blog.oauth;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -26,9 +26,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @create 2018/08/13
  */
 @Controller
-@RequestMapping("github/oauth2.0")
+@RequestMapping("qq/oauth2.0")
 @Slf4j
-public class GithubLoginController {
+public class QQLoginController {
 
     @RequestMapping("login")
     public String toQQLoginPage() {

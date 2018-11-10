@@ -15,13 +15,18 @@
     <modules>
         <module>blog-druid-starter-autoconfigurer</module>
         <module>blog-druid-starter</module>
-        <module>blog-shiro-starter</module>
-        <module>blog-shiro-starter-autoconfigurer</module>
         <module>blog-web-starter</module>
         <module>blog-web-starter-autoconfigurer</module>
         <module>blog-oauth-starter</module>
         <module>blog-oauth-starter-autoconfigurer</module>
     </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId><!--springboot web-->
+        </dependency>
+    </dependencies>
 
 
 </project>

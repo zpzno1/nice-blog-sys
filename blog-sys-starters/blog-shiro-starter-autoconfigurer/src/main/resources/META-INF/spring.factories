@@ -1,3 +1,0 @@
-# Auto Configure 自动配置启动类设置
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.kiwipeach.blog.shiro.config.ShiroConfiguration

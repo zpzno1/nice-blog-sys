@@ -20,7 +20,7 @@
 		<!--项目模块依赖 -->
 		<dependency>
 			<groupId>cn.kiwipeach.blog</groupId>
-			<artifactId>blog-shiro-starter</artifactId>
+			<artifactId>blog-sys-api</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>

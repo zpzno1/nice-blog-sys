@@ -25,10 +25,6 @@
             <version>${oracle.version}</version>
         </dependency>
         <!--项目模块依赖-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId><!--springboot web-->
-        </dependency>
-    </dependencies>
+     </dependencies>
 
 </project>
