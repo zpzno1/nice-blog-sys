@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<!--
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+-->
+
+    <link rel="stylesheet" href="bs_docs_sidebar.css">
+    <title>Hello, world!</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <!--Nav Bar -->
+        <nav class="col-xs-3 bs-docs-sidebar">
+            <ul id="sidebar" class="nav nav-stacked fixed">
+                <li>
+                    <a href="#GroupA">Group A</a>
+                    <ul class="nav nav-stacked">
+                        <li><a href="#GroupASub1">Sub-Group 1</a></li>
+                        <li><a href="#GroupASub2">Sub-Group 2</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#GroupB">Group B</a>
+                    <ul class="nav nav-stacked">
+                        <li><a href="#GroupBSub1">Sub-Group 1</a></li>
+                        <li><a href="#GroupBSub2">Sub-Group 2</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#GroupC">Group C</a>
+                    <ul class="nav nav-stacked">
+                        <li><a href="#GroupCSub1">Sub-Group 1</a></li>
+                        <li><a href="#GroupCSub2">Sub-Group 2</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!--Main Content -->
+        <div class="col-xs-9">
+            <section id="GroupA" class="group">
+                <h3>Group A</h3>
+                <div id="GroupASub1" class="subgroup">
+                    <h4>Group A Sub 1</h4>
+                </div>
+                <div id="GroupASub2" class="subgroup">
+                    <h4>Group A Sub 2</h4>
+                </div>
+            </section>
+            <section id="GroupB" class="group">
+                <h3>Group B</h3>
+                <div id="GroupBSub1" class="subgroup">
+                    <h4>Group B Sub 1</h4>
+                </div>
+                <div id="GroupBSub2" class="subgroup">
+                    <h4>Group B Sub 2</h4>
+                </div>
+            </section>
+            <section id="GroupC" class="group">
+                <h3>Group C</h3>
+                <div id="GroupCSub1" class="subgroup">
+                    <h4>Group C Sub 1</h4>
+                </div>
+                <div id="GroupCSub2" class="subgroup">
+                    <h4>Group C Sub 2</h4>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+</body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><script>
+    $('body').scrollspy({
+        target: '.bs-docs-sidebar',
+        offset: 40
+    });
+</script>
+</html>

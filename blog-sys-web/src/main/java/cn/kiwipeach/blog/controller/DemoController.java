@@ -76,4 +76,49 @@ public class DemoController {
     }
 
 
+    /**
+     * 测试博客首页样式显示
+     * @return
+     */
+    @RequestMapping("blog/demo")
+    public String toBlogSeedPage(){
+        return "blog/demo";
+    }
+
+    /**
+     * 测试博客首页显示
+     * @return
+     */
+    @RequestMapping("blog/index")
+    public String toBlogIndexPage(){
+        return "blog/index";
+    }
+    /**
+     * 测试博客详情页面
+     * @return
+     */
+    @RequestMapping("blog/detail")
+    public String toBlogDetailPage(){
+        return "blog/detail";
+    }
+
+    /**
+     * 测试博客归档页面
+     * @return
+     */
+    @RequestMapping("blog/archive")
+    public String toBlogArchivePage(){
+        return "blog/archive";
+    }
+
+    /**
+     * 测试博客关于页面
+     * @return
+     */
+    @RequestMapping("blog/about")
+    public String toBlogAboutPage(){
+        return "blog/about";
+    }
+
+
 }

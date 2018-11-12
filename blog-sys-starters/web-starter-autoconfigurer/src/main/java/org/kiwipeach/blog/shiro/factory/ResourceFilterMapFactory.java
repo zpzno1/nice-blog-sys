@@ -38,8 +38,11 @@ public class ResourceFilterMapFactory {
      */
     public Map<String,String> loadResourceAccessRules(){
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
+        //1)配置匿名可以访问的路径
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/user/login", "anon");
+        filterChainDefinitionMap.put("/favicon.ico", "anon");
+        //2)配置需要拦截的路径
         filterChainDefinitionMap.put("/user/logout", "logout");
         filterChainDefinitionMap.put("/login/success", "authc");//必须授权
         filterChainDefinitionMap.put("/**", "user");//认证过或“记住我”都可访问,例如helo或remember页面

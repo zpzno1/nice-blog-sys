@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="blog::header('博客首页*')"></head>
+<body class="index-page">
+<nav th:replace="blog::navbar "></nav>
+<div th:replace="blog::background"></div>
+<div class="main main-raised">
+    <div class="row">
+        <div class="col-md-9">
+            <!--动态内容-->
+            <div class="card">
+                <div class="card-body ">
+                    <h4 class="card-title">
+                        这里填写正文内容。
+                    </h4> <h4 class="card-title">
+                    这里填写正文内容。
+                </h4> <h4 class="card-title">
+                    这里填写正文内容。
+                </h4> <h4 class="card-title">
+                    这里填写正文内容。
+                </h4> <h4 class="card-title">
+                    这里填写正文内容。
+                </h4> <h4 class="card-title">
+                    这里填写正文内容。
+                </h4> <h4 class="card-title">
+                    这里填写正文内容。
+                </h4>
+                </div>
+            </div>
+        </div>
+        <div th:replace="blog::side_bar"></div>
+    </div>
+    <footer th:replace="blog::footer"></footer>
+</div>
+<div th:replace="blog::script"></div>
+<script>
+    $(document).ready(function () {
+        //回到顶端插件
+        blog_index.plugin.uitotop.init();
+        //博客标签云插件
+        blog_index.plugin.jqxtagcloud.init($('#blog_tag_cloud_div'));
+        //分页插件
+        blog_index.plugin.pagination.init($("#blog_pagination_div"));
+        //树形分类插件
+        blog_index.plugin.blog_category_tree.init($("#treeDemo"));
+    });
+</script>
+</body>
+</html>
