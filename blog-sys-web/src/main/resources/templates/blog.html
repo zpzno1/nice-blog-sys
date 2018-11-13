@@ -10,24 +10,16 @@
     <link rel="icon" th:href="@{/assets/images/index/favicon.png}">
     <title th:text="${title}"></title>
     <!--前端框架样式依赖开始-->
-    <link rel="stylesheet" th:href="@{/node_modules/font-awesome/css/font-awesome.min.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/framework/googleapis-font/googleapis-font.css}"/>
     <link rel="stylesheet" th:href="@{/node_modules/material-kit/assets/css/material-kit.css}">
     <link rel="stylesheet" th:href="@{/assets/css/framework/common-base.css}">
+    <link rel="stylesheet" th:href="@{/node_modules/font-awesome/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/framework/googleapis-font/googleapis-font.css}"/>
     <!--回到最顶部(totop)插件-->
     <link rel="stylesheet" media="screen,projection" th:href="@{/assets/plugins/jquery_totop_plugin/css/ui.totop.css}"/>
     <!--分页插件样式-->
     <link rel="stylesheet" th:href="@{/assets/plugins/jquery_pagination/pagination.css}">
     <!--jquery-widgets 样式-->
-    <link type="text/css" rel="Stylesheet"
-          th:href="@{/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/styles/jqx.base.css}"/>
-    <!--smartwizard 步骤插件(http://techlaboratory.net/smartwizard/)-->
-    <link rel="stylesheet" type="text/css" th:href="@{/node_modules/smartwizard/dist/css/smart_wizard.css}"/>
-    <link rel="stylesheet" type="text/css"
-          th:href="@{/node_modules/smartwizard/dist/css/smart_wizard_theme_circles.css}"/>
-    <link rel="stylesheet" type="text/css"
-          th:href="@{/node_modules/smartwizard/dist/css/smart_wizard_theme_arrows.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/node_modules/smartwizard/dist/css/smart_wizard_theme_dots.css}"/>
+    <link type="text/css" rel="Stylesheet" th:href="@{/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/styles/jqx.base.css}"/>
     <!--树形分类插件-->
     <link rel="stylesheet" th:href="@{/node_modules/ztree/css/zTreeStyle/zTreeStyle.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/assets/css/index/outlook_tree.css}" type="text/css">
@@ -35,9 +27,14 @@
     <link rel="stylesheet" th:href="@{/assets/css/detail/blog.css}"/>
     <!--博客时间归档样式-->
     <link rel="stylesheet" th:href="@{/assets/css/archive/hexo-timeline.css}">
-
-    <!--前段框架依赖开始-->
     <script type="text/javascript" th:src="@{/node_modules/jquery/dist/jquery.min.js}"></script>
+    <!--弹出框layer依赖-->
+    <script type="text/javascript" th:src="@{/node_modules/layui-layer/dist/layer.js}"></script>
+    <script type="text/javascript">
+        var load_index = layer.load(2, {shade: [0.9,'#ffffff']});
+        console.log('open:', load_index);
+    </script>
+    <!--前段框架依赖开始-->
     <script th:src="@{/node_modules/material-kit/assets/js/core/popper.min.js}"></script>
     <script th:src="@{/node_modules/material-kit/assets/js/bootstrap-material-design.js}"></script>
     <script th:src="@{/node_modules/material-kit/assets/js/plugins/moment.min.js}"></script>
@@ -499,7 +496,7 @@
     </div>
 </footer>
 <!--#.页面底部脚本-->
-<div th:fragment="script">
+<div th:fragment="javascript">
     <!--回到最顶端(totop)插件-->
     <script th:src="@{/assets/plugins/jquery_totop_plugin/js/easing.js}" type="text/javascript"></script>
     <script th:src="@{/assets/plugins/jquery_totop_plugin/js/jquery.ui.totop.js}" type="text/javascript"></script>
@@ -513,8 +510,13 @@
     <script type="text/javascript" th:src="@{/node_modules/ztree/js/jquery.ztree.core.js}"></script>
     <script type="text/javascript" th:src="@{/node_modules/ztree/js/jquery.ztree.excheck.js}"></script>
     <script type="text/javascript" th:src="@{/node_modules/ztree/js/jquery.ztree.exedit.js}"></script>
-    <!--弹出框layer依赖-->
-    <script type="text/javascript" th:src="@{/node_modules/layui-layer/dist/layer.js}"></script>
+    <script type="text/javascript">
+        $(function () {
+            setTimeout(function () {
+                layer.closeAll();
+            }, 600);
+        });
+    </script>
 </div>
 </body>
 
