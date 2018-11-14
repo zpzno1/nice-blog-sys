@@ -19,7 +19,8 @@
     <!--分页插件样式-->
     <link rel="stylesheet" th:href="@{/assets/plugins/jquery_pagination/pagination.css}">
     <!--jquery-widgets 样式-->
-    <link type="text/css" rel="Stylesheet" th:href="@{/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/styles/jqx.base.css}"/>
+    <link type="text/css" rel="Stylesheet"
+          th:href="@{/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/styles/jqx.base.css}"/>
     <!--树形分类插件-->
     <link rel="stylesheet" th:href="@{/node_modules/ztree/css/zTreeStyle/zTreeStyle.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/assets/css/index/outlook_tree.css}" type="text/css">
@@ -31,8 +32,7 @@
     <!--弹出框layer依赖-->
     <script type="text/javascript" th:src="@{/node_modules/layui-layer/dist/layer.js}"></script>
     <script type="text/javascript">
-        var load_index = layer.load(2, {shade: [0.9,'#ffffff']});
-        console.log('open:', load_index);
+        layer.load(2, {shade: [0.9, '#ffffff']});
     </script>
     <!--前段框架依赖开始-->
     <script th:src="@{/node_modules/material-kit/assets/js/core/popper.min.js}"></script>
@@ -53,7 +53,7 @@
         <div class="navbar-translate">
             <a class="navbar-brand" href="blog/index.html"><img th:src="@{/assets/images/index/me-logo.png}"
                                                                 alt="Circle Image"
-                                                                class="rounded-circle img-fluid">KiWiPeach </a>
+                                                                class="rounded-circle img-fluid">kiwipeach </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
                     aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -65,17 +65,17 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/demo/blog/index}">
-                        <i class="material-icons">cloud_download</i> 首页**
+                        <i class="fa fa-home"></i> 首页
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/demo/blog/archive}">
-                        <i class="material-icons">cloud_download</i> 归档
+                        <i class="fa fa-archive"></i> 归档
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/demo/blog/about}">
-                        <i class="material-icons">cloud_download</i> 关于
+                        <i class="fa fa-user-o"></i> 关于
                     </a>
                 </li>
                 <li class="dropdown nav-item">
@@ -512,10 +512,14 @@
     <script type="text/javascript" th:src="@{/node_modules/ztree/js/jquery.ztree.exedit.js}"></script>
     <script type="text/javascript">
         $(function () {
+            console.log('dom加载完成');
             setTimeout(function () {
                 layer.closeAll();
             }, 600);
         });
+    </script>
+    <script type="text/javascript">
+        console.log("拼命加载中...")
     </script>
 </div>
 </body>

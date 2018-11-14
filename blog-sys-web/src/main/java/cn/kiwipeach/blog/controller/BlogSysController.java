@@ -71,7 +71,8 @@ public class BlogSysController {
 
     @GetMapping("login/success")
     public String toLoginSuccessPage() {
-        return "shiro/success";
+        //return "shiro/success";
+        return "demo/blog/index";
     }
 
     @GetMapping("login/fail")
