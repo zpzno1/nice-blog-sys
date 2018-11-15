@@ -834,7 +834,7 @@ module.exports = {
                         <a href="#pablo">你的回复也很棒棒喔(#^.^#)</a>
                     </h6>
                     <div class="collapse" id="collapseExample">
-                        <div class="card" style="background: lightgrey;margin: 3px 0px 3px 0px">
+                        <div class="card" style="background: #f9f7f7;margin: 3px 0px 3px 0px">
                             <div class="card-body" style="padding: 10px 0px 0px 15px">
                                 <div class="author">
                                     <a href="#pablo">
@@ -853,7 +853,7 @@ module.exports = {
                                 </div>
                             </div>
                         </div>
-                        <div class="card" style="background: lightgrey;margin: 3px 0px 3px 0px">
+                        <div class="card" style="background: #f9f7f7;margin: 3px 0px 3px 0px">
                             <div class="card-body" style="padding: 10px 0px 0px 15px">
                                 <div class="author">
                                     <a href="#pablo">
@@ -872,7 +872,7 @@ module.exports = {
                                 </div>
                             </div>
                         </div>
-                        <div class="card" style="background: lightgrey;margin: 3px 0px 3px 0px">
+                        <div class="card" style="background: #f9f7f7;margin: 3px 0px 3px 0px">
                             <div class="card-body" style="padding: 10px 0px 0px 15px">
                                 <div class="author">
                                     <a href="#pablo">
@@ -899,9 +899,8 @@ module.exports = {
                 </div>
                 <div class="card-footer ">
                     <div class="stats ml-auto">
-                        <a href="javascript:;" class="text-dark"><i class="material-icons">favorite</i> 342 &#xB7;</a>
-                        <a href="javascript:;" class="text-dark"><i class="material-icons">chat_bubble</i> 45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        <a href="#collapseExample" class="text-dark" data-toggle="collapse">查看回复</a>
+                        <a href="javascript:;" class="text-dark"><i class="fa fa-thumbs-o-up"></i> 45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        <a href="#collapseExample" class="text-dark" data-toggle="collapse">查看回复(38)<i class="fa fa-chevron-down" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
@@ -1185,18 +1184,4 @@ module.exports = {
 </body>
 <!--前段框架依赖开始-->
 <script type="text/javascript" src="../../static/assets/js/detail/blog_detail.js" th:src="@{/assets/js/detail/blog_detail.js}"></script>
-<script>
-    $(document).ready(function () {
-        blog_detail.plugin.bootstrap4_catalog_plugin.init();
-        blog_detail.plugin.bootstrap4_catalog_plugin.event.bind_outline_scroll();
-        //初始化博客分页插件
-        blog_detail.plugin.blog_pagination.init($('#blog_detial_pagination_div'));
-        //绑定博客评论加载按钮事件
-        blog_detail.evnent.bind_load_comment_btn($('#load_comment_btn'));
-        //初始化分页插件
-        blog_detail.plugin.reply_pagination.init($('#blog_reply_pagination_div'));
-    });
-</script>
-
-
 </html>

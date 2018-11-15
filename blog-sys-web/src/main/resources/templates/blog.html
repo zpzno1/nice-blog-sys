@@ -10,10 +10,9 @@
     <link rel="icon" th:href="@{/assets/images/index/favicon.png}">
     <title th:text="${title}"></title>
     <!--前端框架样式依赖开始-->
+    <link rel="stylesheet" th:href="@{/node_modules/font-awesome/css/font-awesome.min.css}"/>
     <link rel="stylesheet" th:href="@{/node_modules/material-kit/assets/css/material-kit.css}">
     <link rel="stylesheet" th:href="@{/assets/css/framework/common-base.css}">
-    <link rel="stylesheet" th:href="@{/node_modules/font-awesome/css/font-awesome.min.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/framework/googleapis-font/googleapis-font.css}"/>
     <!--回到最顶部(totop)插件-->
     <link rel="stylesheet" media="screen,projection" th:href="@{/assets/plugins/jquery_totop_plugin/css/ui.totop.css}"/>
     <!--分页插件样式-->
@@ -32,17 +31,8 @@
     <!--弹出框layer依赖-->
     <script type="text/javascript" th:src="@{/node_modules/layui-layer/dist/layer.js}"></script>
     <script type="text/javascript">
-        layer.load(2, {shade: [0.9, '#ffffff']});
+        layer.load(2, {shade: [0.9, '#ffffff'],});
     </script>
-    <!--前段框架依赖开始-->
-    <script th:src="@{/node_modules/material-kit/assets/js/core/popper.min.js}"></script>
-    <script th:src="@{/node_modules/material-kit/assets/js/bootstrap-material-design.js}"></script>
-    <script th:src="@{/node_modules/material-kit/assets/js/plugins/moment.min.js}"></script>
-    <script th:src="@{/node_modules/material-kit/assets/js/plugins/bootstrap-datetimepicker.min.js}"></script>
-    <script th:src="@{/node_modules/material-kit/assets/js/plugins/nouislider.min.js}"></script>
-    <script th:src="@{/node_modules/material-kit/assets/js/material-kit.js}"></script>
-    <!--前段框架依赖结束-->
-
 </head>
 <body>
 <!--#.导航条-->
@@ -80,15 +70,15 @@
                 </li>
                 <li class="dropdown nav-item">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <i class="material-icons">apps</i> 更多
+                        <i class="fa fa-th"></i> 更多
                     </a>
                     <div class="dropdown-menu dropdown-with-icons">
                         <a href="blog/index.html" class="dropdown-item">
-                            <i class="material-icons">layers</i> 资料下载
+                            <i class="fa fa-cloud-download"></i> 资料下载
                         </a>
                         <a href="http://demos.creative-tim.com/material-kit/docs/2.0/getting-started/introduction.html"
                            class="dropdown-item">
-                            <i class="material-icons">content_paste</i> Material-Kit官方手册
+                            <i class="fa fa-book"></i> Material-Kit官方手册
                         </a>
                     </div>
                 </li>
@@ -158,7 +148,7 @@
                                     data-target="#loginModal"><i class="fa fa-user-o"></i> 用户登陆
                             </button>-->
                             <div class="ui horizontal list git-other-login-method-icon list-center">
-                                <button class="btn btn-sm btn-info btn-round" data-toggle="modal"
+                                <button class="btn btn-sm btn-round" data-toggle="modal" style="background: lightblue"
                                         data-target="#loginModal"><i class="fa fa-qq" aria-hidden="true"></i>
                                 </button>
                                 <button class="btn btn-sm btn-round" data-toggle="modal"
@@ -170,7 +160,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="tab-pane" id="schedule-1">
+                        <div class="tab-pane">
                             <!--卡片肖像:begin-->
                             <div class="card card-profile" style="max-width: 360px">
                                 <div class="card-header card-header-image">
@@ -229,7 +219,7 @@
 
             <!--橱窗位置:begin-->
             <div class="card card-raised card-carousel">
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <div class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0" class=""></li>
                         <li data-target="#carouselExampleIndicators" data-slide-to="1" class=""></li>
@@ -272,13 +262,11 @@
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
                        data-slide="prev">
-                        <i class="material-icons">keyboard_arrow_left</i>
-                        <span class="sr-only">Previous</span>
+                        <i class="fa fa-chevron-left"></i>
                     </a>
                     <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
                        data-slide="next">
-                        <i class="material-icons">keyboard_arrow_right</i>
-                        <span class="sr-only">Next</span>
+                        <i class="fa fa-chevron-right"></i>
                     </a>
                 </div>
             </div>
@@ -316,13 +304,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#schedule-1" role="tab" data-toggle="tab">
+                            <a class="nav-link" role="tab" data-toggle="tab">
                                 <bold>博&nbsp;&nbsp;&nbsp;主</bold>
                             </a>
                         </li>
                     </ul>
                     <div class="tab-content tab-space">
-                        <div class="tab-pane active" id="dashboard-1" style="text-align: center">
+                        <div class="tab-pane active" style="text-align: center">
                             <!--登陆成功状态-->
                             <!-- <img src="./assets/images/index/me-logo.png" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">欢迎您,KiWiPeach -->
                             <!--未登录状态-->
@@ -333,7 +321,7 @@
                                     data-target="#signupModal"><i class="fa fa-user-plus"></i> 用户注册
                             </button>
                         </div>
-                        <div class="tab-pane" id="schedule-1">
+                        <div class="tab-pane">
                             <!--卡片肖像:begin-->
                             <div class="card card-profile" style="max-width: 360px">
                                 <div class="card-header card-header-image">
@@ -413,13 +401,11 @@
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
                        data-slide="prev">
-                        <i class="material-icons">keyboard_arrow_left</i>
-                        <span class="sr-only">Previous</span>
+                        <i class="fa fa-chevron-left"></i>
                     </a>
                     <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
                        data-slide="next">
-                        <i class="material-icons">keyboard_arrow_right</i>
-                        <span class="sr-only">Next</span>
+                        <i class="fa fa-chevron-right"></i>
                     </a>
                 </div>
             </div>
@@ -497,6 +483,14 @@
 </footer>
 <!--#.页面底部脚本-->
 <div th:fragment="javascript">
+    <!--前段框架依赖-->
+    <script th:src="@{/node_modules/material-kit/assets/js/core/popper.min.js}"></script>
+    <script th:src="@{/node_modules/material-kit/assets/js/bootstrap-material-design.min.js}"></script>
+    <script th:src="@{/node_modules/material-kit/assets/js/plugins/moment.min.js}"></script>
+    <script th:src="@{/node_modules/material-kit/assets/js/plugins/bootstrap-datetimepicker.min.js}"></script>
+    <script th:src="@{/node_modules/material-kit/assets/js/plugins/nouislider.min.js}"></script>
+    <script th:src="@{/node_modules/material-kit/assets/js/material-kit.min.js}"></script>
+
     <!--回到最顶端(totop)插件-->
     <script th:src="@{/assets/plugins/jquery_totop_plugin/js/easing.js}" type="text/javascript"></script>
     <script th:src="@{/assets/plugins/jquery_totop_plugin/js/jquery.ui.totop.js}" type="text/javascript"></script>
@@ -510,16 +504,13 @@
     <script type="text/javascript" th:src="@{/node_modules/ztree/js/jquery.ztree.core.js}"></script>
     <script type="text/javascript" th:src="@{/node_modules/ztree/js/jquery.ztree.excheck.js}"></script>
     <script type="text/javascript" th:src="@{/node_modules/ztree/js/jquery.ztree.exedit.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/blog-common.js}"></script>
     <script type="text/javascript">
         $(function () {
-            console.log('dom加载完成');
             setTimeout(function () {
                 layer.closeAll();
-            }, 600);
+            }, 500);
         });
-    </script>
-    <script type="text/javascript">
-        console.log("拼命加载中...")
     </script>
 </div>
 </body>

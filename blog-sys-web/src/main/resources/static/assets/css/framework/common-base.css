@@ -4,13 +4,13 @@
 /*下拉菜单*/
 .dropdown-menu .dropdown-item:hover, .dropdown-menu .dropdown-item:focus, .dropdown-menu a:hover, .dropdown-menu a:focus, .dropdown-menu a:active {
     box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
-    background-color: grey;
+    background-color: #555;
     color: #FFFFFF;
 }
 /*导航按钮*/
 .nav-pills .nav-item .nav-link.active {
     color: #fff;
-    background-color: lightslategray;
+    background-color: #555;
     box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.57), 0 13px 24px -11px rgba(156, 39, 176, 0.6);
 }
 /*表单单击*/

@@ -19,7 +19,7 @@
 }
 
 .pagination_plugin .current {
-    background: lightslategray;
+    background: #e6e2e2;
     color: #8b2cab;
 	border: solid 1px #AAE;
 }

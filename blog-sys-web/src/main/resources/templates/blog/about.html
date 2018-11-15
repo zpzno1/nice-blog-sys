@@ -334,13 +334,5 @@
     <!--前段框架依赖结束-->
 </div>
 <script type="text/javascript" src="../../static/assets/js/about/blog_about.js" th:src="@{/assets/js/about/blog_about.js}"></script>
-<script>
-    $(document).ready(function () {
-        //博客标签云插件
-        blog_about.plugin.jqxtagcloud.init($('#blog_tag_cloud_div'));
-        //树形分类插件
-        blog_about.plugin.blog_category_tree.init($("#treeDemo"));
-    });
-</script>
 </body>
 </html>

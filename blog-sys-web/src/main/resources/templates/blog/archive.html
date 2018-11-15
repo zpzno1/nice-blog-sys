@@ -560,21 +560,9 @@
     <!--弹出框layer依赖-->
     <script type="text/javascript" src="../../static/node_modules/layui-layer/dist/layer.js"></script>
 </div>
-</body>
-
 <!--归档模块脚本-->
 <script type="text/javascript" src="../../static/assets/js/archive/blog_archive.js" th:src="@{/assets/js/archive/blog_archive.js}"></script>
-
-<script>
-    $(document).ready(function () {
-        //博客标签云插件
-        blog_archive.plugin.jqxtagcloud.init($('#blog_tag_cloud_div'));
-        //树形分类插件
-        blog_archive.plugin.blog_category_tree.init($("#treeDemo"));
-        //时间线加载更多事件
-        blog_archive.bind_archive_loadmore($('#load_more_archive_btn'));
-    });
-</script>
+</body>
 
 
 </html>

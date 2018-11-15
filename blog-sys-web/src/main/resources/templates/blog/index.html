@@ -652,18 +652,6 @@
 </div>
 <!--用户模块脚本-->
 <script type="text/javascript" src="../../static/assets/js/index/blog_index.js" th:src="@{/assets/js/index/blog_index.js}"></script>
-<script>
-    $(document).ready(function () {
-        //回到顶端插件
-        blog_index.plugin.uitotop.init();
-        //博客标签云插件
-        blog_index.plugin.jqxtagcloud.init($('#blog_tag_cloud_div'));
-        //分页插件
-        blog_index.plugin.pagination.init($("#blog_pagination_div"));
-        //树形分类插件
-        blog_index.plugin.blog_category_tree.init($("#treeDemo"));
-    });
-</script>
 </body>
 
 
