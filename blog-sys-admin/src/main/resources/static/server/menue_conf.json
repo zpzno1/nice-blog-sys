@@ -1,0 +1,80 @@
+[
+  {
+    "id": 900,
+    "parentid": null,
+    "icon":"fa fa-home",
+    "name": "首页"
+  },
+  {
+    "id": 1000,
+    "parentid": null,
+    "icon":"fa fa-edit",
+    "name": "系统功能"
+  },
+  {
+    "id": 1001,
+    "parentid": 1000,
+    "name": "网站用户",
+    "icon":null
+  },
+  {
+    "id": 1002,
+    "parentid": 1000,
+    "name": "系统参数",
+    "icon":null
+  },
+  {
+    "id": 1003,
+    "parentid": 1000,
+    "name": "访问日志",
+    "icon":null
+  },
+  {
+    "id": 1004,
+    "parentid": 1000,
+    "name": "Druid日志",
+    "icon":null
+  },
+  {
+    "id": 1005,
+    "parentid": 1000,
+    "name": "Swagger文档",
+    "icon":null
+  },
+  {
+    "id": 1100,
+    "parentid": null,
+    "name": "博客功能",
+    "icon":"fa fa-desktop"
+  },
+  {
+    "id": 1101,
+    "parentid": 1100,
+    "name": "博客发布",
+    "icon":null
+  },
+  {
+    "id": 1102,
+    "parentid": 1100,
+    "name": "博文管理",
+    "icon":null
+  },
+  {
+    "id": 1103,
+    "parentid": 1100,
+    "name": "博客标签",
+    "icon":null
+  },
+  {
+    "id": 1104,
+    "parentid": 1100,
+    "name": "博客分类",
+    "icon":null
+  },
+  {
+    "id": 1105,
+    "parentid": 1100,
+    "name": "评论留言",
+    "icon":null
+  }
+]

@@ -15,7 +15,6 @@
 	<name>${artifactId}</name>
 	<description>博客web前端模块，主要负责功能展示</description>
 
-	<!--web模块依赖-->
 	<dependencies>
 		<!--项目模块依赖 -->
 		<dependency>

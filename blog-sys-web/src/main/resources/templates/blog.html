@@ -13,6 +13,8 @@
     <link rel="stylesheet" th:href="@{/node_modules/font-awesome/css/font-awesome.min.css}"/>
     <link rel="stylesheet" th:href="@{/node_modules/material-kit/assets/css/material-kit.css}">
     <link rel="stylesheet" th:href="@{/assets/css/framework/common-base.css}">
+    <!--pace样式-->
+    <link rel="stylesheet" th:href="@{/assets/plugins/pace-progress/themes/silver/pace-theme-minimal.css}">
     <!--回到最顶部(totop)插件-->
     <link rel="stylesheet" media="screen,projection" th:href="@{/assets/plugins/jquery_totop_plugin/css/ui.totop.css}"/>
     <!--分页插件样式-->
@@ -30,9 +32,6 @@
     <script type="text/javascript" th:src="@{/node_modules/jquery/dist/jquery.min.js}"></script>
     <!--弹出框layer依赖-->
     <script type="text/javascript" th:src="@{/node_modules/layui-layer/dist/layer.js}"></script>
-    <script type="text/javascript">
-        layer.load(2, {shade: [0.9, '#ffffff'],});
-    </script>
 </head>
 <body>
 <!--#.导航条-->
@@ -160,7 +159,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="tab-pane">
+                        <div class="tab-pane" id="schedule-1">
                             <!--卡片肖像:begin-->
                             <div class="card card-profile" style="max-width: 360px">
                                 <div class="card-header card-header-image">
@@ -490,7 +489,6 @@
     <script th:src="@{/node_modules/material-kit/assets/js/plugins/bootstrap-datetimepicker.min.js}"></script>
     <script th:src="@{/node_modules/material-kit/assets/js/plugins/nouislider.min.js}"></script>
     <script th:src="@{/node_modules/material-kit/assets/js/material-kit.min.js}"></script>
-
     <!--回到最顶端(totop)插件-->
     <script th:src="@{/assets/plugins/jquery_totop_plugin/js/easing.js}" type="text/javascript"></script>
     <script th:src="@{/assets/plugins/jquery_totop_plugin/js/jquery.ui.totop.js}" type="text/javascript"></script>
@@ -505,13 +503,8 @@
     <script type="text/javascript" th:src="@{/node_modules/ztree/js/jquery.ztree.excheck.js}"></script>
     <script type="text/javascript" th:src="@{/node_modules/ztree/js/jquery.ztree.exedit.js}"></script>
     <script type="text/javascript" th:src="@{/assets/js/blog-common.js}"></script>
-    <script type="text/javascript">
-        $(function () {
-            setTimeout(function () {
-                layer.closeAll();
-            }, 500);
-        });
-    </script>
+    <!--pace插件-->
+    <script type="text/javascript" th:src="@{/assets/plugins/pace-progress/pace.min.js}"></script>
 </div>
 </body>
 

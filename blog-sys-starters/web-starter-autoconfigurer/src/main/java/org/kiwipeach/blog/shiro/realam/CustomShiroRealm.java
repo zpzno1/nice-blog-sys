@@ -56,16 +56,15 @@ public class CustomShiroRealm extends AuthorizingRealm {
         SysUser secUser = new SysUser();
         secUser.setUserName("kiwipeach");
         secUser.setPassword("3a322406a9067b292325e13989c404dd1bf38ebf");
-        Object credentials = "3a322406a9067b292325e13989c404dd1bf38ebf";
         if(secUser==null){
             throw new UnknownAccountException("用户不存在!");
         }
         String realName = getName();
         ByteSource credentialsSalt = ByteSource.Util.bytes(username);
         //6. 根据用户的情况, 来构建 AuthenticationInfo 对象并返回. 通常使用的实现类为: SimpleAuthenticationInfo
-        //1). principal: 认证的实体信息. 可以是 username, 也可以是数据表对应的用户的实体类对象.
-        //2). credentials: 密码.
-        AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(secUser,credentials,credentialsSalt,realName);
+        //1). secUser (principal): 认证的实体信息，目的是为了在授权的时候获取到当前的认知实体信息.
+        //2). secUser.getPassword (credentials): 从数据库中获取的数据库密码信息.
+        AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(secUser,secUser.getPassword(),credentialsSalt,realName);
         return authenticationInfo;
     }
 
