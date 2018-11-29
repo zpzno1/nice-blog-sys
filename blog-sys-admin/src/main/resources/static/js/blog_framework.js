@@ -60,7 +60,6 @@
             '</li> ' +
             '<li><a href="javascript:;"><i class="fa fa-desktop"></i> <span class="nav-label">博客功能管理</span><span class="fa arrow"></span></a>' +
             '  <ul class="nav nav-second-level collapse">' +
-            '       <li class="nav-item" data-url="blog/article/article_send.html"><a href="javascript:;">博客发布</a></li>' +
             '       <li class="nav-item" data-url="blog/article/index.html"><a href="javascript:;">博文管理</a></li>' +
             '       <li class="nav-item" data-url="blog/tag/index.html"><a href="javascript:;">博客标签</a></li> ' +
             '       <li class="nav-item" data-url="blog/category/index.html"><a href="javascript:;">博客分类</a></li> ' +

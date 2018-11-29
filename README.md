@@ -8,7 +8,7 @@
 
 #### 安装教程
 
-1. 拉取源代码
+1. 拉取源代码	
 
 ```shell
     git clone https://gitee.com/KiWiPeach/nice-blog-sys.git

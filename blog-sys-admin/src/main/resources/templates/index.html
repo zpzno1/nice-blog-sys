@@ -12,6 +12,7 @@
           rel="stylesheet">
     <link href="../static/css/animate.css" th:href="@{/css/animate.css}" rel="stylesheet">
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -22,9 +23,10 @@
         <div class="sidebar-collapse">
             <div class="nav-header">
                 <div class="dropdown profile-element"><img alt="image" class="rounded-circle"
-                                                           src="../static/img/profile_small.jpg" th:src="@{/img/profile_small.jpg}"/> <a data-toggle="dropdown"
-                                                                                       class="dropdown-toggle"
-                                                                                       href="#"> <span
+                                                           src="../static/img/profile_small.jpg"
+                                                           th:src="@{/img/me-logo.png}"/> <a data-toggle="dropdown"
+                                                                                             class="dropdown-toggle"
+                                                                                             href="#"> <span
                         class="block m-t-xs font-bold">kiwipeach</span> </a></div>
             </div>
             <ul class="nav metismenu" id="side-menu">
@@ -49,7 +51,7 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        <span class="m-r-sm text-muted welcome-message">kiwipeach的博客管理中心</span>
+                        <a href="./blog/article/article_send.html" target="_blank" a><img src="https://images.gitbook.cn/FrluR8-O_2mfQXV32LfkVLeYR1X6">快速发表博文</a>
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
@@ -151,11 +153,9 @@
                             </li>
                         </ul>
                     </li>
-
-
                     <li>
                         <a href="login.html">
-                            <i class="fa fa-sign-out"></i> Log out
+                            <i class="fa fa-sign-out"></i> 登出
                         </a>
                     </li>
                     <li>
@@ -164,7 +164,6 @@
                         </a>
                     </li>
                 </ul>
-
             </nav>
         </div>
         <!--动态内容-->
@@ -598,6 +597,7 @@
 <script src="../static/js/plugins/flot/jquery.flot.symbol.js"
         th:src="@{/js/plugins/flot/jquery.flot.symbol.js}"></script>
 <script src="../static/js/plugins/flot/jquery.flot.time.js" th:src="@{/js/plugins/flot/jquery.flot.time.js}"></script>
+
 <!--框架加强js-->
 <script type="text/javascript" src="../static/js/blog_framework.js" th:src="@{/js/blog_framework.js}"></script>
 <script type="text/javascript" th:inline="javascript">
