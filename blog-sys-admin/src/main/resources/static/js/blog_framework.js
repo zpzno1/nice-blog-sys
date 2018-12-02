@@ -48,8 +48,8 @@
      * @param res 返回属性数据
      */
     function auto_generate_menue(ctx, res) {
-        var resultDom = '<li class="nav-item active" data-url="home.html"><a href="javascript:;"><i class="fa fa-th-large"></i> <span class="nav-label">首页</span></a></li> ' +
-            '<li><a href="javascript:;"><i class="fa fa-edit"></i> <span class="nav-label">系统功能管理</span><span class="fa arrow"></span></a> ' +
+        var resultDom = '<li class="nav-item" data-url="home.html"><a href="javascript:;"><i class="fa fa-th-large"></i> <span class="nav-label">首页</span></a></li> ' +
+            '<li ><a href="javascript:;"><i class="fa fa-edit"></i> <span class="nav-label">系统功能管理</span><span class="fa arrow"></span></a> ' +
             '   <ul class="nav nav-second-level collapse"> ' +
             '       <li class="nav-item" data-url="system/user/index.html"><a href="javascript:;">网站用户</a></li> ' +
             '       <li class="nav-item" data-url="system/param/index.html"><a href="javascript:;">系统参数</a></li> ' +

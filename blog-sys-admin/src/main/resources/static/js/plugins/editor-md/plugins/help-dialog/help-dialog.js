@@ -24,6 +24,7 @@
 			var path        = settings.pluginPath + pluginName + "/";
 			var classPrefix = this.classPrefix;
 			var dialogName  = classPrefix + pluginName, dialog;
+            debugger;
 			var dialogLang  = lang.dialog.help;
 
 			if (editor.find("." + dialogName).length < 1)
@@ -59,6 +60,7 @@
 			this.dialogLockScreen();
 			dialog.show();
 
+
 			var helpContent = dialog.find(".markdown-body");
 
 			if (helpContent.html() === "") 
@@ -68,6 +70,7 @@
 					helpContent.html(md);
                     
                     helpContent.find("a").attr("target", "_blank");
+
 				});
 			}
 		};
