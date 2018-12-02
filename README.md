@@ -28,21 +28,17 @@
 
 #### 系统截图
 
-##### 前台博客(努力开发中)
+##### 前台博客(更新中...)
 
-1. 博客首页
+- 博客首页
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/1127/113145_d617521a_1387578.gif "博客首页.gif")
-2. 文章详情
+- 文章详情
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/1127/113200_a7a12603_1387578.gif "文章详情.gif")
-3. 博客归档
-![输入图片说明](https://images.gitee.com/uploads/images/2018/1127/113212_1b68756e_1387578.gif "文章归档.gif")
-4. 关于留言
-![输入图片说明](https://images.gitee.com/uploads/images/2018/1127/113222_af1cc7c6_1387578.gif "关于留言.gif")
-5. 博客其他(持续更新中..)
 
-##### 后台管理（努力开发中...）
 
-1. 随便给出一个预览页面吧 :joy: 
+##### 后台管理（更新中...）
+
+- 目前大体框架 :joy: 
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/1127/113125_8043f6a4_1387578.png "屏幕截图.png")
 
