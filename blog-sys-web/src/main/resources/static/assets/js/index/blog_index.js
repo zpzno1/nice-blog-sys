@@ -3,9 +3,5 @@
  */
 (function () {
     console.log('index js');
-    //底部分页
     blog_common.defaul_plugin_init();
-
-    blog_common.plugin.pagination.init($("#blog_pagination_div"));
-
 })();

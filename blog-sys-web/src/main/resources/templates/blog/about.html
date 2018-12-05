@@ -18,6 +18,16 @@
     <link rel="stylesheet" href="../../static/node_modules/material-kit/assets/css/material-kit.css?v=2.0.2">
     <link rel="stylesheet" href="../../static/assets/css/framework/common-base.css">
     <!--前端框架样式依赖结束-->
+
+    <!--前段框架依赖开始-->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="../../static/node_modules/material-kit/assets/js/core/popper.min.js"></script>
+    <script src="../../static/node_modules/material-kit/assets/js/bootstrap-material-design.js"></script>
+    <script src="../../static/node_modules/material-kit/assets/js/plugins/moment.min.js"></script>
+    <script src="../../static/node_modules/material-kit/assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+    <script src="../../static/node_modules/material-kit/assets/js/plugins/nouislider.min.js"></script>
+    <script src="../../static/node_modules/material-kit/assets/js/material-kit.js?v=2.0.2"></script>
+    <!--前段框架依赖结束-->
 </head>
 
 <body class="index-page ">
@@ -160,27 +170,42 @@
         <!--容器右侧内容:begin-->
         <div th:replace="blog::side_bar_default" class="col-md-3">
             <div class="row">
-                <!--右侧网站信息:begin-->
                 <div class="col-md-12">
-                    <!--网站和个人信息:begin-->
+                    <!--网站和个人信:begin-->
                     <div class="card">
                         <div class="card-body">
                             <ul class="nav nav-pills nav-pills-icons" role="tablist">
                                 <li class="nav-item ">
-                                    <a class="nav-link active" href="#dashboard-1" role="tab" data-toggle="tab">
-                                        <bold>用户信息</bold>
+                                    <a class="nav-link  active" href="#dashboard-1" role="tab" data-toggle="tab">
+                                        <bold>用&nbsp;&nbsp;&nbsp;户</bold>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#schedule-1" role="tab" data-toggle="tab">
-                                        <bold>博主信息</bold>
+                                        <bold>博&nbsp;&nbsp;&nbsp;主</bold>
                                     </a>
                                 </li>
                             </ul>
                             <div class="tab-content tab-space">
-                                <div class="tab-pane active" id="dashboard-1">
-                                    <img src="../../static/assets/images/index/me-logo.png" alt="Thumbnail Image"
-                                         class="img-raised rounded-circle img-fluid">欢迎您,KiWiPeach
+                                <div class="tab-pane active" id="dashboard-1" style="text-align: center">
+                                    <!--登陆成功状态-->
+                                    <!-- <img src="./assets/images/index/me-logo.png" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">欢迎您,KiWiPeach -->
+                                    <!--未登录状态-->
+                                    <!--<button class="btn btn-sm btn-default btn-round" data-toggle="modal"
+                                            data-target="#loginModal"><i class="fa fa-user-o"></i> 用户登陆
+                                    </button>-->
+                                    <div class="ui horizontal list git-other-login-method-icon list-center">
+                                        <button class="btn btn-sm btn-info btn-round" data-toggle="modal"
+                                                data-target="#loginModal"><i class="fa fa-qq" aria-hidden="true"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-round" data-toggle="modal"
+                                                data-target="#loginModal" style="background: black"><i
+                                                class="fa fa-github" aria-hidden="true"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger btn-round" data-toggle="modal"
+                                                data-target="#loginModal"><i class="fa fa-git" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
                                 </div>
                                 <div class="tab-pane" id="schedule-1">
                                     <!--卡片肖像:begin-->
@@ -188,7 +213,7 @@
                                         <div class="card-header card-header-image">
                                             <a href="#pablo">
                                                 <img class="img"
-                                                     src="https://images.unsplash.com/photo-1492447273231-0f8fecec1e3a?auto=format&fit=crop&w=334&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D">
+                                                     src="../../static/assets/images/index/demo-profile.jpg">
                                             </a>
                                         </div>
 
@@ -213,18 +238,59 @@
                             </div>
                         </div>
                     </div>
-                    <!--网站和个人信息:end-->
-                    <!--图片轮播:begin-->
+                    <!--网站和个人信:end-->
+
+                    <!--分类信息:begin-->
+                    <div class="card">
+                        <h4 href="#" class="list-group-item" style="color: #0e0e0e">
+                            分类
+                        </h4>
+                        <div class="card-body">
+                            <ul id="treeDemo" class="ztree"></ul>
+                        </div>
+                    </div>
+                    <script type="text/javascript"
+                            src="../../static/node_modules/ztree/js/jquery.ztree.all.min.js"></script>
+                    <script type="text/javascript">
+                        blog_common.plugin.blog_category_tree.init($("#treeDemo"));
+                    </script>
+                    <!--分类信息:end-->
+
+
+                    <!--标签云部分:begin-->
+                    <div class="card">
+                        <h4 href="#" class="list-group-item" style="color: #0e0e0e">
+                            标签云
+                        </h4>
+                        <div class="card-body">
+                            <div id="blog_tag_cloud_div">
+
+                            </div>
+                        </div>
+                    </div>
+                    <script type="text/javascript"
+                            src="../../static/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/jqxcore.js"></script>
+                    <script type="text/javascript"
+                            src="../../static/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/jqxdata.js"></script>
+                    <script type="text/javascript"
+                            src="../../static/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/jqxtagcloud.js"></script>
+                    <script type="text/javascript">
+                        blog_common.plugin.jqxtagcloud.init($('#blog_tag_cloud_div'));
+                    </script>
+                    <!--标签云部分:end-->
+
+                    <!--橱窗位置:begin-->
                     <div class="card card-raised card-carousel">
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
                                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class=""></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="1" class="active"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="2" class=""></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1" class=""></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2" class="active"></li>
                             </ol>
                             <div class="carousel-inner">
                                 <div class="carousel-item">
                                     <img class="d-block w-100"
+                                         th:src="@{/node_modules/material-kit/assets/img/kit/bg2.jpg}"
                                          src="../../static/node_modules/material-kit/assets/img/kit/bg2.jpg"
                                          alt="First slide">
                                     <div class="carousel-caption d-none d-md-block">
@@ -234,8 +300,9 @@
                                         </h4>
                                     </div>
                                 </div>
-                                <div class="carousel-item active">
+                                <div class="carousel-item">
                                     <img class="d-block w-100"
+                                         th:src="@{/node_modules/material-kit/assets/img/kit/bg2.jpg}"
                                          src="../../static/node_modules/material-kit/assets/img/kit/bg2.jpg"
                                          alt="Second slide">
                                     <div class="carousel-caption d-none d-md-block">
@@ -245,8 +312,9 @@
                                         </h4>
                                     </div>
                                 </div>
-                                <div class="carousel-item">
+                                <div class="carousel-item active">
                                     <img class="d-block w-100"
+                                         th:src="@{/node_modules/material-kit/assets/img/kit/bg2.jpg}"
                                          src="../../static/node_modules/material-kit/assets/img/kit/bg2.jpg"
                                          alt="Third slide">
                                     <div class="carousel-caption d-none d-md-block">
@@ -269,18 +337,26 @@
                             </a>
                         </div>
                     </div>
-                    <!--图片轮播:end-->
-                </div>
-                <!--文章导航栏:begin-->
-                <div id="sideToolbar">
-                    <div id="sideCatalog"></div>
-                </div>
-                <!--文章导航栏:end-->
-            </div>
-            <!--右侧网站信息:end-->
+                    <!--橱窗位置:end-->
 
+                    <!--友链部分:begin-->
+                    <div class="card">
+                        <h4 href="#" class="list-group-item" style="color: #0e0e0e">
+                            我的友链
+                        </h4>
+                        <div class="card-body">
+                            <span class="badge badge-default">卡卡罗特</span>
+                            <span class="badge badge-default">在乎你的在乎</span>
+                            <span class="badge badge-default">哈哈</span>
+                            <span class="badge badge-default">Default</span>
+                            <span class="badge badge-default">Default</span>
+                        </div>
+                    </div>
+                    <!--友链部分:end-->
+                </div>
+            </div>
         </div>
-        <!--容器右侧内容:end-->
+        <!--容器右侧内容:End-->
     </div>
 </div>
 <!--主题部分:end-->
@@ -320,18 +396,6 @@
     </div>
 </footer>
 <!--页面底部:end-->
-</div>
-
-<div th:replace="blog::javascript">
-    <!--前段框架依赖开始-->
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-    <script src="../../static/node_modules/material-kit/assets/js/core/popper.min.js"></script>
-    <script src="../../static/node_modules/material-kit/assets/js/bootstrap-material-design.js"></script>
-    <script src="../../static/node_modules/material-kit/assets/js/plugins/moment.min.js"></script>
-    <script src="../../static/node_modules/material-kit/assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
-    <script src="../../static/node_modules/material-kit/assets/js/plugins/nouislider.min.js"></script>
-    <script src="../../static/node_modules/material-kit/assets/js/material-kit.js?v=2.0.2"></script>
-    <!--前段框架依赖结束-->
 </div>
 <script type="text/javascript" src="../../static/assets/js/about/blog_about.js" th:src="@{/assets/js/about/blog_about.js}"></script>
 </body>

@@ -32,6 +32,27 @@
     <script type="text/javascript" th:src="@{/node_modules/jquery/dist/jquery.min.js}"></script>
     <!--弹出框layer依赖-->
     <script type="text/javascript" th:src="@{/node_modules/layui-layer/dist/layer.js}"></script>
+    <!--前段框架依赖-->
+    <script th:src="@{/node_modules/material-kit/assets/js/core/popper.min.js}"></script>
+    <script th:src="@{/node_modules/material-kit/assets/js/bootstrap-material-design.min.js}"></script>
+    <script th:src="@{/node_modules/material-kit/assets/js/plugins/moment.min.js}"></script>
+    <script th:src="@{/node_modules/material-kit/assets/js/plugins/bootstrap-datetimepicker.min.js}"></script>
+    <script th:src="@{/node_modules/material-kit/assets/js/plugins/nouislider.min.js}"></script>
+    <script th:src="@{/node_modules/material-kit/assets/js/material-kit.min.js}"></script>
+    <!--回到最顶端(totop)插件-->
+    <script th:src="@{/assets/plugins/jquery_totop_plugin/js/easing.js}" type="text/javascript"></script>
+    <script th:src="@{/assets/plugins/jquery_totop_plugin/js/jquery.ui.totop.js}" type="text/javascript"></script>
+    <!--jquery-widgets 依赖脚本-->
+    <script type="text/javascript" th:src="@{/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/jqxcore.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/jqxdata.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/jqxtagcloud.js}"></script>
+    <!--树形分类插件-->
+    <script type="text/javascript" th:src="@{/node_modules/ztree/js/jquery.ztree.core.js}"></script>
+    <script type="text/javascript" th:src="@{/node_modules/ztree/js/jquery.ztree.excheck.js}"></script>
+    <script type="text/javascript" th:src="@{/node_modules/ztree/js/jquery.ztree.exedit.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/blog-common.js}"></script>
+    <!--pace插件-->
+    <script type="text/javascript" th:src="@{/assets/plugins/pace-progress/pace.min.js}"></script>
 </head>
 <body>
 <!--#.导航条-->
@@ -200,6 +221,11 @@
                     <ul id="treeDemo" class="ztree"></ul>
                 </div>
             </div>
+            <script type="text/javascript" src="../../static/node_modules/ztree/js/jquery.ztree.all.min.js"
+                    th:src="@{/node_modules/ztree/js/jquery.ztree.all.min.js}"></script>
+            <script type="text/javascript">
+                blog_common.plugin.blog_category_tree.init($("#treeDemo"));
+            </script>
             <!--分类信息:end-->
 
 
@@ -214,6 +240,12 @@
                     </div>
                 </div>
             </div>
+            <script type="text/javascript"
+                    src="../../static/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/jqxtagcloud.js"
+                    th:src="@{/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/jqxtagcloud.js}"></script>
+            <script type="text/javascript">
+                blog_common.plugin.jqxtagcloud.init($('#blog_tag_cloud_div'));
+            </script>
             <!--标签云部分:end-->
 
             <!--橱窗位置:begin-->
@@ -480,32 +512,6 @@
         </div>
     </div>
 </footer>
-<!--#.页面底部脚本-->
-<div th:fragment="javascript">
-    <!--前段框架依赖-->
-    <script th:src="@{/node_modules/material-kit/assets/js/core/popper.min.js}"></script>
-    <script th:src="@{/node_modules/material-kit/assets/js/bootstrap-material-design.min.js}"></script>
-    <script th:src="@{/node_modules/material-kit/assets/js/plugins/moment.min.js}"></script>
-    <script th:src="@{/node_modules/material-kit/assets/js/plugins/bootstrap-datetimepicker.min.js}"></script>
-    <script th:src="@{/node_modules/material-kit/assets/js/plugins/nouislider.min.js}"></script>
-    <script th:src="@{/node_modules/material-kit/assets/js/material-kit.min.js}"></script>
-    <!--回到最顶端(totop)插件-->
-    <script th:src="@{/assets/plugins/jquery_totop_plugin/js/easing.js}" type="text/javascript"></script>
-    <script th:src="@{/assets/plugins/jquery_totop_plugin/js/jquery.ui.totop.js}" type="text/javascript"></script>
-    <!--分页插件-->
-    <script th:src="@{/assets/plugins/jquery_pagination/jquery.pagination.js}"></script>
-    <!--jquery-widgets 依赖脚本-->
-    <script type="text/javascript" th:src="@{/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/jqxcore.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/jqxdata.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/jqxtagcloud.js}"></script>
-    <!--树形分类插件-->
-    <script type="text/javascript" th:src="@{/node_modules/ztree/js/jquery.ztree.core.js}"></script>
-    <script type="text/javascript" th:src="@{/node_modules/ztree/js/jquery.ztree.excheck.js}"></script>
-    <script type="text/javascript" th:src="@{/node_modules/ztree/js/jquery.ztree.exedit.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/blog-common.js}"></script>
-    <!--pace插件-->
-    <script type="text/javascript" th:src="@{/assets/plugins/pace-progress/pace.min.js}"></script>
-</div>
 </body>
 
 </html>

@@ -37,7 +37,6 @@
           type="text/css"/>
     <link rel="stylesheet" href="../../static/assets/css/detail/blog.css"/>
 </head>
-
 <body class="index-page scrollspy-example-2" data-spy="scroll" data-offset="110" style="position: relative;">
 <!--导航条:begin-->
 <nav th:replace="blog::navbar" class="navbar navbar-color-on-scroll navbar-transparent    fixed-top  navbar-expand-lg "
@@ -781,6 +780,23 @@ module.exports = {
                     <div class="row" style="margin-top: 30px;">
                         <div id="blog_detial_pagination_div" style="margin: 0 auto">
                         </div>
+                        <script src="../../static/assets/plugins/jquery_pagination/jquery.pagination.js"
+                                th:src="@{/assets/plugins/jquery_pagination/jquery.pagination.js}"></script>
+                        <script type="text/javascript">
+                            var opt = {
+                                total: 236,
+                                items_per_page: 5,
+                                num_display_entries: 0,
+                                num_edge_entries: 0,
+                                next_text: '下一页',
+                                prev_text: '前一页',
+                                callback: function (new_page_index, pagination_container) {
+                                    console.log("当前页码:" + new_page_index)
+                                    return false;
+                                }
+                            };
+                            blog_common.plugin.pagination.init($('#blog_detial_pagination_div'),opt);
+                        </script>
                     </div>
                     <!--分页插件:end-->
 
@@ -825,7 +841,7 @@ module.exports = {
                 <div class="card-body ">
                     <div class="author">
                         <a href="#pablo">
-                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=334&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
+                            <img src="/assets/images/index/me-logo.png"
                                  alt="..." class="avatar img-raised">
                             <span>Lord Alex</span>
                         </a>
@@ -838,7 +854,7 @@ module.exports = {
                             <div class="card-body" style="padding: 10px 0px 0px 15px">
                                 <div class="author">
                                     <a href="#pablo">
-                                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=334&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
+                                        <img src="/assets/images/index/me-logo.png"
                                              alt="..." class="avatar img-raised">
                                         <span>Lord Alex&nbsp;&nbsp;&nbsp;<label>回复</label>&nbsp;&nbsp;&nbsp;kiwipeach</span>
                                     </a>
@@ -857,7 +873,7 @@ module.exports = {
                             <div class="card-body" style="padding: 10px 0px 0px 15px">
                                 <div class="author">
                                     <a href="#pablo">
-                                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=334&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
+                                        <img src="/assets/images/index/me-logo.png"
                                              alt="..." class="avatar img-raised">
                                         <span>Lord Alex&nbsp;&nbsp;&nbsp;<label>回复</label>&nbsp;&nbsp;&nbsp;kiwipeach</span>
                                     </a>
@@ -876,7 +892,7 @@ module.exports = {
                             <div class="card-body" style="padding: 10px 0px 0px 15px">
                                 <div class="author">
                                     <a href="#pablo">
-                                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=334&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
+                                        <img src="/assets/images/index/me-logo.png"
                                              alt="..." class="avatar img-raised">
                                         <span>Lord Alex&nbsp;&nbsp;&nbsp;<label>回复</label>&nbsp;&nbsp;&nbsp;kiwipeach</span>
                                     </a>
@@ -895,52 +911,27 @@ module.exports = {
                         <div class="row">
                             <div id="blog_reply_pagination_div" style="margin: 5px auto;"></div>
                         </div>
+                        <script type="text/javascript">
+                            var opt = {
+                                total: 236,
+                                items_per_page: 5,
+                                num_display_entries: 3,
+                                num_edge_entries: 2,
+                                next_text: '下一页',
+                                prev_text: '前一页',
+                                callback: function (new_page_index, pagination_container) {
+                                    console.log("当前页码:" + new_page_index)
+                                    return false;
+                                }
+                            };
+                            blog_common.plugin.pagination.init($("#blog_reply_pagination_div"),opt);
+                        </script>
                     </div>
                 </div>
                 <div class="card-footer ">
                     <div class="stats ml-auto">
                         <a href="javascript:;" class="text-dark"><i class="fa fa-thumbs-o-up"></i> 45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         <a href="#collapseExample" class="text-dark" data-toggle="collapse">查看回复(38)<i class="fa fa-chevron-down" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body ">
-                    <div class="author">
-                        <a href="#pablo">
-                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=334&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                                 alt="..." class="avatar img-raised">
-                            <span>Lord Alex</span>
-                        </a>
-                    </div>
-                    <h6 class="card-title">
-                        <a href="#pablo">你的文章好棒棒哦</a>
-                    </h6>
-                </div>
-                <div class="card-footer ">
-                    <div class="stats ml-auto">
-                        <a href="javascript:;" class="text-dark"><i class="material-icons">favorite</i> 342 &#xB7;</a>
-                        <a href="javascript:;" class="text-dark"><i class="material-icons">chat_bubble</i> 45</a>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body ">
-                    <div class="author">
-                        <a href="#pablo">
-                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=334&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D"
-                                 alt="..." class="avatar img-raised">
-                            <span>Lord Alex</span>
-                        </a>
-                    </div>
-                    <h6 class="card-title">
-                        <a href="#pablo">你的文章好棒棒哦</a>
-                    </h6>
-                </div>
-                <div class="card-footer ">
-                    <div class="stats ml-auto">
-                        <a href="javascript:;" class="text-dark"><i class="material-icons">favorite</i> 342 &#xB7;</a>
-                        <a href="javascript:;" class="text-dark"><i class="material-icons">chat_bubble</i> 45</a>
                     </div>
                 </div>
             </div>
@@ -1109,7 +1100,6 @@ module.exports = {
                         </div>
                     </div>
                     <!--bootstrap4文章导航:end-->
-
                 </div>
             </div>
             <!--右侧网站信息:end-->
@@ -1156,32 +1146,7 @@ module.exports = {
 </footer>
 <!--页面底部:end-->
 </div>
-<div th:replace="blog::javascript">
-    <script type="text/javascript" src="../../static/node_modules/jquery/dist/jquery.min.js"></script><!--v1.11.2-->
-    <script src="../../static/node_modules/material-kit/assets/js/core/popper.min.js"></script>
-    <script src="../../static/node_modules/material-kit/assets/js/bootstrap-material-design.js"></script>
-    <script src="../../static/node_modules/material-kit/assets/js/plugins/moment.min.js"></script>
-    <script src="../../static/node_modules/material-kit/assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
-    <script src="../../static/node_modules/material-kit/assets/js/plugins/nouislider.min.js"></script>
-    <script src="../../static/node_modules/material-kit/assets/js/material-kit.js?v=2.0.2"></script>
-    <!--前段框架依赖结束-->
-    <!--标签云插件-->
-    <script type="text/javascript" src="../../static/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/jqxcore.js"></script>
-    <script type="text/javascript" src="../../static/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/jqxdata.js"></script>
-    <script type="text/javascript" src="../../static/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/jqxtagcloud.js"></script>
-    <!--分页插件-->
-    <script src="../../static/assets/plugins/jquery_pagination/jquery.pagination.js"></script>
-    <!--文章导航插件-->
-    <script type="text/javascript" src="../../static/assets/plugins/baidu_side_catalog/side-toolbar.js"></script>
-    <script type="text/javascript" src="../../static/assets/plugins/baidu_side_catalog/side-catalog.js"></script>
-    <!--弹出框layer依赖-->
-    <script type="text/javascript" src="../../static/node_modules/layui-layer/dist/layer.js"></script>
-    <!--注册步骤插件-->
-    <script type="text/javascript" src="../../static/node_modules/smartwizard/dist/js/jquery.smartWizard.min.js"></script>
-    <!--博客详情模块脚本-->
-    <script type="text/javascript" src="../../static/assets/js/detail/blog_detail.js"></script>
-</div>
-</body>
 <!--前段框架依赖开始-->
 <script type="text/javascript" src="../../static/assets/js/detail/blog_detail.js" th:src="@{/assets/js/detail/blog_detail.js}"></script>
+</body>
 </html>

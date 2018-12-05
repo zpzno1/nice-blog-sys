@@ -53,19 +53,8 @@
             },
             /*分页*/
             pagination: {
-                settings: {
-                    items_per_page: 5,
-                    num_display_entries: 3,
-                    num_edge_entries: 2,
-                    next_text: '下一页',
-                    prev_text: '前一页',
-                    callback: function (new_page_index, pagination_container) {
-                        console.log("当前页码:" + new_page_index)
-                        return false;
-                    }
-                },
-                init: function (target) {
-                    target.pagination(236, blog_common.plugin.pagination.settings);
+                init: function (target,opt) {
+                    target.pagination(opt.total, opt);
                 }
             },
             /*注册步骤*/
@@ -252,10 +241,6 @@
     function defaul_plugin_init() {
         //回到顶端
         blog_common.plugin.uitotop.init();
-        //标签云
-        blog_common.plugin.jqxtagcloud.init($('#blog_tag_cloud_div'));
-        //树形分类插件
-        blog_common.plugin.blog_category_tree.init($("#treeDemo"));
     }
 
     window.blog_common = blog_common;

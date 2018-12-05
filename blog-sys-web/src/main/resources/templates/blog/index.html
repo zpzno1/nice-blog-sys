@@ -8,7 +8,8 @@
     <link rel="apple-touch-icon" href="../../static/assets/images/index/apple-icon.png">
     <link rel="icon" href="../../static/assets/images/index/favicon.png">
     <title>首页</title>
-    <link rel="stylesheet" type="text/css" href="../../static/assets/css/framework/googleapis-font/googleapis-font.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="../../static/assets/css/framework/googleapis-font/googleapis-font.css"/>
     <link rel="stylesheet" href="../../static/node_modules/font-awesome/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="../../static/node_modules/material-kit/assets/css/material-kit.css?v=2.0.2">
     <link rel="stylesheet" href="../../static/assets/css/framework/common-base.css">
@@ -19,8 +20,19 @@
           href="../../static/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/styles/jqx.base.css"/>
     <link rel="stylesheet" href="../../static/node_modules/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
     <link rel="stylesheet" href="../../static/assets/css/index/outlook_tree.css" type="text/css">
-</head>
 
+    <script type="text/javascript" src="../../static/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../static/node_modules/material-kit/assets/js/core/popper.min.js"></script>
+    <script src="../../static/node_modules/material-kit/assets/js/bootstrap-material-design.js"></script>
+    <script src="../../static/node_modules/material-kit/assets/js/plugins/moment.min.js"></script>
+    <script src="../../static/node_modules/material-kit/assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+    <script src="../../static/node_modules/material-kit/assets/js/plugins/nouislider.min.js"></script>
+    <script src="../../static/node_modules/material-kit/assets/js/material-kit.js?v=2.0.2"></script>
+    <script src="../../static/assets/plugins/jquery_totop_plugin/js/easing.js" type="text/javascript"></script>
+    <script src="../../static/assets/plugins/jquery_totop_plugin/js/jquery.ui.totop.js" type="text/javascript"></script>
+    <!--用户模块脚本-->
+    <script type="text/javascript" src="../../static/assets/js/blog-common.js"></script>
+</head>
 <body class="index-page">
 <!--导航条:begin-->
 <nav th:replace="blog::navbar" class="navbar navbar-color-on-scroll navbar-transparent  fixed-top  navbar-expand-lg "
@@ -408,6 +420,23 @@
             <div class="row">
                 <div id="blog_pagination_div" style="margin: 0 auto"></div>
             </div>
+            <script src="../../static/assets/plugins/jquery_pagination/jquery.pagination.js"
+                    th:src="@{/assets/plugins/jquery_pagination/jquery.pagination.js}"></script>
+            <script type="text/javascript">
+                var opt = {
+                    total: 236,
+                    items_per_page: 5,
+                    num_display_entries: 3,
+                    num_edge_entries: 2,
+                    next_text: '下一页',
+                    prev_text: '前一页',
+                    callback: function (new_page_index, pagination_container) {
+                        console.log("当前页码:" + new_page_index)
+                        return false;
+                    }
+                };
+                blog_common.plugin.pagination.init($("#blog_pagination_div"),opt);
+            </script>
             <!--分页插件:end-->
         </div>
         <!--容器左侧内容:end-->
@@ -457,7 +486,8 @@
                                     <div class="card card-profile" style="max-width: 360px">
                                         <div class="card-header card-header-image">
                                             <a href="#pablo">
-                                                <img class="img" src="../../static/assets/images/index/demo-profile.jpg">
+                                                <img class="img"
+                                                     src="../../static/assets/images/index/demo-profile.jpg">
                                             </a>
                                         </div>
 
@@ -493,6 +523,11 @@
                             <ul id="treeDemo" class="ztree"></ul>
                         </div>
                     </div>
+                    <script type="text/javascript"
+                            src="../../static/node_modules/ztree/js/jquery.ztree.all.min.js"></script>
+                    <script type="text/javascript">
+                        blog_common.plugin.blog_category_tree.init($("#treeDemo"));
+                    </script>
                     <!--分类信息:end-->
 
 
@@ -507,6 +542,15 @@
                             </div>
                         </div>
                     </div>
+                    <script type="text/javascript"
+                            src="../../static/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/jqxcore.js"></script>
+                    <script type="text/javascript"
+                            src="../../static/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/jqxdata.js"></script>
+                    <script type="text/javascript"
+                            src="../../static/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/jqxtagcloud.js"></script>
+                    <script type="text/javascript">
+                        blog_common.plugin.jqxtagcloud.init($('#blog_tag_cloud_div'));
+                    </script>
                     <!--标签云部分:end-->
 
                     <!--橱窗位置:begin-->
@@ -625,28 +669,8 @@
     </footer>
     <!--页面底部:end-->
 </div>
-
-<div th:replace="blog::javascript">
-    <script type="text/javascript" src="../../static/node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../../static/node_modules/material-kit/assets/js/core/popper.min.js"></script>
-    <script src="../../static/node_modules/material-kit/assets/js/bootstrap-material-design.js"></script>
-    <script src="../../static/node_modules/material-kit/assets/js/plugins/moment.min.js"></script>
-    <script src="../../static/node_modules/material-kit/assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
-    <script src="../../static/node_modules/material-kit/assets/js/plugins/nouislider.min.js"></script>
-    <script src="../../static/node_modules/material-kit/assets/js/material-kit.js?v=2.0.2"></script>
-    <script src="../../static/assets/plugins/jquery_totop_plugin/js/easing.js" type="text/javascript"></script>
-    <script src="../../static/assets/plugins/jquery_totop_plugin/js/jquery.ui.totop.js" type="text/javascript"></script>
-    <script src="../../static/assets/plugins/jquery_pagination/jquery.pagination.js"></script>
-    <script type="text/javascript" src="../../static/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/jqxcore.js"></script>
-    <script type="text/javascript" src="../../static/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/jqxdata.js"></script>
-    <script type="text/javascript"
-            src="../../static/assets/plugins/jqwidgets-ver5.7.2/jqwidgets/jqxtagcloud.js"></script>
-    <script type="text/javascript" src="../../static/node_modules/ztree/js/jquery.ztree.all.min.js"></script>
-    <script type="text/javascript" src="../../static/assets/js/blog-common.js"></script>
-    <script type="text/javascript" src="../../static/assets/js/index/blog_index.js"></script>
-</div>
-<!--用户模块脚本-->
-<script type="text/javascript" src="../../static/assets/js/index/blog_index.js" th:src="@{/assets/js/index/blog_index.js}"></script>
+<script type="text/javascript" src="../../static/assets/js/index/blog_index.js"
+        th:src="@{/assets/js/index/blog_index.js}"></script>
 </body>
 
 
