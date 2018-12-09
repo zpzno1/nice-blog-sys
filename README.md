@@ -20,7 +20,6 @@ https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg"></a>
  <a href="javascript:;">QQ交流群 :679722876</p>
 </p>
 
----
 
 #### 项目说明
 个人博客网站，希望在2018年年底前完成，预计完成时间在年后，（群问归期未有期,也表示很无奈呀） :joy: 。
