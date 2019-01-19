@@ -11,7 +11,7 @@
 
     <artifactId>blog-sys-parent</artifactId>
     <packaging>pom</packaging>
-    <description>博客仲裁中心，所有博客相关模块的父容器</description>
+    <description>博客仲裁中心，所有博客相关模块的父容器xxx</description>
 
     <!--项目模块-->
     <modules>
