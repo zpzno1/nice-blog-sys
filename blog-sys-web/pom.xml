@@ -5,9 +5,10 @@
 	<!--项目基本信息-->
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>kiwipeach-blog-sys</artifactId>
+		<artifactId>blog-sys-parent</artifactId>
 		<groupId>cn.kiwipeach.blog</groupId>
 		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../blog-sys-parent/pom.xml</relativePath>
 	</parent>
 	<groupId>cn.kiwipeach.blog</groupId>
 	<artifactId>blog-sys-web</artifactId>
