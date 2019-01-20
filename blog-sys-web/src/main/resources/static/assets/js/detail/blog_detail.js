@@ -16,8 +16,8 @@
     bind_load_comment($('#load_comment_btn'));
 
     //博客大纲
-    blog_common.plugin.bootstrap4_catalog_plugin.init();
-    blog_common.plugin.bootstrap4_catalog_plugin.event.bind_outline_scroll();
+    blog_common.plugin.tocbot_catalog_plugin.init();
+    blog_common.plugin.tocbot_catalog_plugin.event.bind_outline_scroll();
 
     //默认事件(回到顶部)
     blog_common.defaul_plugin_init();

@@ -176,49 +176,35 @@
                     });
                 }
             },
-            /*文章侧边栏，bootstrap4版本*/
-            bootstrap4_catalog_plugin: {
+            /*将要废除：文章侧边栏，bootstrap4版本*/
+            tocbot_catalog_plugin: {
                 /*初始化文章的大纲目录功能*/
                 init: function () {
-                    var $navItems = $('#article-content-div').find('h1,h2,h3,h4,h5,h6'),//文章大纲数组
-                        $outline = $('#outline_div'),
-                        $outline_items = null;
-                    $.each($navItems, function (index, item) {
-                        console.log(index, '---', $(item));
-                        var $tempItem = '<li><a href="#' + $(item).attr('id') + '">$(item).html()</a></li>'
+                    tocbot.init({
+                        // Where to render the table of contents.
+                        tocSelector: '.js-toc',
+                        // Where to grab the headings to build the table of contents.
+                        contentSelector: '.js-toc-content',
+                        // Which headings to grab inside of the contentSelector element.
+                        headingSelector: 'h1, h2, h3',
                     })
                 },
                 event: {
                     /*绑定文章滚动激活大纲事件*/
                     bind_outline_scroll: function () {
                         //文章大纲鼠标监听事件
-                        var $navItems = $('#article-content-div').find('h1,h2,h3,h4,h5,h6'),//所有的文章导航标题
-                            $topNav = $('#sectionsNav'),//广告栏
+                        var $topNav = $('#sectionsNav'),//广告栏
                             $outline = $('#outline_div');//大纲容器
                         var outlineTop = $('#outline_div').offset().top;
                         var topNavHeight = $topNav.height();
                         $(window).scroll(function () {
-                            //1.监听每一个标题相对文档顶部的offset，获取当前活跃的锚点active_id
-                            var scrollTop = $(document).scrollTop(),
-                                active_id = null;
-                            $navItems.each(function () {
-                                var offsetTop = $(this).offset().top;
-                                //锚点滚动体验修正
-                                if (scrollTop + 100 > offsetTop) {
-                                    active_id = $(this).attr('id');
-                                }
-                            });
-                            //2.激活锚点样式
-                            if (active_id) {
-                                $outline.find('a').removeClass('blog_outline_active');
-                                $outline.find("[href='#" + active_id + "']").addClass('blog_outline_active');
-                            }
+                            var scrollTop = $(document).scrollTop();
                             //3.对大纲的定位进行设置
                             if (scrollTop + 35 >= outlineTop) {//大纲导航定位体验修复
                                 //开始显示文档大纲组件
                                 $outline.css({
                                     position: 'fixed',
-                                    top: (topNavHeight + 16) + 'px'
+                                    top: (topNavHeight + 40) + 'px'
                                 });
                             } else {
                                 $outline.css({
@@ -244,4 +230,5 @@
     }
 
     window.blog_common = blog_common;
+
 })(jQuery, window);

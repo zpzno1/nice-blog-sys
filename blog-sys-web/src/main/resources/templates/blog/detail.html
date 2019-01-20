@@ -37,6 +37,9 @@
           type="text/css"/>
     <link rel="stylesheet" href="../../static/assets/css/detail/blog.css"/>
 </head>
+<!--博客toc目录样式-->
+<link rel="stylesheet" th:href="@{/node_modules/tocbot/styles.css}">
+<link rel="stylesheet" th:href="@{/node_modules/tocbot/tocbot.css}">
 <body class="index-page scrollspy-example-2" data-spy="scroll" data-offset="110" style="position: relative;">
 <!--导航条:begin-->
 <nav th:replace="blog::navbar" class="navbar navbar-color-on-scroll navbar-transparent    fixed-top  navbar-expand-lg "
@@ -181,7 +184,7 @@
                     </div>
                     <!--清除浮动,博客发表时间和标签浮动-->
                     <div class="clearfix"></div>
-                    <div id="content" class="card-text">
+                    <div id="content" class="card-text js-toc-content">
                         <!--存放文章内容-->
                         <div class="row">
                             <div id="article-content-div" class="article fmt article__content"
@@ -1073,29 +1076,10 @@ module.exports = {
                     <div id="outline_div" class="post-nav hidden-xs side-outline hidden-sm"
                          style="display: block; position: relative;width: 300px;">
                         <div class="panel panel-default widget-outline">
-                            <div class="panel-heading">目录</div>
+                            <div class="panel-heading">曾经许下的誓言让我们共同了解</div>
                             <div class="panel-body">
-                                <div class="nav-body" style="top: 0px;">
-                                    <!--<div class="highlight-title" style="display: block; top: 0px; height: 27px;"></div>-->
-                                    <ul class="articleIndex">
-                                        <li><a href="#articleHeader0" class="active">背景</a></li>
-                                        <li><a href="#articleHeader1">产品模型</a></li>
-                                        <li><a href="#articleHeader2">架构方案</a></li>
-                                        <li><a href="#articleHeader3">资源权限管理</a></li>
-                                        <li><a href="#articleHeader4">实现方案</a></li>
-                                        <li style="list-style:none;">
-                                            <ul>
-                                                <li><a href="#articleHeader5">动态路由</a></li>
-                                                <li><a href="#articleHeader6">脚本加载和调度</a></li>
-                                                <li><a href="#articleHeader7">应用视图渲染</a></li>
-                                                <li><a href="#articleHeader8">应用生命周期管理</a></li>
-                                                <li><a href="#articleHeader9">构建配置</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#articleHeader10">总结</a></li>
-                                        <li><a href="#articleHeader11">参考</a></li>
-                                    </ul>
-                                </div>
+                                <!--目录大纲放在这里-->
+                                <nav class="toc toc-right js-toc"></nav>
                             </div>
                         </div>
                     </div>

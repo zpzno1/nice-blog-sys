@@ -25,10 +25,11 @@
     <!--树形分类插件-->
     <link rel="stylesheet" th:href="@{/node_modules/ztree/css/zTreeStyle/zTreeStyle.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/assets/css/index/outlook_tree.css}" type="text/css">
-    <!--博客大纲样式-->
-    <link rel="stylesheet" th:href="@{/assets/css/detail/blog.css}"/>
-    <!--博客时间归档样式-->
-    <link rel="stylesheet" th:href="@{/assets/css/archive/hexo-timeline.css}">
+
+
+    <!--博客页面通用样式-->
+    <link rel="stylesheet" th:href="@{/assets/css/blog_common.css}">
+
     <script type="text/javascript" th:src="@{/node_modules/jquery/dist/jquery.min.js}"></script>
     <!--弹出框layer依赖-->
     <script type="text/javascript" th:src="@{/node_modules/layui-layer/dist/layer.js}"></script>
@@ -50,9 +51,15 @@
     <script type="text/javascript" th:src="@{/node_modules/ztree/js/jquery.ztree.core.js}"></script>
     <script type="text/javascript" th:src="@{/node_modules/ztree/js/jquery.ztree.excheck.js}"></script>
     <script type="text/javascript" th:src="@{/node_modules/ztree/js/jquery.ztree.exedit.js}"></script>
-    <script type="text/javascript" th:src="@{/assets/js/blog-common.js}"></script>
     <!--pace插件-->
     <script type="text/javascript" th:src="@{/assets/plugins/pace-progress/pace.min.js}"></script>
+    <!--博客toc目录插件-->
+    <script type="text/javascript" th:src="@{/node_modules/tocbot/tocbot.js}"></script>
+    <!--博客slimscroll滚动条插件-->
+    <!--<script type="text/javascript" th:src="@{/node_modules/jQuery-slimScroll/jquery.slimscroll.min.js}"></script>-->
+    <!--博客通用js-->
+    <script type="text/javascript" th:src="@{/assets/js/blog-common.js}"></script>
+
 </head>
 <body>
 <!--#.导航条-->
@@ -75,34 +82,34 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/demo/blog/index}">
-                        <i class="fa fa-home"></i> 首页
+                       <!-- <i class="fa fa-home"></i> --><span>首页</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/demo/blog/archive}">
-                        <i class="fa fa-archive"></i> 归档
+                        <!--<i class="fa fa-archive"></i> --><span>时间归档</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/demo/blog/about}">
-                        <i class="fa fa-user-o"></i> 关于
+                       <!-- <i class="fa fa-user-o"></i>--> <span>关于博主</span>
                     </a>
                 </li>
                 <li class="dropdown nav-item">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <i class="fa fa-th"></i> 更多
+                       <!-- <i class="fa fa-th"></i>--> <span>更多功能</span>
                     </a>
                     <div class="dropdown-menu dropdown-with-icons">
                         <a href="blog/index.html" class="dropdown-item">
-                            <i class="fa fa-cloud-download"></i> 资料下载
+                            <!--<i class="fa fa-cloud-download"></i> --><span>资料下载</span>
                         </a>
                         <a href="http://demos.creative-tim.com/material-kit/docs/2.0/getting-started/introduction.html"
                            class="dropdown-item">
-                            <i class="fa fa-book"></i> Material-Kit官方手册
+                            <!--<i class="fa fa-book"></i>--><span> Material-Kit官方手册</span>
                         </a>
                     </div>
                 </li>
-                <li class="nav-item">
+               <!-- <li class="nav-item">
                     <a class="nav-link" rel="tooltip" title="" data-placement="bottom"
                        href="https://twitter.com/CreativeTim" target="_blank"
                        data-original-title="Follow us on Twitter">
@@ -122,15 +129,14 @@
                        data-original-title="Follow us on Instagram">
                         <i class="fa fa-instagram"></i>
                     </a>
-                </li>
+                </li>-->
             </ul>
         </div>
     </div>
 </nav>
 <!--#.大图文字-->
-<div th:fragment="background" class="page-header header-filter clear-filter big_bg" data-parallax="true"
-     th:style="'height: 40vh;background:url(' + @{/node_modules/material-kit/assets/img/kit/bg2.jpg} + ');'">
-    <div class="container">
+<div th:fragment="background" class="page-header header-filter clear-filter big_bg" style="height: 40vh;" th:style="'height: 40vh;background:url(' + @{/node_modules/material-kit/assets/img/kit/bg2.jpg} + ');'">
+    <div class="container" >
         <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
                 <div class="brand">
@@ -446,29 +452,9 @@
             <div id="outline_div" class="post-nav hidden-xs side-outline hidden-sm"
                  style="display: block; position: relative;width: 300px;">
                 <div class="panel panel-default widget-outline">
-                    <div class="panel-heading">目录</div>
                     <div class="panel-body">
-                        <div class="nav-body" style="top: 0px;">
-                            <!--<div class="highlight-title" style="display: block; top: 0px; height: 27px;"></div>-->
-                            <ul class="articleIndex">
-                                <li><a href="#articleHeader0" class="active">背景</a></li>
-                                <li><a href="#articleHeader1">产品模型</a></li>
-                                <li><a href="#articleHeader2">架构方案</a></li>
-                                <li><a href="#articleHeader3">资源权限管理</a></li>
-                                <li><a href="#articleHeader4">实现方案</a></li>
-                                <li style="list-style:none;">
-                                    <ul>
-                                        <li><a href="#articleHeader5">动态路由</a></li>
-                                        <li><a href="#articleHeader6">脚本加载和调度</a></li>
-                                        <li><a href="#articleHeader7">应用视图渲染</a></li>
-                                        <li><a href="#articleHeader8">应用生命周期管理</a></li>
-                                        <li><a href="#articleHeader9">构建配置</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#articleHeader10">总结</a></li>
-                                <li><a href="#articleHeader11">参考</a></li>
-                            </ul>
-                        </div>
+                        <!--目录大纲放在这里-->
+                        <nav class="toc toc-right js-toc" style="font-size: 18px;"></nav>
                     </div>
                 </div>
             </div>
