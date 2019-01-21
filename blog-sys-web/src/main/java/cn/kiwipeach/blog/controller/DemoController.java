@@ -37,6 +37,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/demo")
 public class DemoController {
+    public DemoController() {
+        System.out.println("DemoController");
+    }
+
     @Autowired
     private IDemoService iDemoService;
 
@@ -70,7 +74,7 @@ public class DemoController {
     @ResponseBody
     public String internalServrError() {
         if (true) {
-            throw new BlogException(999, "测试异常");
+            throw new BlogException("-BLOG_TEST", "测试异常");
         }
         return "tets";
     }

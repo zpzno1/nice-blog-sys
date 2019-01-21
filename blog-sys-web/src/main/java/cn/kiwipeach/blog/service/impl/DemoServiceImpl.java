@@ -52,7 +52,7 @@ public class DemoServiceImpl extends ServiceImpl<DemoMapper, Blog> implements ID
         Integer updateRow = baseMapper.updateById(blog);
         log.info("博客标题更新结果:{}", updateRow);
         if (true) {
-            throw new BlogException(1001, "博客异常");
+            throw new BlogException("-BLOG_TEST", "博客异常");
         }
     }
 }

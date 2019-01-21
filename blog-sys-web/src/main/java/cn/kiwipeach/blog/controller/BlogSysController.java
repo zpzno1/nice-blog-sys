@@ -38,7 +38,7 @@ public class BlogSysController {
     @GetMapping("exception")
     public String test500InternalException() {
         if (true) {
-            throw new BlogException(101, "测试SpringBoot业务异常");
+            throw new BlogException("-BLOG_TEST", "测试SpringBoot业务异常");
         }
         return null;
     }

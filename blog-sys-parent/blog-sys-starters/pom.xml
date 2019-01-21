@@ -13,12 +13,8 @@
     <artifactId>blog-sys-starters</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>druid-starter-autoconfigurer</module>
         <module>druid-starter</module>
         <module>web-starter</module>
-        <module>web-starter-autoconfigurer</module>
-        <module>oauth-starter</module>
-        <module>oauth-starter-autoconfigurer</module>
     </modules>
 
     <dependencies>

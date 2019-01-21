@@ -13,13 +13,18 @@
     <artifactId>druid-starter</artifactId>
 
     <dependencies>
+        <!--[Oracle、MySQL]驱动和数据源-->
         <dependency>
-            <groupId>org.kiwipeach.blog</groupId>
-            <artifactId>druid-starter-autoconfigurer</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId><!--duird数据源-->
+            <version>${druid.version}</version>
         </dependency>
-
-    </dependencies>
-
+        <dependency>
+            <groupId>cn.kiwipeach</groupId>
+            <artifactId>ojdbc6</artifactId><!--oracle数据库驱动-->
+            <version>${oracle.version}</version>
+        </dependency>
+        <!--项目模块依赖-->
+     </dependencies>
 
 </project>

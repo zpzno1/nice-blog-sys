@@ -1,7 +1,8 @@
 # 端口
 server:
-  port: 8825
+  port: 80
   context-path: /
+
 
 # 1)系统启动广告
 banner:
@@ -74,16 +75,37 @@ blog:
     cookie:
       name: shrio_remember
       maxAge: 600
-      domain: localhost
+      domain: 127.0.0.1
       httpOnly: true
     cacheManager:
       cacheManagerConfigFile: classpath:ehcache.xml
-    credentialsMatcher:
-      hashAlgorithmName: SHA1
-      hashIterations: 1024
+#    credentialsMatcher:
+#      hashAlgorithmName: SHA1
+#      hashIterations: 1024
     shiroFilter:
       loginUrl: /login
       successUrl: /login/success
       unauthorizedUrl: /unauthorize
 
+# 6)三方登陆配置
+qq:
+  client:
+    app_ID: 101495727
+    app_KEY: 6d4d93e59731ef57deae952ccec2774a
+    accessTokenURL: https://graph.qq.com/oauth2.0/token
+    authorizeURL: https://graph.qq.com/oauth2.0/authorize
+    redirectURI: http://www.kiwipeach.cn/qq/oauth2.0/callback
+    getOpenIDURL: https://graph.qq.com/oauth2.0/me
+  resource:
+    getUserInfoURL: https://graph.qq.com/user/get_user_info
 
+
+#github:
+#  client:
+#    clientId: 892f3976910e28e3f9a0
+#    clientSecret: f377aaf3bc9d38b6607b85af6b5524bd44a57329
+#    accessTokenUri: https://github.com/login/oauth/access_token
+#    userAuthorizationUri: https://github.com/login/oauth/authorize
+#    clientAuthenticationScheme: form
+#  resource:
+#    userInfoUri: https://api.github.com/user

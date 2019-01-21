@@ -24,13 +24,13 @@ package cn.kiwipeach.blog.exception;
  * @create 2018/08/06
  */
 public class BlogException extends RuntimeException{
-    private static final Integer DEFAULT_EXCEPTION_CEDE = -1;
-    private Integer code = DEFAULT_EXCEPTION_CEDE;
+    private static final String DEFAULT_EXCEPTION_CEDE = "-1";
+    private String code = DEFAULT_EXCEPTION_CEDE;
     public BlogException() {
         super();
     }
 
-    public BlogException(Integer code,String message) {
+    public BlogException(String code,String message) {
         super(message);
         this.code = code;
     }

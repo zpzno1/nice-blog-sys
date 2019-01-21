@@ -24,11 +24,11 @@ public class BlogWebApplication extends SpringBootServletInitializer {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication app = new SpringApplication(BlogWebApplication.class);
-		app.setBannerMode(Banner.Mode.CONSOLE);
-		app.run(args);
-		logger.info("系统访问后台:http://localhost:8825/");
-		logger.info("系统duird监控:http://localhost:8825/druid");
-		//SpringApplication.run(BlogWebApplication.class, args);
+//		SpringApplication app = new SpringApplication(BlogWebApplication.class);
+//		app.setBannerMode(Banner.Mode.CONSOLE);
+//		app.run(args);
+		SpringApplication.run(BlogWebApplication.class, args);
+		logger.info("系统访问后台:http://www.kiwipeach.cn/");
+		logger.info("系统duird监控:http://www.kiwipeach.cn/druid");
 	}
 }

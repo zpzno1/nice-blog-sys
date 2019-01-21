@@ -1,6 +1,0 @@
-# Auto Configure 自动配置启动类设置
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.kiwipeach.blog.oauth.GiteeLoginController,\
-org.kiwipeach.blog.oauth.GithubLoginController,\
-org.kiwipeach.blog.oauth.QQLoginController
-  
