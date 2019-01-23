@@ -1,10 +1,7 @@
 package cn.kiwipeach.blog;
 
 import cn.kiwipeach.blog.domain.Blog;
-import cn.kiwipeach.blog.domain.SysUser;
 import cn.kiwipeach.blog.mapper.BlogMapper;
-import cn.kiwipeach.blog.mapper.SysUserMapper;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

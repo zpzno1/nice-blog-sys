@@ -74,7 +74,7 @@ public class DemoMapperTest extends BlogApiApplicationTests {
         //boolean insert = blog.insert();
         SysPermission permission = new SysPermission();
         permission.setIcon("icon-1.png");
-        permission.setWeight(new BigDecimal(1));
+        permission.setWeight(1);
         permission.setName("博客评论权限");
         Integer insert = sysPermissionMapper.insert(permission);
         log.info("插入结果：{}", insert);

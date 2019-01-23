@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.kiwipeach.blog.mapper.BlogMapper">
+<mapper namespace="cn.kiwipeach.generator.mapper.BlogMapper">
     <!-- auto-part create by kiwipeach [1099501218@qq.com] -->
     <resultMap id="BaseResultMap" type="cn.kiwipeach.blog.domain.Blog">
         <id column="ID" property="id"/>
@@ -19,6 +19,5 @@
     </sql>
 
     <!-- self-part create by kiwipeach [1099501218@qq.com] -->
-
 
 </mapper>

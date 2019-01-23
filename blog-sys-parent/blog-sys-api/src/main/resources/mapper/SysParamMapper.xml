@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.kiwipeach.blog.mapper.SysParamMapper">
+<mapper namespace="cn.kiwipeach.generator.mapper.SysParamMapper">
     <!-- auto-part create by kiwipeach [1099501218@qq.com] -->
     <resultMap id="BaseResultMap" type="cn.kiwipeach.blog.domain.SysParam">
-        <id column="ID" property="id"/>
-        <result column="PARAM" property="param"/>
+        <result column="ID" property="id"/>
+        <result column="NAME" property="name"/>
         <result column="VALUE" property="value"/>
         <result column="ENABLE" property="enable"/>
         <result column="DESCRIPTION" property="description"/>
+        <result column="PARENT_ID" property="parentId"/>
+        <result column="TYPE" property="type"/>
         <result column="CREATE_TIME" property="createTime"/>
         <result column="UPDATE_TIME" property="updateTime"/>
     </resultMap>
     <sql id="Base_Column_List">
-        ID, PARAM, VALUE, ENABLE, DESCRIPTION, CREATE_TIME, UPDATE_TIME
+        ID, NAME, VALUE, ENABLE, DESCRIPTION, PARENT_ID, TYPE, CREATE_TIME, UPDATE_TIME
     </sql>
 
     <!-- self-part create by kiwipeach [1099501218@qq.com] -->

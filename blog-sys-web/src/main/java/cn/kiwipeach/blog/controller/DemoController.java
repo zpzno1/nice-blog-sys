@@ -20,6 +20,7 @@ import cn.kiwipeach.blog.exception.BlogException;
 import cn.kiwipeach.blog.service.IDemoService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -120,6 +121,7 @@ public class DemoController {
      * @return
      */
     @RequestMapping("blog/about")
+    @RequiresPermissions(value = "blog:page:about")
     public String toBlogAboutPage(){
         return "blog/about";
     }

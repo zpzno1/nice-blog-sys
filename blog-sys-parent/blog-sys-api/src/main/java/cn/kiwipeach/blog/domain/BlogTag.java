@@ -1,31 +1,32 @@
 /*
- * Copyright 2018 kiwipeach.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+* Copyright 2019 kiwipeach(1099501218@qq.com).
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*      http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 package cn.kiwipeach.blog.domain;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
+import java.time.LocalDateTime;
+
 /**
- * 博客标签
+ * 标签
  *
  * @author kiwipeach [1099501218@qq.com]
- * @create 2018-08-05
+ * @create 2019-01-24
  */
 @TableName("T_BLOG_TAG")
 public class BlogTag implements Serializable {
@@ -48,7 +49,7 @@ public class BlogTag implements Serializable {
      * 标签权重
      */
     @TableField("WEIGHT")
-    private BigDecimal weight;
+    private Integer weight;
 
     /**
      * 标签图标
@@ -82,11 +83,11 @@ public class BlogTag implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    public BigDecimal getWeight() {
+    public Integer getWeight() {
         return weight;
     }
 
-    public void setWeight(BigDecimal weight) {
+    public void setWeight(Integer weight) {
         this.weight = weight;
     }
     public String getIcon() {

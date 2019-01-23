@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 kiwipeach.
+ * Copyright 2019 kiwipeach(1099501218@qq.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,16 +20,14 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 
-import java.math.BigDecimal;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-
-import java.io.Serializable;
 /**
  * 博客
  *
  * @author kiwipeach [1099501218@qq.com]
- * @create 2018-08-05
+ * @create 2019-01-24
  */
 @TableName("T_BLOG")
 public class Blog extends Model<Blog> implements Serializable {
@@ -70,19 +68,19 @@ public class Blog extends Model<Blog> implements Serializable {
      * 博客点赞
      */
     @TableField("STAR_COUNT")
-    private BigDecimal starCount;
+    private Integer starCount;
 
     /**
      * 浏览总量
      */
     @TableField("VIEWS")
-    private BigDecimal views;
+    private Integer views;
 
     /**
      * 是否置顶
      */
     @TableField("TOP")
-    private BigDecimal top;
+    private Integer top;
 
     /**
      * 创建时间
@@ -103,6 +101,7 @@ public class Blog extends Model<Blog> implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
+
     public String getUserId() {
         return userId;
     }
@@ -110,6 +109,7 @@ public class Blog extends Model<Blog> implements Serializable {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
     public String getCateId() {
         return cateId;
     }
@@ -117,6 +117,7 @@ public class Blog extends Model<Blog> implements Serializable {
     public void setCateId(String cateId) {
         this.cateId = cateId;
     }
+
     public String getTitle() {
         return title;
     }
@@ -124,6 +125,7 @@ public class Blog extends Model<Blog> implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
+
     public String getContent() {
         return content;
     }
@@ -131,27 +133,31 @@ public class Blog extends Model<Blog> implements Serializable {
     public void setContent(String content) {
         this.content = content;
     }
-    public BigDecimal getStarCount() {
+
+    public Integer getStarCount() {
         return starCount;
     }
 
-    public void setStarCount(BigDecimal starCount) {
+    public void setStarCount(Integer starCount) {
         this.starCount = starCount;
     }
-    public BigDecimal getViews() {
+
+    public Integer getViews() {
         return views;
     }
 
-    public void setViews(BigDecimal views) {
+    public void setViews(Integer views) {
         this.views = views;
     }
-    public BigDecimal getTop() {
+
+    public Integer getTop() {
         return top;
     }
 
-    public void setTop(BigDecimal top) {
+    public void setTop(Integer top) {
         this.top = top;
     }
+
     public LocalDateTime getCreateTime() {
         return createTime;
     }
@@ -159,6 +165,7 @@ public class Blog extends Model<Blog> implements Serializable {
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
+
     public LocalDateTime getUpdateTime() {
         return updateTime;
     }
@@ -170,17 +177,17 @@ public class Blog extends Model<Blog> implements Serializable {
     @Override
     public String toString() {
         return "Blog{" +
-        "id=" + id +
-        ", userId=" + userId +
-        ", cateId=" + cateId +
-        ", title=" + title +
-        ", content=" + content +
-        ", starCount=" + starCount +
-        ", views=" + views +
-        ", top=" + top +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        "}";
+                "id=" + id +
+                ", userId=" + userId +
+                ", cateId=" + cateId +
+                ", title=" + title +
+                ", content=" + content +
+                ", starCount=" + starCount +
+                ", views=" + views +
+                ", top=" + top +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                "}";
     }
 
     @Override

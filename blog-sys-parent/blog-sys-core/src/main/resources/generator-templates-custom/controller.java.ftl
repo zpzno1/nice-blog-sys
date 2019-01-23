@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 kiwipeach.
+ * Copyright 2019 kiwipeach[${cfg.email}].
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ import ${superControllerClassPackage};
 /**
  * ${table.comment} 前端控制器
  *
- * @author ${author} [${cfg.email}]
+ * @author ${author}
  * @create ${date}
  */
 <#if restControllerStyle>

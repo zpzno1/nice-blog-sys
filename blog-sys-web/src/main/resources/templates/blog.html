@@ -68,9 +68,9 @@
      id="sectionsNav">
     <div class="container">
         <div class="navbar-translate">
-            <a class="navbar-brand" href="blog/index.html"><img th:src="@{/assets/images/index/me-logo.png}"
+            <a class="navbar-brand" href="blog/index.html"><img th:src="@{/assets/images/index/China.png}"
                                                                 alt="Circle Image"
-                                                                class="rounded-circle img-fluid">kiwipeach </a>
+                                                                class="rounded-circle img-fluid" style="width: 60px;height: 60px;"/><!--爱撸代码的程序员--> </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
                     aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -134,8 +134,8 @@
         </div>
     </div>
 </nav>
-<!--#.大图文字-->
-<div th:fragment="background" class="page-header header-filter clear-filter big_bg" style="height: 40vh;" th:style="'height: 40vh;background:url(' + @{/node_modules/material-kit/assets/img/kit/bg2.jpg} + ');'">
+<!--#.大图文字 node_modules/material-kit/assets/img/kit/bg2.jpg-->
+<div th:fragment="background" class="page-header header-filter clear-filter big_bg" style="height: 40vh;" th:style="'height: 40vh;background:url(' + @{/assets/images/index/nav_bg_2.jpg} + ')  no-repeat -9px -580px;'">
     <div class="container" >
         <div class="row">
             <div class="col-md-8 ml-auto mr-auto">

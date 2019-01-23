@@ -38,7 +38,7 @@ public class MybatisPlusGeneratorTest {
         GlobalConfig config = new GlobalConfig();
         config.setActiveRecord(true) // 是否支持AR模式
                 .setAuthor("kiwipeach") // 作者
-                .setOutputDir("E:\\Gitee\\201803Blog\\kiwipeach-blog-sys\\blog-sys-web\\src\\main\\java") // 生成路径
+                .setOutputDir("D:\\souce_code\\mine_source\\nice-blog-sys\\blog-sys-parent\\blog-sys-api\\src\\main\\java") // 生成路径
                 .setFileOverride(true)// 是否覆盖文件
                 .setServiceName("I%sService")
                 .setActiveRecord(true)// 开启 activeRecord 模式
@@ -65,7 +65,7 @@ public class MybatisPlusGeneratorTest {
 
         //4. 包名策略配置
         PackageConfig pkConfig = new PackageConfig();
-        pkConfig.setParent("cn.kiwipeach.blog")
+        pkConfig.setParent("cn.kiwipeach.blog.generator")
                 .setMapper("mapper")
                 .setService("service")
                 .setController("controller")

@@ -18,9 +18,12 @@ package cn.kiwipeach.blog.controller;
 import cn.kiwipeach.blog.exception.BlogException;
 import cn.kiwipeach.blog.service.ILoginService;
 import cn.kiwipeach.blog.service.impl.QQLoginServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.util.SavedRequest;
+import org.apache.shiro.web.util.WebUtils;
 import org.kiwipeach.blog.shiro.token.AccessToken;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 登陆控制器[qq,github,gitee]
  *
@@ -39,6 +44,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @RequestMapping
 @Controller
+@Slf4j
 public class LoginController {
 
     @Autowired(required = false)
@@ -56,7 +62,8 @@ public class LoginController {
     public String login(
             @RequestParam(name = "code", required = true) String code,
             @RequestParam(name = "state", required = true) String state,
-            @RequestParam(name = "remember", required = false) boolean remember) {
+            @RequestParam(name = "remember", required = false) boolean remember,
+            HttpServletRequest request) {
         if (qqLoginService == null) {
             throw new BlogException("-LOGIN_02", "qq登陆未配置有误，请联系管理员");
         } else {
@@ -72,7 +79,14 @@ public class LoginController {
                 }
             }
         }
-        return "redirect:/login/success";
+        SavedRequest savedRequest = WebUtils.getSavedRequest(request);
+        // 被拦截的地址
+        String targetUrl = "/login/success";
+        if (savedRequest!=null){
+            targetUrl = savedRequest.getRequestUrl();
+        }
+        log.info("拦截到目标地址:{}", targetUrl);
+        return "redirect:" + targetUrl;
     }
 
 

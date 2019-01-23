@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.FieldFill;
@@ -60,11 +59,14 @@ public class MybatisPlusGeneratorOfficalTest {
         List<TableFill> tableFillList = new ArrayList<>();
         tableFillList.add(new TableFill("ASDD_SS", FieldFill.INSERT_UPDATE));
 
+        String tables[] = new String[]{"SYS_PERMISSION", "PK_SYS_PERMISSION", "T_BLOG", "PK_T_BLOG", "R_TAG_BLOG", "PK_R_TAG_BLOG", "SYS_PARAM", "SYS_USER", "PK_SYS_USER", "T_BLOG_CATEGORY", "PK_T_BLOG_CATEGORY", "T_BLOG_TAG", "PK_T_BLOG_TAG", "SYS_FUNCTION", "PK_T_COMMENT", "T_COMMENT_MSG", "R_USER_PERMISSION"};
+
+
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator().setGlobalConfig(
                 // 全局配置
                 new GlobalConfig()
-                        .setOutputDir("E:\\Gitee\\201803Blog\\kiwipeach-blog-sys\\blog-sys-api\\src\\main\\java")//输出目录
+                        .setOutputDir("D:\\souce_code\\mine_source\\nice-blog-sys\\blog-sys-parent\\blog-sys-api\\src\\main\\java")//输出目录
                         .setFileOverride(true)// 是否覆盖文件
                         .setActiveRecord(false)// 开启 activeRecord 模式
                         .setEnableCache(false)// XML 二级缓存
@@ -107,13 +109,14 @@ public class MybatisPlusGeneratorOfficalTest {
                         .setUrl("jdbc:oracle:thin:@localhost:1521:ORCL")
         ).setStrategy(
                 // 策略配置
-                new StrategyConfig()
+
+        new StrategyConfig()
                         // .setCapitalMode(true)// 全局大写命名
                         // .setDbColumnUnderline(true)//全局下划线命名
                         .setTablePrefix(new String[]{"t_"})// 此处可以修改为您的表前缀
                         .setNaming(NamingStrategy.underline_to_camel)// 表名生成策略
                         //.setInclude(new String[]{"SYS_USER","T_BLOG","R_TAG_BLOG","SYS_PARAM","T_BLOG_CATEGORY","T_BLOG_TAG","T_COMMENT","T_LEAVE_MSG"}) // 需要生成的表
-                        .setInclude(new String[]{"SYS_PERMISSION"}) // 需要生成的表
+                        .setInclude(tables) // 需要生成的表
                         // .setExclude(new String[]{"test"}) // 排除生成的表
                         // 自定义实体父类
                         // .setSuperEntityClass("com.baomidou.demo.TestEntity")
@@ -166,7 +169,7 @@ public class MybatisPlusGeneratorOfficalTest {
                     // 自定义输出文件目录
                     @Override
                     public String outputFile(TableInfo tableInfo) {
-                        return "E:\\Gitee\\201803Blog\\kiwipeach-blog-sys\\blog-sys-api\\src\\main\\resources\\generator\\" + tableInfo.getEntityName() + "Mapper.xml";
+                        return "D:\\souce_code\\mine_source\\nice-blog-sys\\blog-sys-parent\\blog-sys-api\\src\\main\\resources\\mapper\\" + tableInfo.getEntityName() + "Mapper.xml";
                     }
                 }))
         ).setTemplate(

@@ -4,7 +4,18 @@
  * @create 2018/11/15
  */
 (function ($, window) {
-    var blog_common = {
+    /**
+     * 公共部分默认组件初始化
+     */
+    function defaul_plugin_init() {
+        //回到顶端
+        blog_common.plugin.uitotop.init();
+    }
+
+    window.blog_common = {
+        /**
+         * 常用插件
+         */
         plugin: {
             /*回到顶部*/
             uitotop: {
@@ -218,17 +229,18 @@
                 }
             },
         },
-        defaul_plugin_init: defaul_plugin_init
+        /**
+         * 公共默认初始化
+         */
+        defaul_plugin_init: defaul_plugin_init,
+        /**
+         * blog所有关于http的请求
+         */
+        http:{
+            initProfile:function () {
+
+            }
+        }
     };
-
-    /**
-     * 公共部分默认组件初始化
-     */
-    function defaul_plugin_init() {
-        //回到顶端
-        blog_common.plugin.uitotop.init();
-    }
-
-    window.blog_common = blog_common;
 
 })(jQuery, window);
