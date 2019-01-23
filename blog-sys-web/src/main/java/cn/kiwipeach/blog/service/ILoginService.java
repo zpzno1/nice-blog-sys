@@ -33,5 +33,6 @@ public interface ILoginService {
      */
     AccessToken login(String code);
 
+    String queryLoginUrl();
 
 }

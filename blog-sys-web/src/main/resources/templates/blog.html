@@ -70,7 +70,8 @@
         <div class="navbar-translate">
             <a class="navbar-brand" href="blog/index.html"><img th:src="@{/assets/images/index/China.png}"
                                                                 alt="Circle Image"
-                                                                class="rounded-circle img-fluid" style="width: 60px;height: 60px;"/><!--爱撸代码的程序员--> </a>
+                                                                class="rounded-circle img-fluid"
+                                                                style="width: 60px;height: 60px;"/><!--爱撸代码的程序员--> </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
                     aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -81,23 +82,23 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/demo/blog/index}">
-                       <!-- <i class="fa fa-home"></i> --><span>首页</span>
+                    <a class="nav-link" th:href="@{/}">
+                        <!-- <i class="fa fa-home"></i> --><span>首页</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/demo/blog/archive}">
+                    <a class="nav-link" th:href="@{/blog/archive}">
                         <!--<i class="fa fa-archive"></i> --><span>时间归档</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/demo/blog/about}">
-                       <!-- <i class="fa fa-user-o"></i>--> <span>关于博主</span>
+                    <a class="nav-link" th:href="@{/blog/about}">
+                        <!-- <i class="fa fa-user-o"></i>--> <span>关于博主</span>
                     </a>
                 </li>
                 <li class="dropdown nav-item">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                       <!-- <i class="fa fa-th"></i>--> <span>更多功能</span>
+                        <!-- <i class="fa fa-th"></i>--> <span>更多功能</span>
                     </a>
                     <div class="dropdown-menu dropdown-with-icons">
                         <a href="blog/index.html" class="dropdown-item">
@@ -109,34 +110,35 @@
                         </a>
                     </div>
                 </li>
-               <!-- <li class="nav-item">
-                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom"
-                       href="https://twitter.com/CreativeTim" target="_blank"
-                       data-original-title="Follow us on Twitter">
-                        <i class="fa fa-twitter"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom"
-                       href="https://www.facebook.com/CreativeTim" target="_blank"
-                       data-original-title="Like us on Facebook">
-                        <i class="fa fa-facebook-square"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" rel="tooltip" title="" data-placement="bottom"
-                       href="https://www.instagram.com/CreativeTimOfficial" target="_blank"
-                       data-original-title="Follow us on Instagram">
-                        <i class="fa fa-instagram"></i>
-                    </a>
-                </li>-->
+                <!-- <li class="nav-item">
+                     <a class="nav-link" rel="tooltip" title="" data-placement="bottom"
+                        href="https://twitter.com/CreativeTim" target="_blank"
+                        data-original-title="Follow us on Twitter">
+                         <i class="fa fa-twitter"></i>
+                     </a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" rel="tooltip" title="" data-placement="bottom"
+                        href="https://www.facebook.com/CreativeTim" target="_blank"
+                        data-original-title="Like us on Facebook">
+                         <i class="fa fa-facebook-square"></i>
+                     </a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" rel="tooltip" title="" data-placement="bottom"
+                        href="https://www.instagram.com/CreativeTimOfficial" target="_blank"
+                        data-original-title="Follow us on Instagram">
+                         <i class="fa fa-instagram"></i>
+                     </a>
+                 </li>-->
             </ul>
         </div>
     </div>
 </nav>
 <!--#.大图文字 node_modules/material-kit/assets/img/kit/bg2.jpg-->
-<div th:fragment="background" class="page-header header-filter clear-filter big_bg" style="height: 40vh;" th:style="'height: 40vh;background:url(' + @{/assets/images/index/nav_bg_2.jpg} + ')  no-repeat -9px -580px;'">
-    <div class="container" >
+<div th:fragment="background" class="page-header header-filter clear-filter big_bg" style="height: 40vh;"
+     th:style="'height: 40vh;background:url(' + @{/assets/images/index/nav_bg_2.jpg} + ')  no-repeat -9px -580px;'">
+    <div class="container">
         <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
                 <div class="brand">
@@ -166,14 +168,14 @@
                         </li>
                     </ul>
                     <div class="tab-content tab-space">
-                        <div class="tab-pane active" id="dashboard-1" style="text-align: center">
+                        <div class="tab-pane active" id="user_login_div" style="text-align: center">
                             <!--登陆成功状态-->
                             <!-- <img src="./assets/images/index/me-logo.png" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">欢迎您,KiWiPeach -->
                             <!--未登录状态-->
                             <!--<button class="btn btn-sm btn-default btn-round" data-toggle="modal"
                                     data-target="#loginModal"><i class="fa fa-user-o"></i> 用户登陆
                             </button>-->
-                            <div class="ui horizontal list git-other-login-method-icon list-center">
+                           <!-- <div class="ui horizontal list git-other-login-method-icon list-center">
                                 <button class="btn btn-sm btn-round" data-toggle="modal" style="background: lightblue"
                                         data-target="#loginModal"><i class="fa fa-qq" aria-hidden="true"></i>
                                 </button>
@@ -184,7 +186,7 @@
                                 <button class="btn btn-sm btn-danger btn-round" data-toggle="modal"
                                         data-target="#loginModal"><i class="fa fa-git" aria-hidden="true"></i>
                                 </button>
-                            </div>
+                            </div>-->
                         </div>
                         <div class="tab-pane" id="schedule-1">
                             <!--卡片肖像:begin-->
@@ -216,6 +218,22 @@
                     </div>
                 </div>
             </div>
+            <!--加载用户信息-->
+            <script type="application/javascript">
+                $.ajax({
+                    method: 'get',
+                    url: '/user',
+                    success: function (res) {
+                        var $content;
+                        if (res.code == 0) {
+                            $content = $('<div style="font-size: 20px;"><img src="' + res.data.headUrl + '"class="img-raised rounded-circle img-fluid" style="width: 60px;height: 60px;"><p>Hello ' + res.data.nickName + '</p></div><');
+                        } else {
+                            $content = $('<div class="ui horizontal list git-other-login-method-icon list-center"> <button class="btn btn-sm btn-round" data-toggle="modal" style="background: lightblue"data-target="#loginModal"><i class="fa fa-qq" aria-hidden="true"></i> </button> <button class="btn btn-sm btn-round" data-toggle="modal"data-target="#loginModal" style="background: black"><i class="fa fa-github" aria-hidden="true"></i> </button> <button class="btn btn-sm btn-danger btn-round" data-toggle="modal"data-target="#loginModal"><i class="fa fa-git" aria-hidden="true"></i> </button> </div>\n');
+                        }
+                        $('#user_login_div').html($content);
+                    }
+                });
+            </script>
             <!--网站和个人信:end-->
 
             <!--分类信息:begin-->
@@ -325,7 +343,9 @@
             <!--友链部分:end-->
         </div>
     </div>
+
 </div>
+
 <!--#.右侧导航-博客详情-->
 <div th:fragment="side_bar_outline" class="col-md-3">
     <div class="row">

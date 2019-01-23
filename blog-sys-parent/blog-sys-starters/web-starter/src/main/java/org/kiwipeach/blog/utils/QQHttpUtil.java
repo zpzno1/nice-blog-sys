@@ -43,6 +43,25 @@ import java.util.List;
 @Slf4j
 public class QQHttpUtil {
 
+
+    /**
+     * 获取QQ的登陆路径
+     *
+     * @param qqConfig
+     * @return
+     */
+    public static String getLoginUrl(ConfigProperties qqConfig) throws URISyntaxException {
+        URI uri = new URIBuilder(qqConfig.getClient().getAuthorizeURL())
+                .addParameter("response_type", "code")
+                .addParameter("client_id", qqConfig.getClient().getApp_ID())
+                .addParameter("redirect_uri", qqConfig.getClient().getRedirectURI())
+                .addParameter("state", "__kiwipeach__")
+                .addParameter("scope", qqConfig.getClient().getScope())
+                .addParameter("display", "pc").build();
+        return uri.toString();
+    }
+
+
     /**
      * 通过授权码获取AccessToken
      * 失败：callback( {"error":100019,"error_description":"code to access token error"} );
@@ -126,9 +145,9 @@ public class QQHttpUtil {
         JSONObject jsonObject = JSONObject.parseObject(resultStr);
         AccessToken accessToken = null;
         if ("0".equals(jsonObject.getString("ret"))) {
-            String userName = jsonObject.getString("nickname");
+            String nickName = jsonObject.getString("nickname");
             String headUrl = jsonObject.getString("figureurl");
-            accessToken = new AccessToken(accessTokenString, openId, userName, headUrl,"qq");
+            accessToken = new AccessToken(accessTokenString, openId, nickName, headUrl, "qq");
         } else {
             throw new BlogException("-ACCOUNT_002", "qq查询openId异常,错误信息:" + resultStr);
         }

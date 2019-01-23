@@ -96,6 +96,7 @@ qq:
     authorizeURL: https://graph.qq.com/oauth2.0/authorize
     redirectURI: http://www.kiwipeach.cn/qq/oauth2.0/callback
     getOpenIDURL: https://graph.qq.com/oauth2.0/me
+    scope: get_user_info
   resource:
     getUserInfoURL: https://graph.qq.com/user/get_user_info
 

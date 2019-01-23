@@ -27,7 +27,15 @@ public class Client {
     private String authorizeURL;
     private String redirectURI;
     private String getOpenIDURL;
+    private String scope;
 
+    public String getScope() {
+        return scope;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
+    }
 
     public String getApp_ID() {
         return app_ID;

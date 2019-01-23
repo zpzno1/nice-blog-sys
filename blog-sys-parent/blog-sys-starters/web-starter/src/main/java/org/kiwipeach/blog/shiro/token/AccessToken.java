@@ -25,7 +25,7 @@ import org.apache.shiro.authc.RememberMeAuthenticationToken;
  * @author kiwipeach
  * @create 2019-01-21
  */
-public class AccessToken extends SysUser implements HostAuthenticationToken,RememberMeAuthenticationToken {
+public class AccessToken extends SysUser implements HostAuthenticationToken, RememberMeAuthenticationToken {
 
     /**
      * 当前登陆账号的token字符串,一定存在
@@ -55,11 +55,11 @@ public class AccessToken extends SysUser implements HostAuthenticationToken,Reme
     public AccessToken() {
     }
 
-    public AccessToken(String tokenStr,String userId,String userNmae,String headUrl,String platform) {
+    public AccessToken(String tokenStr, String userId, String nickName, String headUrl, String platform) {
         this.tokenStr = tokenStr;
         this.platform = platform;
         setId(userId);
-        setUserName(userNmae);
+        setNickName(nickName);
         setHeadUrl(headUrl);
     }
 
@@ -106,6 +106,7 @@ public class AccessToken extends SysUser implements HostAuthenticationToken,Reme
 
     /**
      * 获取认证的主体
+     *
      * @return 返回主体信息
      */
     @Override
@@ -115,6 +116,7 @@ public class AccessToken extends SysUser implements HostAuthenticationToken,Reme
 
     /**
      * 获取认证主体的密码密文
+     *
      * @return 返回密文
      */
     @Override

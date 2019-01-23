@@ -24,6 +24,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.net.URISyntaxException;
+
 /**
  * qq登陆服务实现类
  *
@@ -56,6 +58,17 @@ public class QQLoginServiceImpl implements ILoginService {
         }
         accessToken.setPlatform("qq");
         return accessToken;
+    }
+
+    @Override
+    public String queryLoginUrl() {
+        String loginUrl = null;
+        try {
+            loginUrl = QQHttpUtil.getLoginUrl(qqConfig);
+        } catch (URISyntaxException e) {
+            throw new BlogException("-LOGIN_001", e.getLocalizedMessage());
+        }
+        return  loginUrl;
     }
 
 

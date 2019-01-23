@@ -35,4 +35,9 @@ public class GithubLoginServiceImpl implements ILoginService {
          */
         return null;
     }
+
+    @Override
+    public String queryLoginUrl() {
+        return null;
+    }
 }
