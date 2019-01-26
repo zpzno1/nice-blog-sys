@@ -41,14 +41,19 @@ public class SysCommonController {
 
     /**
      * 获取当前登陆用户信息
+     *
      * @return 返回当前登陆用户信息
      */
     @GetMapping("user")
     @ResponseBody
     public AjaxResponse<UserInfoVO> queryUserInfo() {
         AccessToken curUser = (AccessToken) SecurityUtils.getSubject().getPrincipal();
-        UserInfoVO userInfoVO = new UserInfoVO(curUser.getUserName(),curUser.getNickName(),curUser.getHeadUrl());
-        return AjaxResponse.success(userInfoVO);
+        if (curUser == null) {
+            return AjaxResponse.fail("-USERINFO_OO1", "未查询到用户信息");
+        }else {
+            UserInfoVO userInfoVO = new UserInfoVO(curUser.getUserName(), curUser.getNickName(), curUser.getHeadUrl());
+            return AjaxResponse.success(userInfoVO);
+        }
     }
 
     @GetMapping("exception")

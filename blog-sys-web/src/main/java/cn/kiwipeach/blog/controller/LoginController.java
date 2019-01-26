@@ -143,5 +143,9 @@ public class LoginController {
         return "shiro/remember";
     }
 
+    public static void main(String[] args) {
+
+    }
+
 
 }

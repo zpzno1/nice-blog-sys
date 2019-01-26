@@ -19,21 +19,22 @@ import java.util.Date;
 
 /**
  * 返回数据:
- *  0  成功
- *  >0 业务异常
- *  <0 系统错误
+ * 0  成功
+ * >0 业务异常
+ * <0 系统错误
+ *
  * @author kiwipeach [1099501218@qq.com]
  * @create 2018/07/11
  */
 public class AjaxResponse<T> {
     //region 分页默认值
-    private static final Integer DEFAULT_RESPONSE_SUCCESS_CODE = 0;
+    private static final String DEFAULT_RESPONSE_SUCCESS_CODE = "0";
     private static final String DEFAULT_RESPONSE_MSG = "请求成功";
     //endregion
     /**
      * 返回状态码
      */
-    private Integer code = DEFAULT_RESPONSE_SUCCESS_CODE;
+    private String code = DEFAULT_RESPONSE_SUCCESS_CODE;
     /**
      * 返回失败信息
      */
@@ -58,16 +59,16 @@ public class AjaxResponse<T> {
         this.data = data;
     }
 
-    public AjaxResponse(Integer code, String msg) {
+    public AjaxResponse(String code, String msg) {
         this.code = code;
         this.msg = msg;
     }
 
-    public Integer getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(Integer code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
@@ -105,8 +106,9 @@ public class AjaxResponse<T> {
 
     /**
      * 返回成功数据
+     *
      * @param data 报文数据
-     * @param <T> 报文类型
+     * @param <T>  报文类型
      * @return 统一返回报文数据
      */
     public static <T> AjaxResponse<T> success(T data) {
@@ -115,12 +117,13 @@ public class AjaxResponse<T> {
 
     /**
      * 返回失败数据
+     *
      * @param code 失败状态码
-     * @param msg 失败报文
-     * @param <T> 报文类型
+     * @param msg  失败报文
+     * @param <T>  报文类型
      * @return 统一返回把报文数据
      */
-    public static <T> AjaxResponse<T> fail(Integer code, String msg) {
+    public static <T> AjaxResponse<T> fail(String code, String msg) {
         AjaxResponse<T> ajaxResponse = new AjaxResponse<T>(code, msg);
         ajaxResponse.setCode(code);
         return ajaxResponse;

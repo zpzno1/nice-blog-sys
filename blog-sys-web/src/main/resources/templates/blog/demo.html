@@ -4,7 +4,7 @@
 <body class="index-page">
 <nav th:replace="blog::navbar "></nav>
 <div th:replace="blog::background"></div>
-<div class="main main-raised">
+        <div class="main main-raised">
     <div class="row">
         <div class="col-md-9">
             <!--动态内容-->
@@ -28,7 +28,74 @@
                 </div>
             </div>
         </div>
-        <div th:replace="blog::side_bar"></div>
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <!--网站和个人信:begin-->
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="nav nav-pills nav-pills-icons" role="tablist">
+                                <li class="nav-item ">
+                                    <a class="nav-link  active" href="#dashboard-1" role="tab" data-toggle="tab">
+                                        <bold>用&nbsp;&nbsp;&nbsp;户</bold>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#schedule-1" role="tab" data-toggle="tab">
+                                        <bold>博&nbsp;&nbsp;&nbsp;主</bold>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content tab-space">
+                                <div class="tab-pane active" id="dashboard-1" style="text-align: center">
+                                    <!--登陆成功状态-->
+                                    <!-- <img src="./assets/images/index/me-logo.png" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">欢迎您,KiWiPeach -->
+                                    <!--未登录状态-->
+                                    <button class="btn btn-round" data-toggle="modal"
+                                            data-target="#loginModal"><i class="fas fa-sign-in-alt fa-lg"></i> 登陆
+                                    </button>
+                                    <button class="btn  btn-round" data-toggle="modal"
+                                            data-target="#loginModal"><i class="fa fa-registered fa-lg"></i> 注册
+                                    </button>
+                                </div>
+                                <div class="tab-pane" id="schedule-1">
+                                    <!--卡片肖像:begin-->
+                                    <div class="card card-profile" style="max-width: 360px">
+                                        <div class="card-header card-header-image">
+                                            <a href="#pablo">
+                                                <img class="img"
+                                                     src="../../static/assets/images/index/demo-profile.jpg" th:src="@{/assets/images/index/demo-profile.jpg}">
+                                            </a>
+                                        </div>
+
+                                        <div class="card-body ">
+                                            <h4 class="card-title">刘卜铷</h4>
+                                            <h6 class="card-category text-gray">Java Web Developer</h6>
+                                        </div>
+                                        <div class="card-footer justify-content-center">
+                                            <a href="#pablo" class="btn btn-just-icon btn-twitter btn-round">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                            <a href="#pablo" class="btn btn-just-icon btn-facebook btn-round">
+                                                <i class="fa fa-facebook-square"></i>
+                                            </a>
+                                            <a href="#pablo" class="btn btn-just-icon btn-google btn-round">
+                                                <i class="fa fa-google"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!--卡片肖像:end-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--网站和个人信:end-->
+
+                    <!--分类、标签云、橱窗、友链-->
+                    <div th:replace="blog::side_bar_common"></div>
+                </div>
+            </div>
+        </div>
     </div>
     <footer th:replace="blog::footer"></footer>
 </div>

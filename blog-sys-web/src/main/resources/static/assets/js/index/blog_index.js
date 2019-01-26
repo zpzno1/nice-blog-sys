@@ -4,5 +4,4 @@
 (function () {
     console.log('index js');
     blog_common.defaul_plugin_init();
-
 })();

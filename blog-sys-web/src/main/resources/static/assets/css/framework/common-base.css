@@ -2,18 +2,18 @@
   material框架样式调整
  */
 /*下拉菜单*/
-.dropdown-menu .dropdown-item:hover, .dropdown-menu .dropdown-item:focus, .dropdown-menu a:hover, .dropdown-menu a:focus, .dropdown-menu a:active {
-    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
-    background-color: #555;
-    color: #FFFFFF;
-}
-/*导航按钮*/
-.nav-pills .nav-item .nav-link.active {
-    color: #fff;
-    background-color: #555;
-    box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.57), 0 13px 24px -11px rgba(156, 39, 176, 0.6);
-}
-/*表单单击*/
-.form-control, .is-focused .form-control {
-    background-image: linear-gradient(to top, #778899 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px);
-}
+/*.dropdown-menu .dropdown-item:hover, .dropdown-menu .dropdown-item:focus, .dropdown-menu a:hover, .dropdown-menu a:focus, .dropdown-menu a:active {*/
+    /*box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);*/
+    /*background-color: #555;*/
+    /*color: #FFFFFF;*/
+/*}*/
+/*!*导航按钮*!*/
+/*.nav-pills .nav-item .nav-link.active {*/
+    /*color: #fff;*/
+    /*background-color: #555;*/
+    /*box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.57), 0 13px 24px -11px rgba(156, 39, 176, 0.6);*/
+/*}*/
+/*!*表单单击*!*/
+/*.form-control, .is-focused .form-control {*/
+    /*background-image: linear-gradient(to top, #778899 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px);*/
+/*}*/

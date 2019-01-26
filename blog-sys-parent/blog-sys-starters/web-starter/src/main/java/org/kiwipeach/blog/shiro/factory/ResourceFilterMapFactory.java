@@ -51,7 +51,7 @@ public class ResourceFilterMapFactory {
         filterChainDefinitionMap.put("/blog/detail", "anon");
         filterChainDefinitionMap.put("/blog/archive", "anon");
         filterChainDefinitionMap.put("/blog/about", "anon");
-        filterChainDefinitionMap.put("/blog/user", "anon");
+        filterChainDefinitionMap.put("/user", "anon");
 
 
         // 静态资源路径
