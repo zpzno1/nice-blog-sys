@@ -4,6 +4,7 @@ server:
   context-path: /
 
 
+
 # 1)系统启动广告
 banner:
   location: classpath:system/banner.txt
@@ -101,12 +102,13 @@ qq:
     getUserInfoURL: https://graph.qq.com/user/get_user_info
 
 
-#github:
-#  client:
-#    clientId: 892f3976910e28e3f9a0
-#    clientSecret: f377aaf3bc9d38b6607b85af6b5524bd44a57329
-#    accessTokenUri: https://github.com/login/oauth/access_token
-#    userAuthorizationUri: https://github.com/login/oauth/authorize
-#    clientAuthenticationScheme: form
-#  resource:
-#    userInfoUri: https://api.github.com/user
+github:
+  client:
+    clientId: 892f3976910e28e3f9a0
+    clientSecret: f377aaf3bc9d38b6607b85af6b5524bd44a57329
+    accessTokenUri: https://github.com/login/oauth/access_token
+    userAuthorizationUri: https://github.com/login/oauth/authorize
+    clientAuthenticationScheme: form
+    redirectURI: http://www.kiwipeach.cn/github/oauth2.0/callback
+  resource:
+    userInfoUri: https://api.github.com/user

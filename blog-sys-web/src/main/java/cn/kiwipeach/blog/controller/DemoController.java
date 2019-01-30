@@ -38,9 +38,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/demo")
 public class DemoController {
-    public DemoController() {
-        System.out.println("DemoController");
-    }
 
     @Autowired
     private IDemoService iDemoService;

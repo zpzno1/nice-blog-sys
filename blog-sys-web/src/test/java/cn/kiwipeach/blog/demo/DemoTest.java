@@ -15,6 +15,8 @@
  */
 package cn.kiwipeach.blog.demo;
 
+import cn.kiwipeach.blog.enums.CodeEnum;
+import cn.kiwipeach.blog.enums.CodeValueEnum;
 import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 
@@ -60,6 +62,16 @@ public class DemoTest {
         ApplicationPersonalBean bean = new ApplicationPersonalBean();
         bean.setAAC003("刘卜铷");
         System.out.println(JSON.toJSONString(bean));
+    }
+
+    @Test
+    public void testEnum() {
+        CodeEnum platform = CodeEnum.QQ;
+        System.out.println(platform);
+        System.out.println(platform.toString().equals("qq"));
+
+        CodeValueEnum sex = CodeValueEnum.GIRL;
+        System.out.println(sex);
     }
 
 }

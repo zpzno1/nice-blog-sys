@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
  * @author kiwipeach
  * @create 2019-01-20
  */
-@Component
+@Component("qqConfigProperties")
 @ConfigurationProperties("qq")
 public class ConfigProperties {
 

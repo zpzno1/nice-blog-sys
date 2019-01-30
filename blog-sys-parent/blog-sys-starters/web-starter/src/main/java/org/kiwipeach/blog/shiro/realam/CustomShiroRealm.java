@@ -49,12 +49,12 @@ public class CustomShiroRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         AccessToken accessToken = (AccessToken) authenticationToken;
         //TODO 从数据库中查找到了一条用户
-        AccessToken dbAccessToken = new AccessToken("AccessToken-JDLFJDLJF", "6FF96B97CF726B2D1DD31798135782FA", "kiwipeach", "kiwiipeach.png", "unknow");
-        dbAccessToken.setPassword("this_is_password");
-        if (!dbAccessToken.getId().equals("6FF96B97CF726B2D1DD31798135782FA")) {//数据库里面找不到用户openid
-            throw new UnknownAccountException("用户不存在!");
-        }
-        AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(accessToken, dbAccessToken.getPassword(), "CustomShiroRealm");
+        //AccessToken dbAccessToken = new AccessToken("AccessToken-JDLFJDLJF", "6FF96B97CF726B2D1DD31798135782FA", "kiwipeach", "kiwiipeach.png", "unknow");
+        //dbAccessToken.setPassword("this_is_password");
+        //if (!dbAccessToken.getId().equals("6FF96B97CF726B2D1DD31798135782FA")) {//数据库里面找不到用户openid
+        //    throw new UnknownAccountException("用户不存在!");
+        //}
+        AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(accessToken, accessToken.getPassword(), "CustomShiroRealm");
         return authenticationInfo;
     }
 

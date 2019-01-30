@@ -16,6 +16,7 @@
 package cn.kiwipeach.blog.controller;
 
 import cn.kiwipeach.blog.domain.SysUser;
+import cn.kiwipeach.blog.enums.CodeEnum;
 import cn.kiwipeach.blog.exception.BlogException;
 import cn.kiwipeach.blog.service.ILoginService;
 import cn.kiwipeach.blog.service.impl.QQLoginServiceImpl;
@@ -33,10 +34,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -55,10 +53,24 @@ public class LoginController {
     @Qualifier("qqLoginServiceImpl")
     private ILoginService qqLoginService;
 
-    @RequestMapping("qq/login")
-    public String toQQLoginPage() {
-        return "redirect:" + qqLoginService.queryLoginUrl();
+
+    @Autowired(required = false)
+    @Qualifier("githubLoginServiceImpl")
+    private ILoginService githubLoginService;
+
+    @Autowired(required = false)
+    @Qualifier("giteeLoginServiceImpl")
+    private ILoginService giteeLoginService;
+
+
+    /***************************************************三方通用登陆 begin**************************************************************/
+
+    @RequestMapping("{platform}/login")
+    public String toQQLoginPage(@PathVariable("platform") String platform) {
+        ILoginService loginService = decideLoginService(platform);
+        return "redirect:" + loginService.queryLoginUrl();
     }
+
 
     /**
      * http://www.kiwipeach.cn/qqlogin/callback?code=02F2BCC543134404B33E2665DCFD1A0C&state=d4213204f14d585c48998f8ba330425
@@ -67,16 +79,18 @@ public class LoginController {
      * @param state 状态码
      * @return 返回登陆结果
      */
-    @RequestMapping("qq/oauth2.0/callback")
-    public String login(
+    @RequestMapping("{platform}/oauth2.0/callback")
+    public String qqLoginCallback(
             @RequestParam(name = "code", required = true) String code,
             @RequestParam(name = "state", required = true) String state,
+            @PathVariable("platform") String platform,
             @RequestParam(name = "remember", required = false) boolean remember,
             HttpServletRequest request) {
-        if (qqLoginService == null) {
-            throw new BlogException("-LOGIN_02", "qq登陆未配置有误，请联系管理员");
+        ILoginService loginService = decideLoginService(platform);
+        if (loginService == null) {
+            throw new BlogException("-LOGIN_02", "三方登陆配置有误，请联系管理员");
         } else {
-            AccessToken accessToken = qqLoginService.login(code);
+            AccessToken accessToken = loginService.login(code);
             Subject currentUser = SecurityUtils.getSubject();
             //2.判断是否认证过，否则进行重新认证
             if (!currentUser.isAuthenticated()) {
@@ -97,6 +111,29 @@ public class LoginController {
         log.info("拦截到目标地址:{}", targetUrl);
         return "redirect:" + targetUrl;
     }
+
+
+    /**
+     * 选择三方平台服务
+     *
+     * @param platform 平台类型
+     * @return 返回登陆服务实现类
+     */
+    private ILoginService decideLoginService(String platform) {
+        ILoginService loginService = null;
+        if (CodeEnum.QQ.toString().equalsIgnoreCase(platform)) {
+            loginService = qqLoginService;
+        } else if (CodeEnum.GITHUB.toString().equalsIgnoreCase(platform)) {
+            loginService = githubLoginService;
+        } else if (CodeEnum.GITEE.toString().equalsIgnoreCase(platform)) {
+            loginService = giteeLoginService;
+        } else {
+            throw new IllegalArgumentException("非法入参:" + platform);
+        }
+        return loginService;
+    }
+
+    /***************************************************三方通用登陆 end**************************************************************/
 
 
     @GetMapping("login")
@@ -142,10 +179,5 @@ public class LoginController {
     public String toRememberPage() {
         return "shiro/remember";
     }
-
-    public static void main(String[] args) {
-
-    }
-
 
 }

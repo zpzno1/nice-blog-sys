@@ -22,6 +22,7 @@ import cn.kiwipeach.blog.exception.BlogException;
 import cn.kiwipeach.blog.service.ILoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.net.URISyntaxException;
@@ -40,6 +41,7 @@ public class QQLoginServiceImpl implements ILoginService {
      * qq配置
      */
     @Autowired
+    @Qualifier("qqConfigProperties")
     private ConfigProperties qqConfig;
 
     @Override
@@ -56,7 +58,6 @@ public class QQLoginServiceImpl implements ILoginService {
             log.error("qq登陆异常:", e);
             throw new BlogException("-LOGIN_001", e.getLocalizedMessage());
         }
-        accessToken.setPlatform("qq");
         return accessToken;
     }
 

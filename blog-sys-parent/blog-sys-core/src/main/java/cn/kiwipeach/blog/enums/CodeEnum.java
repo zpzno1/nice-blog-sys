@@ -13,22 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.oauth.github;
+package cn.kiwipeach.blog.enums;
 
 /**
- * 资源
+ * <code,value> 类型的枚举，用来存放系统开发时候出现的编码
  *
  * @author kiwipeach
- * @create 2019-01-20
+ * @create 2019-01-30
  */
-public class Resource {
-    private String userInfoUri;
+public enum CodeEnum {
 
-    public String getUserInfoUri() {
-        return userInfoUri;
-    }
+    /*平台常量*/
+    QQ,
+    GITHUB,
+    GITEE,
+    ;
 
-    public void setUserInfoUri(String userInfoUri) {
-        this.userInfoUri = userInfoUri;
-    }
+
 }

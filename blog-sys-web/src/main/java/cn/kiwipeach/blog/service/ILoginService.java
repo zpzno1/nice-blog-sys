@@ -28,11 +28,17 @@ public interface ILoginService {
 
     /**
      * 通过授权码获取当用户的登陆信息
+     *
      * @param code 授权码
      * @return 返回博客统一用户信息
      */
     AccessToken login(String code);
 
+    /**
+     * 获取三方平台的登陆地址
+     *
+     * @return 返回认证登陆地址
+     */
     String queryLoginUrl();
 
 }

@@ -35,15 +35,19 @@
         </encoder>
     </appender>
     <!--自定义目标包体下的日志输出级别-->
-   <!-- <logger name="cn.kiwipeach.blog.service" level="trace" />-->
+    <!-- <logger name="cn.kiwipeach.blog.service" level="trace" />-->
 
     <!--关闭热部署工具日日志-->
-    <logger name="org.springframework.boot.devtools" level="OFF" />
+    <logger name="org.springframework.boot.devtools" level="OFF"/>
+    <!--spring boot 调试日志 -->
+    <logger name="org.springframework.boot.web" level="INFO"/>
+    <!--关闭自动配置注解-->
+    <logger name="org.springframework.boot.autoconfigure" level="INFO"/>
     <springProfile name="dev">
-        <logger name="cn.kiwipeach.blog.mapper" level="debug" />
+        <logger name="cn.kiwipeach.blog.mapper" level="debug"/>
     </springProfile>
     <springProfile name="prod">
-        <logger name="cn.kiwipeach.blog.mapper" level="warn" />
+        <logger name="cn.kiwipeach.blog.mapper" level="warn"/>
     </springProfile>
     <!-- 日志级别TRACE<DEBUG<INFO<WARN<ERROR -->
     <root level="INFO">

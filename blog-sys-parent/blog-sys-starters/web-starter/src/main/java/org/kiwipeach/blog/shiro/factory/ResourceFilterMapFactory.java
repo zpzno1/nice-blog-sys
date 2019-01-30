@@ -34,15 +34,16 @@ public class ResourceFilterMapFactory {
      * /login/success= user
      * /user/index= user
      * /** = authc
+     *
      * @return
      */
-    public Map<String,String> loadResourceAccessRules(){
+    public Map<String, String> loadResourceAccessRules() {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         //1)配置匿名可以访问的路径
         // 登陆路径
         filterChainDefinitionMap.put("/login", "anon");
-        filterChainDefinitionMap.put("/qq/login", "anon");
         filterChainDefinitionMap.put("/user/login", "anon");
+        filterChainDefinitionMap.put("/**/login", "anon");
         filterChainDefinitionMap.put("/**/oauth2.0/callback", "anon");
 
         //通用控制器

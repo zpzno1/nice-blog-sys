@@ -15,9 +15,17 @@
  */
 package cn.kiwipeach.blog.service.impl;
 
+import cn.kiwipeach.blog.exception.BlogException;
+import cn.kiwipeach.blog.oauth.github.ConfigProperties;
 import cn.kiwipeach.blog.service.ILoginService;
+import lombok.extern.slf4j.Slf4j;
 import org.kiwipeach.blog.shiro.token.AccessToken;
+import org.kiwipeach.blog.utils.GithubHttpUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import java.net.URISyntaxException;
 
 /**
  * github登陆服务实现类
@@ -25,19 +33,41 @@ import org.springframework.stereotype.Service;
  * @author kiwipeach
  * @create 2019-01-20
  */
-@Service
+@Service("githubLoginServiceImpl")
+@Slf4j
 public class GithubLoginServiceImpl implements ILoginService {
+
+    /**
+     * qq配置
+     */
+    @Autowired
+    @Qualifier("githubConfigProperties")
+    private ConfigProperties githubConfig;
+
+
     @Override
     public AccessToken login(String code) {
-        /**
-         * 登陆成功：access_token=2544e25b1027631ab43d94373e2fb984fd3b92d7&scope=&token_type=bearer
-         * 登陆失败：error=bad_verification_code&error_description=The+code+passed+is+incorrect+or+expired.&error_uri=https%3A%2F%2Fdeveloper.github.com%2Fapps%2Fmanaging-oauth-apps%2Ftroubleshooting-oauth-app-access-token-request-errors%2F%23bad-verification-code
-         */
-        return null;
+        AccessToken accessToken = null;
+        try {
+            // 1.获取accessToken
+            String accessTokenString = GithubHttpUtil.getAccessTokenString(githubConfig, code, "access_token");
+            // 2.获取用户信息
+            accessToken = GithubHttpUtil.getAccessToken(githubConfig, accessTokenString);
+        } catch (Exception e) {
+            log.error("github登陆异常:", e);
+            throw new BlogException("-LOGIN_001", e.getLocalizedMessage());
+        }
+        return accessToken;
     }
 
     @Override
     public String queryLoginUrl() {
-        return null;
+        String loginUrl = null;
+        try {
+            loginUrl = GithubHttpUtil.getLoginUrl(githubConfig);
+        } catch (URISyntaxException e) {
+            throw new BlogException("-LOGIN_001", e.getLocalizedMessage());
+        }
+        return loginUrl;
     }
 }

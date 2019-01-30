@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
  * @author kiwipeach
  * @create 2019-01-20
  */
-@Service
+@Service("giteeLoginServiceImpl")
 public class GiteeLoginServiceImpl implements ILoginService {
 
     @Override

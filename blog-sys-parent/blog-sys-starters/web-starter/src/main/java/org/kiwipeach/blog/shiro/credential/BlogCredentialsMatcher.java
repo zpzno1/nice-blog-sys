@@ -32,8 +32,9 @@ public class BlogCredentialsMatcher implements CredentialsMatcher {
 
     /**
      * 密码比对
+     *
      * @param token 前台或者三方token
-     * @param info 数据库中的密码密文信息
+     * @param info  数据库中的密码密文信息
      * @return 返回比对结果
      */
     @Override
@@ -42,7 +43,7 @@ public class BlogCredentialsMatcher implements CredentialsMatcher {
         AccessToken accessToken = (AccessToken) token;
         String platform = accessToken.getPlatform();
         //三方登陆，认证授权即可
-        if ("qq".equals(platform) || "qq".equals(platform) || "qq".equals(platform)) {
+        if ("qq".equals(platform) || "github".equals(platform) || "gitee".equals(platform)) {
             return true;
         } else {
             //本站用户，需要比对账号密码,假设现在使用明文密码比对方式

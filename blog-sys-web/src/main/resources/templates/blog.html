@@ -30,9 +30,12 @@
     <!--步骤插件-->
     <link th:href="@{/assets/plugins/smartwizard/dist/css/smart_wizard.css}" rel="stylesheet" type="text/css"/>
     <!--theme-->
-    <link th:href="@{/assets/plugins/smartwizard/dist/css/smart_wizard_theme_circles.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{/assets/plugins/smartwizard/dist/css/smart_wizard_theme_arrows.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{/assets/plugins/smartwizard/dist/css/smart_wizard_theme_dots.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/assets/plugins/smartwizard/dist/css/smart_wizard_theme_circles.css}" rel="stylesheet"
+          type="text/css"/>
+    <link th:href="@{/assets/plugins/smartwizard/dist/css/smart_wizard_theme_arrows.css}" rel="stylesheet"
+          type="text/css"/>
+    <link th:href="@{/assets/plugins/smartwizard/dist/css/smart_wizard_theme_dots.css}" rel="stylesheet"
+          type="text/css"/>
     <!--博客页面通用样式-->
     <link rel="stylesheet" th:href="@{/assets/css/blog_common.css}">
 
@@ -299,11 +302,11 @@
             success: function (res) {
                 var $content;
                 if (res.code == 0) {
-                    $content = $('<div style="font-size: 20px;"><img src="' + res.data.headUrl + '"class="img-raised rounded-circle img-fluid" style="width: 60px;height: 60px;"><p>亲爱的 <span style="font-size: 24px;font-weight: bold">' + res.data.nickName + '</span>早上好</p></div><');
+                    $content = $('<div style="font-size: 20px;"><img src="' + res.data.headUrl + '"class="img-raised rounded-circle img-fluid" style="width: 60px;height: 60px;"><p>亲爱的 <span style="font-size: 18px;font-weight: bold">“' + res.data.nickName + '”</span>欢迎光临</p></div><');
                 } else {
                     //登陆注册按钮
-                    $content = $('<button class="btn btn-round" data-toggle="modal"data-target="#loginModal"><i class="fas fa-sign-in-alt fa-lg"></i> 登陆 </button> ' +
-                        '<button class="btn  btn-round" data-toggle="modal"data-target="#signupModal"><i class="fa fa-registered fa-lg"></i> 注册 </button>');
+                    $content = $('<button class="btn btn-primary btn-round" data-toggle="modal"data-target="#loginModal"><i class="fas fa-sign-in-alt fa-lg"></i> 登陆 </button> ' +
+                        '<button class="btn btn-primary btn-round" data-toggle="modal"data-target="#signupModal"><i class="fa fa-registered fa-lg"></i> 注册 </button>');
                 }
                 $('#user_login_div').html($content);
             }
@@ -311,145 +314,6 @@
     </script>
 </div>
 
-<!--#.右侧导航-博客详情-->
-<div th:fragment="side_bar_outline" class="col-md-3">
-    <div class="row">
-        <!--右侧网站信息:begin-->
-        <div class="col-md-12">
-            <!--网站和个人信息:begin-->
-            <div class="card">
-                <div class="card-body">
-                    <ul class="nav nav-pills nav-pills-icons" role="tablist">
-                        <li class="nav-item ">
-                            <a class="nav-link  active" href="#dashboard-1" role="tab" data-toggle="tab">
-                                <bold>用&nbsp;&nbsp;&nbsp;户</bold>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" role="tab" data-toggle="tab">
-                                <bold>博&nbsp;&nbsp;&nbsp;主</bold>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="tab-content tab-space">
-                        <div class="tab-pane active" style="text-align: center">
-                            <!--登陆成功状态-->
-                            <!-- <img src="./assets/images/index/me-logo.png" alt="Thumbnail Image" class="img-raised rounded-circle img-fluid">欢迎您,KiWiPeach -->
-                            <!--未登录状态-->
-                            <button class="btn btn-sm btn-default btn-round" data-toggle="modal"
-                                    data-target="#loginModal"><i class="fa fa-user-o"></i> 用户登陆
-                            </button>
-                            <button class="btn btn-sm btn-default btn-round" data-toggle="modal"
-                                    data-target="#signupModal"><i class="fa fa-user-plus"></i> 用户注册
-                            </button>
-                        </div>
-                        <div class="tab-pane">
-                            <!--卡片肖像:begin-->
-                            <div class="card card-profile" style="max-width: 360px">
-                                <div class="card-header card-header-image">
-                                    <a href="#pablo">
-                                        <img class="img"
-                                             src="https://images.unsplash.com/photo-1492447273231-0f8fecec1e3a?auto=format&fit=crop&w=334&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D">
-                                    </a>
-                                </div>
-
-                                <div class="card-body ">
-                                    <h4 class="card-title">刘卜铷</h4>
-                                    <h6 class="card-category text-gray">Java Web Developer</h6>
-                                </div>
-                                <div class="card-footer justify-content-center">
-                                    <a href="#pablo" class="btn btn-just-icon btn-twitter btn-round">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                    <a href="#pablo" class="btn btn-just-icon btn-facebook btn-round">
-                                        <i class="fa fa-facebook-square"></i>
-                                    </a>
-                                    <a href="#pablo" class="btn btn-just-icon btn-google btn-round">
-                                        <i class="fa fa-google"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <!--卡片肖像:end-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--网站和个人信息:end-->
-            <!--图片轮播:begin-->
-            <div id="advertise_div" class="card card-raised card-carousel">
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                        <div class="carousel-item">
-                            <img class="d-block w-100"
-                                 src="../../static/assets/plugins/material-kit/assets/img/kit/bg2.jpg"
-                                 th:src="@{/assets/plugins/material-kit/assets/img/kit/bg2.jpg}"
-                                 alt="First slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h4>
-                                    <i class="material-icons">location_on</i>
-                                    Yellowstone National Park, United States
-                                </h4>
-                            </div>
-                        </div>
-                        <div class="carousel-item active">
-                            <img class="d-block w-100"
-                                 src="../../static/assets/plugins/material-kit/assets/img/kit/bg2.jpg"
-                                 th:src="@{/assets/plugins/material-kit/assets/img/kit/bg2.jpg}"
-                                 alt="Second slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h4>
-                                    <i class="material-icons">location_on</i>
-                                    Somewhere Beyond, United States
-                                </h4>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100"
-                                 src="../../static/assets/plugins/material-kit/assets/img/kit/bg2.jpg"
-                                 th:src="@{/assets/plugins/material-kit/assets/img/kit/bg2.jpg}"
-                                 alt="Third slide">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h4>
-                                    <i class="material-icons">location_on</i>
-                                    Yellowstone National Park, United States
-                                </h4>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
-                       data-slide="prev">
-                        <i class="fa fa-chevron-left"></i>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
-                       data-slide="next">
-                        <i class="fa fa-chevron-right"></i>
-                    </a>
-                </div>
-            </div>
-            <!--图片轮播:end-->
-
-            <!--bootstrap4文章导航:begin-->
-            <div id="outline_div" class="post-nav hidden-xs side-outline hidden-sm"
-                 style="display: block; position: relative;width: 300px;">
-                <div class="panel panel-default widget-outline">
-                    <div class="panel-body">
-                        <!--目录大纲放在这里-->
-                        <nav class="toc toc-right js-toc" style="font-size: 18px;"></nav>
-                    </div>
-                </div>
-            </div>
-            <!--bootstrap4文章导航:end-->
-
-        </div>
-    </div>
-    <!--右侧网站信息:end-->
-
-</div>
 <!--#.页面底部-->
 <footer th:fragment="footer" class="footer ">
     <div class="container">
@@ -502,7 +366,7 @@
                                         <use xlink:href="#icon-QQ"></use>
                                     </svg>
                                 </a>
-                                <a href="#pablo" class="btn btn-just-icon btn-link">
+                                <a href="#pablo" th:href="@{/github/login}" class="btn btn-just-icon btn-link">
                                     <svg class="alibaba-icon">
                                         <use xlink:href="#icon-GitHub"></use>
                                     </svg>
@@ -519,7 +383,7 @@
                         <form class="form" method="" action="">
                             <p class="description text-center" style="font-weight: bold">社交账号快速登陆</p>
                             <div class="card-body">
-                                <div class="form-group bmd-form-group">
+                                <div class="form-group bmd -form-group">
                                     <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="fas fa-envelope-square fa-lg"></i>

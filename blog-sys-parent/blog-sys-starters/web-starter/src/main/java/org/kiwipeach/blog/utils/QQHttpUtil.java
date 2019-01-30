@@ -40,21 +40,21 @@ import java.util.List;
  * @author kiwipeach
  * @create 2019-01-20
  */
-@Slf4j
-public class QQHttpUtil {
+public class QQHttpUtil extends HttpBaseUtil{
 
 
     /**
      * 获取QQ的登陆路径
      *
-     * @param qqConfig
-     * @return
+     * @param qqConfig qq配置类
+     * @return 返回qq登陆地址
      */
     public static String getLoginUrl(ConfigProperties qqConfig) throws URISyntaxException {
         URI uri = new URIBuilder(qqConfig.getClient().getAuthorizeURL())
                 .addParameter("response_type", "code")
                 .addParameter("client_id", qqConfig.getClient().getApp_ID())
                 .addParameter("redirect_uri", qqConfig.getClient().getRedirectURI())
+                // FIXME qq官方建议我们把这个值，存在session中，在登陆的时候去验证该值
                 .addParameter("state", "__kiwipeach__")
                 .addParameter("scope", qqConfig.getClient().getScope())
                 .addParameter("display", "pc").build();
@@ -105,12 +105,12 @@ public class QQHttpUtil {
      *
      * @param qqConfig
      * @param accessToken
-     * @param type
+     * @param returnKey
      * @return
      * @throws URISyntaxException
      * @throws IOException
      */
-    public static String getOpenId(ConfigProperties qqConfig, String accessToken, String type) throws URISyntaxException, IOException {
+    public static String getOpenId(ConfigProperties qqConfig, String accessToken, String returnKey) throws URISyntaxException, IOException {
         URI uri = new URIBuilder(qqConfig.getClient().getGetOpenIDURL())
                 .addParameter("access_token", accessToken).build();
         String resultStr = getResponse(uri);
@@ -118,7 +118,7 @@ public class QQHttpUtil {
         if (resultStr.contains("openid")) {
             String result = resultStr.replace("callback(", "").replace(");", "");
             JSONObject jsonObject = JSONObject.parseObject(result);
-            typeValue = jsonObject.getString(type);
+            typeValue = jsonObject.getString(returnKey);
         } else {
             throw new BlogException("-ACCOUNT_002", "qq查询openId异常,错误信息:" + resultStr);
         }
@@ -154,22 +154,7 @@ public class QQHttpUtil {
         return accessToken;
     }
 
-    /**
-     * get公共方法
-     *
-     * @param uri 请求地址
-     * @return 返回相应结果
-     * @throws IOException
-     */
-    private static String getResponse(URI uri) throws IOException {
-        log.warn("qq send request:{}", uri.toString());
-        CloseableHttpClient httpclient = HttpClientBuilder.create().build();
-        HttpGet httpGet = new HttpGet(uri);
-        CloseableHttpResponse httpResponse = httpclient.execute(httpGet);
-        String response = EntityUtils.toString(httpResponse.getEntity());
-        log.warn("qq send response:{}", response);
-        return response;
-    }
+
 
 
     public static void main(String[] args) {
