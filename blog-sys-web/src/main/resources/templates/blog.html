@@ -285,7 +285,10 @@
         <h4 href="#" class="list-group-item" style="color: #0e0e0e">
             用户信息
         </h4>
+
+
         <div class="card-body">
+
             <div th:id="user_login_div" class="tab-pane active" id="dashboard-1"
                  style="text-align: center">
                 <!--登陆成功状态-->
@@ -295,6 +298,8 @@
             </div>
         </div>
     </div>
+
+
     <script type="application/javascript">
         $.ajax({
             method: 'get',
@@ -302,7 +307,11 @@
             success: function (res) {
                 var $content;
                 if (res.code == 0) {
-                    $content = $('<div style="font-size: 20px;"><img src="' + res.data.headUrl + '"class="img-raised rounded-circle img-fluid" style="width: 60px;height: 60px;"><p>亲爱的 <span style="font-size: 18px;font-weight: bold">“' + res.data.nickName + '”</span>欢迎光临</p></div><');
+                    $content = $('<div style="font-size: 20px;">' +
+                        '<img src="' + res.data.headUrl + '"class="img-raised rounded-circle img-fluid" style="width: 60px;height: 60px;">' +
+                        '<p>亲爱的 <span style="font-size: 18px;font-weight: bold">“' + res.data.nickName + '”</span>欢迎光临</p>' +
+                        '<p><a href="/user/logout"  data-toggle="tooltip" data-html="true" title="<b>欢迎您下次光临~~</b>">安全退出</a></p>' +
+                        '</div><');
                 } else {
                     //登陆注册按钮
                     $content = $('<button class="btn btn-primary btn-round" data-toggle="modal"data-target="#loginModal"><i class="fas fa-sign-in-alt fa-lg"></i> 登陆 </button> ' +
@@ -356,7 +365,7 @@
             <div class="modal-content">
                 <div class="card card-signup card-plain">
                     <div class="modal-header">
-                        <div class="card-header text-center col-md-12" style="background: lightslategray">
+                        <div class="card-header card-header-primary text-center col-md-12">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i
                                     class="fas fa-times fa-sm"></i></button>
                             <h4 class="card-title">用户登陆</h4>

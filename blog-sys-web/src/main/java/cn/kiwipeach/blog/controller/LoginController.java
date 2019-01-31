@@ -65,6 +65,12 @@ public class LoginController {
 
     /***************************************************三方通用登陆 begin**************************************************************/
 
+    /**
+     * 三大授权平台的认证授权登陆入口
+     *
+     * @param platform 平台[qq.github.gitee]
+     * @return 返回登陆地址
+     */
     @RequestMapping("{platform}/login")
     public String toQQLoginPage(@PathVariable("platform") String platform) {
         ILoginService loginService = decideLoginService(platform);
@@ -73,11 +79,12 @@ public class LoginController {
 
 
     /**
-     * http://www.kiwipeach.cn/qqlogin/callback?code=02F2BCC543134404B33E2665DCFD1A0C&state=d4213204f14d585c48998f8ba330425
+     * 三大授权平台的授权回调地址
      *
-     * @param code  qq授权码
-     * @param state 状态码,码云没有传该值，qq和github有使用
-     * @return 返回登陆结果
+     * @param code     qq授权码
+     * @param state    状态码,码云没有传该值，qq和github有使用
+     * @param platform 平台[qq.github.gitee]
+     * @return 返回登陆结果页面
      */
     @RequestMapping("{platform}/oauth2.0/callback")
     public String qqLoginCallback(
