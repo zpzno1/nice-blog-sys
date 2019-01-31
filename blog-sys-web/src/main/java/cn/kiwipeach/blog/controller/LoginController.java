@@ -76,16 +76,17 @@ public class LoginController {
      * http://www.kiwipeach.cn/qqlogin/callback?code=02F2BCC543134404B33E2665DCFD1A0C&state=d4213204f14d585c48998f8ba330425
      *
      * @param code  qq授权码
-     * @param state 状态码
+     * @param state 状态码,码云没有传该值，qq和github有使用
      * @return 返回登陆结果
      */
     @RequestMapping("{platform}/oauth2.0/callback")
     public String qqLoginCallback(
             @RequestParam(name = "code", required = true) String code,
-            @RequestParam(name = "state", required = true) String state,
+            @RequestParam(name = "state", required = false) String state,
             @PathVariable("platform") String platform,
             @RequestParam(name = "remember", required = false) boolean remember,
             HttpServletRequest request) {
+        log.info("{}平台登陆开始:code={},state={}", platform, code, state);
         ILoginService loginService = decideLoginService(platform);
         if (loginService == null) {
             throw new BlogException("-LOGIN_02", "三方登陆配置有误，请联系管理员");
@@ -108,7 +109,7 @@ public class LoginController {
         if (savedRequest != null) {
             targetUrl = savedRequest.getRequestUrl();
         }
-        log.info("拦截到目标地址:{}", targetUrl);
+        log.info("{}平台登陆成功:{}", targetUrl);
         return "redirect:" + targetUrl;
     }
 

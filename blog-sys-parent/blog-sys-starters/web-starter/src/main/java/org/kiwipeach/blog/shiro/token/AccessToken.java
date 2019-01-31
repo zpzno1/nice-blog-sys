@@ -128,4 +128,8 @@ public class AccessToken extends SysUser implements HostAuthenticationToken, Rem
     public String getHost() {
         return this.host;
     }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
 }

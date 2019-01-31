@@ -10,7 +10,7 @@ banner:
   location: classpath:system/banner.txt
 
 spring:
-# 2)thymeleaf 模板引擎
+  # 2)thymeleaf 模板引擎
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
@@ -18,7 +18,7 @@ spring:
     content-type: text/html
     encoding: UTF-8
     cache: false
-# 3)数据源配置
+  # 3)数据源配置
   datasource:
     username: kiwipeach
     password: Cnzg8hutIv6NPHhylRPqjvC7OkQOqdb543vwfW5JCfsBnBDtMctnENGO3MfMF3VJo8Q/Ixou8Q/6d2hipLBEew==
@@ -45,7 +45,7 @@ spring:
 mybatis-plus:
   mapper-locations: classpath*:/mapper/*Mapper.xml
   typeAliasesPackage: cn.kiwipeach.blog.domain
-#  typeEnumsPackage: com.baomidou.springboot.entity.enums
+  #  typeEnumsPackage: com.baomidou.springboot.entity.enums
   global-config:
     #刷新mapper 调试神器
     db-config:
@@ -54,9 +54,9 @@ mybatis-plus:
       #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
       field-strategy: not_empty
       #驼峰下划线转换
-#      column-underline: false
+      #      column-underline: false
       #数据库大写下划线转换
-#      capital-mode: true
+      #      capital-mode: true
       #逻辑删除配置
       logic-delete-value: 0
       logic-not-delete-value: 1
@@ -65,7 +65,7 @@ mybatis-plus:
       #自定义填充策略接口实现
       #meta-object-handler: com.baomidou.springboot.xxx
       #自定义SQL注入器
-      #sql-injector: com.baomidou.springboot.xxx
+    #sql-injector: com.baomidou.springboot.xxx
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
@@ -80,9 +80,9 @@ blog:
       httpOnly: true
     cacheManager:
       cacheManagerConfigFile: classpath:ehcache.xml
-#    credentialsMatcher:
-#      hashAlgorithmName: SHA1
-#      hashIterations: 1024
+    #    credentialsMatcher:
+    #      hashAlgorithmName: SHA1
+    #      hashIterations: 1024
     shiroFilter:
       loginUrl: /login
       successUrl: /login/success
@@ -112,3 +112,13 @@ github:
     redirectURI: http://www.kiwipeach.cn/github/oauth2.0/callback
   resource:
     userInfoUri: https://api.github.com/user
+
+gitee:
+  client:
+    clientId: 5dd66a99095b62d59758399d1c220ec746b683b54bfbe87dcfd9fb4618be9e17
+    clientSecret: c6eb84d1ab96d3697d489cc615b26629c8ced21aef14fb0d7ee27db88a0bc264
+    accessTokenUri: https://gitee.com/oauth/token
+    userAuthorizationUri: https://gitee.com/oauth/authorize
+    redirectURI: http://www.kiwipeach.cn/gitee/oauth2.0/callback
+  resource:
+    userInfoUri: https://gitee.com/api/v5/user

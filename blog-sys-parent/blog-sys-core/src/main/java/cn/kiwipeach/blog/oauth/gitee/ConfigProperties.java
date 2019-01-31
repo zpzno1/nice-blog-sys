@@ -15,14 +15,17 @@
  */
 package cn.kiwipeach.blog.oauth.gitee;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
 /**
  * qq配置实体类
  *
  * @author kiwipeach
  * @create 2019-01-20
  */
-//@Component
-//@ConfigurationProperties("github")
+@Component("giteeConfigProperties")
+@ConfigurationProperties("gitee")
 public class ConfigProperties {
 
     private Client client;

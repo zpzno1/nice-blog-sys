@@ -16,7 +16,7 @@
 package cn.kiwipeach.blog.oauth.qq;
 
 /**
- * 资源
+ * qq 资源
  *
  * @author kiwipeach
  * @create 2019-01-20

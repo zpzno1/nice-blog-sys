@@ -15,9 +15,18 @@
  */
 package cn.kiwipeach.blog.service.impl;
 
+import cn.kiwipeach.blog.exception.BlogException;
+import cn.kiwipeach.blog.oauth.gitee.ConfigProperties;
 import cn.kiwipeach.blog.service.ILoginService;
+import lombok.extern.slf4j.Slf4j;
 import org.kiwipeach.blog.shiro.token.AccessToken;
+import org.kiwipeach.blog.utils.GiteeHttpUtil;
+import org.kiwipeach.blog.utils.GithubHttpUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import java.net.URISyntaxException;
 
 /**
  * gitee登陆服务实现类
@@ -26,16 +35,38 @@ import org.springframework.stereotype.Service;
  * @create 2019-01-20
  */
 @Service("giteeLoginServiceImpl")
+@Slf4j
 public class GiteeLoginServiceImpl implements ILoginService {
+
+    @Autowired
+    @Qualifier("giteeConfigProperties")
+    private ConfigProperties giteeConfig;
+
 
     @Override
     public AccessToken login(String code) {
-        return null;
+        AccessToken accessToken = null;
+        try {
+            // 1.获取accessToken
+            String accessTokenString = GiteeHttpUtil.getAccessTokenString(giteeConfig, code, "access_token");
+            // 2.获取用户信息
+            accessToken = GiteeHttpUtil.getAccessToken(giteeConfig, accessTokenString);
+        } catch (Exception e) {
+            log.error("github登陆异常:", e);
+            throw new BlogException("-LOGIN_001", e.getLocalizedMessage());
+        }
+        return accessToken;
     }
 
     @Override
     public String queryLoginUrl() {
-        return null;
+        String loginUrl = null;
+        try {
+            loginUrl = GiteeHttpUtil.getLoginUrl(giteeConfig);
+        } catch (URISyntaxException e) {
+            throw new BlogException("-LOGIN_001", e.getLocalizedMessage());
+        }
+        return loginUrl;
     }
 
 }

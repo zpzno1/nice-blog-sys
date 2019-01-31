@@ -16,19 +16,19 @@
 package cn.kiwipeach.blog.oauth.gitee;
 
 /**
- * 资源
+ * gitees资源
  *
  * @author kiwipeach
  * @create 2019-01-20
  */
 public class Resource {
-    private String getUserInfoURL;
+    private String userInfoUri;
 
-    public String getGetUserInfoURL() {
-        return getUserInfoURL;
+    public String getUserInfoUri() {
+        return userInfoUri;
     }
 
-    public void setGetUserInfoURL(String getUserInfoURL) {
-        this.getUserInfoURL = getUserInfoURL;
+    public void setUserInfoUri(String userInfoUri) {
+        this.userInfoUri = userInfoUri;
     }
 }

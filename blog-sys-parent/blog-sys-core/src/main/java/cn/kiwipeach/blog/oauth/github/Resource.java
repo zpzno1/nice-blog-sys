@@ -16,7 +16,7 @@
 package cn.kiwipeach.blog.oauth.github;
 
 /**
- * 资源
+ * github资源
  *
  * @author kiwipeach
  * @create 2019-01-20

@@ -38,7 +38,7 @@ import java.net.URISyntaxException;
 public class GithubLoginServiceImpl implements ILoginService {
 
     /**
-     * qq配置
+     * github配置
      */
     @Autowired
     @Qualifier("githubConfigProperties")
