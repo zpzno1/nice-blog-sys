@@ -19,7 +19,7 @@ body::-webkit-scrollbar-track, div::-webkit-scrollbar-track, p::-webkit-scrollba
 }
 
 body::-webkit-scrollbar-thumb, div::-webkit-scrollbar-thumb, p::-webkit-scrollbar-thumb, textarea::-webkit-scrollbar-thumb, section::-webkit-scrollbar-thumb, ul::-webkit-scrollbar-thumb {
-    background: #6B747A;
+    background: #5e5e5e;
     -webkit-border-radius: 12px;
 }
 
