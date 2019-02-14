@@ -52,7 +52,7 @@ public class GiteeLoginServiceImpl implements ILoginService {
             // 2.获取用户信息
             accessToken = GiteeHttpUtil.getAccessToken(giteeConfig, accessTokenString);
         } catch (Exception e) {
-            log.error("github登陆异常:", e);
+            log.error("gitee登陆异常:", e);
             throw new BlogException("-LOGIN_001", e.getLocalizedMessage());
         }
         return accessToken;

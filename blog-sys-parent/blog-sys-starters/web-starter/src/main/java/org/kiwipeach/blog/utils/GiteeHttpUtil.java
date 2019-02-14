@@ -70,7 +70,7 @@ public class GiteeHttpUtil extends HttpBaseUtil {
         if (resultStr.contains("access_token")) {
             JSONObject jsonObj = JSONObject.parseObject(resultStr);
             //TODO 这里面其实有返回fresh_token和超期时间expire_time等信息
-            tokenStr = jsonObj.getString("access_token");
+            tokenStr = jsonObj.getString(returnKey);
         } else {
             throw new BlogException("-ACCOUNT_002", "gitee授权码登陆失败,错误信息:" + resultStr);
         }

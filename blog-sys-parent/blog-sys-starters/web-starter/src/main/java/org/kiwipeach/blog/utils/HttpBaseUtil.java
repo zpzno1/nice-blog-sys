@@ -53,6 +53,8 @@ public class HttpBaseUtil {
         log.warn("GET:三方登陆请求:{}", uri.toString());
         CloseableHttpClient httpclient = HttpClientBuilder.create().build();
         HttpGet httpGet = new HttpGet(uri);
+        //gitee需要设置代理，否则会出出现403错误
+        httpGet.setHeader(new BasicHeader("user-agent", "*"));
         CloseableHttpResponse httpResponse = httpclient.execute(httpGet);
         String response = EntityUtils.toString(httpResponse.getEntity());
         log.warn("GET:三方登陆返回:{}", response);
@@ -74,6 +76,8 @@ public class HttpBaseUtil {
         String postUri = new StringBuffer(uriBuilder.getScheme()).append("://").append(uriBuilder.getHost()).append(uri.getPath()).toString();
         HttpPost httpPost = new HttpPost(postUri);
         httpPost.setHeader(new BasicHeader("Content-Type", "application/x-www-form-urlencoded"));
+        //gitee需要设置代理，否则会出出现403错误
+        httpPost.setHeader(new BasicHeader("user-agent", "*"));
         List<NameValuePair> nvps = new ArrayList<>();
         List<NameValuePair> queryParams = uriBuilder.getQueryParams();
         for (NameValuePair nameValuePair : queryParams) {
