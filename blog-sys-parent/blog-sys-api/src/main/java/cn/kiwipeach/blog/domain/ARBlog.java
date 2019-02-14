@@ -61,8 +61,8 @@ public class ARBlog extends Model<ARBlog> /*implements Serializable */{
     /**
      * 博客内容
      */
-    @TableField("CONTENT_KEY")
-    private String contentKey;
+    @TableField("CONTENT")
+    private String content;
 
     /**
      * 博客点赞
@@ -126,12 +126,12 @@ public class ARBlog extends Model<ARBlog> /*implements Serializable */{
         this.title = title;
     }
 
-    public String getContentKey() {
-        return contentKey;
+    public String getContent() {
+        return content;
     }
 
-    public void setContentKey(String contentKey) {
-        this.contentKey = contentKey;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public BigDecimal getStarCount() {
@@ -181,7 +181,7 @@ public class ARBlog extends Model<ARBlog> /*implements Serializable */{
                 ", userId=" + userId +
                 ", cateId=" + cateId +
                 ", title=" + title +
-                ", contentKey=" + contentKey +
+                ", content=" + content +
                 ", starCount=" + starCount +
                 ", views=" + views +
                 ", top=" + top +

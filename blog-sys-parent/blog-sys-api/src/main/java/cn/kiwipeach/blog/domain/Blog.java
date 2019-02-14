@@ -61,8 +61,8 @@ public class Blog extends Model<Blog> implements Serializable {
     /**
      * 博客内容
      */
-    @TableField("CONTENT_KEY")
-    private String contentKey;
+    @TableField("CONTENT")
+    private String content;
 
     /**
      * 博客点赞
@@ -126,12 +126,12 @@ public class Blog extends Model<Blog> implements Serializable {
         this.title = title;
     }
 
-    public String getContentKey() {
-        return contentKey;
+    public String getContent() {
+        return content;
     }
 
-    public void setContentKey(String contentKey) {
-        this.contentKey = contentKey;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Integer getStarCount() {
@@ -181,7 +181,7 @@ public class Blog extends Model<Blog> implements Serializable {
                 ", userId=" + userId +
                 ", cateId=" + cateId +
                 ", title=" + title +
-                ", contentKey=" + contentKey +
+                ", content=" + content +
                 ", starCount=" + starCount +
                 ", views=" + views +
                 ", top=" + top +

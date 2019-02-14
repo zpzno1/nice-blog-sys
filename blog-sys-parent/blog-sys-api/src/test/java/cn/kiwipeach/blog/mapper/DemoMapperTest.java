@@ -68,7 +68,7 @@ public class DemoMapperTest extends BlogApiApplicationTests {
     public void 测试insert插入() {
         //Blog blog = new Blog();
         //blog.setTitle("kiwipeach是一个程序员");
-        //blog.setContentKey("他很帅，很有才华，同时也很烦恼");
+        //blog.setContent("他很帅，很有才华，同时也很烦恼");
         //blog.setCateId("1");
         //blog.setTop(new BigDecimal(1));
         //boolean insert = blog.insert();
