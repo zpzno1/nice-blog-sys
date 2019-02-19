@@ -170,7 +170,7 @@ public class LoginController {
 
     @GetMapping("login/success")
     public String toLoginSuccessPage() {
-        return "redirect:/blog/index";
+        return "redirect:/blog/index.html";
     }
 
     @GetMapping("login/fail")

@@ -50,7 +50,6 @@
     <modules>
         <module>blog-sys-parent</module>
         <module>blog-sys-web</module>
-        <module>blog-sys-admin</module>
     </modules>
 
 

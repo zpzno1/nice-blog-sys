@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 页面跳转控制器,分三种类型：
  * 1）前端普通页面跳转
@@ -61,6 +63,22 @@ public class PageCommonController {
     }
 
 
+
+    /**
+     * 1）前端通用页面跳转
+     *
+     * @return 首页
+     */
+    @RequestMapping("admin/{pageName}.html")
+    public String adminResponseHtml(
+            @PathVariable("pageName") String pageName,
+            HttpServletRequest request) {
+        StringBuffer targetUrl = new StringBuffer("admin").append("/").append(pageName);
+        String contextPath = request.getContextPath() + "/";
+        request.setAttribute("ctx", contextPath);
+        return targetUrl.toString();
+    }
+
     /**
      * 3）后端普通页面跳转 admin/system/blog/send.html
      *
@@ -70,8 +88,11 @@ public class PageCommonController {
     public String adminResponseHtml(
             @PathVariable("module") String module,
             @PathVariable("business") String business,
-            @PathVariable("pageName") String pageName) {
+            @PathVariable("pageName") String pageName,
+            HttpServletRequest request) {
         StringBuffer targetUrl = new StringBuffer("admin/").append(module).append("/").append(business).append("/").append(pageName);
+        String contextPath = request.getContextPath() + "/";
+        request.setAttribute("ctx", contextPath);
         return targetUrl.toString();
     }
 
@@ -84,8 +105,11 @@ public class PageCommonController {
     public String adminResponseJson(
             @PathVariable("module") String module,
             @PathVariable("business") String business,
-            @PathVariable("pageName") String pageName) {
+            @PathVariable("pageName") String pageName,
+            HttpServletRequest request) {
         StringBuffer targetUrl = new StringBuffer("admin/").append(module).append("/").append(business).append("/").append(pageName);
+        String contextPath = request.getContextPath() + "/";
+        request.setAttribute("ctx", contextPath);
         return targetUrl.toString();
     }
 

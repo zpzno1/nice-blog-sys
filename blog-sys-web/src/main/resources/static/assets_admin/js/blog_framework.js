@@ -17,8 +17,9 @@
      * @param ctx 应用上下文
      */
     function generate_menue(ctx) {
-        var menue_url = ctx + 'assets_admin/server/menue_conf.json';
-        var inspinia_url = ctx + "assets_admin/js/inspinia.js";
+        var menue_url = ctx + '/server/menue_conf.data';
+        var inspinia_url = ctx + "/js/inspinia.js";
+        debugger;
         $.ajax({
             type: 'get',
             url: menue_url,
