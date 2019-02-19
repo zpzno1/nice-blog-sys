@@ -16,6 +16,7 @@
 package cn.kiwipeach.blog.service;
 
 import cn.kiwipeach.blog.domain.Blog;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,11 +36,13 @@ public interface IDemoService extends IService<Blog> {
      * @param userId
      * @return
      */
-    Page<Blog> queryBlogListDemo(Page<Blog> page, String userId);
+    IPage<Blog> queryBlogListDemo(IPage<Blog> page, String userId);
 
     /**
      * 事务测试服务
      */
     @Transactional
     void testTranactional(Blog blog);
+
+    void testRuntimeException();
 }

@@ -15,10 +15,12 @@
  */
 package cn.kiwipeach.blog.service.impl;
 
+import cn.kiwipeach.blog.configuration.AjaxResponse;
 import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.exception.BlogException;
 import cn.kiwipeach.blog.mapper.DemoMapper;
 import cn.kiwipeach.blog.service.IDemoService;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -41,10 +43,10 @@ public class DemoServiceImpl extends ServiceImpl<DemoMapper, Blog> implements ID
     private DemoMapper demoMapper;
 
     @Override
-    public Page<Blog> queryBlogListDemo(Page<Blog> page, String userId) {
+    public IPage<Blog> queryBlogListDemo(IPage<Blog> page, String userId) {
         List<Blog> blogs1 = demoMapper.selectBlogListDemo(page, userId);
         List<Blog> blogs2 = baseMapper.selectBlogListDemo(page, userId);
-        return (Page<Blog>) page.setRecords(blogs2);
+        return page.setRecords(blogs2);
     }
 
     @Override
@@ -53,6 +55,13 @@ public class DemoServiceImpl extends ServiceImpl<DemoMapper, Blog> implements ID
         log.info("博客标题更新结果:{}", updateRow);
         if (true) {
             throw new BlogException("-BLOG_TEST", "博客异常");
+        }
+    }
+
+    @Override
+    public void testRuntimeException() {
+        if (true) {
+            throw new BlogException("-BLOG_TEST", "测试博客运行异常");
         }
     }
 }

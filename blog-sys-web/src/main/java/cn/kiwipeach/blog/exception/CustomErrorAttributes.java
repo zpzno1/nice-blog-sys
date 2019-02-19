@@ -15,6 +15,7 @@
  */
 package cn.kiwipeach.blog.exception;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.boot.autoconfigure.web.DefaultErrorAttributes;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
@@ -40,12 +41,15 @@ public class CustomErrorAttributes extends DefaultErrorAttributes {
         Map<String, Object> errorAttributes = super.getErrorAttributes(requestAttributes, includeStackTrace);
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("code", errorAttributes.get("status"));
-        resultMap.put("message", errorAttributes.get("error"));
-        resultMap.put("path", errorAttributes.get("path"));
-        resultMap.put("time", new Date());
-        //resultMap.put("data", "test");
+        resultMap.put("msg", errorAttributes.get("message"));
+        JSONObject data = new JSONObject();
+        data.put("path", errorAttributes.get("path"));
+        //data.put("error", errorAttributes.get("error"));
+        data.put("stack", requestAttributes.getAttribute("humanExceptionStack", RequestAttributes.SCOPE_REQUEST));
+        resultMap.put("time", errorAttributes.get("timestamp"));
+        resultMap.put("data", data);
         //获取请求域中的参
-        //resultMap.put("paramMap", requestAttributes.getAttribute("paramMap", RequestAttributes.SCOPE_REQUEST));
+        //resultMap.put("paramMap", requestAttributes.getAttribute("humanExceptionStack", RequestAttributes.SCOPE_REQUEST));
         return resultMap;
     }
 }

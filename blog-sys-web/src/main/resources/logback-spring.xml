@@ -17,7 +17,7 @@
             <maxFileSize>5MB</maxFileSize>
         </triggeringPolicy>
         <encoder>
-            <pattern>%d{yyyy年MM月dd日 HH时:mm分:ss秒} [%thread] %-5level %logger - %msg%n</pattern>
+            <pattern>%d{yyyy年MM月dd日 HH时:mm分:ss秒} %-5level %logger - %msg%n</pattern>
         </encoder>
         <!--
         %d{yyyy-MM-dd HH:mm:ss.SSS}——日志输出时间

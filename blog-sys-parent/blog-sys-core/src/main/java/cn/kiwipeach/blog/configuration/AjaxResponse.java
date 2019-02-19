@@ -46,7 +46,7 @@ public class AjaxResponse<T> {
     /**
      * 数据访问路径
      */
-    private String path;
+    //private String path;
     /**
      * 返回系统时间
      */
@@ -86,14 +86,6 @@ public class AjaxResponse<T> {
 
     public void setData(T data) {
         this.data = data;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
     }
 
     public Date getTime() {

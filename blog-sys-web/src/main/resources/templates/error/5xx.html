@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>错误页面</title>
 </head>
 <body>
-<h1>5XX错误页面</h1>
+<h1>5XX错误页面（服务器内部错误页面）</h1>
+<h1>状态码:<span th:text="${code}"></span></h1>
+<h1>错误信息:<span th:text="${msg}"></span></h1>
+<h1>发生时间:<span th:text="${#dates.format(time, 'yyyy-MM-dd hh:mm:ss')}"></span></h1>
+<h1>发生路径:<span th:text="${data.path}"></span></h1>
+<h1>系统提示:</h1>
+<div>
+    <div th:each="e : ${data.stack}" style="border: 1px">
+        <p><span th:text="${e.className}"></span><span th:text="${e.fileName}"></span>#<span
+                th:text="${e.methodName}"></span> <span th:text="${e.lineNumber}"></span></p>
+    </div>
+    <!--<ul th:each="e : ${data.stack}">-->
+    <!--<li th:text="${e.className}"></li>-->
+    <!--<li th:text="${e.fileName}"></li>-->
+    <!--<li th:text="${e.methodName}"></li>-->
+    <!--<li th:text="${e.lineNumber}"></li>-->
+    <!--</ul>-->
+</div>
+
 </body>
 </html>

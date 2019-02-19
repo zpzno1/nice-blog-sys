@@ -16,6 +16,7 @@
 package cn.kiwipeach.blog.controller;
 
 
+import cn.kiwipeach.blog.configuration.AjaxResponse;
 import cn.kiwipeach.blog.exception.BlogException;
 import cn.kiwipeach.blog.service.IDemoService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -54,8 +55,8 @@ public class DemoController {
      */
     @RequestMapping("page1")
     @ResponseBody
-    public IPage page1(Page page) {
-        return iDemoService.page(page, null);
+    public AjaxResponse<IPage> page1(Page page) {
+        return AjaxResponse.success(iDemoService.page(page, null));
     }
 
     /**
@@ -64,28 +65,18 @@ public class DemoController {
      */
     @RequestMapping("page2")
     @ResponseBody
-    public IPage page2(Page page, @RequestParam(value = "userId", required = true) String userId) {
-        return iDemoService.queryBlogListDemo(page, userId);
+    public AjaxResponse<IPage> page2(Page page, @RequestParam(value = "userId", required = true) String userId) {
+        return AjaxResponse.success(iDemoService.queryBlogListDemo(page, userId));
     }
 
     @RequestMapping("500")
     @ResponseBody
     public String internalServrError() {
-        if (true) {
-            throw new BlogException("-BLOG_TEST", "测试异常");
-        }
+        //调用异常方法
+        iDemoService.testRuntimeException();
         return "tets";
     }
 
-
-    /**
-     * 测试博客首页样式显示
-     * @return
-     */
-    @RequestMapping("blog/demo")
-    public String toBlogSeedPage(){
-        return "blog/demo";
-    }
 
 
 }

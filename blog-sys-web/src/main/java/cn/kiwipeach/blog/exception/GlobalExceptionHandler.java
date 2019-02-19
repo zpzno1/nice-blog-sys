@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -22,13 +24,26 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public String toDefaultErrorController(Exception e, HttpServletRequest request) {
+        logger.error("######################################################################################################################################################################");
         logger.error("服务器内部错误:", e);
+        LinkedList<StackTraceElement> humanExceptionStack = getHumanExceptionStack(e);
+        logger.error("######################################################################################################################################################################");
         Map<String, String> paramMap = new HashMap<>();
         request.setAttribute("javax.servlet.error.status_code", 500);
-        //paramMap.put("author", "kiwipeach");
-        //paramMap.put("email", "10999051218@qq.com");
-        //request.setAttribute("paramMap", paramMap);
+        //人性化异常堆栈，将推送至前端，使系统更快排查报错原因
+        request.setAttribute("humanExceptionStack", humanExceptionStack);
         return "forward:/error";
+    }
+
+    private LinkedList<StackTraceElement> getHumanExceptionStack(Exception e) {
+        StackTraceElement[] stackTrace = e.getStackTrace();
+        LinkedList<StackTraceElement> resultStack = new LinkedList<>();
+        for (StackTraceElement element : stackTrace) {
+            if (element.getClassName().contains("kiwipeach")) {
+                resultStack.add(element);
+            }
+        }
+        return resultStack;
     }
 
 
