@@ -44,7 +44,7 @@ public class DruidAutoConfiguration {
 
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
-    public DataSource druid() {
+    public DataSource dataSource() {
         return new DruidDataSource();
     }
 

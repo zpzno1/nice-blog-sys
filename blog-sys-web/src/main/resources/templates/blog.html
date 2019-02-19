@@ -109,12 +109,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/blog/archive}">
+                    <a class="nav-link" th:href="@{/blog/archive.html}">
                         <i class="fas fa-archive fa-lg"></i><span> 时间归档</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/blog/about}">
+                    <a class="nav-link" th:href="@{/blog/about.html}">
                         <i class="fas fa-user-secret fa-lg"></i><span>关于博主</span>
                     </a>
                 </li>
@@ -129,6 +129,9 @@
                         <a href="http://demos.creative-tim.com/material-kit/docs/2.0/getting-started/introduction.html"
                            class="dropdown-item">
                             <i class="fa fa-book fa-lg"></i><span> Material-Kit官方手册</span>
+                        </a>
+                        <a href="blog/index.html" class="dropdown-item">
+                            <i class="fas fa-download fa-lg"></i> <span>我是站长</span>
                         </a>
                     </div>
                 </li>
@@ -419,6 +422,7 @@
         </div>
     </div>
     <!--注册弹框-->
+<!--
     <div class="modal fade" id="signupModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -430,7 +434,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <!--smartwizard begin-->
+                        &lt;!&ndash;smartwizard begin&ndash;&gt;
                         <div id="smartwizard">
                             <ul>
                                 <li><a href="#step-1"><span style="font-size: 20px">1.快速注册</span><br/>
@@ -498,7 +502,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!--smartwizard end-->
+                        &lt;!&ndash;smartwizard end&ndash;&gt;
                     </div>
                 </div>
             </div>
@@ -509,6 +513,7 @@
         blog_common.plugin.smartwizard.init($('#smartwizard'));
         blog_common.plugin.smartwizard.event.bind_show_step($("#smartwizard"));
     </script>
+-->
 </div>
 </body>
 

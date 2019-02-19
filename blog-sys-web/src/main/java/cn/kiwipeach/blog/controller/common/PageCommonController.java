@@ -16,49 +16,78 @@
 package cn.kiwipeach.blog.controller.common;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * 页面跳转控制器
+ * 页面跳转控制器,分三种类型：
+ * 1）前端普通页面跳转
+ * 2）后端普通页面跳转
+ * 3）前端授权页面跳转
+ * 4）后端授权页面挑战
  *
  * @author kiwipeach
  * @create 2019-01-24
  */
 @Controller
 public class PageCommonController {
+
     /**
-     * 博客首页显示
-     * @return
+     * 1）前端通用页面跳转
+     *
+     * @return 首页
      */
-    @RequestMapping("blog/index")
-    public String toBlogIndexPage(){
-        return "blog/index";
-    }
-    /**
-     * 博客详情页面
-     * @return
-     */
-    @RequestMapping("blog/detail")
-    public String toBlogDetailPage(){
-        return "blog/detail";
+    @RequestMapping("{business}/{pageName}.html")
+    public String frontResponseHtml(
+            @PathVariable("business") String business,
+            @PathVariable("pageName") String pageName) {
+        StringBuffer targetUrl = new StringBuffer(business).append("/").append(pageName);
+        return targetUrl.toString();
     }
 
     /**
-     * 博客归档页面
-     * @return
+     * 2）前端通用数据接口
+     *
+     * @return 首页
      */
-    @RequestMapping("blog/archive")
-    public String toBlogArchivePage(){
-        return "blog/archive";
+    @RequestMapping("{business}/{pageName}.json")
+    @ResponseBody
+    public String frontResponseJson(
+            @PathVariable("business") String business,
+            @PathVariable("pageName") String pageName) {
+        StringBuffer targetUrl = new StringBuffer(business).append("/").append(pageName);
+        return targetUrl.toString();
+    }
+
+
+    /**
+     * 3）后端普通页面跳转 admin/system/blog/send.html
+     *
+     * @return 首页
+     */
+    @RequestMapping("admin/{module}/{business}/{pageName}.html")
+    public String adminResponseHtml(
+            @PathVariable("module") String module,
+            @PathVariable("business") String business,
+            @PathVariable("pageName") String pageName) {
+        StringBuffer targetUrl = new StringBuffer("admin/").append(module).append("/").append(business).append("/").append(pageName);
+        return targetUrl.toString();
     }
 
     /**
-     * 博客关于页面
-     * @return
+     * 4）后端普数据接口
+     *
+     * @return 首页
      */
-    @RequestMapping("blog/about")
-//    @RequiresPermissions(value = "blog:page:about")
-    public String toBlogAboutPage(){
-        return "blog/about";
+    @RequestMapping("admin/{module}/{business}/{pageName}.json")
+    public String adminResponseJson(
+            @PathVariable("module") String module,
+            @PathVariable("business") String business,
+            @PathVariable("pageName") String pageName) {
+        StringBuffer targetUrl = new StringBuffer("admin/").append(module).append("/").append(business).append("/").append(pageName);
+        return targetUrl.toString();
     }
+
+
 }

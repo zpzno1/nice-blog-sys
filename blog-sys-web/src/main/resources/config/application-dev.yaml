@@ -3,8 +3,6 @@ server:
   port: 80
   context-path: /
 
-
-
 # 1)系统启动广告
 banner:
   location: classpath:system/banner.txt

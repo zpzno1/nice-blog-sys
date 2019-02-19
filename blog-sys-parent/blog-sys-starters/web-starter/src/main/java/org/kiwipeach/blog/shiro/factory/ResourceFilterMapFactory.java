@@ -41,24 +41,26 @@ public class ResourceFilterMapFactory {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         //1)配置匿名可以访问的路径
         // 登陆路径
-        filterChainDefinitionMap.put("/login", "anon");
-        filterChainDefinitionMap.put("/user/login", "anon");
+        //filterChainDefinitionMap.put("/login", "anon");
+        //filterChainDefinitionMap.put("/user/login", "anon");
         filterChainDefinitionMap.put("/**/login", "anon");
         filterChainDefinitionMap.put("/**/oauth2.0/callback", "anon");
 
         //通用控制器
         filterChainDefinitionMap.put("/", "anon");
-        filterChainDefinitionMap.put("/blog/index", "anon");
-        filterChainDefinitionMap.put("/blog/detail", "anon");
-        filterChainDefinitionMap.put("/blog/archive", "anon");
-        filterChainDefinitionMap.put("/blog/about", "anon");
+        filterChainDefinitionMap.put("/blog/index.html", "anon");
+        filterChainDefinitionMap.put("/blog/detail.html", "anon");
+        filterChainDefinitionMap.put("/blog/archive.html", "anon");
+        filterChainDefinitionMap.put("/blog/about.html", "anon");
         filterChainDefinitionMap.put("/user", "anon");
+
+        //duird
+        filterChainDefinitionMap.put("/druid/**", "anon");
 
 
         // 静态资源路径
         filterChainDefinitionMap.put("/favicon.ico", "anon");
         filterChainDefinitionMap.put("/assets/**", "anon");
-        filterChainDefinitionMap.put("/node_modules/**", "anon");
 
         // 案例路径
         filterChainDefinitionMap.put("/demo/**", "anon");

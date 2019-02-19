@@ -28,7 +28,7 @@ public class BlogWebApplication extends SpringBootServletInitializer {
 //		app.setBannerMode(Banner.Mode.CONSOLE);
 //		app.run(args);
 		SpringApplication.run(BlogWebApplication.class, args);
-		logger.info("系统访问后台:http://www.kiwipeach.cn/");
-		logger.info("系统duird监控:http://www.kiwipeach.cn/druid");
+		logger.info("系统访问后台[qq,github,gitee]:http://www.kiwipeach.cn/");
+		logger.info("系统duird监控[admin/123456]:http://www.kiwipeach.cn/druid");
 	}
 }
