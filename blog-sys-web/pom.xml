@@ -29,15 +29,15 @@
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
-        <!--springboot场景启动器-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId><!--springboot thymeleaf-->
-        </dependency>
-        <!--<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>&lt;!&ndash;springboot web&ndash;&gt;
-        </dependency>-->
+		<!--springboot场景启动器-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId><!--springboot thymeleaf-->
+		</dependency>
+		<!--<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-exception</artifactId>&lt;!&ndash;springboot exception&ndash;&gt;
+		</dependency>-->
 
         <!--七牛云存储依赖 begin-->
         <dependency>

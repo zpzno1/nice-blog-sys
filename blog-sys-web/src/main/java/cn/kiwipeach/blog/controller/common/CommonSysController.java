@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @create 2018/08/11
  */
 @Controller
-public class SysCommonController {
+public class CommonSysController {
 
     /**
      * 获取当前登陆用户信息

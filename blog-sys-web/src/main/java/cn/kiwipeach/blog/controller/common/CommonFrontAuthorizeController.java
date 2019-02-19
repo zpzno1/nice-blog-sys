@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @create 2019-01-24
  */
 @Controller
-public class FrontAuthorizeController {
+public class CommonFrontAuthorizeController {
 
     /**
      * 博客关于页面

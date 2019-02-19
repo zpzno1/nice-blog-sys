@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @create 2019-01-24
  */
 @Controller
-public class AdminAuthorizeController {
+public class CommonAdminAuthorizeController {
 
 
     /**

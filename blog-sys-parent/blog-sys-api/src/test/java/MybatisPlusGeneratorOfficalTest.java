@@ -148,7 +148,7 @@ public class MybatisPlusGeneratorOfficalTest {
                 new PackageConfig()
                         .setModuleName("generator")
                         .setParent("cn.kiwipeach")// 自定义包路径
-                        .setController("controller")// 这里是控制器包名，默认 web
+                        .setController("controller")// 这里是控制器包名，默认 exception
                         .setEntity("domain")
                         .setMapper("mapper")
                         .setService("service")

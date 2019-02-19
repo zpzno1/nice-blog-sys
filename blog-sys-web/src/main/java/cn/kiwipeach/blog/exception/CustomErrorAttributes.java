@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kiwipeach.blog.web.exception;
+package cn.kiwipeach.blog.exception;
 
 import org.springframework.boot.autoconfigure.web.DefaultErrorAttributes;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 
 import java.util.Date;
@@ -29,20 +29,23 @@ import java.util.Map;
  * @author kiwipeach [1099501218@qq.com]
  * @create 2018/07/27
  */
-@Configuration
+@Component
 public class CustomErrorAttributes extends DefaultErrorAttributes {
+    public CustomErrorAttributes() {
+        System.out.println("CustomErrorAttributes");
+    }
 
     @Override
     public Map<String, Object> getErrorAttributes(RequestAttributes requestAttributes, boolean includeStackTrace) {
         Map<String, Object> errorAttributes = super.getErrorAttributes(requestAttributes, includeStackTrace);
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("code",errorAttributes.get("status"));
-        resultMap.put("msg",errorAttributes.get("error"));
-        resultMap.put("path",errorAttributes.get("path"));
-        resultMap.put("time",new Date());
-        resultMap.put("data",null);
+        resultMap.put("code", errorAttributes.get("status"));
+        resultMap.put("message", errorAttributes.get("error"));
+        resultMap.put("path", errorAttributes.get("path"));
+        resultMap.put("time", new Date());
+        //resultMap.put("data", "test");
         //获取请求域中的参
-        //errorAttributes.put("paramMap",requestAttributes.getAttribute("paramMap",RequestAttributes.SCOPE_REQUEST));
+        //resultMap.put("paramMap", requestAttributes.getAttribute("paramMap", RequestAttributes.SCOPE_REQUEST));
         return resultMap;
     }
 }

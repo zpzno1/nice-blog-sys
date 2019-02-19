@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletRequest;
  * @create 2019-01-24
  */
 @Controller
-public class PageCommonController {
+public class CommonPageController {
 
     /**
      * 1）前端通用页面跳转

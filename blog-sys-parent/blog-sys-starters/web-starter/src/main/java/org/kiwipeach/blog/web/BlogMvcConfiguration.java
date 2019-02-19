@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kiwipeach.blog.web.web;
+package org.kiwipeach.blog.web;
 
 import com.alibaba.druid.support.http.StatViewServlet;
 import org.springframework.beans.factory.annotation.Autowired;
