@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>kiwipeach blog 500 internal server error page</title>
+    <link href="../../static/assets_admin/css/bootstrap.min.css" th:href="@{/assets_admin/css/bootstrap.min.css}"
+          rel="stylesheet">
+    <link href="../../static/assets_admin/font-awesome/css/font-awesome.css"
+          th:href="@{/assets_admin/font-awesome/css/font-awesome.css}"
+          rel="stylesheet">
+    <link href="../../static/assets_admin/css/animate.css" th:href="@{/assets_admin/css/animate.css}" rel="stylesheet">
+    <link href="../../static/assets_admin/css/style.css" th:href="@{/assets_admin/css/style.css}" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+<div class="middle-box text-center animated fadeInDown" style="min-width: 800px;">
+    <h1><span th:text="${code}"></span></h1>
+    <h3 class="font-bold">抱歉，服务器内部错误,(′⌒`)!</h3>
+    <h3 class="font-bold">系统提示：<span th:text="${msg}"></span></h3>
+    <p class="error-desc">
+    <p><span th:text="${#dates.format(time, 'yyyy-MM-dd hh:mm:ss')}"></span>&nbsp;&nbsp;&nbsp;<span
+            th:text="${data.path}"></span><a id="logDetailQueryBtn" href="javascript:;">&nbsp;&nbsp;&nbsp;查看日志</a></p>
+    <div id="logDetail" style="display: none">
+        <p th:each="e : ${data.stack}">
+            <span th:text="${e.className}+${e.fileName}+'#'+${e.methodName}+'  '+${e.lineNumber}"></span>
+        </p>
+    </div>
+    <div style="margin-left: 32%">
+        <form class="form-inline">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="您宝贵的建议或留言!" style="width: 200px;">
+            </div>
+            <button type="submit" class="btn btn-primary">发送给站长</button>
+        </form>
+    </div>
+</div>
+
+</div>
+<script src="../../static/assets_admin/js/jquery-3.1.1.min.js"
+        th:src="@{/assets_admin/js/jquery-3.1.1.min.js}"></script>
+<script>
+    $('#logDetailQueryBtn').bind('click', function () {
+        $('#logDetail').toggle();
+    });
+</script>
+
+</body>
+
+</html>

@@ -161,7 +161,8 @@ public class LoginController {
             try {
                 currentUser.login(token);
             } catch (AuthenticationException e) {
-                System.out.println("用户信息登陆失败,失败原因:" + e.getLocalizedMessage());
+                throw e;
+                //System.out.println("用户信息登陆失败,失败原因:" + e.getLocalizedMessage());
             }
         }
         //登陆成功，则用户认证成功，进入成功页面；登陆失败，则认证失败，会被拦截到登陆地址。
@@ -170,7 +171,7 @@ public class LoginController {
 
     @GetMapping("login/success")
     public String toLoginSuccessPage() {
-        return "redirect:/blog/index.html";
+        return "redirect:/";
     }
 
     @GetMapping("login/fail")

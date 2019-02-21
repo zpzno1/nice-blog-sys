@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>kiwipeach blog 500 internal server error page</title>
+    <link href="../../static/assets_admin/css/bootstrap.min.css" th:href="@{/assets_admin/css/bootstrap.min.css}"
+          rel="stylesheet">
+    <link href="../../static/assets_admin/font-awesome/css/font-awesome.css"
+          th:href="@{/assets_admin/font-awesome/css/font-awesome.css}"
+          rel="stylesheet">
+    <link href="../../static/assets_admin/css/animate.css" th:href="@{/assets_admin/css/animate.css}" rel="stylesheet">
+    <link href="../../static/assets_admin/css/style.css" th:href="@{/assets_admin/css/style.css}" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+<div class="middle-box text-center animated fadeInDown" style="min-width: 800px;">
+    <h1><span th:text="${code}"></span></h1>
+    <h3 class="font-bold">您访问的链接系统找不到，请仔细核对地址再访问<a id="logDetailQueryBtn" href="http://www.kiwipeach.cn">&nbsp;&nbsp;&nbsp;返回首页</a>
+    </h3>
+</div>
+
+</div>
+</body>
+
+</html>
