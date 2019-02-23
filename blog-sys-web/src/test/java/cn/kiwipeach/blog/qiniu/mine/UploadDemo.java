@@ -69,10 +69,11 @@ public class UploadDemo extends QiniuJunitBase {
     public void testPublicUpload() {
         selectBucketname("kiwipeach-bucket");
         try {
-            String key = "hello-public-bucket-2.jpg";
-            String FilePath = "C:\\Users\\kiwipeach\\Pictures\\美图\\6.jpg";
+            String FilePath = "C:\\Users\\kiwipeach\\Pictures\\美图\\10.jpg";
+            //String FilePath = "D:\\souce_code\\mine_source\\nice-blog-sys\\开发语录.md";
+            File file = new File(FilePath);
             //调用put方法上传
-            Response res = uploadManager.put(FilePath, key, getUpToken());
+            Response res = uploadManager.put(FilePath, file.getName(), getUpToken());
             log.info("上传结果：{}", res.bodyString());
         } catch (QiniuException e) {
             Response r = e.response;
@@ -84,8 +85,43 @@ public class UploadDemo extends QiniuJunitBase {
         }
     }
 
+
+    /**
+     * 测试公有七牛云上传md博客测试数据文件
+     */
     @Test
-    public void testDownload(){
+    public void testPublicExampleDataUpload() {
+        selectBucketname("kiwipeach-bucket");
+        File file = new File("D:\\souce_code\\mine_source\\nice-blog-sys\\project_files\\examples");
+        File[] files = file.listFiles();
+        for (File f:files){
+            try {
+                //调用put方法上传
+                Response res = uploadManager.put(f, f.getName(), getUpToken());
+                log.info("上传结果：{}", res.bodyString());
+            } catch (QiniuException e) {
+                Response r = e.response;
+                try {
+                    log.info("上传异常信息：{}", r.bodyString());
+                } catch (QiniuException e1) {
+                    //ignore
+                }
+            }
+        }
+        /**
+         * 00:18:25.627 [main] INFO cn.kiwipeach.blog.qiniu.mine.UploadDemo - 上传结果：{"hash":"FtGvZPuHWqL-vJ-e7Zc-17r6R6S3","key":"Github相关语法手册.md"}
+         * 00:18:28.256 [main] INFO cn.kiwipeach.blog.qiniu.mine.UploadDemo - 上传结果：{"hash":"FofundtYWnkLPxcDiOzfRdSYk1eP","key":"Linux实用命令手册.md"}
+         * 00:18:28.691 [main] INFO cn.kiwipeach.blog.qiniu.mine.UploadDemo - 上传结果：{"hash":"Ft6jGcV5-d-5lzFcY8TUbXE13unm","key":"Markdown语法简介.md"}
+         * 00:18:28.986 [main] INFO cn.kiwipeach.blog.qiniu.mine.UploadDemo - 上传结果：{"hash":"Ft6G4eLC2Gnu-OIsQbUGJz1C153W","key":"SSR搭建教程.md"}
+         * 00:18:29.390 [main] INFO cn.kiwipeach.blog.qiniu.mine.UploadDemo - 上传结果：{"hash":"Fkc3SYNnXNOejuFkH0dzyuV6TsYt","key":"windows双网卡设置.md"}
+         * 00:18:30.007 [main] INFO cn.kiwipeach.blog.qiniu.mine.UploadDemo - 上传结果：{"hash":"Fu4PSdBi8_tGcgWohd8UFstruNB1","key":"七牛云-关于回调流程.md"}
+         * 查看图片方式：http://cdn.kiwipeach.cn/Github相关语法手册.md
+         */
+
+    }
+
+    @Test
+    public void testDownload() {
         String url = "http://pmw84t3zh.bkt.clouddn.com/开发语录.md";
         //String downloadRUL = auth.privateDownloadUrl(url, 3600);
         String downloadRUL = auth.privateDownloadUrl(url, 10);
