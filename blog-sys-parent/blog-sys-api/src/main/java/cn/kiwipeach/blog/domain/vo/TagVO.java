@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 kiwipeach[1099501218@qq.com].
+ * Copyright 2019 kiwipeach(1099501218@qq.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,28 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.mapper;
+package cn.kiwipeach.blog.domain.vo;
 
-
-import cn.kiwipeach.blog.domain.Blog;
-import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
- * 博客 Mapper 接口
+ * 标签实体类
  *
  * @author kiwipeach
- * @create 2019-02-24
+ * @create 2019-02-25
  */
-public interface BlogMapper extends BaseMapper<Blog> {
-    /**
-     * 分页查询博客信息
-     * @param page 分页对象
-     * @return 返回博客分页列表
-     */
-    List<BlogInfoVO> selectByPage(IPage<BlogInfoVO> page);
-
+@Getter
+@Setter
+public class TagVO {
+    private String id;
+    private String name;
+    private String icon;
 }

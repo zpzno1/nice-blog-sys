@@ -129,319 +129,335 @@
         <div class="row">
             <!--容器左侧内容:begin-->
             <div class="col-md-9">
-                <!--博客顶端:begin-->
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <a href="#pablo" style="color: grey">博文统计：本站博客共【<span
-                                    class="text-dark">100</span>】个，分类【<span
-                                    class="text-dark">10</span>】个，标签【<span class="text-dark">16</span>】个，当前日期:<span
-                                    class="text-dark">2018年05月19日 星期六 10:54:29</span></a>
+                <div id="blogContainer">
+                    <!--博客顶端:begin-->
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="#pablo" style="color: grey">博文统计：本站博客共【<span
+                                        class="text-dark">100</span>】个，分类【<span
+                                        class="text-dark">10</span>】个，标签【<span class="text-dark">16</span>】个，当前日期:<span
+                                        class="text-dark">2018年05月19日 星期六 10:54:29</span></a>
+                            </h4>
+                        </div>
+                    </div>
+                    <!--博客顶端:end-->
+
+                    <!--单条博客:begin-->
+                    <div class="card card-nav-tabs">
+                        <div class="card-header card-header" style="font-size: 20px;">
+                            <div class="row">
+                                <div class="col-md-11">
+                                    <span class="badge badge-pill badge-dark">Java</span>
+                                    <a href="detail.html" th:href="@{/blog/detail.html}"
+                                       class="text-dark">曾经许下的誓言让我们共同了解</a>
+                                </div>
+                                <div class="col-md-1">
+                                <span class="badge badge-pill badge-danger pull-right">TOP<span
+                                        class="fas fa-award fa-lg"></span></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="card-body">
+                            <div class="card-text">
+                                <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                        class="fa fa-calendar"></i></label>&nbsp;&nbsp;<span>2018年5月19日02:09:25</span>
+                                <label>
+                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                            class="fas fa-user"></i></label>&nbsp;&nbsp;<span>kiwipeach</span>
+                                </label>
+                                <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                        class="fas fa-comments"></i></label>&nbsp;&nbsp;<span>666</span>
+                                <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                        class="fa fa-eye"></i></label>&nbsp;&nbsp;<span>98</span>
+                                </label>
+                            </div>
+                            <div class="card-text">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作为一个非计算机专业出身的IT男，入行也是很曲折的。在大学大学。在大学的机械专业T男，入行也是很曲折的。在大学的机械专业，其！...
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-10 pull-left">
+                                                <label>标签：</label>
+                                                <button type="button" class="btn btn-default btn-sm btn-round"
+                                                        style="padding: 0 10px 0 10px;">
+                                                    <i class="fa fa-tag"></i>JAVA
+                                                </button>
+                                                <button type="button" class="btn btn-default btn-sm btn-round"
+                                                        style="padding: 0 10px 0 10px">
+                                                    <i class="fa fa-tag"></i>Html <span
+                                                        class="badge badge-default"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-default btn-sm btn-round"
+                                                        style="padding: 0 10px 0 10px">
+                                                    <i class="fa fa-tag"></i>C++ <span
+                                                        class="badge badge-default"></span>
+                                                </button>
+                                            </div>
+
+                                            <div class="col-md-2 pull-right">
+                                                <a href="detail.html" th:href="@{/blog/detail.html}"
+                                                   class="btn btn-primary btn-round"
+                                                   style="padding: 3px 15px 3px 15px">阅读全文</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <img src="../../static/assets/images/index/profile.jpg"
+                                             style="width: 80%;height: 100%;"
+                                             th:src="@{/assets/images/index/profile.jpg}">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--单条博客:begin-->
+                    <div class="card card-nav-tabs">
+                        <h4 class="card-header card-header"><a
+                                href="detail.html" class="text-dark"><span
+                                class="badge badge-pill badge-dark">Java</span>曾经许下的誓言让我们共同了解</a>
                         </h4>
-                    </div>
-                </div>
-                <!--博客顶端:end-->
-
-                <!--单条博客:begin-->
-                <div class="card card-nav-tabs">
-                    <div class="card-header card-header" style="font-size: 20px;">
-                        <div class="row">
-                            <div class="col-md-11">
-                                <span class="badge badge-pill badge-dark">Java</span>
-                                <a href="detail.html" th:href="@{/blog/detail.html}" class="text-dark">曾经许下的誓言让我们共同了解</a>
-                            </div>
-                            <div class="col-md-1">
-                                <span class="badge badge-pill badge-danger pull-right">TOP<span class="fas fa-award fa-lg"></span></span>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="card-body">
-                        <div class="card-text">
-                            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                                    class="fa fa-calendar"></i></label>&nbsp;&nbsp;<span>2018年5月19日02:09:25</span>
-                            <label>
+                        <div class="card-body">
+                            <div class="card-text">
                                 <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                                        class="fas fa-user"></i></label>&nbsp;&nbsp;<span>kiwipeach</span>
-                            </label>
-                            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                                    class="fas fa-comments"></i></label>&nbsp;&nbsp;<span>666</span>
-                            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                                    class="fa fa-eye"></i></label>&nbsp;&nbsp;<span>98</span>
-                            </label>
-                        </div>
-                        <div class="card-text">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <div>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作为一个非计算机专业出身的IT男，入行也是很曲折的。在大学大学。在大学的机械专业T男，入行也是很曲折的。在大学的机械专业，其！...
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-10 pull-left">
-                                            <label>标签：</label>
-                                            <button type="button" class="btn btn-default btn-sm btn-round"
-                                                    style="padding: 0 10px 0 10px;">
-                                                <i class="fa fa-tag"></i>JAVA
-                                            </button>
-                                            <button type="button" class="btn btn-default btn-sm btn-round"
-                                                    style="padding: 0 10px 0 10px">
-                                                <i class="fa fa-tag"></i>Html <span
-                                                    class="badge badge-default"></span>
-                                            </button>
-                                            <button type="button" class="btn btn-default btn-sm btn-round"
-                                                    style="padding: 0 10px 0 10px">
-                                                <i class="fa fa-tag"></i>C++ <span
-                                                    class="badge badge-default"></span>
-                                            </button>
-                                        </div>
-
-                                        <div class="col-md-2 pull-right">
-                                            <a href="detail.html" th:href="@{/blog/detail.html}"
-                                               class="btn btn-primary btn-round"
-                                               style="padding: 3px 15px 3px 15px">阅读全文</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <img src="../../static/assets/images/index/profile.jpg"
-                                         style="width: 80%;height: 100%;" th:src="@{/assets/images/index/profile.jpg}">
-                                </div>
+                                        class="fa fa-calendar"></i></label>&nbsp;&nbsp;<span>2018年5月19日02:09:25</span>
+                                <label>
+                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                            class="fas fa-user"></i></label>&nbsp;&nbsp;<span>kiwipeach</span>
+                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                            class="fas fa-comments"></i></label>&nbsp;&nbsp;<span>666</span>
+                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                            class="fas fa-eye"></i></label>&nbsp;&nbsp;<span>98</span>
+                                </label>
                             </div>
+                            <div class="card-text">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作为一个非计算机专业出身的IT男，入行也是很曲折的。在大学大学。在大学的机械专业T男，入行也是很曲折的。在大学的机械专业，其！...
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-10 pull-left">
+                                                <label>标签：</label>
+                                                <button type="button" class="btn btn-default btn-sm btn-round"
+                                                        style="padding: 0 10px 0 10px;">
+                                                    <i class="fa fa-tag"></i>JAVA
+                                                </button>
+                                                <button type="button" class="btn btn-default btn-sm btn-round"
+                                                        style="padding: 0 10px 0 10px">
+                                                    <i class="fa fa-tag"></i>Html <span
+                                                        class="badge badge-default"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-default btn-sm btn-round"
+                                                        style="padding: 0 10px 0 10px">
+                                                    <i class="fa fa-tag"></i>C++ <span
+                                                        class="badge badge-default"></span>
+                                                </button>
+                                            </div>
 
+                                            <div class="col-md-2 pull-right">
+                                                <a href="detail.html" th:href="@{/blog/detail.html}"
+                                                   class="btn btn-primary btn-round"
+                                                   style="padding: 3px 15px 3px 15px">阅读全文</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <img src="../../static/assets/images/index/profile.jpg"
+                                             style="width: 80%;height: 100%;"
+                                             th:src="@{/assets/images/index/profile.jpg}">
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!--单条博客:begin-->
-                <div class="card card-nav-tabs">
-                    <h4 class="card-header card-header"><a
-                                href="detail.html" class="text-dark"><span class="badge badge-pill badge-dark">Java</span>曾经许下的誓言让我们共同了解</a></h4>
-                    <div class="card-body">
-                        <div class="card-text">
-                            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                                    class="fa fa-calendar"></i></label>&nbsp;&nbsp;<span>2018年5月19日02:09:25</span>
-                            <label>
+                    <div class="card card-nav-tabs">
+                        <h4 class="card-header card-header"><a
+                                href="detail.html" class="text-dark"><span
+                                class="badge badge-pill badge-dark">Java</span>曾经许下的誓言让我们共同了解</a>
+                        </h4>
+                        <div class="card-body">
+                            <div class="card-text">
                                 <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                                        class="fas fa-user"></i></label>&nbsp;&nbsp;<span>kiwipeach</span>
-                                <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                                        class="fas fa-comments"></i></label>&nbsp;&nbsp;<span>666</span>
-                                <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                                        class="fas fa-eye"></i></label>&nbsp;&nbsp;<span>98</span>
-                            </label>
-                        </div>
-                        <div class="card-text">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <div>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作为一个非计算机专业出身的IT男，入行也是很曲折的。在大学大学。在大学的机械专业T男，入行也是很曲折的。在大学的机械专业，其！...
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-10 pull-left">
-                                            <label>标签：</label>
-                                            <button type="button" class="btn btn-default btn-sm btn-round"
-                                                    style="padding: 0 10px 0 10px;">
-                                                <i class="fa fa-tag"></i>JAVA
-                                            </button>
-                                            <button type="button" class="btn btn-default btn-sm btn-round"
-                                                    style="padding: 0 10px 0 10px">
-                                                <i class="fa fa-tag"></i>Html <span
-                                                    class="badge badge-default"></span>
-                                            </button>
-                                            <button type="button" class="btn btn-default btn-sm btn-round"
-                                                    style="padding: 0 10px 0 10px">
-                                                <i class="fa fa-tag"></i>C++ <span
-                                                    class="badge badge-default"></span>
-                                            </button>
-                                        </div>
-
-                                        <div class="col-md-2 pull-right">
-                                            <a href="detail.html" th:href="@{/blog/detail.html}"
-                                               class="btn btn-primary btn-round"
-                                               style="padding: 3px 15px 3px 15px">阅读全文</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <img src="../../static/assets/images/index/profile.jpg"
-                                         style="width: 80%;height: 100%;" th:src="@{/assets/images/index/profile.jpg}">
-                                </div>
+                                        class="fa fa-calendar"></i></label>&nbsp;&nbsp;<span>2018年5月19日02:09:25</span>
+                                <label>
+                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                            class="fas fa-user"></i></label>&nbsp;&nbsp;<span>kiwipeach</span>
+                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                            class="fas fa-comments"></i></label>&nbsp;&nbsp;<span>666</span>
+                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                            class="fas fa-eye"></i></label>&nbsp;&nbsp;<span>98</span>
+                                </label>
                             </div>
+                            <div class="card-text">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作为一个非计算机专业出身的IT男，入行也是很曲折的。在大学大学。在大学的机械专业T男，入行也是很曲折的。在大学的机械专业，其！...
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-10 pull-left">
+                                                <label>标签：</label>
+                                                <button type="button" class="btn btn-default btn-sm btn-round"
+                                                        style="padding: 0 10px 0 10px;">
+                                                    <i class="fa fa-tag"></i>JAVA
+                                                </button>
+                                                <button type="button" class="btn btn-default btn-sm btn-round"
+                                                        style="padding: 0 10px 0 10px">
+                                                    <i class="fa fa-tag"></i>Html <span
+                                                        class="badge badge-default"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-default btn-sm btn-round"
+                                                        style="padding: 0 10px 0 10px">
+                                                    <i class="fa fa-tag"></i>C++ <span
+                                                        class="badge badge-default"></span>
+                                                </button>
+                                            </div>
 
+                                            <div class="col-md-2 pull-right">
+                                                <a href="detail.html" th:href="@{/blog/detail.html}"
+                                                   class="btn btn-primary btn-round"
+                                                   style="padding: 3px 15px 3px 15px">阅读全文</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <img src="../../static/assets/images/index/profile.jpg"
+                                             style="width: 80%;height: 100%;"
+                                             th:src="@{/assets/images/index/profile.jpg}">
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card card-nav-tabs">
-                    <h4 class="card-header card-header"><a
-                            href="detail.html" class="text-dark"><span class="badge badge-pill badge-dark">Java</span>曾经许下的誓言让我们共同了解</a></h4>
-                    <div class="card-body">
-                        <div class="card-text">
-                            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                                    class="fa fa-calendar"></i></label>&nbsp;&nbsp;<span>2018年5月19日02:09:25</span>
-                            <label>
+                    <div class="card card-nav-tabs">
+                        <h4 class="card-header card-header"><a
+                                href="detail.html" class="text-dark"><span
+                                class="badge badge-pill badge-dark">Java</span>曾经许下的誓言让我们共同了解</a>
+                        </h4>
+                        <div class="card-body">
+                            <div class="card-text">
                                 <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                                        class="fas fa-user"></i></label>&nbsp;&nbsp;<span>kiwipeach</span>
-                                <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                                        class="fas fa-comments"></i></label>&nbsp;&nbsp;<span>666</span>
-                                <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                                        class="fas fa-eye"></i></label>&nbsp;&nbsp;<span>98</span>
-                            </label>
-                        </div>
-                        <div class="card-text">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <div>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作为一个非计算机专业出身的IT男，入行也是很曲折的。在大学大学。在大学的机械专业T男，入行也是很曲折的。在大学的机械专业，其！...
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-10 pull-left">
-                                            <label>标签：</label>
-                                            <button type="button" class="btn btn-default btn-sm btn-round"
-                                                    style="padding: 0 10px 0 10px;">
-                                                <i class="fa fa-tag"></i>JAVA
-                                            </button>
-                                            <button type="button" class="btn btn-default btn-sm btn-round"
-                                                    style="padding: 0 10px 0 10px">
-                                                <i class="fa fa-tag"></i>Html <span
-                                                    class="badge badge-default"></span>
-                                            </button>
-                                            <button type="button" class="btn btn-default btn-sm btn-round"
-                                                    style="padding: 0 10px 0 10px">
-                                                <i class="fa fa-tag"></i>C++ <span
-                                                    class="badge badge-default"></span>
-                                            </button>
-                                        </div>
-
-                                        <div class="col-md-2 pull-right">
-                                            <a href="detail.html" th:href="@{/blog/detail.html}"
-                                               class="btn btn-primary btn-round"
-                                               style="padding: 3px 15px 3px 15px">阅读全文</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <img src="../../static/assets/images/index/profile.jpg"
-                                         style="width: 80%;height: 100%;" th:src="@{/assets/images/index/profile.jpg}">
-                                </div>
+                                        class="fa fa-calendar"></i></label>&nbsp;&nbsp;<span>2018年5月19日02:09:25</span>
+                                <label>
+                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                            class="fas fa-user"></i></label>&nbsp;&nbsp;<span>kiwipeach</span>
+                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                            class="fas fa-comments"></i></label>&nbsp;&nbsp;<span>666</span>
+                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                            class="fas fa-eye"></i></label>&nbsp;&nbsp;<span>98</span>
+                                </label>
                             </div>
+                            <div class="card-text">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作为一个非计算机专业出身的IT男，入行也是很曲折的。在大学大学。在大学的机械专业T男，入行也是很曲折的。在大学的机械专业，其！...
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-10 pull-left">
+                                                <label>标签：</label>
+                                                <button type="button" class="btn btn-default btn-sm btn-round"
+                                                        style="padding: 0 10px 0 10px;">
+                                                    <i class="fa fa-tag"></i>JAVA
+                                                </button>
+                                                <button type="button" class="btn btn-default btn-sm btn-round"
+                                                        style="padding: 0 10px 0 10px">
+                                                    <i class="fa fa-tag"></i>Html <span
+                                                        class="badge badge-default"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-default btn-sm btn-round"
+                                                        style="padding: 0 10px 0 10px">
+                                                    <i class="fa fa-tag"></i>C++ <span
+                                                        class="badge badge-default"></span>
+                                                </button>
+                                            </div>
 
+                                            <div class="col-md-2 pull-right">
+                                                <a href="detail.html" th:href="@{/blog/detail.html}"
+                                                   class="btn btn-primary btn-round"
+                                                   style="padding: 3px 15px 3px 15px">阅读全文</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <img src="../../static/assets/images/index/profile.jpg"
+                                             style="width: 80%;height: 100%;"
+                                             th:src="@{/assets/images/index/profile.jpg}">
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card card-nav-tabs">
-                    <h4 class="card-header card-header"><a
-                            href="detail.html" class="text-dark"><span class="badge badge-pill badge-dark">Java</span>曾经许下的誓言让我们共同了解</a></h4>
-                    <div class="card-body">
-                        <div class="card-text">
-                            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                                    class="fa fa-calendar"></i></label>&nbsp;&nbsp;<span>2018年5月19日02:09:25</span>
-                            <label>
+                    <div class="card card-nav-tabs">
+                        <h4 class="card-header card-header"><a
+                                href="detail.html" class="text-dark"><span
+                                class="badge badge-pill badge-dark">Java</span>曾经许下的誓言让我们共同了解</a>
+                        </h4>
+                        <div class="card-body">
+                            <div class="card-text">
                                 <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                                        class="fas fa-user"></i></label>&nbsp;&nbsp;<span>kiwipeach</span>
-                                <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                                        class="fas fa-comments"></i></label>&nbsp;&nbsp;<span>666</span>
-                                <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                                        class="fas fa-eye"></i></label>&nbsp;&nbsp;<span>98</span>
-                            </label>
-                        </div>
-                        <div class="card-text">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <div>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作为一个非计算机专业出身的IT男，入行也是很曲折的。在大学大学。在大学的机械专业T男，入行也是很曲折的。在大学的机械专业，其！...
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-10 pull-left">
-                                            <label>标签：</label>
-                                            <button type="button" class="btn btn-default btn-sm btn-round"
-                                                    style="padding: 0 10px 0 10px;">
-                                                <i class="fa fa-tag"></i>JAVA
-                                            </button>
-                                            <button type="button" class="btn btn-default btn-sm btn-round"
-                                                    style="padding: 0 10px 0 10px">
-                                                <i class="fa fa-tag"></i>Html <span
-                                                    class="badge badge-default"></span>
-                                            </button>
-                                            <button type="button" class="btn btn-default btn-sm btn-round"
-                                                    style="padding: 0 10px 0 10px">
-                                                <i class="fa fa-tag"></i>C++ <span
-                                                    class="badge badge-default"></span>
-                                            </button>
-                                        </div>
-
-                                        <div class="col-md-2 pull-right">
-                                            <a href="detail.html" th:href="@{/blog/detail.html}"
-                                               class="btn btn-primary btn-round"
-                                               style="padding: 3px 15px 3px 15px">阅读全文</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <img src="../../static/assets/images/index/profile.jpg"
-                                         style="width: 80%;height: 100%;" th:src="@{/assets/images/index/profile.jpg}">
-                                </div>
+                                        class="fa fa-calendar"></i></label>&nbsp;&nbsp;<span>2018年5月19日02:09:25</span>
+                                <label>
+                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                            class="fas fa-user"></i></label>&nbsp;&nbsp;<span>kiwipeach</span>
+                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                            class="fas fa-comments"></i></label>&nbsp;&nbsp;<span>666</span>
+                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+                                            class="fas fa-eye"></i></label>&nbsp;&nbsp;<span>98</span>
+                                </label>
                             </div>
+                            <div class="card-text">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作为一个非计算机专业出身的IT男，入行也是很曲折的。在大学大学。在大学的机械专业T男，入行也是很曲折的。在大学的机械专业，其！...
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-10 pull-left">
+                                                <label>标签：</label>
+                                                <button type="button" class="btn btn-default btn-sm btn-round"
+                                                        style="padding: 0 10px 0 10px;">
+                                                    <i class="fa fa-tag"></i>JAVA
+                                                </button>
+                                                <button type="button" class="btn btn-default btn-sm btn-round"
+                                                        style="padding: 0 10px 0 10px">
+                                                    <i class="fa fa-tag"></i>Html <span
+                                                        class="badge badge-default"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-default btn-sm btn-round"
+                                                        style="padding: 0 10px 0 10px">
+                                                    <i class="fa fa-tag"></i>C++ <span
+                                                        class="badge badge-default"></span>
+                                                </button>
+                                            </div>
 
+                                            <div class="col-md-2 pull-right">
+                                                <a href="detail.html" th:href="@{/blog/detail.html}"
+                                                   class="btn btn-primary btn-round"
+                                                   style="padding: 3px 15px 3px 15px">阅读全文</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <img src="../../static/assets/images/index/profile.jpg"
+                                             style="width: 80%;height: 100%;"
+                                             th:src="@{/assets/images/index/profile.jpg}">
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="card card-nav-tabs">
-                    <h4 class="card-header card-header"><a
-                            href="detail.html" class="text-dark"><span class="badge badge-pill badge-dark">Java</span>曾经许下的誓言让我们共同了解</a></h4>
-                    <div class="card-body">
-                        <div class="card-text">
-                            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                                    class="fa fa-calendar"></i></label>&nbsp;&nbsp;<span>2018年5月19日02:09:25</span>
-                            <label>
-                                <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                                        class="fas fa-user"></i></label>&nbsp;&nbsp;<span>kiwipeach</span>
-                                <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                                        class="fas fa-comments"></i></label>&nbsp;&nbsp;<span>666</span>
-                                <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                                        class="fas fa-eye"></i></label>&nbsp;&nbsp;<span>98</span>
-                            </label>
-                        </div>
-                        <div class="card-text">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <div>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;作为一个非计算机专业出身的IT男，入行也是很曲折的。在大学大学。在大学的机械专业T男，入行也是很曲折的。在大学的机械专业，其！...
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-10 pull-left">
-                                            <label>标签：</label>
-                                            <button type="button" class="btn btn-default btn-sm btn-round"
-                                                    style="padding: 0 10px 0 10px;">
-                                                <i class="fa fa-tag"></i>JAVA
-                                            </button>
-                                            <button type="button" class="btn btn-default btn-sm btn-round"
-                                                    style="padding: 0 10px 0 10px">
-                                                <i class="fa fa-tag"></i>Html <span
-                                                    class="badge badge-default"></span>
-                                            </button>
-                                            <button type="button" class="btn btn-default btn-sm btn-round"
-                                                    style="padding: 0 10px 0 10px">
-                                                <i class="fa fa-tag"></i>C++ <span
-                                                    class="badge badge-default"></span>
-                                            </button>
-                                        </div>
-
-                                        <div class="col-md-2 pull-right">
-                                            <a href="detail.html" th:href="@{/blog/detail.html}"
-                                               class="btn btn-primary btn-round"
-                                               style="padding: 3px 15px 3px 15px">阅读全文</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <img src="../../static/assets/images/index/profile.jpg"
-                                         style="width: 80%;height: 100%;" th:src="@{/assets/images/index/profile.jpg}">
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
                 <!--分页插件:begin-->
                 <div class="row">
                     <div id="blog_pagination_div" style="margin: 0 auto"></div>
@@ -449,22 +465,148 @@
                 <script src="../../static/assets/plugins/jquery_pagination/jquery.pagination.js"
                         th:src="@{/assets/plugins/jquery_pagination/jquery.pagination.js}"></script>
                 <script type="text/javascript">
-                    var opt = {
-                        total: 236,
-                        items_per_page: 5,
-                        num_display_entries: 3,
-                        num_edge_entries: 2,
-                        next_text: '下一页',
-                        prev_text: '前一页',
-                        callback: function (new_page_index, pagination_container) {
-                            console.log("当前页码:" + new_page_index)
-                            return false;
+                    $.ajax({
+                        url: '/blog/query',
+                        data: {
+                            size: 5,
+                            current: 1
+                        },
+                        method: 'get',
+                        success: function (res) {
+                            if (res.code == '0') {
+                                var opt = {
+                                    total: res.data.total,
+                                    items_per_page: 5,
+                                    num_display_entries: 3,
+                                    num_edge_entries: 2,
+                                    next_text: '下一页',
+                                    prev_text: '前一页',
+                                    /*分页回调*/
+                                    callback: function (new_page_index, pagination_container) {
+                                        var $blogListContainer = $('#blogContainer');
+                                        $blogListContainer.html('');
+                                        console.log("当前页码:" + new_page_index);
+                                        $.ajax({
+                                            url: '/blog/query',
+                                            data: {
+                                                size: 5,
+                                                current: new_page_index + 1
+                                            },
+                                            method: 'get',
+                                            success: function (res) {
+                                                if (res.code == '0') {
+                                                    $.each(res.data.records, function (index, item) {
+                                                        var $blogListItem = '' +
+                                                            ' <div class="card card-nav-tabs">\n' +
+                                                            '                    <div class="card-header card-header" style="font-size: 20px;">\n' +
+                                                            '                        <div class="row">\n' +
+                                                            '                            <div class="col-md-11">\n' +
+                                                            '                                <span class="badge badge-pill badge-dark">' + item.categoryName + '</span>\n' +
+                                                            '                                <a href="detail.html" th:href="@{/blog/detail.html}"\n' +
+                                                            '                                   class="text-dark">' + item.title + '</a>\n' +
+                                                            '                            </div>\n' +
+                                                            '                            <div class="col-md-1">\n' +
+                                                            '                            ' + get_top_dom(item.top) +
+                                                            '                            </div>\n' +
+                                                            '                        </div>\n' +
+                                                            '\n' +
+                                                            '                    </div>\n' +
+                                                            '\n' +
+                                                            '                    <div class="card-body">\n' +
+                                                            '                        <div class="card-text">\n' +
+                                                            '                            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i\n' +
+                                                            '                                    class="fa fa-calendar"></i></label>&nbsp;&nbsp;<span>' + item.updateTime + '</span>\n' +
+                                                            '                            <label>\n' +
+                                                            '                                <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i\n' +
+                                                            '                                        class="fas fa-user"></i></label>&nbsp;&nbsp;<span>' + item.userId + '</span>\n' +
+                                                            '                            </label>\n' +
+                                                            '                            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i\n' +
+                                                            '                                    class="fas fa-thumbs-up"></i></label>&nbsp;&nbsp;<span>' + item.starCount + '</span>\n' +
+                                                            '                            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i\n' +
+                                                            '                                    class="fa fa-eye"></i></label>&nbsp;&nbsp;<span>' + item.views + '</span>\n' +
+                                                            '                            </label>\n' +
+                                                            '                        </div>\n' +
+                                                            '                        <div class="card-text">\n' +
+                                                            '                            <div class="row">\n' +
+                                                            '                                <div class="col-md-9">\n' +
+                                                            '                                    <div>\n' +
+                                                            '                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + item.introduction + '\n' +
+                                                            '                                    </div>\n' +
+                                                            '                                    <div class="row">\n' +
+                                                            '                                        <div class="col-md-10 pull-left">\n' +
+                                                            '                                            ' + get_tags_dom(item.blogTagList) + '\n' +
+                                                            '                                        </div>\n' +
+                                                            '\n' +
+                                                            '                                        <div class="col-md-2 pull-right">\n' +
+                                                            '                                            <a href="/blog/detail.html?target='+item.content+'&contentType='+item.contentType+'"\n' +
+                                                            '                                               class="btn btn-primary btn-round"\n' +
+                                                            '                                               style="padding: 3px 15px 3px 15px">阅读全文</a>\n' +
+                                                            '                                        </div>\n' +
+                                                            '                                    </div>\n' +
+                                                            '                                </div>\n' +
+                                                            '                                <div class="col-md-3">\n' +
+                                                            '                                    <img src="' + item.iconUrl + '"\n' +
+                                                            '                                         style="width: 80%;height: 100%;">\n' +
+                                                            '                                </div>\n' +
+                                                            '                            </div>\n' +
+                                                            '\n' +
+                                                            '                        </div>\n' +
+                                                            '                    </div>\n' +
+                                                            '                </div>';
+                                                        $blogListContainer.append($blogListItem);
+
+                                                    });
+                                                }
+                                            }
+                                        });
+                                        return false;
+                                    }
+                                };
+                                blog_common.plugin.pagination.init($("#blog_pagination_div"), opt);
+                            }
+                            // $('#blogContainer').html();
+
                         }
-                    };
-                    blog_common.plugin.pagination.init($("#blog_pagination_div"), opt);
+                    });
+
+                    /**
+                     * 获取动态标签
+                     * @param tags
+                     * @returns {string}
+                     */
+                    function get_tags_dom(tags) {
+                        if (tags.length == 0) {
+                            return "";
+                        }
+                        var resultHtml = '<label>标签：</label>';
+                        $.each(tags, function (index, item) {
+                            var tagBtnHtml = '<button type="button" class="btn btn-default btn-sm btn-round"\n' +
+                                '                            style="padding: 0 10px 0 10px;">\n' +
+                                '                                <i class="fa fa-tag"></i>' + item.name + '\n' +
+                                '                                </button>';
+                            resultHtml += tagBtnHtml;
+                        });
+                        return resultHtml;
+                    }
+
+                    /**
+                     * 获取置顶图标dom
+                     * @param isTop
+                     */
+                    function get_top_dom(isTop) {
+                        if (isTop == "1") {
+                            var topHtml = '<span class="badge badge-pill badge-danger pull-right">TOP<span\n' +
+                                '                                        class="fas fa-award fa-lg"></span></span>\n' +
+                                '                                </div>';
+                            return topHtml;
+                        } else {
+                            return "";
+                        }
+                    }
                 </script>
                 <!--分页插件:end-->
             </div>
+
             <!--容器左侧内容:end-->
 
             <!--容器右侧内容:begin-->

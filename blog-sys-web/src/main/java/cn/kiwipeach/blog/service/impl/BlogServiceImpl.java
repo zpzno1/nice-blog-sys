@@ -16,11 +16,15 @@
 package cn.kiwipeach.blog.service.impl;
 
 import cn.kiwipeach.blog.domain.Blog;
+import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
 import cn.kiwipeach.blog.mapper.BlogMapper;
 import cn.kiwipeach.blog.service.IBlogService;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 博客 服务实现类
@@ -38,5 +42,11 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IB
     public boolean createBlog(Blog blog) {
         Integer insert = blogMapper.insert(blog);
         return insert > 0;
+    }
+
+    @Override
+    public IPage<BlogInfoVO> pageQuery(IPage<BlogInfoVO> page) {
+        List<BlogInfoVO> blogInfoVOS = blogMapper.selectByPage(page);
+        return page.setRecords(blogInfoVOS);
     }
 }

@@ -16,6 +16,8 @@
 package cn.kiwipeach.blog.service;
 
 import cn.kiwipeach.blog.domain.Blog;
+import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -26,6 +28,18 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IBlogService extends IService<Blog> {
 
+    /**
+     * 保存博客信息
+     * @param blog 博客
+     * @return 返回保存结果
+     */
     boolean createBlog(Blog blog);
+
+    /**
+     * 分页查询博客信息
+     * @param page 分页信息
+     * @return 博客列表
+     */
+    IPage<BlogInfoVO> pageQuery(IPage<BlogInfoVO> page);
 
 }
