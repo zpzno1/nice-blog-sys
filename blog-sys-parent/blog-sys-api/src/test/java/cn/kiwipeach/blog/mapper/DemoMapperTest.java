@@ -3,16 +3,15 @@ package cn.kiwipeach.blog.mapper;
 import cn.kiwipeach.blog.BlogApiApplicationTests;
 import cn.kiwipeach.blog.domain.ARBlog;
 import cn.kiwipeach.blog.domain.Blog;
-import cn.kiwipeach.blog.domain.SysPermission;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Slf4j
@@ -62,21 +61,26 @@ public class DemoMapperTest extends BlogApiApplicationTests {
         log.info("selectBlogList==>{}", page);
     }
 
+    @Autowired
+    private BlogMapper blogMapper;
 
     @Rollback(value = false)
     @Test
     public void 测试insert插入() {
-        //Blog blog = new Blog();
-        //blog.setTitle("kiwipeach是一个程序员");
-        //blog.setContent("他很帅，很有才华，同时也很烦恼");
-        //blog.setCateId("1");
-        //blog.setTop(new BigDecimal(1));
+        Blog blog = new Blog();
+        //blog.setId("109950");
+        blog.setTitle("kiwipeach是一个程序员");
+        blog.setContent("他很帅，很有才华，同时也很烦恼");
+        blog.setCateId("1");
+        blog.setTop(0);
+        blog.setUserId("kiwipeach");
+        Integer insert = blogMapper.insert(blog);
         //boolean insert = blog.insert();
-        SysPermission permission = new SysPermission();
-        permission.setIcon("icon-1.png");
-        permission.setWeight(1);
-        permission.setName("博客评论权限");
-        Integer insert = sysPermissionMapper.insert(permission);
+        //SysPermission permission = new SysPermission();
+        //permission.setIcon("icon-1.png");
+        //permission.setWeight(1);
+        //permission.setName("博客评论权限");
+        //Integer insert = sysPermissionMapper.insert(permission);
         log.info("插入结果：{}", insert);
     }
 
@@ -92,7 +96,7 @@ public class DemoMapperTest extends BlogApiApplicationTests {
         log.info("查询结果:{}", arResult);
 
         //查询操作
-        Blog blog = new Blog().selectById("100");
+        ARBlog blog = new ARBlog().selectById("100");
         log.info("查询结果:{}", blog);
 
         //更新操作
@@ -106,7 +110,7 @@ public class DemoMapperTest extends BlogApiApplicationTests {
         log.info("删除结果:{}", deleteFlag);
 
         //分页操作
-        IPage<Blog> blogIPage = new Blog().selectPage(new Page<Blog>(1, 3), null);
+        IPage<ARBlog> blogIPage = new ARBlog().selectPage(new Page<ARBlog>(1, 3), null);
         log.info("分页结果:{}", blogIPage);
 
     }

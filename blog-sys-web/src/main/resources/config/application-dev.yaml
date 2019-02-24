@@ -48,7 +48,7 @@ mybatis-plus:
     #刷新mapper 调试神器
     db-config:
       #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
-      id-type: id_worker
+      id-type: ID_WORKER_STR
       #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
       field-strategy: not_empty
       #驼峰下划线转换
@@ -120,3 +120,18 @@ gitee:
     redirectURI: http://www.kiwipeach.cn/gitee/oauth2.0/callback
   resource:
     userInfoUri: https://gitee.com/api/v5/user
+
+# 7)博客文件对象配置
+
+qiniu:
+  access-key: egP7QEuBIF-kN03VuxuUeqAYtfylyZR5h9VSTM8h
+  private-key: XEbTW-3zyO26deFxW0_PBt79bNGH6IhQcji59LLB
+  # 公共存储对象，用来存放博客静态图片文件
+  image-bucket: image-public-bucket
+  image-domain: http://img.kiwipeach.cn
+  # 私有存储对象，用来存放博客静态文件
+  markdown-bucket: markdown-private-bucket
+  markdown-domain: http://md.kiwipeach.cn
+  expire-time: 3600
+
+

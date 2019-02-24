@@ -59,7 +59,8 @@ public class MybatisPlusGeneratorOfficalTest {
         List<TableFill> tableFillList = new ArrayList<>();
         tableFillList.add(new TableFill("ASDD_SS", FieldFill.INSERT_UPDATE));
 
-        String tables[] = new String[]{"SYS_PERMISSION", "PK_SYS_PERMISSION", "T_BLOG", "PK_T_BLOG", "R_TAG_BLOG", "PK_R_TAG_BLOG", "SYS_PARAM", "SYS_USER", "PK_SYS_USER", "T_BLOG_CATEGORY", "PK_T_BLOG_CATEGORY", "T_BLOG_TAG", "PK_T_BLOG_TAG", "SYS_FUNCTION", "PK_T_COMMENT", "T_COMMENT_MSG", "R_USER_PERMISSION"};
+        //String tables[] = new String[]{"SYS_PERMISSION", "PK_SYS_PERMISSION", "T_BLOG", "PK_T_BLOG", "R_TAG_BLOG", "PK_R_TAG_BLOG", "SYS_PARAM", "SYS_USER", "PK_SYS_USER", "T_BLOG_CATEGORY", "PK_T_BLOG_CATEGORY", "T_BLOG_TAG", "PK_T_BLOG_TAG", "SYS_FUNCTION", "PK_T_COMMENT", "T_COMMENT_MSG", "R_USER_PERMISSION"};
+        String tables[] = new String[]{"T_BLOG"};
 
 
         // 代码生成器
@@ -169,7 +170,7 @@ public class MybatisPlusGeneratorOfficalTest {
                     // 自定义输出文件目录
                     @Override
                     public String outputFile(TableInfo tableInfo) {
-                        return "D:\\souce_code\\mine_source\\nice-blog-sys\\blog-sys-parent\\blog-sys-api\\src\\main\\resources\\mapper\\" + tableInfo.getEntityName() + "Mapper.xml";
+                        return "D:\\souce_code\\mine_source\\nice-blog-sys\\blog-sys-parent\\blog-sys-api\\src\\main\\resources\\generator\\" + tableInfo.getEntityName() + "Mapper.xml";
                     }
                 }))
         ).setTemplate(

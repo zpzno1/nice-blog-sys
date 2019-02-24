@@ -13,30 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.service.impl;
+package cn.kiwipeach.blog.service;
 
+import cn.kiwipeach.blog.BlogWebApplicationTests;
 import cn.kiwipeach.blog.domain.Blog;
-import cn.kiwipeach.blog.mapper.BlogMapper;
-import cn.kiwipeach.blog.service.IBlogService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
- * 博客 服务实现类
+ * 博客服务测试
  *
- * @author kiwipeach [1099501218@qq.com]
- * @create 2019-01-24
+ * @author kiwipeach
+ * @create 2019-02-24
  */
-@Service
-public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IBlogService {
+@Slf4j
+public class IBlogServiceTest extends BlogWebApplicationTests {
 
     @Autowired
-    private BlogMapper blogMapper;
+    private IBlogService iBlogService;
 
-    @Override
-    public boolean createBlog(Blog blog) {
-        Integer insert = blogMapper.insert(blog);
-        return insert > 0;
+    @Test
+    public void insert() {
+        Blog blog = new Blog();
+        boolean isCreate = iBlogService.createBlog(blog);
+        log.info("博客是否创建成功？{}", isCreate);
     }
 }

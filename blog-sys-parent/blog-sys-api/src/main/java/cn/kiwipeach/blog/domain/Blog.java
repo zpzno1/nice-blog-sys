@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 kiwipeach(1099501218@qq.com).
+ * Copyright 2019 kiwipeach[1099501218@qq.com].
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,11 +26,11 @@ import java.time.LocalDateTime;
 /**
  * 博客
  *
- * @author kiwipeach [1099501218@qq.com]
- * @create 2019-01-24
+ * @author kiwipeach
+ * @create 2019-02-24
  */
 @TableName("T_BLOG")
-public class Blog extends Model<Blog> implements Serializable {
+public class Blog implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -59,7 +59,7 @@ public class Blog extends Model<Blog> implements Serializable {
     private String title;
 
     /**
-     * 博客内容
+     * 博客内容（根据内容类型存放不同的内容数据）
      */
     @TableField("CONTENT")
     private String content;
@@ -93,6 +93,24 @@ public class Blog extends Model<Blog> implements Serializable {
      */
     @TableField("UPDATE_TIME")
     private LocalDateTime updateTime;
+
+    /**
+     * 博客内容类型[0:千牛markdown类型 1:网页元素自定义类型]
+     */
+    @TableField("CONTENT_TYPE")
+    private String contentType;
+
+    /**
+     * 博客简介
+     */
+    @TableField("INTRODUCTION")
+    private String introduction;
+
+    /**
+     * 博客图标
+     */
+    @TableField("ICON_URL")
+    private String iconUrl;
 
     public String getId() {
         return id;
@@ -174,6 +192,30 @@ public class Blog extends Model<Blog> implements Serializable {
         this.updateTime = updateTime;
     }
 
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
+
+    public String getIconUrl() {
+        return iconUrl;
+    }
+
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
+    }
+
     @Override
     public String toString() {
         return "Blog{" +
@@ -187,11 +229,10 @@ public class Blog extends Model<Blog> implements Serializable {
                 ", top=" + top +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
+                ", contentType=" + contentType +
+                ", introduction=" + introduction +
+                ", iconUrl=" + iconUrl +
                 "}";
     }
 
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
-    }
 }

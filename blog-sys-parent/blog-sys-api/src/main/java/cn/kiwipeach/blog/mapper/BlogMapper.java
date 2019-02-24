@@ -1,5 +1,5 @@
 /*
-* Copyright 2019 kiwipeach(1099501218@qq.com).
+* Copyright 2019 kiwipeach[1099501218@qq.com].
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -15,14 +15,15 @@
 */
 package cn.kiwipeach.blog.mapper;
 
+
 import cn.kiwipeach.blog.domain.Blog;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * 博客 Mapper 接口
  *
- * @author kiwipeach [1099501218@qq.com]
- * @create 2019-01-24
+ * @author kiwipeach
+ * @create 2019-02-24
  */
 public interface BlogMapper extends BaseMapper<Blog> {
 

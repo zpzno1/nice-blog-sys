@@ -5,8 +5,7 @@ import com.qiniu.http.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 
 @Slf4j
 public class UploadDemo extends QiniuJunitBase {
@@ -74,6 +73,29 @@ public class UploadDemo extends QiniuJunitBase {
             File file = new File(FilePath);
             //调用put方法上传
             Response res = uploadManager.put(FilePath, file.getName(), getUpToken());
+            log.info("上传结果：{}", res.bodyString());
+        } catch (QiniuException e) {
+            Response r = e.response;
+            try {
+                log.info("上传异常信息：{}", r.bodyString());
+            } catch (QiniuException e1) {
+                //ignore
+            }
+        }
+    }
+
+
+    /**
+     * 测试公有七牛云空间上传
+     */
+    @Test
+    public void testPublicUploadByInputStream() throws FileNotFoundException {
+        selectBucketname("kiwipeach-bucket");
+        try {
+            String filePath = "C:\\Users\\kiwipeach\\Pictures\\美图\\10.jpg";
+            FileInputStream fileInputStream = new FileInputStream(new File(filePath));
+            //调用put方法上传
+            Response res = uploadManager.put(fileInputStream, "inputstream-demo.jpg", getUpToken(),null,"application/octet-stream");
             log.info("上传结果：{}", res.bodyString());
         } catch (QiniuException e) {
             Response r = e.response;

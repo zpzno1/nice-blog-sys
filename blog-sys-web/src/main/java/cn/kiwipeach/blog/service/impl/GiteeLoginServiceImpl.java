@@ -21,7 +21,6 @@ import cn.kiwipeach.blog.service.ILoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.kiwipeach.blog.shiro.token.AccessToken;
 import org.kiwipeach.blog.utils.GiteeHttpUtil;
-import org.kiwipeach.blog.utils.GithubHttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

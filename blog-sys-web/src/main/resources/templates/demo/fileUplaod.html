@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" th:href="@{/static/assets/favicon.ico}"/>
+    <link rel="bookmark" th:href="@{/static/assets/favicon.ico}"/>
+    <title>测试文件上传</title>
+</head>
+<body>
+<h1 th:inlines="text">单个文件上传</h1>
+<form action="/qiniu/singleUpload" method="post" enctype="multipart/form-data" >
+    <p>选择文件1: <input type="file" name="fileName"/></p>
+    <p><input type="submit" value="提交"/></p>
+</form>
+<h1 th:inlines="text">多个文件上传</h1>
+<form action="/qiniu/multiUpload" method="post" enctype="multipart/form-data" >
+    <p>选择文件1: <input type="file" name="fileName"/></p>
+    <p>选择文件2: <input type="file" name="fileName"/></p>
+    <p>选择文件3: <input type="file" name="fileName"/></p>
+    <p><input type="submit" value="提交"/></p>
+</form>
+</body>
+</html>
