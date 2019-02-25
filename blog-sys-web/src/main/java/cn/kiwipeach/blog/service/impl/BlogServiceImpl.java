@@ -17,7 +17,9 @@ package cn.kiwipeach.blog.service.impl;
 
 import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
+import cn.kiwipeach.blog.domain.vo.TagVO;
 import cn.kiwipeach.blog.mapper.BlogMapper;
+import cn.kiwipeach.blog.mapper.BlogTagMapper;
 import cn.kiwipeach.blog.service.IBlogService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -38,15 +40,16 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IB
     @Autowired
     private BlogMapper blogMapper;
 
-    @Override
-    public boolean createBlog(Blog blog) {
-        Integer insert = blogMapper.insert(blog);
-        return insert > 0;
-    }
+    @Autowired
+    private BlogTagMapper blogTagMapper;
 
     @Override
     public IPage<BlogInfoVO> pageQuery(IPage<BlogInfoVO> page) {
         List<BlogInfoVO> blogInfoVOS = blogMapper.selectByPage(page);
+        for (BlogInfoVO blogInfoVO:blogInfoVOS){
+            List<TagVO> tagVOS = blogTagMapper.selectBlogId(blogInfoVO.getId());
+            blogInfoVO.setBlogTagList(tagVOS);
+        }
         return page.setRecords(blogInfoVOS);
     }
 }

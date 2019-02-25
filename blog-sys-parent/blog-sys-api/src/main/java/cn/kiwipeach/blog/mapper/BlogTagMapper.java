@@ -16,7 +16,10 @@
 package cn.kiwipeach.blog.mapper;
 
 import cn.kiwipeach.blog.domain.BlogTag;
+import cn.kiwipeach.blog.domain.vo.TagVO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
  * 标签 Mapper 接口
@@ -25,5 +28,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @create 2019-01-24
  */
 public interface BlogTagMapper extends BaseMapper<BlogTag> {
+
+
+    List<TagVO> selectBlogId(String blogId);
 
 }

@@ -494,6 +494,7 @@
                                             },
                                             method: 'get',
                                             success: function (res) {
+                                                console.log(res);
                                                 if (res.code == '0') {
                                                     $.each(res.data.records, function (index, item) {
                                                         var $blogListItem = '' +
@@ -538,7 +539,7 @@
                                                             '                                        </div>\n' +
                                                             '\n' +
                                                             '                                        <div class="col-md-2 pull-right">\n' +
-                                                            '                                            <a href="/blog/detail.html?target='+item.content+'&contentType='+item.contentType+'"\n' +
+                                                            '                                            <a href="/blog/detail.html?target=' + item.content + '&contentType=' + item.contentType + '"\n' +
                                                             '                                               class="btn btn-primary btn-round"\n' +
                                                             '                                               style="padding: 3px 15px 3px 15px">阅读全文</a>\n' +
                                                             '                                        </div>\n' +

@@ -35,8 +35,8 @@ public class IBlogServiceTest extends BlogWebApplicationTests {
 
     @Test
     public void insert() {
-        Blog blog = new Blog();
-        boolean isCreate = iBlogService.createBlog(blog);
-        log.info("博客是否创建成功？{}", isCreate);
+        //Blog blog = new Blog();
+        //boolean isCreate = iBlogService.createBlog(blog);
+        //log.info("博客是否创建成功？{}", isCreate);
     }
 }

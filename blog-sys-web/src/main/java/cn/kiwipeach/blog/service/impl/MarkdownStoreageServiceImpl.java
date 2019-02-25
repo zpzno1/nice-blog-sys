@@ -77,8 +77,8 @@ public class MarkdownStoreageServiceImpl implements IMarkdownStoreageService {
             String downloadUrl = download(uploadResult.getString("key"));
             blog.setContent(downloadUrl);
             blog.setContentType("0");//博客内容类型[0:千牛markdown类型 1:markdown文本类型 2:个性化网页内容型]
-            boolean isInserted = iBlogService.createBlog(blog);
-            log.info("博客入库状态:{},上传七牛云存储状态:{}", isInserted, resultBodyString);
+            boolean isSave = iBlogService.save(blog);
+            log.info("博客入库状态:{},上传七牛云存储状态:{}", isSave, resultBodyString);
         } catch (IOException e) {
             throw new BlogException("-SINGLE_UPLOAD_01", e.getMessage());
         }

@@ -47,13 +47,14 @@ public class MybatisPluginsConfiguration {
      * 性能分析插件,mybaits-plus官网提供，在Web环境下将自动失效
      * @return performanceInterceptor
      */
-    @Bean
-    public PerformanceInterceptor performanceInterceptor(){
-        PerformanceInterceptor performanceInterceptor = new PerformanceInterceptor();
-        //执行时间和是否格式化,毫秒
-        performanceInterceptor.setMaxTime(3000);
-        performanceInterceptor.setFormat(false);
-        return performanceInterceptor;
-    }
+    //@Bean
+    //public PerformanceInterceptor performanceInterceptor(){
+    //    PerformanceInterceptor performanceInterceptor = new PerformanceInterceptor();
+    //    //执行时间和是否格式化,毫秒
+    //    //performanceInterceptor.setMaxTime(3000);
+    //    performanceInterceptor.setMaxTime(3000000);
+    //    performanceInterceptor.setFormat(false);
+    //    return performanceInterceptor;
+    //}
 
 }

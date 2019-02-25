@@ -39,11 +39,6 @@
         <result column="CONTENT_TYPE" property="contentType"/>
         <result column="INTRODUCTION" property="introduction"/>
         <result column="ICON_URL" property="iconUrl"/>
-        <collection property="blogTagList" ofType="cn.kiwipeach.blog.domain.vo.TagVO">
-            <id column="TAGID" property="id"/>
-            <result column="TAGNAME" property="name"/>
-            <result column="TAGICON" property="icon"/>
-        </collection>
     </resultMap>
 
     <!--分页查询博客信息-->
@@ -61,16 +56,14 @@
                b.UPDATE_TIME,
                b.CONTENT_TYPE,
                b.INTRODUCTION,
-               b.ICON_URL,
-               tmp.TAG_ID as TAGID,
-               tmp.NAME as TAGNAME,
-               tmp.ICON AS TAGICON
+               b.ICON_URL
           FROM T_BLOG b
           left join t_blog_category c on b.cate_id = c.id
-          left join (select rt.blog_id, rt.tag_id, t.name,t.icon
-                       from r_tag_blog rt, t_blog_tag t
-                      where rt.tag_id = t.id) tmp on b.id = tmp.blog_id
          ORDER BY TOP DESC, UPDATE_TIME DESC
     </select>
+
+  <!--  <select id="selectTagById" resultType="cn.kiwipeach.blog.domain.BlogTag">
+
+    </select>-->
 
 </mapper>
