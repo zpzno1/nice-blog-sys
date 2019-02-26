@@ -18,15 +18,20 @@ package cn.kiwipeach.blog.controller;
 
 import cn.kiwipeach.blog.configuration.AjaxResponse;
 import cn.kiwipeach.blog.domain.Blog;
+import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
 import cn.kiwipeach.blog.service.IBlogService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 博客 前端控制器
@@ -49,5 +54,12 @@ public class BlogController {
         //IPage page1 = iBlogService.page(page, queryWrapper);
         IPage iPage = iBlogService.pageQuery(page);
         return AjaxResponse.success(iPage);
+    }
+
+    @GetMapping("detail/{blogId}")
+    public String queryBlogDetail(@PathVariable("blogId") String blogId, Model model, HttpServletRequest request) {
+        BlogInfoVO blogInfoVO = iBlogService.queryById(blogId);
+        model.addAttribute("blogDetail", blogInfoVO);
+        return "blog/detail";
     }
 }

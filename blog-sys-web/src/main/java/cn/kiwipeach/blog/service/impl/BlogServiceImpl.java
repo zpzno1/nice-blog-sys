@@ -21,6 +21,7 @@ import cn.kiwipeach.blog.domain.vo.TagVO;
 import cn.kiwipeach.blog.mapper.BlogMapper;
 import cn.kiwipeach.blog.mapper.BlogTagMapper;
 import cn.kiwipeach.blog.service.IBlogService;
+import cn.kiwipeach.blog.service.IMarkdownStoreageService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,13 +44,33 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IB
     @Autowired
     private BlogTagMapper blogTagMapper;
 
+    @Autowired
+    private IMarkdownStoreageService iMarkdownStoreageService;
+
     @Override
     public IPage<BlogInfoVO> pageQuery(IPage<BlogInfoVO> page) {
         List<BlogInfoVO> blogInfoVOS = blogMapper.selectByPage(page);
-        for (BlogInfoVO blogInfoVO:blogInfoVOS){
+        for (BlogInfoVO blogInfoVO : blogInfoVOS) {
+            // 处理博客标签
             List<TagVO> tagVOS = blogTagMapper.selectBlogId(blogInfoVO.getId());
             blogInfoVO.setBlogTagList(tagVOS);
+            // 处理博客图片
+            String download = iMarkdownStoreageService.download(blogInfoVO.getContent());
+            blogInfoVO.setContent(download);
         }
         return page.setRecords(blogInfoVOS);
+    }
+
+    @Override
+    public BlogInfoVO queryById(String blogId) {
+        BlogInfoVO blogInfoVO = blogMapper.selectBlog(blogId);
+        // 处理博客标签
+        List<TagVO> tagVOS = blogTagMapper.selectBlogId(blogInfoVO.getId());
+        blogInfoVO.setBlogTagList(tagVOS);
+        // 处理博客图片
+        String download = iMarkdownStoreageService.download(blogInfoVO.getContent());
+        // TODO 添加博客上一页下一页的地址信息
+        blogInfoVO.setContent(download);
+        return blogInfoVO;
     }
 }

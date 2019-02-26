@@ -16,6 +16,7 @@
 package cn.kiwipeach.blog.controller.common;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -63,7 +64,6 @@ public class CommonPageController {
     }
 
 
-
     /**
      * 1）前端通用页面跳转
      *
@@ -71,11 +71,11 @@ public class CommonPageController {
      */
     @RequestMapping("admin/{pageName}.html")
     public String adminResponseHtml(
-            @PathVariable("pageName") String pageName,
-            HttpServletRequest request) {
+            @PathVariable("pageName") String pageName, Model model, HttpServletRequest request) {
         StringBuffer targetUrl = new StringBuffer("admin").append("/").append(pageName);
         String contextPath = request.getContextPath() + "/";
-        request.setAttribute("ctx", contextPath);
+        //request.setAttribute("ctx", contextPath);
+        model.addAttribute("ctx", contextPath);
         return targetUrl.toString();
     }
 

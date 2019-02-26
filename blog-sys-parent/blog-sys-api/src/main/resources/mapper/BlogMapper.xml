@@ -62,8 +62,24 @@
          ORDER BY TOP DESC, UPDATE_TIME DESC
     </select>
 
-  <!--  <select id="selectTagById" resultType="cn.kiwipeach.blog.domain.BlogTag">
-
-    </select>-->
-
+    <!--分页查询博客信息-->
+    <select id="selectBlog" resultMap="blogInfoVOResultMap">
+                SELECT b.ID,
+               b.USER_ID,
+               b.CATE_ID,
+               c.NAME as CATEGORY_NAME,
+               b.TITLE,
+               b.CONTENT,
+               b.STAR_COUNT,
+               b.VIEWS,
+               b.TOP,
+               b.CREATE_TIME,
+               b.UPDATE_TIME,
+               b.CONTENT_TYPE,
+               b.INTRODUCTION,
+               b.ICON_URL
+          FROM T_BLOG b
+          left join t_blog_category c on b.cate_id = c.id
+          where b.id = #{blogId}
+    </select>
 </mapper>

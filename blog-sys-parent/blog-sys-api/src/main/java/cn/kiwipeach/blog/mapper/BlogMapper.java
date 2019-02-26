@@ -32,9 +32,18 @@ import java.util.List;
 public interface BlogMapper extends BaseMapper<Blog> {
     /**
      * 分页查询博客信息
+     *
      * @param page 分页对象
      * @return 返回博客分页列表
      */
     List<BlogInfoVO> selectByPage(IPage<BlogInfoVO> page);
+
+    /**
+     * 查询单条博客详情
+     *
+     * @param blogId 博客编号
+     * @return 返回博客详情信息
+     */
+    BlogInfoVO selectBlog(String blogId);
 
 }

@@ -1,5 +1,6 @@
 .toc {
-    overflow-y: auto
+    overflow-y: auto;
+    font-size: 1rem
 }
 
 .toc > .toc-list {
@@ -52,5 +53,5 @@ a.toc-link {
 }
 
 .is-active-link::before {
-    background-color: #54BC4B
+    background-color: #6e00bc
 }

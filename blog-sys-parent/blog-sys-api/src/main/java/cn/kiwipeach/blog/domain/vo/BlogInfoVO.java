@@ -16,6 +16,7 @@
 package cn.kiwipeach.blog.domain.vo;
 
 import ch.qos.logback.core.pattern.color.BlackCompositeConverter;
+import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.domain.BlogTag;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,7 +32,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-public class BlogInfoVO {
+public class BlogInfoVO{
     private String id;
     private String userId;
     private String cateId;

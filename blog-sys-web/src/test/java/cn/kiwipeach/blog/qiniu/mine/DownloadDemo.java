@@ -11,7 +11,7 @@ public class DownloadDemo {
     Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
     //构造私有空间的需要生成的下载的链接
     //String URL = "http://bucketdomain/key";
-    String URL = "http://pmw84t3zh.bkt.clouddn.com/hello-private-bucket.jpg";
+    String URL = "http://md.kiwipeach.cn/20190224123925-开发语录.md";
 
 
     @Test
