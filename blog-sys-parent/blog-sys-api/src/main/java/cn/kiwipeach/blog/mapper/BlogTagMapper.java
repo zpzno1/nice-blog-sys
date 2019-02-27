@@ -29,7 +29,11 @@ import java.util.List;
  */
 public interface BlogTagMapper extends BaseMapper<BlogTag> {
 
-
-    List<TagVO> selectBlogId(String blogId);
+    /**
+     *  查询博客标签
+     * @param blogId 博客编号
+     * @return 返回博客标签信息
+     */
+    List<TagVO> selectBlogTag(String blogId);
 
 }

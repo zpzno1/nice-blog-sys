@@ -229,56 +229,52 @@
                     <hr>
                     <!--点赞:begin-->
                     <div class="row">
-                        <div style="margin: 0 auto">
-                            <label><a href="detail.html" class="text-dark">&lt;&lt;Java基础部分知识点集锦</a></label>
-                            <button class="btn btn-sm btn-default btn-round">
-                                <i class="fa fa-thumbs-up">赞(130)</i>
+                        <div style="font-size: 18px;padding-top: 20px;text-align: left;font-weight: bold" class="col-md-5">
+                            <a href="detail.html" th:href="@{/blog/detail/{blogId}(blogId=${blogDetail.getPreviousBlog().getId()})}"
+                               class="text-dark">
+                                <svg class="alibaba-icon" aria-hidden="true">
+                                    <use xlink:href="#icon-PrevioustrackFill"></use>
+                                </svg>
+                                <span th:text="${blogDetail.getPreviousBlog().getTitle()}"></span></a>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-sm btn-primary btn-round" style="font-size: 24px;">
+                                <svg class="alibaba-icon">
+                                    <use xlink:href="#icon-agree"></use>
+                                </svg>
+                                赞(130)
                             </button>
-                            <label><a href="detail.html" class="text-dark">Java基础部分知识点集锦&gt;&gt;</a></label>
+                        </div>
+                        <div style="font-size: 18px;padding-top: 20px;text-align: right;font-weight: bold" class="col-md-5">
+                            <a href="detail.html" th:href="@{/blog/detail/{blogId}(blogId=${blogDetail.getNextBlog().getId()})}" class="text-dark">
+                                <span th:text="${blogDetail.getNextBlog().getTitle()}"></span>
+                                <svg class="alibaba-icon" aria-hidden="true">
+                                    <use xlink:href="#icon-NexttrackFilled"></use>
+                                </svg>
+                            </a>
                         </div>
                     </div>
                     <!--点赞:end-->
-
-                    <!--分页插件:begin-->
-                    <div class="row" style="margin-top: 30px;">
-                        <div id="blog_detial_pagination_div" style="margin: 0 auto">
-                        </div>
-                        <script src="../../static/assets/plugins/jquery_pagination/jquery.pagination.js"
-                                th:src="@{/assets/plugins/jquery_pagination/jquery.pagination.js}"></script>
-                        <script type="text/javascript">
-                            var opt = {
-                                total: 236,
-                                items_per_page: 5,
-                                num_display_entries: 0,
-                                num_edge_entries: 0,
-                                next_text: '下一页',
-                                prev_text: '前一页',
-                                callback: function (new_page_index, pagination_container) {
-                                    console.log("当前页码:" + new_page_index)
-                                    return false;
-                                }
-                            };
-                            blog_common.plugin.pagination.init($('#blog_detial_pagination_div'), opt);
-                        </script>
-                    </div>
-                    <!--分页插件:end-->
-
                     <!--文章转载须知信息:begin-->
                     <div class="card col-md-10 offset-md-1">
-                        <div class="card-body text-dark">
-                            <p class="card-title">
-                                <span>文章链接：</span>
-                                <span><a href="#"
-                                >http://localhost:63342/kiwipeach-blog-ui/blog_detail.html#</a></span>
-                            </p>
+                        <div class="card-body text-dark text-center">
                             <p class="card-title">
                                 <span>最近更新：</span>
-                                <span><a href="#">2018年5月21日10:00:02</a></span>
+                                <span th:text="${blogDetail.getUpdateTime()}">2018年5月21日10:00:02</span>
                             </p>
                             <p class="card-title">
                                 <span>转载须知：</span>
                                 <span><a href="#">转载请保留原文链接出处，谢谢支持.</a></span>
                             </p>
+                            <p class="card-title">
+                                <span>文章链接：</span><span><a id="blogHref" href="#">http://localhost:63342/kiwipeach-blog-ui/blog_detail.html#</a></span>
+                                <script type="application/javascript">
+                                    $(function () {
+                                        $('#blogHref').html(window.location.href);
+                                    })
+                                </script>
+                            </p>
+
 
                         </div>
                     </div>
@@ -366,6 +362,8 @@
                         <div class="row">
                             <div id="blog_reply_pagination_div" style="margin: 5px auto;"></div>
                         </div>
+                        <script src="../../static/assets/plugins/jquery_pagination/jquery.pagination.js"
+                                th:src="@{/assets/plugins/jquery_pagination/jquery.pagination.js}"></script>
                         <script type="text/javascript">
                             var opt = {
                                 total: 236,

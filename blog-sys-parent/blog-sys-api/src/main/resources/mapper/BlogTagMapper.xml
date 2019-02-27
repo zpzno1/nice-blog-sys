@@ -22,11 +22,16 @@
         <result column="ICON" property="icon"/>
     </resultMap>
 
-    <select id="selectBlogId" resultMap="tagVoResultMap">
+
+    <!--查询博客标签-->
+    <select id="selectBlogTag" resultMap="tagVoResultMap">
         SELECT rt.blog_id, rt.tag_id, t.name, t.icon
         FROM r_tag_blog rt, t_blog_tag t
         WHERE rt.tag_id = t.id
         AND rt.blog_id = #{blogId}
     </select>
+
+
+
 
 </mapper>

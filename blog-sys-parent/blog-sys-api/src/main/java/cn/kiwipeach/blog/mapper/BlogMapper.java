@@ -20,6 +20,8 @@ import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import lombok.NonNull;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -45,5 +47,19 @@ public interface BlogMapper extends BaseMapper<Blog> {
      * @return 返回博客详情信息
      */
     BlogInfoVO selectBlog(String blogId);
+
+    /**
+     *  查询上一篇博客
+     * @param blogId 目标博客编号
+     * @return 返回博客信息
+     */
+    Blog selectPreviousBlog(@Param("blogId") String blogId);
+
+   /**
+     *  查询上一篇博客
+     * @param blogId 目标博客编号
+     * @return 返回博客信息
+     */
+    Blog selectNextBlog(@Param("blogId") String blogId);
 
 }

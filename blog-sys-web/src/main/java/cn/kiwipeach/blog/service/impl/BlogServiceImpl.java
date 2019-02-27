@@ -22,6 +22,8 @@ import cn.kiwipeach.blog.mapper.BlogMapper;
 import cn.kiwipeach.blog.mapper.BlogTagMapper;
 import cn.kiwipeach.blog.service.IBlogService;
 import cn.kiwipeach.blog.service.IMarkdownStoreageService;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +54,7 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IB
         List<BlogInfoVO> blogInfoVOS = blogMapper.selectByPage(page);
         for (BlogInfoVO blogInfoVO : blogInfoVOS) {
             // 处理博客标签
-            List<TagVO> tagVOS = blogTagMapper.selectBlogId(blogInfoVO.getId());
+            List<TagVO> tagVOS = blogTagMapper.selectBlogTag(blogInfoVO.getId());
             blogInfoVO.setBlogTagList(tagVOS);
             // 处理博客图片
             String download = iMarkdownStoreageService.download(blogInfoVO.getContent());
@@ -64,13 +66,25 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IB
     @Override
     public BlogInfoVO queryById(String blogId) {
         BlogInfoVO blogInfoVO = blogMapper.selectBlog(blogId);
-        // 处理博客标签
-        List<TagVO> tagVOS = blogTagMapper.selectBlogId(blogInfoVO.getId());
+        // 处理博客标签（例外加载）
+        List<TagVO> tagVOS = blogTagMapper.selectBlogTag(blogInfoVO.getId());
         blogInfoVO.setBlogTagList(tagVOS);
-        // 处理博客图片
+        // 处理博客图片(需要登录)
         String download = iMarkdownStoreageService.download(blogInfoVO.getContent());
-        // TODO 添加博客上一页下一页的地址信息
         blogInfoVO.setContent(download);
+        // TODO 添加博客上一页下一页的地址信息，如果到达边界那么就显示置顶文章内容
+        Blog nextBlog = blogMapper.selectNextBlog(blogId);
+        if (nextBlog == null) {
+            QueryWrapper<Blog> queryWrapper = new QueryWrapper<Blog>().eq("top", "1");
+            nextBlog = blogMapper.selectOne(queryWrapper);
+        }
+        Blog previousBlog = blogMapper.selectPreviousBlog(blogId);
+        if (previousBlog == null) {
+            QueryWrapper<Blog> queryWrapper = new QueryWrapper<Blog>().eq("top", "1");
+            previousBlog = blogMapper.selectOne(queryWrapper);
+        }
+        blogInfoVO.setNextBlog(nextBlog);
+        blogInfoVO.setPreviousBlog(previousBlog);
         return blogInfoVO;
     }
 }

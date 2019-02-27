@@ -49,7 +49,16 @@ public class BlogInfoVO{
     private String contentType;
     private String introduction;
     private String iconUrl;
+    /**
+     * 博客标签
+     */
     private List<TagVO> blogTagList;
-
-
+    /**
+     * 上一篇博客
+     */
+    private Blog previousBlog;
+    /**
+     * 下一篇博客
+     */
+    private Blog nextBlog;
 }

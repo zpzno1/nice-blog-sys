@@ -62,9 +62,9 @@
          ORDER BY TOP DESC, UPDATE_TIME DESC
     </select>
 
-    <!--分页查询博客信息-->
+    <!--查询博客详情信息-->
     <select id="selectBlog" resultMap="blogInfoVOResultMap">
-                SELECT b.ID,
+         SELECT b.ID,
                b.USER_ID,
                b.CATE_ID,
                c.NAME as CATEGORY_NAME,
@@ -82,4 +82,45 @@
           left join t_blog_category c on b.cate_id = c.id
           where b.id = #{blogId}
     </select>
+
+    <!--查询博客上一篇-->
+    <select id="selectPreviousBlog" resultMap="BaseResultMap">
+        SELECT *
+        FROM (SELECT TMP.*, ROWNUM ROW_ID
+        FROM (
+            select <include refid="Base_Column_List"></include>
+            from t_blog t
+            where 1 = 1
+            and t.update_time <![CDATA[ >= ]]>
+            (select update_time from t_blog where id = #{blogId})
+            order by t.update_time asc
+        ) TMP
+        WHERE ROWNUM <![CDATA[ <= ]]> 2)
+        WHERE ROW_ID <![CDATA[ > ]]> 1
+
+
+
+
+    </select>
+
+    <!--下一篇博客信息-->
+    <select id="selectNextBlog" resultMap="BaseResultMap">
+        SELECT *
+        FROM (SELECT TMP.*, ROWNUM ROW_ID
+        FROM (
+            select <include refid="Base_Column_List"></include>
+            from t_blog t
+            where 1 = 1
+            and t.update_time <![CDATA[ <= ]]>
+            (select update_time from t_blog where id = #{blogId})
+            order by t.update_time desc
+        ) TMP
+        WHERE ROWNUM <![CDATA[ <= ]]> 2)
+        WHERE ROW_ID <![CDATA[ > ]]> 1
+
+
+
+
+    </select>
+
 </mapper>
