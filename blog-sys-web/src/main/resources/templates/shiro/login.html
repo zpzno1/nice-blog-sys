@@ -6,7 +6,7 @@
 </head>
 <body>
 <h3>测试用户:kiwipeach/123456,其他账号均不能正常登陆</h3>
-<form action="/shrio/login" th:attr="action=@{/user/login}" method="post">
+<form action="/shrio/login" th:attr="action=@{/blog/user/login}" method="post">
     <input type="text" value="kiwipeach" name="userName"><br>
     <input type="password" value="123456" name="password"><br>
     <input type="checkbox" name="remember" value="1">记住我？<br>

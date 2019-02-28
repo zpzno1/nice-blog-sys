@@ -40,7 +40,6 @@
     <link rel="stylesheet" th:href="@{/assets/css/blog_common.css}">
 
 
-
     <script type="text/javascript" th:src="@{/assets/plugins/jquery/dist/jquery.min.js}"></script>
     <!--fontawsome图标-->
     <script type="text/javascript" th:src="@{/assets/plugins/font-awesome/js/all.min.js}"></script>
@@ -392,8 +391,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-body">
-                        <form class="form" method="" action="">
+                    <form class="form" method="post" action="/blog/user/login" th:attr="action=@{/blog/user/login}">
+                        <div class="modal-body">
                             <p class="description text-center" style="font-weight: bold">社交账号快速登陆</p>
                             <div class="card-body">
                                 <div class="form-group bmd -form-group">
@@ -401,7 +400,8 @@
                                     <span class="input-group-addon">
                                         <i class="fas fa-envelope-square fa-lg"></i>
                                     </span>
-                                        <input type="text" class="form-control" placeholder="邮箱/账号">
+                                        <input name="userName" type="text" class="form-control" placeholder="邮箱/账号"
+                                               value="kiwipeach">
                                     </div>
                                 </div>
                                 <div class="form-group bmd-form-group">
@@ -409,112 +409,140 @@
                                     <span class="input-group-addon">
                                        <i class="fas fa-lock fa-lg"></i>
                                     </span>
-                                        <input type="password" placeholder="请输入密码" class="form-control">
+                                        <input name="password" type="password" placeholder="请输入密码" class="form-control"
+                                               value="123456">
                                     </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                        <button class="btn btn-primary btn-round" style="margin-bottom: 30px;width: 300px;">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;陆</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--注册弹框-->
-<!--
-    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="card card-signup card-plain">
-                    <div class="modal-header">
-                        <h5 class="modal-title card-title">Register</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <i class="material-icons">clear</i>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        &lt;!&ndash;smartwizard begin&ndash;&gt;
-                        <div id="smartwizard">
-                            <ul>
-                                <li><a href="#step-1"><span style="font-size: 20px">1.快速注册</span><br/>
-                                </a></li>
-                                <li><a href="#step-2"><span style="font-size: 20px;color: #0e0e0e">2.邮件激活</span><br/>
-                                </a></li>
-                                <li><a href="#step-3"><span style="font-size: 20px;color: #0e0e0e">3.结果提示</span><br/>
-                                </a></li>
-                            </ul>
-                            <div>
-                                <div id="step-1" class="">
-                                    <div>
-                                        <form class="form" method="" action="">
-                                            <div class="card-body">
-                                                <div class="form-group bmd-form-group">
-                                                    <div class="input-group"><span class="input-group-addon"><i
-                                                            class="material-icons">face</i></span><input type="text"
-                                                                                                         class="form-control"
-                                                                                                         placeholder="用户名">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group bmd-form-group">
-                                                    <div class="input-group"><span class="input-group-addon"><i
-                                                            class="material-icons">email</i></span><input type="text"
-                                                                                                          class="form-control"
-                                                                                                          placeholder="Email...">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group bmd-form-group">
-                                                    <div class="input-group"><span class="input-group-addon"><i
-                                                            class="material-icons">lock_outline</i></span><input
-                                                            type="password" placeholder="输入密码" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="form-check"><label class="form-check-label"><input
-                                                        class="form-check-input" type="checkbox" value=""
-                                                        checked=""><span
-                                                        class="form-check-sign"><span class="check"></span></span>我同意该网站的所有条款<a
-                                                        href="#something">内容</a>.</label></div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div id="step-2" class="">
-                                    <div>
-                                        <div class="alert alert-info">
-                                            <div class="container">
-                                                <div class="alert-icon">
-                                                    <i class="material-icons">info_outline</i>
-                                                </div>
-                                                一封邮件已经发往了您的邮箱[<span class="h4">1099501218@qq.com</span>]，请查收并激活。
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="step-3" class="">
-                                    <div class="alert alert-success">
-                                        <div class="container">
-                                            <div class="alert-icon">
-                                                <i class="material-icons">check</i>
-                                            </div>
-                                            恭喜您，注册成功!!!
-                                        </div>
-                                    </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input name="remember" class="form-check-input" type="checkbox" value="">
+                                        记住我？
+                                        <span class="form-check-sign"><span class="check"></span></span>
+                                    </label>
                                 </div>
                             </div>
                         </div>
-                        &lt;!&ndash;smartwizard end&ndash;&gt;
-                    </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="submit" class="btn btn-primary btn-round"
+                                    style="margin-bottom: 30px;width: 300px;">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;陆
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
     <script type="application/javascript">
-        //注册步骤插件
-        blog_common.plugin.smartwizard.init($('#smartwizard'));
-        blog_common.plugin.smartwizard.event.bind_show_step($("#smartwizard"));
+        // $(function () {
+        //     $('#loginBtn').bind('click', function () {
+        //         var param = new Object();
+        //         param.userName = $('input[name=userName]').val();
+        //         param.password= $('input[name=password]').val();
+        //         debugger;
+        //         $.ajax({
+        //             url:'/blog/user/login',
+        //             method:'post',
+        //             data:param,
+        //             success:function (res) {
+        //                 debugger;
+        //             }
+        //         })
+        //     });
+        // })
     </script>
--->
+    <!--注册弹框-->
+    <!--
+        <div class="modal fade" id="signupModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="card card-signup card-plain">
+                        <div class="modal-header">
+                            <h5 class="modal-title card-title">Register</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <i class="material-icons">clear</i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            &lt;!&ndash;smartwizard begin&ndash;&gt;
+                            <div id="smartwizard">
+                                <ul>
+                                    <li><a href="#step-1"><span style="font-size: 20px">1.快速注册</span><br/>
+                                    </a></li>
+                                    <li><a href="#step-2"><span style="font-size: 20px;color: #0e0e0e">2.邮件激活</span><br/>
+                                    </a></li>
+                                    <li><a href="#step-3"><span style="font-size: 20px;color: #0e0e0e">3.结果提示</span><br/>
+                                    </a></li>
+                                </ul>
+                                <div>
+                                    <div id="step-1" class="">
+                                        <div>
+                                            <form class="form" method="" action="">
+                                                <div class="card-body">
+                                                    <div class="form-group bmd-form-group">
+                                                        <div class="input-group"><span class="input-group-addon"><i
+                                                                class="material-icons">face</i></span><input type="text"
+                                                                                                             class="form-control"
+                                                                                                             placeholder="用户名">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group bmd-form-group">
+                                                        <div class="input-group"><span class="input-group-addon"><i
+                                                                class="material-icons">email</i></span><input type="text"
+                                                                                                              class="form-control"
+                                                                                                              placeholder="Email...">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group bmd-form-group">
+                                                        <div class="input-group"><span class="input-group-addon"><i
+                                                                class="material-icons">lock_outline</i></span><input
+                                                                type="password" placeholder="输入密码" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-check"><label class="form-check-label"><input
+                                                            class="form-check-input" type="checkbox" value=""
+                                                            checked=""><span
+                                                            class="form-check-sign"><span class="check"></span></span>我同意该网站的所有条款<a
+                                                            href="#something">内容</a>.</label></div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div id="step-2" class="">
+                                        <div>
+                                            <div class="alert alert-info">
+                                                <div class="container">
+                                                    <div class="alert-icon">
+                                                        <i class="material-icons">info_outline</i>
+                                                    </div>
+                                                    一封邮件已经发往了您的邮箱[<span class="h4">1099501218@qq.com</span>]，请查收并激活。
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="step-3" class="">
+                                        <div class="alert alert-success">
+                                            <div class="container">
+                                                <div class="alert-icon">
+                                                    <i class="material-icons">check</i>
+                                                </div>
+                                                恭喜您，注册成功!!!
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            &lt;!&ndash;smartwizard end&ndash;&gt;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="application/javascript">
+            //注册步骤插件
+            blog_common.plugin.smartwizard.init($('#smartwizard'));
+            blog_common.plugin.smartwizard.event.bind_show_step($("#smartwizard"));
+        </script>
+    -->
 </div>
 </body>
 

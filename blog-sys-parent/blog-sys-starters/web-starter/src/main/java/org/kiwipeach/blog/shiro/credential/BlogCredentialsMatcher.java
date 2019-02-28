@@ -15,11 +15,14 @@
  */
 package org.kiwipeach.blog.shiro.credential;
 
+import cn.kiwipeach.blog.exception.BlogException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.kiwipeach.blog.shiro.token.AccessToken;
 
 /**
@@ -42,13 +45,20 @@ public class BlogCredentialsMatcher implements CredentialsMatcher {
         //TODO 三方账号登陆的时候，不需要经过密码比对器，只有在本站注册的账号才需要获取账号密文进行比对。
         AccessToken accessToken = (AccessToken) token;
         String platform = accessToken.getPlatform();
+        String targetUsername = accessToken.getUserName();
         //三方登陆，认证授权即可
         if ("qq".equals(platform) || "github".equals(platform) || "gitee".equals(platform)) {
             return true;
-        } else {
-            //本站用户，需要比对账号密码,假设现在使用明文密码比对方式
+        } else if ("system".equals(platform)) {
+            //本站用户，需要比对账号密码,假设现在使用明文密码比对方式(system)
+            //SHA1 循环迭代加密1000次，认为改密码无法破解
+            //Object salt = ByteSource.Util.bytes(targetUsername);
+            SimpleHash simpleHash = new SimpleHash("SHA1", accessToken.getPassword(), targetUsername, 1024);
+            String targetPassword = String.valueOf(simpleHash);
             String dbPassword = String.valueOf(info.getCredentials());
-            return dbPassword.equals(accessToken.getPassword());
+            return dbPassword.equals(targetPassword);
+        } else {
+            throw new BlogException("-LOGIN_001", "参数错误:" + platform);
         }
     }
 }

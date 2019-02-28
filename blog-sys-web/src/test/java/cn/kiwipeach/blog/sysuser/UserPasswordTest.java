@@ -34,9 +34,9 @@ public class UserPasswordTest {
     public void encryptUserPwd(){
         String hashAlgorithmName = "SHA1";
         Object credentials = "123456";
-        Object salt = ByteSource.Util.bytes("kiwipeach");
+        //Object salt = ByteSource.Util.bytes("kiwipeach");
         int hashIterations = 1024;
-        Object result = new SimpleHash(hashAlgorithmName, credentials, salt, hashIterations);
+        Object result = new SimpleHash(hashAlgorithmName, credentials, "kiwipeach", hashIterations);
         System.out.println(result);
         //测试中:3a322406a9067b292325e13989c404dd1bf38ebf
         //程序中:3a322406a9067b292325e13989c404dd1bf38ebf

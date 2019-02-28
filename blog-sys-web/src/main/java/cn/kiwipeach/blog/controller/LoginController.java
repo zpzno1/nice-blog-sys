@@ -21,6 +21,7 @@ import cn.kiwipeach.blog.exception.BlogException;
 import cn.kiwipeach.blog.service.ILoginService;
 import cn.kiwipeach.blog.service.impl.QQLoginServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.el.lang.ELArithmetic;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -61,6 +62,10 @@ public class LoginController {
     @Autowired(required = false)
     @Qualifier("giteeLoginServiceImpl")
     private ILoginService giteeLoginService;
+
+    @Autowired(required = true)
+    @Qualifier("systemLoginService")
+    private ILoginService systemLoginService;
 
 
     /***************************************************三方通用登陆 begin**************************************************************/
@@ -135,6 +140,8 @@ public class LoginController {
             loginService = githubLoginService;
         } else if (CodeEnum.GITEE.toString().equalsIgnoreCase(platform)) {
             loginService = giteeLoginService;
+        } else if (CodeEnum.SYSTEM.toString().equals(platform)) {
+            loginService = systemLoginService;
         } else {
             throw new IllegalArgumentException("非法入参:" + platform);
         }
@@ -149,17 +156,24 @@ public class LoginController {
         return "shiro/login";
     }
 
-    @PostMapping("user/login")
+    @PostMapping("blog/user/login")
     public String userLoginAction(SysUser loginUser, @RequestParam(value = "remember", defaultValue = "0") Boolean remember) {
         Subject currentUser = SecurityUtils.getSubject();
         //2.判断是否认证过，否则进行重新认证
         if (!currentUser.isAuthenticated()) {
             //UsernamePasswordToken token = new UsernamePasswordToken(secUser.getUserName(), secUser.get());
-            UsernamePasswordToken token = new UsernamePasswordToken(loginUser.getUserName(), loginUser.getPassword());
+            //在此类org.kiwipeach.blog.shiro.realam.CustomShiroRealm中配置了自定义Realm需要认证授权的Realam对象的类型。
+            AccessToken accessToken = new AccessToken();
+            //TODO 对于本博客平台（system）的token采用置顶的认证方式
+            accessToken.setPlatform("system");
+            accessToken.setUserName(loginUser.getUserName());
+            accessToken.setPassword(loginUser.getPassword());
+            //UsernamePasswordToken token = new UsernamePasswordToken(loginUser.getUserName(), loginUser.getPassword());
             //1.设置rememberMe
-            token.setRememberMe(remember);
+            //token.setRememberMe(remember);
+            accessToken.setRememberMe(remember);
             try {
-                currentUser.login(token);
+                currentUser.login(accessToken);
             } catch (AuthenticationException e) {
                 throw e;
                 //System.out.println("用户信息登陆失败,失败原因:" + e.getLocalizedMessage());

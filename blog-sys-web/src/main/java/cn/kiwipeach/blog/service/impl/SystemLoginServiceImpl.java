@@ -13,22 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.enums;
+package cn.kiwipeach.blog.service.impl;
+
+import cn.kiwipeach.blog.service.ILoginService;
+import org.kiwipeach.blog.shiro.token.AccessToken;
+import org.springframework.stereotype.Service;
 
 /**
- * <code,value> 类型的枚举，用来存放系统开发时候出现的编码
+ * 博客自身系统登录服务实现类
  *
  * @author kiwipeach
- * @create 2019-01-30
+ * @create 2019-02-28
  */
-public enum CodeEnum {
+@Service("systemLoginService")
+public class SystemLoginServiceImpl implements ILoginService {
 
-    /*平台常量*/
-    QQ,
-    GITHUB,
-    GITEE,
-    SYSTEM,
-    ;
+    @Override
+    public AccessToken login(String code) {
+        return null;
+    }
 
-
+    @Override
+    public String queryLoginUrl() {
+        return "/login";
+    }
 }

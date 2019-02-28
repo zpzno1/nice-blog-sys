@@ -63,6 +63,15 @@ public class AccessToken extends SysUser implements HostAuthenticationToken, Rem
         setHeadUrl(headUrl);
     }
 
+    public AccessToken(String tokenStr, String expiresTime, String refreshToken, boolean rememberMe, String host, String platform) {
+        this.tokenStr = tokenStr;
+        this.expiresTime = expiresTime;
+        this.refreshToken = refreshToken;
+        this.rememberMe = rememberMe;
+        this.host = host;
+        this.platform = platform;
+    }
+
     public String getTokenStr() {
         return tokenStr;
     }
