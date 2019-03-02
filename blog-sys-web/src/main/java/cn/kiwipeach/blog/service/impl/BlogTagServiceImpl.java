@@ -16,10 +16,14 @@
 package cn.kiwipeach.blog.service.impl;
 
 import cn.kiwipeach.blog.domain.BlogTag;
+import cn.kiwipeach.blog.domain.vo.TagCountVO;
 import cn.kiwipeach.blog.mapper.BlogTagMapper;
 import cn.kiwipeach.blog.service.IBlogTagService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 标签 服务实现类
@@ -30,4 +34,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class BlogTagServiceImpl extends ServiceImpl<BlogTagMapper, BlogTag> implements IBlogTagService {
 
+    @Autowired
+    private BlogTagMapper blogTagMapper;
+
+    @Override
+    public List<TagCountVO> queryTagCountInfo() {
+        return blogTagMapper.selectTagCountInfo();
+    }
 }

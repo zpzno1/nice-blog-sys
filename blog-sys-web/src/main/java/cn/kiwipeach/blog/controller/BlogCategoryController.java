@@ -16,8 +16,18 @@
 package cn.kiwipeach.blog.controller;
 
 
+import cn.kiwipeach.blog.configuration.AjaxResponse;
+import cn.kiwipeach.blog.domain.BlogCategory;
+import cn.kiwipeach.blog.domain.vo.CategoryTreeVO;
+import cn.kiwipeach.blog.mapper.BlogCategoryMapper;
+import cn.kiwipeach.blog.service.IBlogCategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * 博客分类 前端控制器
@@ -28,5 +38,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/blogCategory")
 public class BlogCategoryController {
+
+
+    @Autowired
+    private IBlogCategoryService iBlogCategoryService;
+
+    @GetMapping("tree/query")
+    @ResponseBody
+    public AjaxResponse<List<CategoryTreeVO>> queryBlogCategoryTree() {
+        List<CategoryTreeVO> blogCategories = iBlogCategoryService.queryBlogCategoryTree();
+        return AjaxResponse.success(blogCategories);
+    }
+
 
 }

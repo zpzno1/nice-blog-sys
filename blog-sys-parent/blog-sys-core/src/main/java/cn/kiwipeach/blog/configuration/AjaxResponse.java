@@ -15,6 +15,9 @@
  */
 package cn.kiwipeach.blog.configuration;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -50,16 +53,19 @@ public class AjaxResponse<T> {
     /**
      * 返回系统时间
      */
-    private Date time = new Date();
+    private String time;
 
     public AjaxResponse() {
+        time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
     }
 
     public AjaxResponse(T data) {
+        this();
         this.data = data;
     }
 
     public AjaxResponse(String code, String msg) {
+        this();
         this.code = code;
         this.msg = msg;
     }
@@ -88,11 +94,11 @@ public class AjaxResponse<T> {
         this.data = data;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

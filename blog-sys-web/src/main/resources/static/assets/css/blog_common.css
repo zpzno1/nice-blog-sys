@@ -5,8 +5,8 @@
 
 /* 修改默认滚动条 */
 body::-webkit-scrollbar, div::-webkit-scrollbar, p::-webkit-scrollbar, textarea::-webkit-scrollbar, section::-webkit-scrollbar, ul::-webkit-scrollbar, iframe::-webkit-scrollbar {
-    width: 4px;
-    height: 12px;
+    width: 1px;
+    height: 10px;
     -webkit-border-radius: 12px;
 }
 
@@ -19,10 +19,10 @@ body::-webkit-scrollbar-track, div::-webkit-scrollbar-track, p::-webkit-scrollba
 }
 
 body::-webkit-scrollbar-thumb, div::-webkit-scrollbar-thumb, p::-webkit-scrollbar-thumb, textarea::-webkit-scrollbar-thumb, section::-webkit-scrollbar-thumb, ul::-webkit-scrollbar-thumb {
-    background: #5e5e5e;
+    background: #040405cf;      /*控制颜色*/
     -webkit-border-radius: 12px;
+    /*border: 1px solid #fff;    */ /*控制宽度*/
 }
-
 
 /*fonticon 图标样式修正*/
 .alibaba-icon {

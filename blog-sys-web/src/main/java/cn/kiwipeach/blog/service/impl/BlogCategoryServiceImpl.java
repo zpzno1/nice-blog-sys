@@ -16,10 +16,14 @@
 package cn.kiwipeach.blog.service.impl;
 
 import cn.kiwipeach.blog.domain.BlogCategory;
+import cn.kiwipeach.blog.domain.vo.CategoryTreeVO;
 import cn.kiwipeach.blog.mapper.BlogCategoryMapper;
 import cn.kiwipeach.blog.service.IBlogCategoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 分类 服务实现类
@@ -30,4 +34,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class BlogCategoryServiceImpl extends ServiceImpl<BlogCategoryMapper, BlogCategory> implements IBlogCategoryService {
 
+    @Autowired
+    private BlogCategoryMapper blogCategoryMapper;
+
+    @Override
+    public List<CategoryTreeVO> queryBlogCategoryTree() {
+        return blogCategoryMapper.selectCategoryTree();
+    }
 }

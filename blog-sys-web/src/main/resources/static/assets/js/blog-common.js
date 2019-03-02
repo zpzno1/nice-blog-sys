@@ -26,8 +26,8 @@
             /*标签云*/
             jqxtagcloud: {
                 settings: {
-                    displayMember: 'countryName',
-                    valueMember: 'technologyRating',
+                    displayMember: 'tagName',
+                    valueMember: 'count',
                     fontSizeUnit: 'px',
                     minFontSize: 10,
                     maxFontSize: 20,
@@ -36,35 +36,41 @@
                     displayValue: true
                 },
                 init: function (target) {
-                    var data = [
-                        {countryName: "Australia", technologyRating: 35},
-                        {countryName: "United States", technologyRating: 60},
-                        {countryName: "United States", technologyRating: 60},
-                        {countryName: "Germany", technologyRating: 55},
-                        {countryName: "Germany", technologyRating: 200},
-                        {countryName: "Brasil", technologyRating: 20},
-                        {countryName: "Brasil", technologyRating: 20},
-                        {countryName: "United Kingdom", technologyRating: 50},
-                        {countryName: "United Kingdom", technologyRating: 50},
-                        {countryName: "Japan", technologyRating: 150}
-                    ];
-                    var source =
-                        {
-                            localdata: data,
-                            datatype: "array",
-                            datafields: [
-                                {name: 'countryName'},
-                                {name: 'technologyRating'}
-                            ]
-                        };
-                    var dataAdapter = new $.jqx.dataAdapter(source, {});
-                    blog_common.plugin.jqxtagcloud.settings.source = dataAdapter;
-                    target.jqxTagCloud(blog_common.plugin.jqxtagcloud.settings);
+                    // var data = [
+                    //     {countryName: "Australia", technologyRating: 35},
+                    //     {countryName: "United States", technologyRating: 60},
+                    //     {countryName: "United States", technologyRating: 60},
+                    //     {countryName: "Germany", technologyRating: 55},
+                    //     {countryName: "Germany", technologyRating: 200},
+                    //     {countryName: "Brasil", technologyRating: 20},
+                    //     {countryName: "Brasil", technologyRating: 20},
+                    //     {countryName: "United Kingdom", technologyRating: 50},
+                    //     {countryName: "United Kingdom", technologyRating: 50},
+                    //     {countryName: "Japan", technologyRating: 150}
+                    // ];
+                    $.ajax({
+                        url: 'blogTag/count/query',
+                        method: 'get',
+                        success: function (res) {
+                            debugger;
+                            var data = res.data;
+                            var source =
+                                {
+                                    localdata: data,
+                                    datatype: "array"
+                                };
+                            var dataAdapter = new $.jqx.dataAdapter(source, {});
+                            var setting = blog_common.plugin.jqxtagcloud.settings
+                            setting.source = dataAdapter;
+                            target.jqxTagCloud(setting);
+                        }
+                    });
+
                 }
             },
             /*分页*/
             pagination: {
-                init: function (target,opt) {
+                init: function (target, opt) {
                     target.pagination(opt.total, opt);
                 }
             },
@@ -136,7 +142,10 @@
                     },
                     data: {
                         simpleData: {
-                            enable: true
+                            enable: true,
+                            idKey: 'id',
+                            pIdKey: 'parentId',
+                            rootPid: null
                         }
                     },
                     callback: {
@@ -162,29 +171,38 @@
                     }
                 },
                 init: function (target) {
-                    var zNodes = [
-                        {id: 1, pId: 0, name: "JavaEE开发"},
-                        {id: 11, pId: 0, name: "收件箱"},
-                        {id: 111, pId: 11, name: "收件箱1"},
-                        {id: 112, pId: 11, name: "收件箱2"},
-                        {id: 113, pId: 112, name: "收件箱3"},
-                        {id: 114, pId: 113, name: "收件箱4"},
-                        {id: 12, pId: 1, name: "垃圾邮件"},
-                        {id: 13, pId: 1, name: "草稿"},
-                        {id: 14, pId: 1, name: "已发送邮件"},
-                        {id: 15, pId: 1, name: "已删除邮件"},
-                        {id: 3, pId: 0, name: "快速视图"},
-                        {id: 31, pId: 3, name: "文档"},
-                        {id: 32, pId: 3, name: "照片"}
-                    ];
-                    $.fn.zTree.init(target, this.setting, zNodes);
-                    target.hover(function () {
-                        if (!target.hasClass("showIcon")) {
-                            target.addClass("showIcon");
+                    // var zNodes = [
+                    //     {id: 1, pId: 0, name: "JavaEE开发"},
+                    //     {id: 11, pId: 0, name: "收件箱"},
+                    //     {id: 111, pId: 11, name: "收件箱1"},
+                    //     {id: 112, pId: 11, name: "收件箱2"},
+                    //     {id: 113, pId: 112, name: "收件箱3"},
+                    //     {id: 114, pId: 113, name: "收件箱4"},
+                    //     {id: 12, pId: 1, name: "垃圾邮件"},
+                    //     {id: 13, pId: 1, name: "草稿"},
+                    //     {id: 14, pId: 1, name: "已发送邮件"},
+                    //     {id: 15, pId: 1, name: "已删除邮件"},
+                    //     {id: 3, pId: 0, name: "快速视图"},
+                    //     {id: 31, pId: 3, name: "文档"},
+                    //     {id: 32, pId: 3, name: "照片"}
+                    // ];
+                    $.ajax({
+                        url: 'blogCategory/tree/query',
+                        method: 'get',
+                        success: function (res) {
+                            var zNodes = res.data;
+                            var setting = blog_common.plugin.blog_category_tree.setting;
+                            $.fn.zTree.init(target, setting, zNodes);
+                            target.hover(function () {
+                                if (!target.hasClass("showIcon")) {
+                                    target.addClass("showIcon");
+                                }
+                            }, function () {
+                                target.removeClass("showIcon");
+                            });
                         }
-                    }, function () {
-                        target.removeClass("showIcon");
                     });
+
                 }
             },
             /*将要废除：文章侧边栏，bootstrap4版本*/
@@ -236,8 +254,8 @@
         /**
          * blog所有关于http的请求
          */
-        http:{
-            initProfile:function () {
+        http: {
+            initProfile: function () {
 
             }
         }

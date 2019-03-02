@@ -16,8 +16,16 @@
 package cn.kiwipeach.blog.controller;
 
 
+import cn.kiwipeach.blog.configuration.AjaxResponse;
+import cn.kiwipeach.blog.domain.vo.TagCountVO;
+import cn.kiwipeach.blog.service.IBlogTagService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * 博客标签 前端控制器
@@ -28,5 +36,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/blogTag")
 public class BlogTagController {
+
+    @Autowired
+    private IBlogTagService iBlogTagService;
+
+
+    @GetMapping("count/query")
+    @ResponseBody
+    public AjaxResponse<List<TagCountVO>> queryTagCountInfo() {
+        return AjaxResponse.success(iBlogTagService.queryTagCountInfo());
+    }
 
 }

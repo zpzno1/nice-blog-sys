@@ -1,18 +1,18 @@
 /*
-* Copyright 2019 kiwipeach(1099501218@qq.com).
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*      http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2019 kiwipeach(1099501218@qq.com).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package cn.kiwipeach.blog.domain;
 
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -69,6 +69,21 @@ public class BlogCategory implements Serializable {
     @TableField("UPDATE_TIME")
     private LocalDateTime updateTime;
 
+    /**
+     * 父类分类编号
+     */
+    @TableField("PARENT_ID")
+    private String parentId;
+
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
     public String getId() {
         return id;
     }
@@ -76,6 +91,7 @@ public class BlogCategory implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
@@ -83,6 +99,7 @@ public class BlogCategory implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
     public Integer getWeight() {
         return weight;
     }
@@ -90,6 +107,7 @@ public class BlogCategory implements Serializable {
     public void setWeight(Integer weight) {
         this.weight = weight;
     }
+
     public String getIcon() {
         return icon;
     }
@@ -97,6 +115,7 @@ public class BlogCategory implements Serializable {
     public void setIcon(String icon) {
         this.icon = icon;
     }
+
     public LocalDateTime getCreateTime() {
         return createTime;
     }
@@ -104,6 +123,7 @@ public class BlogCategory implements Serializable {
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
+
     public LocalDateTime getUpdateTime() {
         return updateTime;
     }
@@ -115,12 +135,12 @@ public class BlogCategory implements Serializable {
     @Override
     public String toString() {
         return "BlogCategory{" +
-        "id=" + id +
-        ", name=" + name +
-        ", weight=" + weight +
-        ", icon=" + icon +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        "}";
+                "id=" + id +
+                ", name=" + name +
+                ", weight=" + weight +
+                ", icon=" + icon +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                "}";
     }
 }

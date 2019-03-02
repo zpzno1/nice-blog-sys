@@ -23,7 +23,7 @@
     </resultMap>
 
 
-    <!--查询博客标签-->
+    <!--查询单条博客的所有标签-->
     <select id="selectBlogTag" resultMap="tagVoResultMap">
         SELECT rt.blog_id, rt.tag_id, t.name, t.icon
         FROM r_tag_blog rt, t_blog_tag t
@@ -31,6 +31,14 @@
         AND rt.blog_id = #{blogId}
     </select>
 
+    <!--查询博客标签统计情况-->
+    <select id="selectTagCountInfo" resultType="cn.kiwipeach.blog.domain.vo.TagCountVO">
+        select bt.id as tagId, bt.name as tagName, count(1) as count
+          from t_blog_tag bt, t_blog t, r_tag_blog rt
+         where rt.tag_id = bt.id
+           and rt.blog_id = t.id
+         group by bt.id, bt.name
+    </select>
 
 
 

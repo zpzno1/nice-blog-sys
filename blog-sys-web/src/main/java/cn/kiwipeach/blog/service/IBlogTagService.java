@@ -16,7 +16,10 @@
 package cn.kiwipeach.blog.service;
 
 import cn.kiwipeach.blog.domain.BlogTag;
+import cn.kiwipeach.blog.domain.vo.TagCountVO;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * 标签 服务接口类
@@ -25,5 +28,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @create 2019-01-24
  */
 public interface IBlogTagService extends IService<BlogTag> {
+
+    List<TagCountVO> queryTagCountInfo();
 
 }

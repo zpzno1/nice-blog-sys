@@ -13,25 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.service;
+package cn.kiwipeach.blog.domain.vo;
 
-import cn.kiwipeach.blog.domain.BlogCategory;
-import cn.kiwipeach.blog.domain.BlogCategory;
-import cn.kiwipeach.blog.domain.vo.CategoryTreeVO;
-import cn.kiwipeach.blog.mapper.BlogCategoryMapper;
-import com.baomidou.mybatisplus.extension.service.IService;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
- * 分类 服务接口类
+ * 标签统计情况实体类
  *
- * @author kiwipeach [1099501218@qq.com]
- * @create 2019-01-24
+ * @author kiwipeach
+ * @create 2019-03-02
  */
-public interface IBlogCategoryService extends IService<BlogCategory> {
-
-    List<CategoryTreeVO> queryBlogCategoryTree();
-
+@Getter
+@Setter
+public class TagCountVO {
+    private String tagId;
+    private String tagName;
+    private String count;
 }
