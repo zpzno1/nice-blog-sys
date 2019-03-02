@@ -74,7 +74,7 @@ blog:
     cookie:
       name: shrio_remember
       maxAge: 600
-      domain: 127.0.0.1
+      domain: www.kiwipeach.cn
       httpOnly: true
     cacheManager:
       cacheManagerConfigFile: classpath:ehcache.xml

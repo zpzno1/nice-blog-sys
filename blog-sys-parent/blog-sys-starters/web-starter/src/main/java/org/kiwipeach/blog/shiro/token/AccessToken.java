@@ -124,7 +124,7 @@ public class AccessToken extends SysUser implements HostAuthenticationToken, Rem
     }
 
     /**
-     * 获取认证主体的密码密文
+     * 获取认证主体的密码
      *
      * @return 返回密文
      */
