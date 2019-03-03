@@ -16,7 +16,7 @@
 
     <!-- self-part create by kiwipeach [1099501218@qq.com] -->
     <!--cn.kiwipeach.blog.domain.vo.TagVO-->
-    <resultMap id="tagVoResultMap" type="cn.kiwipeach.blog.domain.vo.TagVO">
+    <resultMap id="TagVoResultMap" type="cn.kiwipeach.blog.domain.vo.TagVO">
         <id column="ID" property="id"/>
         <result column="NAME" property="name"/>
         <result column="ICON" property="icon"/>
@@ -24,8 +24,8 @@
 
 
     <!--查询单条博客的所有标签-->
-    <select id="selectBlogTag" resultMap="tagVoResultMap">
-        SELECT rt.blog_id, rt.tag_id, t.name, t.icon
+    <select id="selectBlogTag" resultMap="TagVoResultMap">
+        SELECT rt.blog_id, rt.tag_id as id, t.name, t.icon
         FROM r_tag_blog rt, t_blog_tag t
         WHERE rt.tag_id = t.id
         AND rt.blog_id = #{blogId}

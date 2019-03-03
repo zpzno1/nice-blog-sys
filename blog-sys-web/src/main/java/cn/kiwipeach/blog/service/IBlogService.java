@@ -16,6 +16,8 @@
 package cn.kiwipeach.blog.service;
 
 import cn.kiwipeach.blog.domain.Blog;
+import cn.kiwipeach.blog.domain.vo.ArchiveBlogItemVO;
+import cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO;
 import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -30,12 +32,12 @@ public interface IBlogService extends IService<Blog> {
     /**
      * 分页查询博客信息
      *
-     * @param page 分页信息
+     * @param page       分页信息
      * @param categoryId 分类编号
-     * @param tagName 标签名称
+     * @param tagName    标签名称
      * @return 博客列表
      */
-    IPage<BlogInfoVO> pageQuery(IPage<BlogInfoVO> page,String categoryId,String tagName);
+    IPage<BlogInfoVO> pageQuery(IPage<BlogInfoVO> page, String categoryId, String tagName);
 
     /**
      * 查询博客单条记录
@@ -44,5 +46,15 @@ public interface IBlogService extends IService<Blog> {
      * @return 返回博客信息
      */
     BlogInfoVO queryById(String blogId);
+
+
+    /**
+     * 查询博客归档信息
+     *
+     * @param page    分页信息
+     * @param pattern 归档格式
+     * @return 返回归档博客
+     */
+    IPage<ArchiveBlogTimelineVO> archiveBlogQuery(IPage<ArchiveBlogTimelineVO> page, String pattern);
 
 }

@@ -37,7 +37,7 @@
                 },
                 init: function (target) {
                     $.ajax({
-                        url: 'blogTag/count/query',
+                        url: '/blogTag/count/query',
                         method: 'get',
                         success: function (res) {
                             var data = res.data;
@@ -167,7 +167,7 @@
                 },
                 init: function (target) {
                     $.ajax({
-                        url: 'blogCategory/tree/query',
+                        url: '/blogCategory/tree/query',
                         method: 'get',
                         success: function (res) {
                             var zNodes = res.data;
@@ -256,19 +256,30 @@
                                 callback: function (new_page_index, pagination_container) {
                                     var $blogListContainer = $('#blogContainer');
                                     $blogListContainer.html('');
-                                    console.log("当前页码:" + new_page_index);
                                     var requestData = $.extend(param, {size: 8, current: new_page_index + 1});
                                     $.ajax({
                                         url: '/blog/query',
                                         data: requestData,
                                         method: 'get',
+                                        beforeSend: function () {
+                                            // this.dialogIndex = layer.load(0, {shade: false}); 橘黄
+                                            this.dialogIndex = index = layer.load(1, {shade: [0.1, '#fff']});////0.1透明度的白色背景
+                                        },
+                                        complete: function () {
+                                            layer.close(this.dialogIndex);
+                                        },
                                         success: function (res) {
-                                            console.log(res);
                                             if (res.code == '0') {
-                                                $.each(res.data.records, function (index, item) {
-                                                    var blogItemHtml = _get_blog_item(item);
-                                                    $blogListContainer.append(blogItemHtml);
-                                                });
+                                                if (res.data.records.length > 0) {
+                                                    $.each(res.data.records, function (index, item) {
+                                                        var blogItemHtml = _get_blog_item(item);
+                                                        $blogListContainer.append(blogItemHtml);
+                                                    });
+                                                } else {
+                                                    $blogListContainer.append('<div class="text-center"><h3>已经没有再多数据了，去别处看看吧,<a href="/">返回首页</a></h3></div>');
+                                                }
+                                            } else {
+                                                layer.msg(res.msg);
                                             }
                                         }
                                     });

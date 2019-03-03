@@ -41,37 +41,47 @@
         <result column="ICON_URL" property="iconUrl"/>
     </resultMap>
 
+    <!--查询博客归档信息-->
+    <resultMap id="ArchiveBlogTimelineVOResultMap" type="cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO">
+        <id column="ARCHIVETIME" property="archiveTime"/>
+        <id column="ID" property="id"/>
+        <result column="TITLE" property="title"/>
+        <result column="CREATETIME" property="createTime"/>
+        <result column="CATEGORYNAME" property="categoryName"/>
+        <result column="ISTOP" property="isTop"/>
+    </resultMap>
+
     <!--分页查询博客信息-->
     <select id="selectByPage" resultMap="blogInfoVOResultMap">
-          SELECT b.ID,
-               b.USER_ID,
-               b.CATE_ID,
-               c.NAME as CATEGORY_NAME,
-               b.TITLE,
-               b.CONTENT,
-               b.STAR_COUNT,
-               b.VIEWS,
-               b.TOP,
-               b.CREATE_TIME,
-               b.UPDATE_TIME,
-               b.CONTENT_TYPE,
-               b.INTRODUCTION,
-               b.ICON_URL
-          FROM T_BLOG b
-          left join t_blog_category c on b.cate_id = c.id
-          <where>
-              <if test="categoryId !=null and categoryId !=''">
-                  b.CATE_ID = #{categoryId}
-              </if>
-              <if test="tagName !=null and tagName !=''">
-                  b.id in (
-                  select rt.blog_id from r_tag_blog rt, t_blog_tag bt
-                  where bt.id = rt.tag_id
-                  and bt.name = #{tagName}
-                  )
-              </if>
-          </where>
-         ORDER BY TOP DESC, UPDATE_TIME DESC
+        SELECT b.ID,
+        b.USER_ID,
+        b.CATE_ID,
+        c.NAME as CATEGORY_NAME,
+        b.TITLE,
+        b.CONTENT,
+        b.STAR_COUNT,
+        b.VIEWS,
+        b.TOP,
+        b.CREATE_TIME,
+        b.UPDATE_TIME,
+        b.CONTENT_TYPE,
+        b.INTRODUCTION,
+        b.ICON_URL
+        FROM T_BLOG b
+        left join t_blog_category c on b.cate_id = c.id
+        <where>
+            <if test="categoryId !=null and categoryId !=''">
+                b.CATE_ID = #{categoryId}
+            </if>
+            <if test="tagName !=null and tagName !=''">
+                b.id in (
+                select rt.blog_id from r_tag_blog rt, t_blog_tag bt
+                where bt.id = rt.tag_id
+                and bt.name = #{tagName}
+                )
+            </if>
+        </where>
+        ORDER BY TOP DESC, UPDATE_TIME DESC
     </select>
 
     <!--查询博客详情信息-->
@@ -95,17 +105,19 @@
           where b.id = #{blogId}
     </select>
 
+
     <!--查询博客上一篇-->
     <select id="selectPreviousBlog" resultMap="BaseResultMap">
         SELECT *
         FROM (SELECT TMP.*, ROWNUM ROW_ID
         FROM (
-            select <include refid="Base_Column_List"></include>
-            from t_blog t
-            where 1 = 1
-            and t.update_time <![CDATA[ >= ]]>
-            (select update_time from t_blog where id = #{blogId})
-            order by t.update_time asc
+        select
+        <include refid="Base_Column_List"></include>
+        from t_blog t
+        where 1 = 1
+        and t.update_time <![CDATA[ >= ]]>
+        (select update_time from t_blog where id = #{blogId})
+        order by t.update_time asc
         ) TMP
         WHERE ROWNUM <![CDATA[ <= ]]> 2)
         WHERE ROW_ID <![CDATA[ > ]]> 1
@@ -116,19 +128,51 @@
         SELECT *
         FROM (SELECT TMP.*, ROWNUM ROW_ID
         FROM (
-            select <include refid="Base_Column_List"></include>
-            from t_blog t
-            where 1 = 1
-            and t.update_time <![CDATA[ <= ]]>
-            (select update_time from t_blog where id = #{blogId})
-            order by t.update_time desc
+        select
+        <include refid="Base_Column_List"></include>
+        from t_blog t
+        where 1 = 1
+        and t.update_time <![CDATA[ <= ]]>
+        (select update_time from t_blog where id = #{blogId})
+        order by t.update_time desc
         ) TMP
         WHERE ROWNUM <![CDATA[ <= ]]> 2)
         WHERE ROW_ID <![CDATA[ > ]]> 1
+    </select>
 
+    <!--查询按照时间归档博客信息-->
+    <select id="selectArchiveBlog" resultMap="ArchiveBlogTimelineVOResultMap">
+        SELECT t.id,
+               t.title,
+               to_char(t.create_time, 'yyyy-MM-dd HH:mm:ss') AS createTime,
+               to_char(t.create_time, '${pattern}') AS archiveTime,
+               bc.name AS categoryName,
+               CASE
+                 WHEN to_char(t.create_time, 'yyyy-MM-dd HH:mm:ss') =
+                      (SELECT to_char(MAX(create_time), 'yyyy-MM-dd HH:mm:ss')
+                         FROM t_blog
+                        WHERE to_char(create_time, '${pattern}') =
+                              to_char(t.create_time, '${pattern}')) THEN
+                  'true'
+                 ELSE
+                  'false'
+               END AS isTop
+          FROM t_blog t
+          LEFT JOIN (SELECT to_char(b.create_time, '${pattern}') AS archive_time
+                       FROM t_blog b
+                      GROUP BY to_char(b.create_time, '${pattern}')) tmp ON to_char(t.create_time,
+                                                                              '${pattern}') =
+                                                                      tmp.archive_time
+          LEFT JOIN t_blog_category bc ON t.cate_id = bc.id
+         ORDER BY t.create_time DESC
+    </select>
 
-
-
+    <!--获取博客归档时间范围-->
+    <select id="selectArchiveRange" resultType="java.lang.String">
+        SELECT to_char(b.create_time, '${pattern}') AS archive_time
+        FROM t_blog b
+        GROUP BY to_char(b.create_time, '${pattern}')
+        ORDER BY to_char(b.create_time, '${pattern}') DESC
     </select>
 
 </mapper>

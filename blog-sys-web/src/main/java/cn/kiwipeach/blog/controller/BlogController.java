@@ -18,6 +18,7 @@ package cn.kiwipeach.blog.controller;
 
 import cn.kiwipeach.blog.configuration.AjaxResponse;
 import cn.kiwipeach.blog.domain.Blog;
+import cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO;
 import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
 import cn.kiwipeach.blog.service.IBlogService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -43,6 +44,14 @@ public class BlogController {
     @Autowired
     private IBlogService iBlogService;
 
+    /**
+     * 分页查询博客信息
+     *
+     * @param page       分页入参
+     * @param categoryId 分类编号
+     * @param tagName    标签名称
+     * @return 返回博客分页信息
+     */
     @GetMapping("query")
     @ResponseBody
     public AjaxResponse<IPage> pageQuery(Page page,
@@ -52,10 +61,32 @@ public class BlogController {
         return AjaxResponse.success(iPage);
     }
 
+    /**
+     * 查询博客详情
+     *
+     * @param blogId 博客编号
+     * @param model  域模型
+     * @return 返回单条博客详情信息
+     */
     @GetMapping("detail/{blogId}")
-    public String queryBlogDetail(@PathVariable("blogId") String blogId, Model model, HttpServletRequest request) {
+    public String queryBlogDetail(@PathVariable("blogId") String blogId, Model model) {
         BlogInfoVO blogInfoVO = iBlogService.queryById(blogId);
         model.addAttribute("blogDetail", blogInfoVO);
         return "blog/detail";
     }
+
+    /**
+     * 分页查询博客归档信息
+     *
+     * @param page    分页入参
+     * @param pattern 博客归档格式（yyyy,yyyyMM,yyyyQ）
+     * @return 返回博客归档列表信息
+     */
+    @GetMapping("archive/query")
+    @ResponseBody
+    public AjaxResponse<IPage<ArchiveBlogTimelineVO>> archiveBlogQuery(Page page, @RequestParam(value = "pattern", defaultValue = "yyyy") String pattern) {
+        IPage iPage = iBlogService.archiveBlogQuery(page, pattern);
+        return AjaxResponse.success(iPage);
+    }
+
 }

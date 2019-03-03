@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="blog::header('博客详情页面*')">
+<head th:replace="blog::header('博客详情页面')">
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
@@ -207,21 +207,48 @@
                             // var contentMdUrl = '${blog}';
                             var contentMdUrl = /*[[${blogDetail.content}]]*/ "test.md";
                             // contentMdUrl = 'http://pndxi7i9l.bkt.clouddn.com/20190226104100-Markdown%E8%AF%AD%E6%B3%95%E7%AE%80%E4%BB%8B.md?attname=&e=1551195682&token=egP7QEuBIF-kN03VuxuUeqAYtfylyZR5h9VSTM8h:eYB_rkIB5UGDSGa9Vv1Xpb_4_IQ';
-                            $.get(contentMdUrl, function (markdown) {
-                                $('#article-content-div').html('');
-                                testEditormdView = editormd.markdownToHTML("article-content-div", {
-                                    markdown: markdown,
-                                    htmlDecode: "style,script,iframe",  // you can filter tags decode
-                                    tocm: true,    // Using [TOCM]
-                                    emoji: true,
-                                    taskList: true,
-                                    tex: true,  // 默认不解析
-                                    flowChart: true,  // 默认不解析
-                                    sequenceDiagram: true,  // 默认不解析
-                                });
-                                blog_common.plugin.tocbot_catalog_plugin.init();
-                                blog_common.plugin.tocbot_catalog_plugin.event.bind_outline_scroll();
+
+                            $.ajax({
+                                url: contentMdUrl,
+                                method: 'get',
+                                beforeSend: function () {
+                                    this.dialogIndex = index = layer.load(1, {shade: [0.1, '#fff']});////0.1透明度的白色背景
+                                },
+                                complete: function () {
+                                    layer.close(this.dialogIndex);
+                                },
+                                success: function (markdown) {
+                                    $('#article-content-div').html('');
+                                    testEditormdView = editormd.markdownToHTML("article-content-div", {
+                                        markdown: markdown,
+                                        htmlDecode: "style,script,iframe",  // you can filter tags decode
+                                        tocm: true,    // Using [TOCM]
+                                        emoji: true,
+                                        taskList: true,
+                                        tex: true,  // 默认不解析
+                                        flowChart: true,  // 默认不解析
+                                        sequenceDiagram: true,  // 默认不解析
+                                    });
+                                    blog_common.plugin.tocbot_catalog_plugin.init();
+                                    blog_common.plugin.tocbot_catalog_plugin.event.bind_outline_scroll();
+                                }
                             });
+
+                            // $.get(contentMdUrl, function (markdown) {
+                            //     $('#article-content-div').html('');
+                            //     testEditormdView = editormd.markdownToHTML("article-content-div", {
+                            //         markdown: markdown,
+                            //         htmlDecode: "style,script,iframe",  // you can filter tags decode
+                            //         tocm: true,    // Using [TOCM]
+                            //         emoji: true,
+                            //         taskList: true,
+                            //         tex: true,  // 默认不解析
+                            //         flowChart: true,  // 默认不解析
+                            //         sequenceDiagram: true,  // 默认不解析
+                            //     });
+                            //     blog_common.plugin.tocbot_catalog_plugin.init();
+                            //     blog_common.plugin.tocbot_catalog_plugin.event.bind_outline_scroll();
+                            // });
 
                         </script>
                     </div>

@@ -16,13 +16,13 @@
 package cn.kiwipeach.blog.service.impl;
 
 import cn.kiwipeach.blog.domain.Blog;
+import cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO;
 import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
 import cn.kiwipeach.blog.domain.vo.TagVO;
 import cn.kiwipeach.blog.mapper.BlogMapper;
 import cn.kiwipeach.blog.mapper.BlogTagMapper;
 import cn.kiwipeach.blog.service.IBlogService;
 import cn.kiwipeach.blog.service.IMarkdownStoreageService;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -88,5 +88,16 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IB
         blogInfoVO.setNextBlog(nextBlog);
         blogInfoVO.setPreviousBlog(previousBlog);
         return blogInfoVO;
+    }
+
+    @Override
+    public IPage<ArchiveBlogTimelineVO> archiveBlogQuery(IPage<ArchiveBlogTimelineVO> page, String pattern) {
+        List<ArchiveBlogTimelineVO> archiveBlogTimelineVOS = blogMapper.selectArchiveBlog(page, pattern);
+        //给分页查询结果添加标签
+        for (ArchiveBlogTimelineVO tagVOS : archiveBlogTimelineVOS) {
+            List<TagVO> tagVOList = blogTagMapper.selectBlogTag(tagVOS.getId());
+            tagVOS.setTagVOList(tagVOList);
+        }
+        return page.setRecords(archiveBlogTimelineVOS);
     }
 }

@@ -17,10 +17,10 @@ package cn.kiwipeach.blog.mapper;
 
 
 import cn.kiwipeach.blog.domain.Blog;
+import cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO;
 import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import lombok.NonNull;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -35,9 +35,9 @@ public interface BlogMapper extends BaseMapper<Blog> {
     /**
      * 分页查询博客信息
      *
-     * @param page 分页对象
+     * @param page       分页对象
      * @param categoryId 分类编号
-     * @param tagName 标签名称
+     * @param tagName    标签名称
      * @return 返回博客分页列表
      */
     List<BlogInfoVO> selectByPage(IPage<BlogInfoVO> page,
@@ -67,5 +67,22 @@ public interface BlogMapper extends BaseMapper<Blog> {
      * @return 返回博客信息
      */
     Blog selectNextBlog(@Param("blogId") String blogId);
+
+    /**
+     * 查询按照时间归档博客信息
+     *
+     * @param page 分页对象
+     * @param pattern     归档格式 主要有三种:yyyy,yyyyMM,yyyyQ
+     * @return 返回归档博客信息
+     */
+    List<ArchiveBlogTimelineVO> selectArchiveBlog(IPage<ArchiveBlogTimelineVO> page, @Param("pattern") String pattern);
+
+    /**
+     * 获取博客归档时间范围
+     *
+     * @param pattern 归档格式 主要有三种:yyyy,yyyyMM,yyyyQ
+     * @return 返回归档时间范围
+     */
+    List<String> selectArchiveRange(@Param("pattern") String pattern);
 
 }

@@ -15,48 +15,35 @@
  */
 package cn.kiwipeach.blog.domain.vo;
 
-import cn.kiwipeach.blog.domain.Blog;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.List;
 
 /**
- * 博客信息实体
+ * 归档博客实体类
  *
  * @author kiwipeach
- * @create 2019-02-24
+ * @create 2019-03-03
  */
 @Getter
 @Setter
-public class BlogInfoVO{
+public class ArchiveBlogTimelineVO {
+
     private String id;
-    private String userId;
-    private String cateId;
-    private String categoryName;
     private String title;
-    private String content;
-    private String starCount;
-    private String views;
-    private String top;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    private String categoryName;
     private String createTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    private String updateTime;
-    private String contentType;
-    private String introduction;
-    private String iconUrl;
     /**
-     * 博客标签
+     * 归档时间
      */
-    private List<TagVO> blogTagList;
+    private String archiveTime;
     /**
-     * 上一篇博客
+     * 是否为归档范围内的第一个节点
      */
-    private Blog previousBlog;
+    private String isTop;
     /**
-     * 下一篇博客
+     * 所有的博客标签，程序后面赋值
      */
-    private Blog nextBlog;
+    private List<TagVO> tagVOList;
 }

@@ -2,8 +2,10 @@ package cn.kiwipeach.blog.mapper;
 
 import cn.kiwipeach.blog.BlogApiApplicationTests;
 import cn.kiwipeach.blog.domain.Blog;
+import cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO;
 import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -32,5 +34,18 @@ public class BlogMapperTest extends BlogApiApplicationTests {
         Blog previousBlog = blogMapper.selectPreviousBlog("106");
         System.out.println(JSON.toJSONString(nextBlog));
         System.out.println(JSON.toJSONString(previousBlog));
+    }
+
+    @Test
+    public void selectArchiveBlog() {
+        Page<ArchiveBlogTimelineVO> page = new Page<>(1, 3);
+        List<ArchiveBlogTimelineVO> yyyy = blogMapper.selectArchiveBlog(page, "yyyy");
+        log.info("total:{}", page.getTotal());
+    }
+
+    @Test
+    public void 博客归档查询效率提升方法() {
+        //每次加载以10条博客为准，可能记录条数会上下浮动，只会多之多一个归档。
+
     }
 }
