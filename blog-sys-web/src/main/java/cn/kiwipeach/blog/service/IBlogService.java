@@ -31,9 +31,11 @@ public interface IBlogService extends IService<Blog> {
      * 分页查询博客信息
      *
      * @param page 分页信息
+     * @param categoryId 分类编号
+     * @param tagName 标签名称
      * @return 博客列表
      */
-    IPage<BlogInfoVO> pageQuery(IPage<BlogInfoVO> page);
+    IPage<BlogInfoVO> pageQuery(IPage<BlogInfoVO> page,String categoryId,String tagName);
 
     /**
      * 查询博客单条记录

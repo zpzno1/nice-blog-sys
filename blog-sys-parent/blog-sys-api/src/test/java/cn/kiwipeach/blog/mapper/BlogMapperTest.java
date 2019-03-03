@@ -19,8 +19,10 @@ public class BlogMapperTest extends BlogApiApplicationTests {
 
     @Test
     public void selectByPage() {
-        Page<BlogInfoVO> page = new Page<>(2, 3);
-        List<BlogInfoVO> blogInfoVOS = blogMapper.selectByPage(page);
+        Page<BlogInfoVO> page = new Page<>(1, 3);
+        //List<BlogInfoVO> blogInfoVOS = blogMapper.selectByPage(page, null, null);
+        //List<BlogInfoVO> blogInfoVOS = blogMapper.selectByPage(page, "1013", null);
+        List<BlogInfoVO> blogInfoVOS = blogMapper.selectByPage(page, null, "Oracle");
         log.info("total:{}", page.getTotal());
     }
 

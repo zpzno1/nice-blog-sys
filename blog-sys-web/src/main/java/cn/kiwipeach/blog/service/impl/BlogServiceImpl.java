@@ -50,8 +50,8 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IB
     private IMarkdownStoreageService iMarkdownStoreageService;
 
     @Override
-    public IPage<BlogInfoVO> pageQuery(IPage<BlogInfoVO> page) {
-        List<BlogInfoVO> blogInfoVOS = blogMapper.selectByPage(page);
+    public IPage<BlogInfoVO> pageQuery(IPage<BlogInfoVO> page, String categoryId, String tagName) {
+        List<BlogInfoVO> blogInfoVOS = blogMapper.selectByPage(page, categoryId, tagName);
         for (BlogInfoVO blogInfoVO : blogInfoVOS) {
             // 处理博客标签
             List<TagVO> tagVOS = blogTagMapper.selectBlogTag(blogInfoVO.getId());
@@ -74,11 +74,13 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IB
         blogInfoVO.setContent(download);
         // TODO 添加博客上一页下一页的地址信息，如果到达边界那么就显示置顶文章内容
         Blog nextBlog = blogMapper.selectNextBlog(blogId);
+        // 处理最后一篇博客下一篇问题
         if (nextBlog == null) {
             QueryWrapper<Blog> queryWrapper = new QueryWrapper<Blog>().eq("top", "1");
             nextBlog = blogMapper.selectOne(queryWrapper);
         }
         Blog previousBlog = blogMapper.selectPreviousBlog(blogId);
+        // 处理第一篇博客上一篇问题
         if (previousBlog == null) {
             QueryWrapper<Blog> queryWrapper = new QueryWrapper<Blog>().eq("top", "1");
             previousBlog = blogMapper.selectOne(queryWrapper);

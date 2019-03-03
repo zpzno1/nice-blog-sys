@@ -16,6 +16,7 @@
         <id column="ID" property="id"/>
         <result column="NAME" property="name"/>
         <result column="PARENT_ID" property="parentId"/>
+        <result column="COUNT" property="count"/>
     </resultMap>
     <sql id="Base_Column_List">
         ID, NAME, WEIGHT, ICON, CREATE_TIME, UPDATE_TIME,PARENT_ID
@@ -25,11 +26,23 @@
 
     <!--博客树形分类查询-->
     <select id="selectCategoryTree" resultMap="CategoryTreeVOResultMap">
-        select t.id,t.parent_id,t.name
-        from t_blog_category t
-        start with t.parent_id is null
-        connect by prior t.id = t.parent_id
-        order siblings by t.weight asc
+        SELECT t.id, t.name, t.parent_id
+            , CASE (
+                    SELECT COUNT(1)
+                    FROM t_blog_category
+                    WHERE t.id = parent_id
+                )
+                WHEN 0 THEN (
+                    SELECT COUNT(1)
+                    FROM t_blog
+                    WHERE cate_id = t.id
+                )
+                ELSE NULL
+            END AS count
+        FROM t_blog_category t
+        START WITH t.parent_id IS NULL
+        CONNECT BY PRIOR t.id = t.parent_id
+        ORDER SIBLINGS BY t.weight ASC
     </select>
 
 </mapper>

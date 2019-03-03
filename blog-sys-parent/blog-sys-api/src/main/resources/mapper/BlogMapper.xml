@@ -43,7 +43,7 @@
 
     <!--分页查询博客信息-->
     <select id="selectByPage" resultMap="blogInfoVOResultMap">
-                SELECT b.ID,
+          SELECT b.ID,
                b.USER_ID,
                b.CATE_ID,
                c.NAME as CATEGORY_NAME,
@@ -59,6 +59,18 @@
                b.ICON_URL
           FROM T_BLOG b
           left join t_blog_category c on b.cate_id = c.id
+          <where>
+              <if test="categoryId !=null and categoryId !=''">
+                  b.CATE_ID = #{categoryId}
+              </if>
+              <if test="tagName !=null and tagName !=''">
+                  b.id in (
+                  select rt.blog_id from r_tag_blog rt, t_blog_tag bt
+                  where bt.id = rt.tag_id
+                  and bt.name = #{tagName}
+                  )
+              </if>
+          </where>
          ORDER BY TOP DESC, UPDATE_TIME DESC
     </select>
 
@@ -97,10 +109,6 @@
         ) TMP
         WHERE ROWNUM <![CDATA[ <= ]]> 2)
         WHERE ROW_ID <![CDATA[ > ]]> 1
-
-
-
-
     </select>
 
     <!--下一篇博客信息-->

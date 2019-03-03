@@ -30,4 +30,5 @@ public class CategoryTreeVO {
     private String id;
     private String name;
     private String parentId;
+    private String count;
 }

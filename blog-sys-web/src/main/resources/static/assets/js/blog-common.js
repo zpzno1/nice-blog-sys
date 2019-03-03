@@ -36,23 +36,10 @@
                     displayValue: true
                 },
                 init: function (target) {
-                    // var data = [
-                    //     {countryName: "Australia", technologyRating: 35},
-                    //     {countryName: "United States", technologyRating: 60},
-                    //     {countryName: "United States", technologyRating: 60},
-                    //     {countryName: "Germany", technologyRating: 55},
-                    //     {countryName: "Germany", technologyRating: 200},
-                    //     {countryName: "Brasil", technologyRating: 20},
-                    //     {countryName: "Brasil", technologyRating: 20},
-                    //     {countryName: "United Kingdom", technologyRating: 50},
-                    //     {countryName: "United Kingdom", technologyRating: 50},
-                    //     {countryName: "Japan", technologyRating: 150}
-                    // ];
                     $.ajax({
                         url: 'blogTag/count/query',
                         method: 'get',
                         success: function (res) {
-                            debugger;
                             var data = res.data;
                             var source =
                                 {
@@ -63,6 +50,10 @@
                             var setting = blog_common.plugin.jqxtagcloud.settings
                             setting.source = dataAdapter;
                             target.jqxTagCloud(setting);
+                            target.on('itemClick', function (event) {
+                                var args = event.args;
+                                blog_common.http.showBlogPage({tagName: args.label});
+                            });
                         }
                     });
 
@@ -161,6 +152,10 @@
                             }
                         },
                         beforeClick: function (treeId, treeNode) {
+                            // 如果当前节点为叶子节点，那么就要加载分类博客
+                            if (!treeNode.isParent) {
+                                blog_common.http.showBlogPage({categoryId: treeNode.id})
+                            }
                             if (treeNode.level == 0) {
                                 var zTree = $.fn.zTree.getZTreeObj("treeDemo");
                                 zTree.expandNode(treeNode);
@@ -171,21 +166,6 @@
                     }
                 },
                 init: function (target) {
-                    // var zNodes = [
-                    //     {id: 1, pId: 0, name: "JavaEE开发"},
-                    //     {id: 11, pId: 0, name: "收件箱"},
-                    //     {id: 111, pId: 11, name: "收件箱1"},
-                    //     {id: 112, pId: 11, name: "收件箱2"},
-                    //     {id: 113, pId: 112, name: "收件箱3"},
-                    //     {id: 114, pId: 113, name: "收件箱4"},
-                    //     {id: 12, pId: 1, name: "垃圾邮件"},
-                    //     {id: 13, pId: 1, name: "草稿"},
-                    //     {id: 14, pId: 1, name: "已发送邮件"},
-                    //     {id: 15, pId: 1, name: "已删除邮件"},
-                    //     {id: 3, pId: 0, name: "快速视图"},
-                    //     {id: 31, pId: 3, name: "文档"},
-                    //     {id: 32, pId: 3, name: "照片"}
-                    // ];
                     $.ajax({
                         url: 'blogCategory/tree/query',
                         method: 'get',
@@ -257,8 +237,155 @@
         http: {
             initProfile: function () {
 
+            },
+            showBlogPage: function (param) {
+                $.ajax({
+                    url: '/blog/query',
+                    method: 'get',
+                    data: param,
+                    success: function (res) {
+                        if (res.code == '0') {
+                            var opt = {
+                                total: res.data.total,
+                                items_per_page: 8,
+                                num_display_entries: 3,
+                                num_edge_entries: 2,
+                                next_text: '下一页',
+                                prev_text: '前一页',
+                                /*分页回调*/
+                                callback: function (new_page_index, pagination_container) {
+                                    var $blogListContainer = $('#blogContainer');
+                                    $blogListContainer.html('');
+                                    console.log("当前页码:" + new_page_index);
+                                    var requestData = $.extend(param, {size: 8, current: new_page_index + 1});
+                                    $.ajax({
+                                        url: '/blog/query',
+                                        data: requestData,
+                                        method: 'get',
+                                        success: function (res) {
+                                            console.log(res);
+                                            if (res.code == '0') {
+                                                $.each(res.data.records, function (index, item) {
+                                                    var blogItemHtml = _get_blog_item(item);
+                                                    $blogListContainer.append(blogItemHtml);
+                                                });
+                                            }
+                                        }
+                                    });
+                                    return false;
+                                }
+                            };
+                            blog_common.plugin.pagination.init($("#blog_pagination_div"), opt);
+                        }
+                    }
+                });
             }
         }
     };
+
+    /**
+     * 获取动态标签
+     * @param tags
+     * @returns {string} 返回标签html
+     * @private
+     */
+    function _get_tags_dom(tags) {
+        if (tags.length == 0) {
+            return "";
+        }
+        var resultHtml = '<label>标签：</label>';
+        $.each(tags, function (index, item) {
+            var tagBtnHtml = '<button type="button" class="btn btn-default btn-sm btn-round"\n' +
+                '                            style="padding: 0 10px 0 10px;">\n' +
+                '                                <i class="fa fa-tag"></i>' + item.name + '\n' +
+                '                                </button>';
+            resultHtml += tagBtnHtml;
+        });
+        return resultHtml;
+    }
+
+    /**
+     * 获取置顶图标dom
+     * @param isTop 返回置顶html
+     * @private
+     */
+    function _get_top_dom(isTop) {
+        if (isTop == "1") {
+            var topHtml = '<span class="badge badge-pill badge-danger pull-right">TOP<span\n' +
+                '                                        class="fas fa-award fa-lg"></span></span>\n' +
+                '                                </div>';
+            return topHtml;
+        } else {
+            return "";
+        }
+    }
+
+    /**
+     * 获取每一条博客的具体内容html
+     * @param item 博客项数据
+     * @returns {string} 返回整条博客html文本
+     * @private
+     */
+    function _get_blog_item(item) {
+        var $blogListItem = '' +
+            ' <div class="card card-nav-tabs">\n' +
+            '                    <div class="card-header card-header" style="font-size: 20px;">\n' +
+            '                        <div class="row">\n' +
+            '                            <div class="col-md-11">\n' +
+            '                                <span class="badge badge-pill badge-dark">' + item.categoryName + '</span>\n' +
+            '                                <a href="detail.html" th:href="@{/blog/detail.html}"\n' +
+            '                                   class="text-dark">' + item.title + '</a>\n' +
+            '                            </div>\n' +
+            '                            <div class="col-md-1">\n' +
+            '                            ' + _get_top_dom(item.top) +
+            '                            </div>\n' +
+            '                        </div>\n' +
+            '\n' +
+            '                    </div>\n' +
+            '\n' +
+            '                    <div class="card-body">\n' +
+            '                        <div class="card-text">\n' +
+            '                            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i\n' +
+            '                                    class="fa fa-calendar"></i></label>&nbsp;&nbsp;<span>' + item.updateTime + '</span>\n' +
+            '                            <label>\n' +
+            '                                <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i\n' +
+            '                                        class="fas fa-user"></i></label>&nbsp;&nbsp;<span>' + item.userId + '</span>\n' +
+            '                            </label>\n' +
+            '                            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i\n' +
+            '                                    class="fas fa-thumbs-up"></i></label>&nbsp;&nbsp;<span>' + item.starCount + '</span>\n' +
+            '                            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i\n' +
+            '                                    class="fa fa-eye"></i></label>&nbsp;&nbsp;<span>' + item.views + '</span>\n' +
+            '                            </label>\n' +
+            '                        </div>\n' +
+            '                        <div class="card-text">\n' +
+            '                            <div class="row">\n' +
+            '                                <div class="col-md-9">\n' +
+            '                                    <div>\n' +
+            '                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + item.introduction + '\n' +
+            '                                    </div>\n' +
+            '                                    <div class="row">\n' +
+            '                                        <div class="col-md-10 pull-left">\n' +
+            '                                            ' + _get_tags_dom(item.blogTagList) + '\n' +
+            '                                        </div>\n' +
+            '\n' +
+            '                                        <div class="col-md-2 pull-right">\n' +
+            '                                            <a href="/blog/detail/' + item.id + '"\n' +
+            '                                               class="btn btn-primary btn-round"\n' +
+            '                                               style="padding: 3px 15px 3px 15px">阅读全文</a>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+            '                                </div>\n' +
+            '                                <div class="col-md-3">\n' +
+            '                                    <img src="' + item.iconUrl + '"\n' +
+            '                                         style="width: 80%;height: 100%;">\n' +
+            '                                </div>\n' +
+            '                            </div>\n' +
+            '\n' +
+            '                        </div>\n' +
+            '                    </div>\n' +
+            '                </div>';
+        return $blogListItem;
+    }
+
 
 })(jQuery, window);

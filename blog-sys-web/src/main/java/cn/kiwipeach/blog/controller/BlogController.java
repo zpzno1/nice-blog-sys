@@ -26,10 +26,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -48,11 +45,10 @@ public class BlogController {
 
     @GetMapping("query")
     @ResponseBody
-    public AjaxResponse<IPage> pageQuery(Page page) {
-        // 按照置顶顺序和更新时间顺序
-        //QueryWrapper<Blog> queryWrapper = new QueryWrapper<Blog>().orderByDesc("TOP").orderByDesc("UPDATE_TIME");
-        //IPage page1 = iBlogService.page(page, queryWrapper);
-        IPage iPage = iBlogService.pageQuery(page);
+    public AjaxResponse<IPage> pageQuery(Page page,
+                                         @RequestParam(required = false, value = "categoryId") String categoryId,
+                                         @RequestParam(required = false, value = "tagName") String tagName) {
+        IPage iPage = iBlogService.pageQuery(page, categoryId, tagName);
         return AjaxResponse.success(iPage);
     }
 

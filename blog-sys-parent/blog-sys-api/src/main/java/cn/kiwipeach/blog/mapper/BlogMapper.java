@@ -36,9 +36,13 @@ public interface BlogMapper extends BaseMapper<Blog> {
      * 分页查询博客信息
      *
      * @param page 分页对象
+     * @param categoryId 分类编号
+     * @param tagName 标签名称
      * @return 返回博客分页列表
      */
-    List<BlogInfoVO> selectByPage(IPage<BlogInfoVO> page);
+    List<BlogInfoVO> selectByPage(IPage<BlogInfoVO> page,
+                                  @Param("categoryId") String categoryId,
+                                  @Param("tagName") String tagName);
 
     /**
      * 查询单条博客详情
@@ -49,14 +53,16 @@ public interface BlogMapper extends BaseMapper<Blog> {
     BlogInfoVO selectBlog(String blogId);
 
     /**
-     *  查询上一篇博客
+     * 查询上一篇博客
+     *
      * @param blogId 目标博客编号
      * @return 返回博客信息
      */
     Blog selectPreviousBlog(@Param("blogId") String blogId);
 
-   /**
-     *  查询上一篇博客
+    /**
+     * 查询上一篇博客
+     *
      * @param blogId 目标博客编号
      * @return 返回博客信息
      */
