@@ -207,32 +207,37 @@
                             // var contentMdUrl = '${blog}';
                             var contentMdUrl = /*[[${blogDetail.content}]]*/ "test.md";
                             // contentMdUrl = 'http://pndxi7i9l.bkt.clouddn.com/20190226104100-Markdown%E8%AF%AD%E6%B3%95%E7%AE%80%E4%BB%8B.md?attname=&e=1551195682&token=egP7QEuBIF-kN03VuxuUeqAYtfylyZR5h9VSTM8h:eYB_rkIB5UGDSGa9Vv1Xpb_4_IQ';
+                            var markdown = /*[[${blogDetail.content}]]*/ "test.md";
+                            $('#article-content-div').html('');
+                            $(function () {
+                                testEditormdView = editormd.markdownToHTML("article-content-div", {
+                                    markdown: markdown,
+                                    htmlDecode: "style,script,iframe",  // you can filter tags decode
+                                    tocm: true,    // Using [TOCM]
+                                    emoji: true,
+                                    taskList: true,
+                                    tex: true,  // 默认不解析
+                                    flowChart: true,  // 默认不解析
+                                    sequenceDiagram: true,  // 默认不解析
+                                });
 
-                            $.ajax({
-                                url: contentMdUrl,
-                                method: 'get',
-                                beforeSend: function () {
-                                    this.dialogIndex = index = layer.load(1, {shade: [0.1, '#fff']});////0.1透明度的白色背景
-                                },
-                                complete: function () {
-                                    layer.close(this.dialogIndex);
-                                },
-                                success: function (markdown) {
-                                    $('#article-content-div').html('');
-                                    testEditormdView = editormd.markdownToHTML("article-content-div", {
-                                        markdown: markdown,
-                                        htmlDecode: "style,script,iframe",  // you can filter tags decode
-                                        tocm: true,    // Using [TOCM]
-                                        emoji: true,
-                                        taskList: true,
-                                        tex: true,  // 默认不解析
-                                        flowChart: true,  // 默认不解析
-                                        sequenceDiagram: true,  // 默认不解析
-                                    });
-                                    blog_common.plugin.tocbot_catalog_plugin.init();
-                                    blog_common.plugin.tocbot_catalog_plugin.event.bind_outline_scroll();
-                                }
+                                blog_common.plugin.tocbot_catalog_plugin.init();
+                                blog_common.plugin.tocbot_catalog_plugin.event.bind_outline_scroll();
                             });
+
+                            // $.ajax({
+                            //     url: contentMdUrl,
+                            //     method: 'get',
+                            //     beforeSend: function () {
+                            //         this.dialogIndex = index = layer.load(1, {shade: [0.1, '#fff']});////0.1透明度的白色背景
+                            //     },
+                            //     complete: function () {
+                            //         layer.close(this.dialogIndex);
+                            //     },
+                            //     success: function (markdown) {
+                            //
+                            //     }
+                            // });
 
                             // $.get(contentMdUrl, function (markdown) {
                             //     $('#article-content-div').html('');
@@ -256,8 +261,10 @@
                     <hr>
                     <!--点赞:begin-->
                     <div class="row">
-                        <div style="font-size: 18px;padding-top: 20px;text-align: left;font-weight: bold" class="col-md-5">
-                            <a href="detail.html" th:href="@{/blog/detail/{blogId}(blogId=${blogDetail.getPreviousBlog().getId()})}"
+                        <div style="font-size: 18px;padding-top: 20px;text-align: left;font-weight: bold"
+                             class="col-md-5">
+                            <a href="detail.html"
+                               th:href="@{/blog/detail/{blogId}(blogId=${blogDetail.getPreviousBlog().getId()})}"
                                class="text-dark">
                                 <svg class="alibaba-icon" aria-hidden="true">
                                     <use xlink:href="#icon-PrevioustrackFill"></use>
@@ -269,11 +276,14 @@
                                 <svg class="alibaba-icon">
                                     <use xlink:href="#icon-agree"></use>
                                 </svg>
-                                赞(130)
+                                ([[${blogDetail.getViews()}]])
                             </button>
                         </div>
-                        <div style="font-size: 18px;padding-top: 20px;text-align: right;font-weight: bold" class="col-md-5">
-                            <a href="detail.html" th:href="@{/blog/detail/{blogId}(blogId=${blogDetail.getNextBlog().getId()})}" class="text-dark">
+                        <div style="font-size: 18px;padding-top: 20px;text-align: right;font-weight: bold"
+                             class="col-md-5">
+                            <a href="detail.html"
+                               th:href="@{/blog/detail/{blogId}(blogId=${blogDetail.getNextBlog().getId()})}"
+                               class="text-dark">
                                 <span th:text="${blogDetail.getNextBlog().getTitle()}"></span>
                                 <svg class="alibaba-icon" aria-hidden="true">
                                     <use xlink:href="#icon-NexttrackFilled"></use>

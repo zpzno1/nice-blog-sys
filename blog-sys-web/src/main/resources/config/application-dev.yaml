@@ -62,7 +62,7 @@ mybatis-plus:
     refresh: true
       #自定义填充策略接口实现
       #meta-object-handler: com.baomidou.springboot.xxx
-      #自定义SQL注入器
+    #自定义SQL注入器
     #sql-injector: com.baomidou.springboot.xxx
   configuration:
     map-underscore-to-camel-case: true
@@ -73,7 +73,8 @@ blog:
   shiro:
     cookie:
       name: shrio_remember
-      maxAge: 600
+      #默认记住我一天
+      maxAge: 86400
       domain: www.kiwipeach.cn
       httpOnly: true
     cacheManager:

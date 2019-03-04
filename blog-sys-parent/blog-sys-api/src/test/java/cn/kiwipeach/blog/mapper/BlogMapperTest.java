@@ -5,12 +5,16 @@ import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO;
 import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
 import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -43,9 +47,32 @@ public class BlogMapperTest extends BlogApiApplicationTests {
         log.info("total:{}", page.getTotal());
     }
 
+    /**
+     * clob:大文本
+     * blob：大的二进制文件
+     */
     @Test
-    public void 博客归档查询效率提升方法() {
-        //每次加载以10条博客为准，可能记录条数会上下浮动，只会多之多一个归档。
+    @Rollback(value = false)
+    public void 测试Clob大文本插入方法() throws IOException {
+        Blog blog = new Blog();
+        blog.setTitle("Markdown语法糖（保存在数据库中）");
+        blog.setUserId("kiwipeach");
+        blog.setIntroduction("一般的上传流程是用户获得上传凭证之后直接将资源上传到七牛空间，然后七牛回返回一个上传成功或者失败的信息，用户业务服务器是不清楚这些信息的，可以参考下面的流程图：\n");
+        String markDown = getMarkDown();
+        blog.setContent(markDown);
+        blog.setIconUrl("http://7xkn2v.dl1.z0.glb.clouddn.com/QQ20151019-4@2x.png");
+        Integer insert = blogMapper.insert(blog);
+        System.out.println(insert);
+    }
 
+    private String getMarkDown() throws IOException {
+        FileReader fileReader = new FileReader("D:\\souce_code\\mine_source\\nice-blog-sys\\project_files\\examples\\Markdown语法简介.md");
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        String line = null;
+        StringBuffer contentBuffer = new StringBuffer();
+        while ((line = bufferedReader.readLine()) != null) {
+            contentBuffer.append(line).append(System.getProperty("line.separator"));
+        }
+        return contentBuffer.toString();
     }
 }

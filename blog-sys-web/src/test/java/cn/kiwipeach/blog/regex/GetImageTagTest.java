@@ -78,7 +78,50 @@ public class GetImageTagTest {
         if (target.startsWith("![") && target.endsWith(".png)")) {
             int begin = target.indexOf("(http://");
             int end = target.lastIndexOf(")");
-            System.out.println(target.substring(begin+1,end));
+            System.out.println(target.substring(begin + 1, end));
         }
+    }
+
+    @Test
+    public void 测试中文获取() {
+        //String strE = "hello world asd 数据计算技术解决  计算机数据计算  123asd  asds123";
+        //String strE = "hello中国";
+        String pattern1 = "[\\u4E00-\\u9FA5]";//中文正则
+        String pattern2 = "[a-zA-Z]";//英文
+        String pattern3 = "[0-9]";//数字
+        String pattern4 = "[!@$%^&()+=|{}':;',\\[\\]./?￥%……&（）+|{}【】‘；：”“’。，、？]";
+        String patterns[] = new String[]{pattern1, pattern2, pattern3, pattern4};
+        //String[] splitStr = strE.split(" ");
+        //for(String str:splitStr) {
+        //    if(Pattern.matches(pattern, str))
+        //        System.out.println(str);
+        //}
+
+        String content = "# 欢迎使用Markdown编辑器写博客\n" +
+                "\n" +
+                "本Markdown编辑器使用[StackEdit][6]修改而来，用它写博客，将会带来全新的体验哦：\n" +
+                "\n" +
+                "- **Markdown和扩展Markdown简洁的语法**\n" +
+                "- **代码块高亮**\n" +
+                "- **图片链接和图片上传**\n" +
+                "- ***LaTex*数学公式**\n" +
+                "- **UML序列图和流程图**\n" +
+                "- **离线写博客**\n" +
+                "- **导入导出Markdown文件**\n" +
+                "- **丰富的快捷键**\n" +
+                "\n" +
+                "-------------------\n" +
+                "\n" +
+                "## 快捷键\n" +
+                "\n" +
+                " - 加粗    `Ctrl + B` ";
+        char[] contents = content.toCharArray();
+        for (char str : contents) {
+            for (String pattern : patterns) {
+                if (Pattern.matches(pattern, String.valueOf(str)))
+                    System.out.print(str);
+            }
+        }
+        System.out.println();
     }
 }

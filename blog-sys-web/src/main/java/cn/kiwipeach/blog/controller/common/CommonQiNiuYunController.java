@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,36 +37,51 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("qiniu")
-@Slf4j
 public class CommonQiNiuYunController {
 
     @Autowired
     private IMarkdownStoreageService iMarkdownStoreageService;
 
+    /**
+     * 上传单个文件
+     *
+     * @param multipartFile 上传文件
+     * @return 返回上传单个文件结果
+     */
     @ResponseBody
     @PostMapping("singleUpload")
-    public AjaxResponse upload(@RequestParam("fileName") MultipartFile multipartFile) {
-        String fileName = multipartFile.getOriginalFilename();
-        log.info("文件上传名称：{}", fileName);
-        String upload = iMarkdownStoreageService.upload(multipartFile);
-        return AjaxResponse.success(upload);
+    public AjaxResponse<String> upload(@RequestParam("fileName") MultipartFile multipartFile) {
+        String uploadResult = iMarkdownStoreageService.upload(multipartFile);
+        return AjaxResponse.success(uploadResult);
     }
 
-
+    /**
+     * 上传多个文件
+     *
+     * @param files 上传文件列表
+     * @return 返回多个文件下载列表
+     */
     @ResponseBody
     @PostMapping("multiUpload")
-    public AjaxResponse upload(@RequestParam("fileName") List<MultipartFile> files) {
+    public AjaxResponse<List<String>> upload(@RequestParam("fileName") List<MultipartFile> files) {
+        List<String> uploadResultList = new ArrayList<>();
         for (MultipartFile multipartFile : files) {
-            String fileName = multipartFile.getOriginalFilename();
-            log.info("文件上传名称：{}", fileName);
+            String upload = iMarkdownStoreageService.upload(multipartFile);
+            uploadResultList.add(upload);
         }
-        return AjaxResponse.success("上传成功");
+        return AjaxResponse.success(uploadResultList);
     }
 
+    /**
+     * 获取指定文件的下载地址
+     *
+     * @param fileId 目标下载文件编号
+     * @return 返回下载地址
+     */
     @ResponseBody
     @PostMapping("download")
-    public AjaxResponse download() {
-        return null;
+    public AjaxResponse<String> download(String fileId) {
+        return AjaxResponse.success(iMarkdownStoreageService.download(fileId));
     }
 
 }

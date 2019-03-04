@@ -74,4 +74,14 @@ public class DemoTest {
         System.out.println(sex);
     }
 
+    @Test
+    public void testNewLine() {
+        String hello = "Hello ";
+        String world = "World";
+        System.out.println("-----");
+        System.out.print(System.getProperty("line.separator"));
+        System.out.println("-----");
+        System.out.println(hello + "\n"+world);
+    }
+
 }

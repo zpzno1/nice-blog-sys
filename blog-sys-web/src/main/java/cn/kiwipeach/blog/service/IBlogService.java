@@ -15,12 +15,13 @@
  */
 package cn.kiwipeach.blog.service;
 
+import cn.kiwipeach.blog.configuration.AjaxResponse;
 import cn.kiwipeach.blog.domain.Blog;
-import cn.kiwipeach.blog.domain.vo.ArchiveBlogItemVO;
 import cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO;
 import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 博客 服务接口类
@@ -29,6 +30,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @create 2019-01-24
  */
 public interface IBlogService extends IService<Blog> {
+    /*##################################################前台##################################################*/
+
     /**
      * 分页查询博客信息
      *
@@ -56,5 +59,16 @@ public interface IBlogService extends IService<Blog> {
      * @return 返回归档博客
      */
     IPage<ArchiveBlogTimelineVO> archiveBlogQuery(IPage<ArchiveBlogTimelineVO> page, String pattern);
+
+    /*##################################################后台##################################################*/
+
+    /**
+     * 上传博客文件
+     *
+     * @param multipartFile 目标博客
+     * @return 上传博客状态
+     */
+    AjaxResponse<Boolean> uploadBlog(MultipartFile multipartFile);
+
 
 }

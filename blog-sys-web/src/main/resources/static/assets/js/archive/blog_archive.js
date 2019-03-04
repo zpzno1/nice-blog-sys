@@ -9,19 +9,18 @@
     $('#load_more_archive_btn').bind('click', function () {
         var current = sessionStorage.getItem("archive_page_current");
         var next = parseInt(current) + 1;
+        //清空旧的归档博客信息
         loadArchiveContent({current: next});
     });
     //归档查询条件切换事件
     $('input[name=queryTypeRadioOptions]').bind('click', function () {
         sessionStorage.removeItem("archive_page_current");
         $('#archiveContainer').html('');
-        var targetPattern = this.value == 'yyyy' ? 'yyyy"年"' : this.value == 'yyyyQ' ? 'yyyy"年"Q"季"' : 'yyyy"年"MM"月"';
-        loadArchiveContent({current: 1, pattern: targetPattern});
+        loadArchiveContent({current: 1});
     });
 
     //归档博客默认加载事件
-    // $('input[name=queryTypeRadioOptions]')
-    loadArchiveContent({pattern: 'yyyy"年"'});
+    loadArchiveContent();
 
 
     /**
@@ -29,7 +28,10 @@
      * @param pattern
      */
     function loadArchiveContent(opt) {
-        var defaultData = {pattern: 'yyyy', size: 8, current: "1"};
+        //获取选中单选按钮，然后动态加载归档博客
+        var patternValue = $('input[name=queryTypeRadioOptions]:checked').val();
+        var targetPattern = patternValue == 'yyyy' ? 'yyyy"年"' : patternValue == 'yyyyQ' ? 'yyyy"年"Q"季"' : 'yyyy"年"MM"月"';
+        var defaultData = {pattern: targetPattern, size: 8, current: "1"};
         var requestData = $.extend(defaultData, opt);
         $.ajax({
             url: '/blog/archive/query',

@@ -25,11 +25,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * 博客 前端控制器
@@ -42,6 +44,7 @@ import javax.servlet.http.HttpServletRequest;
 public class BlogController {
 
     @Autowired
+    @Qualifier("blogServiceImpl")
     private IBlogService iBlogService;
 
     /**
@@ -84,7 +87,9 @@ public class BlogController {
      */
     @GetMapping("archive/query")
     @ResponseBody
-    public AjaxResponse<IPage<ArchiveBlogTimelineVO>> archiveBlogQuery(Page page, @RequestParam(value = "pattern", defaultValue = "yyyy") String pattern) {
+    public AjaxResponse<IPage<ArchiveBlogTimelineVO>> archiveBlogQuery(Page page, @RequestParam(value = "pattern", defaultValue = "yyyy") String pattern, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        System.out.println("sessionID==>" + session.getId());
         IPage iPage = iBlogService.archiveBlogQuery(page, pattern);
         return AjaxResponse.success(iPage);
     }

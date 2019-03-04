@@ -21,11 +21,10 @@ import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
 import cn.kiwipeach.blog.domain.vo.TagVO;
 import cn.kiwipeach.blog.mapper.BlogMapper;
 import cn.kiwipeach.blog.mapper.BlogTagMapper;
-import cn.kiwipeach.blog.service.IBlogService;
 import cn.kiwipeach.blog.service.IMarkdownStoreageService;
+import cn.kiwipeach.blog.service.adapter.BlogServiceAdapter;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +37,7 @@ import java.util.List;
  * @create 2019-01-24
  */
 @Service
-public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IBlogService {
+public class BlogServiceImpl extends BlogServiceAdapter {
 
     @Autowired
     private BlogMapper blogMapper;
@@ -53,12 +52,7 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IB
     public IPage<BlogInfoVO> pageQuery(IPage<BlogInfoVO> page, String categoryId, String tagName) {
         List<BlogInfoVO> blogInfoVOS = blogMapper.selectByPage(page, categoryId, tagName);
         for (BlogInfoVO blogInfoVO : blogInfoVOS) {
-            // 处理博客标签
-            List<TagVO> tagVOS = blogTagMapper.selectBlogTag(blogInfoVO.getId());
-            blogInfoVO.setBlogTagList(tagVOS);
-            // 处理博客图片
-            String download = iMarkdownStoreageService.download(blogInfoVO.getContent());
-            blogInfoVO.setContent(download);
+            dealTagsAndImageIcon(blogInfoVO);
         }
         return page.setRecords(blogInfoVOS);
     }
@@ -66,13 +60,7 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IB
     @Override
     public BlogInfoVO queryById(String blogId) {
         BlogInfoVO blogInfoVO = blogMapper.selectBlog(blogId);
-        // 处理博客标签（例外加载）
-        List<TagVO> tagVOS = blogTagMapper.selectBlogTag(blogInfoVO.getId());
-        blogInfoVO.setBlogTagList(tagVOS);
-        // 处理博客图片(需要登录)
-        String download = iMarkdownStoreageService.download(blogInfoVO.getContent());
-        blogInfoVO.setContent(download);
-        // TODO 添加博客上一页下一页的地址信息，如果到达边界那么就显示置顶文章内容
+        dealTagsAndImageIcon(blogInfoVO);
         Blog nextBlog = blogMapper.selectNextBlog(blogId);
         // 处理最后一篇博客下一篇问题
         if (nextBlog == null) {
@@ -99,5 +87,18 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements IB
             tagVOS.setTagVOList(tagVOList);
         }
         return page.setRecords(archiveBlogTimelineVOS);
+    }
+
+    /**
+     * 为博客信息附加上标签和博客图标信息
+     *
+     * @param blogInfoVO 目标博客对象
+     */
+    private void dealTagsAndImageIcon(BlogInfoVO blogInfoVO) {
+        List<TagVO> tagVOS = blogTagMapper.selectBlogTag(blogInfoVO.getId());
+        blogInfoVO.setBlogTagList(tagVOS);
+        // 处理博客图片(需要登录)
+        String download = iMarkdownStoreageService.download(blogInfoVO.getContent());
+        blogInfoVO.setContent(download);
     }
 }

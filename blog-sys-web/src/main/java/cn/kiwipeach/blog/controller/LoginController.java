@@ -96,7 +96,7 @@ public class LoginController {
             @RequestParam(name = "code", required = true) String code,
             @RequestParam(name = "state", required = false) String state,
             @PathVariable("platform") String platform,
-            @RequestParam(name = "remember", required = false) boolean remember,
+            @RequestParam(name = "remember", defaultValue = "1") boolean remember,
             HttpServletRequest request) {
         log.info("{}平台登陆开始:code={},state={}", platform, code, state);
         ILoginService loginService = decideLoginService(platform);
