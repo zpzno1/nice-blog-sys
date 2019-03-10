@@ -19,8 +19,12 @@ import cn.kiwipeach.blog.anno.AccessLog;
 import cn.kiwipeach.blog.domain.SysUser;
 import cn.kiwipeach.blog.enums.CodeEnum;
 import cn.kiwipeach.blog.exception.BlogException;
+import cn.kiwipeach.blog.service.IBlogService;
 import cn.kiwipeach.blog.service.ILoginService;
+import cn.kiwipeach.blog.service.ISysUserService;
 import cn.kiwipeach.blog.service.impl.QQLoginServiceImpl;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.el.lang.ELArithmetic;
 import org.apache.shiro.SecurityUtils;
@@ -55,7 +59,6 @@ public class LoginController {
     @Qualifier("qqLoginServiceImpl")
     private ILoginService qqLoginService;
 
-
     @Autowired(required = false)
     @Qualifier("githubLoginServiceImpl")
     private ILoginService githubLoginService;
@@ -68,6 +71,9 @@ public class LoginController {
     @Qualifier("systemLoginService")
     private ILoginService systemLoginService;
 
+    @Autowired
+    private ISysUserService iSysUserService;
+
 
     /***************************************************三方通用登陆 begin**************************************************************/
 
@@ -78,7 +84,7 @@ public class LoginController {
      * @return 返回登陆地址
      */
     @RequestMapping("{platform}/login")
-    public String toQQLoginPage(@PathVariable("platform") String platform) {
+    public String toLoginPage(@PathVariable("platform") String platform) {
         ILoginService loginService = decideLoginService(platform);
         return "redirect:" + loginService.queryLoginUrl();
     }
@@ -94,7 +100,7 @@ public class LoginController {
      */
     @RequestMapping("{platform}/oauth2.0/callback")
     @AccessLog("三方授平台登陆")
-    public String qqLoginCallback(
+    public String loginCallback(
             @RequestParam(name = "code", required = true) String code,
             @RequestParam(name = "state", required = false) String state,
             @PathVariable("platform") String platform,
@@ -106,6 +112,14 @@ public class LoginController {
             throw new BlogException("-LOGIN_02", "三方登陆配置有误，请联系管理员");
         } else {
             AccessToken accessToken = loginService.login(code);
+            Wrapper<SysUser> queryWrapper = new QueryWrapper<SysUser>().eq("THIRD_USER_ID", accessToken.getThirdUserId());
+            SysUser dbQueryUser = iSysUserService.getOne(queryWrapper);
+            if (dbQueryUser == null) {
+                boolean saveSuccess = iSysUserService.save(accessToken);
+                if (saveSuccess) {
+                    log.warn("新用户注册成功!用户名:{}", accessToken.getUserName());
+                }
+            }
             Subject currentUser = SecurityUtils.getSubject();
             //2.判断是否认证过，否则进行重新认证
             if (!currentUser.isAuthenticated()) {
@@ -158,6 +172,7 @@ public class LoginController {
         return "shiro/login";
     }
 
+    @AccessLog("系统用户登陆")
     @PostMapping("blog/user/login")
     public String userLoginAction(SysUser loginUser, @RequestParam(value = "remember", defaultValue = "0") Boolean remember) {
         Subject currentUser = SecurityUtils.getSubject();

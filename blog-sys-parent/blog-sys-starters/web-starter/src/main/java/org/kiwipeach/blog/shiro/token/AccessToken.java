@@ -55,12 +55,13 @@ public class AccessToken extends SysUser implements HostAuthenticationToken, Rem
     public AccessToken() {
     }
 
-    public AccessToken(String tokenStr, String thirdUserId, String nickName, String headUrl, String platform) {
+    public AccessToken(String tokenStr, String thirdUserId, String userName, String nickName, String headUrl, String platform) {
         this.tokenStr = tokenStr;
         this.platform = platform;
         setThirdUserId(thirdUserId);
         setNickName(nickName);
         setHeadUrl(headUrl);
+        setUserName(userName);
     }
 
     public AccessToken(String tokenStr, String expiresTime, String refreshToken, boolean rememberMe, String host, String platform) {

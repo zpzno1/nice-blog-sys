@@ -93,10 +93,11 @@ public class GithubHttpUtil extends HttpBaseUtil {
         AccessToken accessToken = null;
         // 获取信息成功
         if (!StringUtils.isEmpty(jsonObject.getString("login"))) {
-            String loginId = jsonObject.getString("login");
-            String nickName = jsonObject.getString("name");
+            String loginId = jsonObject.getString("node_id");
+            String userName = jsonObject.getString("login");
+            String nickName = jsonObject.getString("login");
             String headUrl = jsonObject.getString("avatar_url");
-            accessToken = new AccessToken(accessTokenStr, loginId, nickName, headUrl, "github");
+            accessToken = new AccessToken(accessTokenStr, loginId,userName, nickName, headUrl, "github");
             // 获取信息失败
         } else {
             throw new BlogException("-ACCOUNT_002", "github查询个人信息异常,错误信息:" + resultStr);

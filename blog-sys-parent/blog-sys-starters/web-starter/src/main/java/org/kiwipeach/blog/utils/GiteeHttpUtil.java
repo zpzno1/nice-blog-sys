@@ -94,10 +94,11 @@ public class GiteeHttpUtil extends HttpBaseUtil {
         AccessToken accessToken = null;
         // 获取信息成功
         if (!StringUtils.isEmpty(jsonObject.getString("login"))) {
-            String loginId = jsonObject.getString("login");
+            String loginId = jsonObject.getString("id");
+            String userName = jsonObject.getString("login");
             String nickName = jsonObject.getString("name");
             String headUrl = jsonObject.getString("avatar_url");
-            accessToken = new AccessToken(accessTokenStr, loginId, nickName, headUrl, "gitee");
+            accessToken = new AccessToken(accessTokenStr, loginId,userName, nickName, headUrl, "gitee");
             // 获取信息失败
         } else {
             throw new BlogException("-ACCOUNT_002", "gitee查询个人信息异常,错误信息:" + resultStr);

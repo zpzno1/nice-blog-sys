@@ -40,7 +40,7 @@ import java.util.List;
  * @author kiwipeach
  * @create 2019-01-20
  */
-public class QQHttpUtil extends HttpBaseUtil{
+public class QQHttpUtil extends HttpBaseUtil {
 
 
     /**
@@ -147,14 +147,12 @@ public class QQHttpUtil extends HttpBaseUtil{
         if ("0".equals(jsonObject.getString("ret"))) {
             String nickName = jsonObject.getString("nickname");
             String headUrl = jsonObject.getString("figureurl");
-            accessToken = new AccessToken(accessTokenString, openId, nickName, headUrl, "qq");
+            accessToken = new AccessToken(accessTokenString, openId, nickName, nickName, headUrl, "qq");
         } else {
             throw new BlogException("-ACCOUNT_002", "qq查询openId异常,错误信息:" + resultStr);
         }
         return accessToken;
     }
-
-
 
 
     public static void main(String[] args) {
