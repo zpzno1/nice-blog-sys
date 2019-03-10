@@ -15,7 +15,7 @@
  */
 package cn.kiwipeach.blog.service.impl.admin;
 
-import cn.kiwipeach.blog.configuration.AjaxResponse;
+import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.exception.BlogException;
 import cn.kiwipeach.blog.service.adapter.AdminBlogServiceAdapter;

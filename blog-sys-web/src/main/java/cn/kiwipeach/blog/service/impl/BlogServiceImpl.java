@@ -52,7 +52,7 @@ public class BlogServiceImpl extends BlogServiceAdapter {
     public IPage<BlogInfoVO> pageQuery(IPage<BlogInfoVO> page, String categoryId, String tagName) {
         List<BlogInfoVO> blogInfoVOS = blogMapper.selectByPage(page, categoryId, tagName);
         for (BlogInfoVO blogInfoVO : blogInfoVOS) {
-            dealTagsAndImageIcon(blogInfoVO);
+            dealTagsName(blogInfoVO);
         }
         return page.setRecords(blogInfoVOS);
     }
@@ -60,7 +60,7 @@ public class BlogServiceImpl extends BlogServiceAdapter {
     @Override
     public BlogInfoVO queryById(String blogId) {
         BlogInfoVO blogInfoVO = blogMapper.selectBlog(blogId);
-        dealTagsAndImageIcon(blogInfoVO);
+        dealTagsName(blogInfoVO);
         Blog nextBlog = blogMapper.selectNextBlog(blogId);
         // 处理最后一篇博客下一篇问题
         if (nextBlog == null) {
@@ -90,15 +90,16 @@ public class BlogServiceImpl extends BlogServiceAdapter {
     }
 
     /**
-     * 为博客信息附加上标签和博客图标信息
+     * 为博客信息附加上标签信息
      *
      * @param blogInfoVO 目标博客对象
      */
-    private void dealTagsAndImageIcon(BlogInfoVO blogInfoVO) {
+    private void dealTagsName(BlogInfoVO blogInfoVO) {
+        // 处理博客标签
         List<TagVO> tagVOS = blogTagMapper.selectBlogTag(blogInfoVO.getId());
         blogInfoVO.setBlogTagList(tagVOS);
         // 处理博客图片(需要登录)
-        String download = iMarkdownStoreageService.download(blogInfoVO.getContent());
-        blogInfoVO.setContent(download);
+        //String download = iMarkdownStoreageService.download(blogInfoVO.getContent());
+        //blogInfoVO.setContent(download);
     }
 }

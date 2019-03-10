@@ -15,7 +15,7 @@
  */
 package cn.kiwipeach.blog.controller.admin;
 
-import cn.kiwipeach.blog.configuration.AjaxResponse;
+import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.service.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

@@ -15,7 +15,7 @@
  */
 package cn.kiwipeach.blog.service;
 
-import cn.kiwipeach.blog.configuration.AjaxResponse;
+import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO;
 import cn.kiwipeach.blog.domain.vo.BlogInfoVO;

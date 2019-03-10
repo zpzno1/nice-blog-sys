@@ -13,25 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.service.adapter;
+package cn.kiwipeach.blog.anno;
 
-import cn.kiwipeach.blog.base.AjaxResponse;
-import cn.kiwipeach.blog.domain.Blog;
-import cn.kiwipeach.blog.mapper.BlogMapper;
-import cn.kiwipeach.blog.service.IBlogService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.web.multipart.MultipartFile;
+import java.lang.annotation.*;
 
 /**
- * 后台博客发表适配器
+ * 访问注解:注解哪些控制器是否需要记录访问日志
  *
  * @author kiwipeach
- * @create 2019-03-04
+ * @create 2019-03-08
  */
-public abstract class BlogServiceAdapter extends ServiceImpl<BlogMapper, Blog> implements IBlogService {
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface AccessLog {
 
-    @Override
-    public AjaxResponse<Boolean> uploadBlog(MultipartFile multipartFile) {
-        return null;
-    }
+    String value() default "";
+
 }

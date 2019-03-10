@@ -16,7 +16,7 @@
 package cn.kiwipeach.blog.controller;
 
 
-import cn.kiwipeach.blog.configuration.AjaxResponse;
+import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.vo.TagCountVO;
 import cn.kiwipeach.blog.service.IBlogTagService;
 import org.springframework.beans.factory.annotation.Autowired;

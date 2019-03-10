@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.configuration;
-
-import org.springframework.format.annotation.DateTimeFormat;
+package cn.kiwipeach.blog.base;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

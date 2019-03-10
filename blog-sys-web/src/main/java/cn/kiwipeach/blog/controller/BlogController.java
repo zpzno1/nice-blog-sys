@@ -16,12 +16,11 @@
 package cn.kiwipeach.blog.controller;
 
 
-import cn.kiwipeach.blog.configuration.AjaxResponse;
-import cn.kiwipeach.blog.domain.Blog;
+import cn.kiwipeach.blog.anno.AccessLog;
+import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO;
 import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
 import cn.kiwipeach.blog.service.IBlogService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +29,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 博客 前端控制器
@@ -85,11 +83,12 @@ public class BlogController {
      * @param pattern 博客归档格式（yyyy,yyyyMM,yyyyQ）
      * @return 返回博客归档列表信息
      */
-    @GetMapping("archive/query")
+    @AccessLog("日志归档信息查询")
+    @GetMapping(value = "archive/query", produces = "application/json")
     @ResponseBody
-    public AjaxResponse<IPage<ArchiveBlogTimelineVO>> archiveBlogQuery(Page page, @RequestParam(value = "pattern", defaultValue = "yyyy") String pattern, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        System.out.println("sessionID==>" + session.getId());
+    public AjaxResponse<IPage<ArchiveBlogTimelineVO>> archiveBlogQuery(Page page,
+                                                                       @RequestParam(value = "pattern", defaultValue = "yyyy") String pattern,
+                                                                       HttpServletResponse response) {
         IPage iPage = iBlogService.archiveBlogQuery(page, pattern);
         return AjaxResponse.success(iPage);
     }

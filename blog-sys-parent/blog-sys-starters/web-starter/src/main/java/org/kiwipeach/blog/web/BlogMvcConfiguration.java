@@ -15,21 +15,15 @@
  */
 package org.kiwipeach.blog.web;
 
-import com.alibaba.druid.support.http.StatViewServlet;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
-import org.springframework.context.annotation.Bean;
+import org.kiwipeach.blog.resolver.CurrentUserMethodArgumentResolver;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.servlet.DispatcherServlet;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import javax.servlet.MultipartConfigElement;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 /**
  * springmvc拓展类,拓展拦截器，过滤器，监听器等等组件。
@@ -40,27 +34,35 @@ import java.util.Map;
 @Configuration
 public class BlogMvcConfiguration extends WebMvcConfigurerAdapter {
 
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         // 设置默认欢迎页面
+        super.addViewControllers(registry);
         registry.addViewController("/").setViewName("forward:/blog/index.html");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
-        super.addViewControllers(registry);
     }
 
     /**
-     * 注册blogDispatcherServlet，前端控制器
+     * 拦截器配置
      *
-     * @return ServletRegistrationBean
+     * @param registry 注册中心
      */
-    @Bean
-    public ServletRegistrationBean blogDispatcherServlet(DispatcherServlet dispatcherServlet, MultipartConfigElement multipartConfigElement) {
-        ServletRegistrationBean bean = new ServletRegistrationBean(dispatcherServlet);
-        bean.addUrlMappings("*.html");
-        bean.addUrlMappings("*.json");
-        bean.setLoadOnStartup(1);
-        //TODO 注册多个前端控制器，暂时未找到使用场景。。。
-        //bean.setMultipartConfig(multipartConfigElement);
-        return bean;
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        super.addInterceptors(registry);
+        //registry.addInterceptor(new AccessLogInterceptor())
+        //        .addPathPatterns("/**");
+    }
+
+    /**
+     * 参数解析器配置
+     *
+     * @param argumentResolvers 参数解析器
+     */
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        super.addArgumentResolvers(argumentResolvers);
+        argumentResolvers.add(new CurrentUserMethodArgumentResolver());
     }
 }

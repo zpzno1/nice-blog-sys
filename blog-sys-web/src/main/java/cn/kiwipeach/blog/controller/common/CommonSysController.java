@@ -15,19 +15,13 @@
  */
 package cn.kiwipeach.blog.controller.common;
 
-import cn.kiwipeach.blog.configuration.AjaxResponse;
-import cn.kiwipeach.blog.domain.SysUser;
+import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.vo.UserInfoVO;
 import cn.kiwipeach.blog.exception.BlogException;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
 import org.kiwipeach.blog.shiro.token.AccessToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**

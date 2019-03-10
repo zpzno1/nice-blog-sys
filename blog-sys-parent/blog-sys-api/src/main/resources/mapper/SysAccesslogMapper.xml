@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kiwipeach.generator.mapper.SysAccesslogMapper">
+    <!-- auto-part create by kiwipeach [1099501218@qq.com] -->
+    <resultMap id="BaseResultMap" type="cn.kiwipeach.blog.domain.SysAccesslog">
+        <id column="ID" property="id"/>
+        <result column="USER_NAME" property="userName"/>
+        <result column="IP" property="ip"/>
+        <result column="START_TIME" property="startTime"/>
+        <result column="URL" property="url"/>
+        <result column="METHOD" property="method"/>
+        <result column="REQUEST_HEADER" property="requestHeader"/>
+        <result column="REQUEST_BODY" property="requestBody"/>
+        <result column="RESPONSE_BODY" property="responseBody"/>
+        <result column="STATUS" property="status"/>
+        <result column="END_TIME" property="endTime"/>
+        <result column="NAME" property="name"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ID, USER_NAME, IP, START_TIME, URL, METHOD, REQUEST_HEADER, REQUEST_BODY, RESPONSE_BODY, STATUS, END_TIME
+    </sql>
+
+    <!-- self-part create by kiwipeach [1099501218@qq.com] -->
+
+</mapper>

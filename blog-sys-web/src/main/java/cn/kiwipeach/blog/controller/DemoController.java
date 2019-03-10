@@ -16,12 +16,11 @@
 package cn.kiwipeach.blog.controller;
 
 
-import cn.kiwipeach.blog.configuration.AjaxResponse;
-import cn.kiwipeach.blog.exception.BlogException;
+import cn.kiwipeach.blog.anno.AccessLog;
+import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.service.IDemoService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,6 +68,7 @@ public class DemoController {
         return AjaxResponse.success(iDemoService.queryBlogListDemo(page, userId));
     }
 
+    @AccessLog("测试博客异常")
     @RequestMapping("500")
     @ResponseBody
     public String internalServrError() {
@@ -76,7 +76,6 @@ public class DemoController {
         iDemoService.testRuntimeException();
         return "tets";
     }
-
 
 
 }

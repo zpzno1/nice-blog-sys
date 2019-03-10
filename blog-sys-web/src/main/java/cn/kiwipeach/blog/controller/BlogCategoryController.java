@@ -16,10 +16,8 @@
 package cn.kiwipeach.blog.controller;
 
 
-import cn.kiwipeach.blog.configuration.AjaxResponse;
-import cn.kiwipeach.blog.domain.BlogCategory;
+import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.vo.CategoryTreeVO;
-import cn.kiwipeach.blog.mapper.BlogCategoryMapper;
 import cn.kiwipeach.blog.service.IBlogCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

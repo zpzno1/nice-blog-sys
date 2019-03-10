@@ -15,6 +15,7 @@
  */
 package cn.kiwipeach.blog.controller;
 
+import cn.kiwipeach.blog.anno.AccessLog;
 import cn.kiwipeach.blog.domain.SysUser;
 import cn.kiwipeach.blog.enums.CodeEnum;
 import cn.kiwipeach.blog.exception.BlogException;
@@ -92,6 +93,7 @@ public class LoginController {
      * @return 返回登陆结果页面
      */
     @RequestMapping("{platform}/oauth2.0/callback")
+    @AccessLog("三方授平台登陆")
     public String qqLoginCallback(
             @RequestParam(name = "code", required = true) String code,
             @RequestParam(name = "state", required = false) String state,
