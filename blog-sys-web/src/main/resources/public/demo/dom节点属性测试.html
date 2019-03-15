@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性节点测试</title>
+    <script type="application/javascript" src="../../static/assets/plugins/jquery/dist/jquery.js"></script>
+</head>
+<body>
+<div id="commentBox" comment-type-data="blog_comment" comment-data="{blogId:10086}">
+    <h4>测试内容</h4>
+</div>
+<script>
+    $(function () {
+        var commentType = $('#commentBox').attr('comment-type-data');
+        var commentData = $('#commentBox').attr('comment-data');
+        debugger
+    })
+</script>
+</body>
+</html>

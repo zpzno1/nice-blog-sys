@@ -19,7 +19,7 @@ body::-webkit-scrollbar-track, div::-webkit-scrollbar-track, p::-webkit-scrollba
 }
 
 body::-webkit-scrollbar-thumb, div::-webkit-scrollbar-thumb, p::-webkit-scrollbar-thumb, textarea::-webkit-scrollbar-thumb, section::-webkit-scrollbar-thumb, ul::-webkit-scrollbar-thumb {
-    background: #040405cf;      /*控制颜色*/
+    background: #040405cf; /*控制颜色*/
     -webkit-border-radius: 12px;
     /*border: 1px solid #fff;    */ /*控制宽度*/
 }
@@ -40,6 +40,7 @@ body::-webkit-scrollbar-thumb, div::-webkit-scrollbar-thumb, p::-webkit-scrollba
     font-weight: 400;
     src: url(https://fonts.gstatic.com/s/materialicons/v37/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
 }
+
 /*模态框关闭图标*/
 .material-icons {
     font-family: 'Material Icons';
@@ -55,4 +56,16 @@ body::-webkit-scrollbar-thumb, div::-webkit-scrollbar-thumb, p::-webkit-scrollba
     direction: ltr;
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
+}
+
+/*博客评论文本域自定义样式*/
+.comment_reply_textarea {
+    display: block;
+    resize: none;
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    min-height: 150px;
+    margin-left: 10px;
+    border: 1px solid #9199a1;
 }

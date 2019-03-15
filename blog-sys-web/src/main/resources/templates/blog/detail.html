@@ -204,65 +204,30 @@
                         <script src="../../static/assets_admin/js/plugins/editor-md/editormd.min.js"
                                 th:src="@{/assets_admin/js/plugins/editor-md/editormd.min.js}"></script>
                         <script type="application/javascript" th:inline="javascript">
-                            // var contentMdUrl = '${blog}';
-                            var contentMdUrl = /*[[${blogDetail.content}]]*/ "test.md";
-                            // contentMdUrl = 'http://pndxi7i9l.bkt.clouddn.com/20190226104100-Markdown%E8%AF%AD%E6%B3%95%E7%AE%80%E4%BB%8B.md?attname=&e=1551195682&token=egP7QEuBIF-kN03VuxuUeqAYtfylyZR5h9VSTM8h:eYB_rkIB5UGDSGa9Vv1Xpb_4_IQ';
                             var markdown = /*[[${blogDetail.content}]]*/ "test.md";
                             $('#article-content-div').html('');
                             $(function () {
-                                testEditormdView = editormd.markdownToHTML("article-content-div", {
-                                    markdown: markdown,
-                                    htmlDecode: "style,script,iframe",  // you can filter tags decode
-                                    tocm: true,    // Using [TOCM]
-                                    emoji: true,
-                                    taskList: true,
-                                    tex: true,  // 默认不解析
-                                    flowChart: true,  // 默认不解析
-                                    sequenceDiagram: true,  // 默认不解析
-                                });
+                                // testEditormdView = editormd.markdownToHTML("article-content-div", {
+                                //     markdown: markdown,
+                                //     htmlDecode: "style,script,iframe",  // you can filter tags decode
+                                //     tocm: true,    // Using [TOCM]
+                                //     emoji: true,
+                                //     taskList: true,
+                                //     tex: true,  // 默认不解析
+                                //     flowChart: true,  // 默认不解析
+                                //     sequenceDiagram: true,  // 默认不解析
+                                // });
 
                                 blog_common.plugin.tocbot_catalog_plugin.init();
                                 blog_common.plugin.tocbot_catalog_plugin.event.bind_outline_scroll();
                             });
-
-                            // $.ajax({
-                            //     url: contentMdUrl,
-                            //     method: 'get',
-                            //     beforeSend: function () {
-                            //         this.dialogIndex = index = layer.load(1, {shade: [0.1, '#fff']});////0.1透明度的白色背景
-                            //     },
-                            //     complete: function () {
-                            //         layer.close(this.dialogIndex);
-                            //     },
-                            //     success: function (markdown) {
-                            //
-                            //     }
-                            // });
-
-                            // $.get(contentMdUrl, function (markdown) {
-                            //     $('#article-content-div').html('');
-                            //     testEditormdView = editormd.markdownToHTML("article-content-div", {
-                            //         markdown: markdown,
-                            //         htmlDecode: "style,script,iframe",  // you can filter tags decode
-                            //         tocm: true,    // Using [TOCM]
-                            //         emoji: true,
-                            //         taskList: true,
-                            //         tex: true,  // 默认不解析
-                            //         flowChart: true,  // 默认不解析
-                            //         sequenceDiagram: true,  // 默认不解析
-                            //     });
-                            //     blog_common.plugin.tocbot_catalog_plugin.init();
-                            //     blog_common.plugin.tocbot_catalog_plugin.event.bind_outline_scroll();
-                            // });
-
                         </script>
                     </div>
-
                     <hr>
                     <!--点赞:begin-->
                     <div class="row">
                         <div style="font-size: 18px;padding-top: 20px;text-align: left;font-weight: bold"
-                             class="col-md-5">
+                             class="col-md-4">
                             <a href="detail.html"
                                th:href="@{/blog/detail/{blogId}(blogId=${blogDetail.getPreviousBlog().getId()})}"
                                class="text-dark">
@@ -271,16 +236,36 @@
                                 </svg>
                                 <span th:text="${blogDetail.getPreviousBlog().getTitle()}"></span></a>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4 text-center">
                             <button class="btn btn-sm btn-primary btn-round" style="font-size: 24px;">
                                 <svg class="alibaba-icon">
                                     <use xlink:href="#icon-agree"></use>
                                 </svg>
                                 ([[${blogDetail.getViews()}]])
                             </button>
+                            <button class="btn btn-primary btn-round" data-toggle="modal" id="commentReplyBtn"
+                                    style="font-size: 18px;"><i class="fas fa-comment"></i>(99)
+                            </button>
                         </div>
+                        <script type="text/javascript">
+                            $(function () {
+                                $('#commentReplyBtn').bind('click', function () {
+                                    var options = {
+                                        backdrop: true,/*不能点击屏幕*/
+                                        keyboard: true,/*不支持ESC*/
+                                    };
+                                    $('#commentReplyDialog').modal(options);
+                                    //隐藏时候销毁评论回复内容
+                                    $('#commentReplyDialog').on('hidden.bs.modal', function (e) {
+                                        $('#commentMessageText').val('');
+                                        $('#commentMessageText').attr('placeholder', '评论支持markdown语法');
+                                    })
+                                });
+                            })
+                        </script>
+
                         <div style="font-size: 18px;padding-top: 20px;text-align: right;font-weight: bold"
-                             class="col-md-5">
+                             class="col-md-4">
                             <a href="detail.html"
                                th:href="@{/blog/detail/{blogId}(blogId=${blogDetail.getNextBlog().getId()})}"
                                class="text-dark">
@@ -321,10 +306,7 @@
             </div>
             <!--博客详情:end-->
 
-
             <!--评论专区:begin-->
-            <h3 style="margin-left: 5%">评论：</h3>
-            <hr>
             <div class="card">
                 <div class="card-body ">
                     <div class="author">
@@ -353,7 +335,13 @@
                             </div>
                             <div class="card-footer" style="padding: 0px 15px 10px 15px">
                                 <div class="stats ml-auto">
-                                    <a href="javascript:;" class="text-dark">回复</a>
+                                    <a href="javascript:;" class="text-dark" title="点赞">
+                                        <svg class="alibaba-icon" aria-hidden="true">
+                                            <use xlink:href="#icon-agree"></use>
+                                        </svg>
+                                        45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                    <a href="#collapseExample" title="回复" class="text-dark" data-toggle="collapse"><i
+                                            class="fa fa-reply" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -420,7 +408,11 @@
                 </div>
                 <div class="card-footer ">
                     <div class="stats ml-auto">
-                        <a href="javascript:;" class="text-dark"><i class="fa fa-thumbs-o-up"></i> 45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                        <a href="javascript:;" class="text-dark">
+                            <svg class="alibaba-icon" aria-hidden="true">
+                                <use xlink:href="#icon-agree"></use>
+                            </svg>
+                            45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         <a href="#collapseExample" class="text-dark" data-toggle="collapse">查看回复(38)<i
                                 class="fa fa-chevron-down" aria-hidden="true"></i></a>
                     </div>
@@ -505,6 +497,45 @@
 </div>
 <!--对话模态框-->
 <div th:replace="blog::modal_dialog"></div>
+
+<!--博客评论回复弹框-->
+
+<div class="modal fade" tabindex="-1" id="commentReplyDialog">
+    <div class="modal-dialog modal-login" role="document" style="width:100%;">
+        <div class="modal-content">
+            <div class="card card-signup card-plain">
+                <div class="modal-header">
+                    <div class="card-header card-header-primary text-center">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i
+                                class="material-icons">clear</i></button>
+                        <h4 class="card-title">评论回复</h4>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <form class="form" method="" action="">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="commentMessageText">请输入内容：</label>
+                                <textarea id="commentMessageText" class="form-control comment_reply_textarea"
+                                          placeholder="评论支持markdown语法"></textarea>
+                            </div>
+                            <!--<div class="form-group">
+                                <label for="exampleFormControlInput1">请输入验证码：</label>
+                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+                            </div>-->
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="submit" class="btn btn-primary btn-round"
+                            style="margin-bottom: 30px;width: 300px;">发&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--前段框架依赖开始-->
 <script type="text/javascript" src="../../static/assets/js/detail/blog_detail.js"
         th:src="@{/assets/js/detail/blog_detail.js}"></script>

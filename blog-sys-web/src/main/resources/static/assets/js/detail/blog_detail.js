@@ -9,7 +9,7 @@
     // 加载更多评论
     bind_load_comment($('#load_comment_btn'));
 
-    // 博客大纲
+    // 博客评论按钮
     // debugger;
 
 })(jQuery);
