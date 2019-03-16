@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kiwipeach.blog.mapper.SysRoleMapper">
+    <!-- auto-part create by kiwipeach [1099501218@qq.com] -->
+    <resultMap id="BaseResultMap" type="cn.kiwipeach.blog.domain.SysRole">
+        <id column="ID" property="id"/>
+        <result column="NAME" property="name"/>
+        <result column="WEIGHT" property="weight"/>
+        <result column="ICON" property="icon"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="DESCRIPTION" property="description"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ID, NAME, WEIGHT, ICON, CREATE_TIME, UPDATE_TIME, DESCRIPTION
+    </sql>
+
+    <!-- self-part create by kiwipeach [1099501218@qq.com] -->
+
+</mapper>

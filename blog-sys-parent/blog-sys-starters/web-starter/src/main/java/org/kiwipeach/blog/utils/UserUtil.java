@@ -15,8 +15,6 @@
  */
 package org.kiwipeach.blog.utils;
 
-import cn.kiwipeach.blog.domain.SysUser;
-import cn.kiwipeach.blog.domain.vo.UserInfoVO;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.kiwipeach.blog.shiro.token.AccessToken;

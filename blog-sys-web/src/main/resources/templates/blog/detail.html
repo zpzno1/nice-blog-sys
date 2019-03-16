@@ -243,26 +243,12 @@
                                 </svg>
                                 ([[${blogDetail.getViews()}]])
                             </button>
-                            <button class="btn btn-primary btn-round" data-toggle="modal" id="commentReplyBtn"
-                                    style="font-size: 18px;"><i class="fas fa-comment"></i>(99)
+                            <button id="commentReplyBtn"
+                                    class="btn btn-primary btn-round" style="font-size: 18px;"
+                                    comment-type="comment"
+                                    th:attr="comment-data=${blogDetail.getId()}"><i class="fas fa-comment"></i>([[${blogDetail.getCommentCount()}]])
                             </button>
                         </div>
-                        <script type="text/javascript">
-                            $(function () {
-                                $('#commentReplyBtn').bind('click', function () {
-                                    var options = {
-                                        backdrop: true,/*不能点击屏幕*/
-                                        keyboard: true,/*不支持ESC*/
-                                    };
-                                    $('#commentReplyDialog').modal(options);
-                                    //隐藏时候销毁评论回复内容
-                                    $('#commentReplyDialog').on('hidden.bs.modal', function (e) {
-                                        $('#commentMessageText').val('');
-                                        $('#commentMessageText').attr('placeholder', '评论支持markdown语法');
-                                    })
-                                });
-                            })
-                        </script>
 
                         <div style="font-size: 18px;padding-top: 20px;text-align: right;font-weight: bold"
                              class="col-md-4">
@@ -512,22 +498,21 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    <form class="form" method="" action="">
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="commentMessageText">请输入内容：</label>
-                                <textarea id="commentMessageText" class="form-control comment_reply_textarea"
-                                          placeholder="评论支持markdown语法"></textarea>
-                            </div>
-                            <!--<div class="form-group">
-                                <label for="exampleFormControlInput1">请输入验证码：</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
-                            </div>-->
+                    <h4 class="description text-center" id="loginTipInfo">文明发言，共建和谐社区</h4>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="commentMessageText">请输入内容：</label>
+                            <textarea id="commentMessageText" class="form-control comment_reply_textarea"
+                                      placeholder="评论支持markdown语法"></textarea>
                         </div>
-                    </form>
+                        <!--<div class="form-group">
+                            <label for="exampleFormControlInput1">请输入验证码：</label>
+                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+                        </div>-->
+                    </div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button type="submit" class="btn btn-primary btn-round"
+                    <button id="sendCommentReplyBtn" type="button" class="btn btn-primary btn-round"
                             style="margin-bottom: 30px;width: 300px;">发&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表
                     </button>
                 </div>

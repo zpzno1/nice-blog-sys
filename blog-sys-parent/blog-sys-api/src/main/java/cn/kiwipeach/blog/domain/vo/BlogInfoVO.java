@@ -38,6 +38,7 @@ public class BlogInfoVO{
     private String title;
     private String content;
     private String starCount;
+    private String commentCount;
     private String views;
     private String top;
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")

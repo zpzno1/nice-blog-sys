@@ -25,12 +25,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.kiwipeach.blog.shiro.token.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.security.auth.login.AccountLockedException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 博客自定义认证授权Realm
@@ -61,12 +66,10 @@ public class CustomShiroRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         AccessToken targetToken = (AccessToken) authenticationToken;
         //TODO 从数据库中查找到了一条用户
-        String targetUsername = targetToken.getUserName();
-        String targetPassword = targetToken.getPassword();
         String platform = targetToken.getPlatform();
         AccessToken dbAccessToken = null;
         if (CodeEnum.SYSTEM.toString().equalsIgnoreCase(platform)) {
-            Wrapper<SysUser> queryWrapper = new QueryWrapper<SysUser>().eq("USER_NAME", targetUsername);
+            Wrapper<SysUser> queryWrapper = new QueryWrapper<SysUser>().eq("USER_NAME", targetToken.getUserName()).eq("PLATFORM", platform);
             SysUser sysUser = sysUserMapper.selectOne(queryWrapper);
             try {
                 userExceptionHandle(sysUser);
@@ -138,8 +141,21 @@ public class CustomShiroRealm extends AuthorizingRealm {
         //info.addStringPermissions(permissions);
         //return info;
         AccessToken accessToken = (AccessToken) principalCollection.getPrimaryPrincipal();
+        //准备角色权限信息
+        Set<String> roles = new HashSet<String>();
+        List<String> permissions = new ArrayList<String>();
+        if (accessToken.getUserName().equals("kiwipeach")&&accessToken.getPlatform().equals("system")){
+            roles.add("BlogAdmin");
+            roles.add("BlogUser");
+            //roles.add("user");
+            //permissions.add("blog:page:aboutxxx");
+            //分装当前用户的角色授权信息并返回
+        }
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roles);
+        info.addStringPermissions(permissions);
+        //3. 返回 SimpleAuthorizationInfo 对象.
+        return info;
         //无权限抛出AuthorizationException异常，可以在全局异常处理中对该异常进行判断，跳转到未授权页面
-        return null;
     }
 
 

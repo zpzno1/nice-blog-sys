@@ -9,6 +9,7 @@
         <result column="TITLE" property="title"/>
         <result column="CONTENT" property="content"/>
         <result column="STAR_COUNT" property="starCount"/>
+        <result column="COMMENT_COUNT" property="commentCount"/>
         <result column="VIEWS" property="views"/>
         <result column="TOP" property="top"/>
         <result column="CREATE_TIME" property="createTime"/>
@@ -18,7 +19,7 @@
         <result column="ICON_URL" property="iconUrl"/>
     </resultMap>
     <sql id="Base_Column_List">
-        ID, USER_ID, CATE_ID, TITLE, CONTENT, STAR_COUNT, VIEWS, TOP, CREATE_TIME, UPDATE_TIME
+        ID, USER_ID, CATE_ID, TITLE, CONTENT, STAR_COUNT, COMMENT_COUNT,VIEWS, TOP, CREATE_TIME, UPDATE_TIME
     </sql>
 
     <!-- self-part create by kiwipeach [1099501218@qq.com] -->
@@ -32,6 +33,7 @@
         <result column="TITLE" property="title"/>
         <result column="CONTENT" property="content"/>
         <result column="STAR_COUNT" property="starCount"/>
+        <result column="COMMENT_COUNT" property="commentCount"/>
         <result column="VIEWS" property="views"/>
         <result column="TOP" property="top"/>
         <result column="CREATE_TIME" property="createTime"/>
@@ -60,6 +62,7 @@
         b.TITLE,
         b.CONTENT,
         b.STAR_COUNT,
+        b.COMMENT_COUNT,
         b.VIEWS,
         b.TOP,
         b.CREATE_TIME,
@@ -93,6 +96,7 @@
                b.TITLE,
                b.CONTENT,
                b.STAR_COUNT,
+                b.COMMENT_COUNT,
                b.VIEWS,
                b.TOP,
                b.CREATE_TIME,
@@ -165,14 +169,6 @@
                                                                       tmp.archive_time
           LEFT JOIN t_blog_category bc ON t.cate_id = bc.id
          ORDER BY t.create_time DESC
-    </select>
-
-    <!--获取博客归档时间范围-->
-    <select id="selectArchiveRange" resultType="java.lang.String">
-        SELECT to_char(b.create_time, '${pattern}') AS archive_time
-        FROM t_blog b
-        GROUP BY to_char(b.create_time, '${pattern}')
-        ORDER BY to_char(b.create_time, '${pattern}') DESC
     </select>
 
 </mapper>

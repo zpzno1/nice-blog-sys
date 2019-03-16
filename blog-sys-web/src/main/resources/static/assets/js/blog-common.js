@@ -4,13 +4,6 @@
  * @create 2018/11/15
  */
 (function ($, window) {
-    /**
-     * 公共部分默认组件初始化
-     */
-    function defaul_plugin_init() {
-        //回到顶端
-        blog_common.plugin.uitotop.init();
-    }
 
     window.blog_common = {
         /**
@@ -293,6 +286,14 @@
             }
         }
     };
+    
+    /**
+     * 公共部分默认组件初始化
+     */
+    function defaul_plugin_init() {
+        //回到顶端
+        blog_common.plugin.uitotop.init();
+    }
 
     /**
      * 获取动态标签

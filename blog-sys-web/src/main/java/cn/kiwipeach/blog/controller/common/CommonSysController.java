@@ -44,8 +44,8 @@ public class CommonSysController {
         AccessToken curUser = (AccessToken) SecurityUtils.getSubject().getPrincipal();
         if (curUser == null) {
             return AjaxResponse.fail("-USERINFO_OO1", "未查询到用户信息");
-        }else {
-            UserInfoVO userInfoVO = new UserInfoVO(curUser.getUserName(), curUser.getNickName(), curUser.getHeadUrl());
+        } else {
+            UserInfoVO userInfoVO = new UserInfoVO(curUser.getUserName(), curUser.getNickName(), curUser.getHeadUrl(), curUser.getOpenId(), curUser.getPlatform());
             return AjaxResponse.success(userInfoVO);
         }
     }

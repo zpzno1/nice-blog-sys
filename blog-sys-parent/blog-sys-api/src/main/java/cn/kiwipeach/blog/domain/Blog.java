@@ -70,6 +70,13 @@ public class Blog implements Serializable {
     private Integer starCount;
 
     /**
+     * 评论数量
+     */
+    @TableField("COMMENT_COUNT")
+    private Integer commentCount;
+
+
+    /**
      * 浏览总量
      */
     @TableField("VIEWS")
@@ -215,6 +222,14 @@ public class Blog implements Serializable {
         this.iconUrl = iconUrl;
     }
 
+    public Integer getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
+    }
+
     @Override
     public String toString() {
         return "Blog{" +
@@ -224,6 +239,7 @@ public class Blog implements Serializable {
                 ", title=" + title +
                 ", content=" + content +
                 ", starCount=" + starCount +
+                ", commentCount=" + commentCount +
                 ", views=" + views +
                 ", top=" + top +
                 ", createTime=" + createTime +

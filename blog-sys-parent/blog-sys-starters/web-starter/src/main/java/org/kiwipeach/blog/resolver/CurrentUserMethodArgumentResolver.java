@@ -16,9 +16,7 @@
 package org.kiwipeach.blog.resolver;
 
 import cn.kiwipeach.blog.anno.CurrentUser;
-import cn.kiwipeach.blog.domain.vo.UserInfoVO;
 import cn.kiwipeach.blog.exception.BlogException;
-import org.apache.shiro.SecurityUtils;
 import org.kiwipeach.blog.shiro.token.AccessToken;
 import org.kiwipeach.blog.utils.UserUtil;
 import org.springframework.core.MethodParameter;
@@ -50,7 +48,7 @@ public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentR
         if (accessToken != null) {
             return accessToken;
         } else {
-            throw new BlogException("-LOGIN_001", "当前用户未登录");
+            throw new BlogException("-LOGIN_401", "当前用户未登录");
         }
     }
 }

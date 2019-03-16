@@ -16,6 +16,7 @@
 package cn.kiwipeach.blog.controller;
 
 import cn.kiwipeach.blog.anno.AccessLog;
+import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.SysUser;
 import cn.kiwipeach.blog.enums.CodeEnum;
 import cn.kiwipeach.blog.exception.BlogException;
@@ -112,9 +113,13 @@ public class LoginController {
             throw new BlogException("-LOGIN_02", "三方登陆配置有误，请联系管理员");
         } else {
             AccessToken accessToken = loginService.login(code);
+            //记录平台信息
+            accessToken.setPlatform(platform);
             Wrapper<SysUser> queryWrapper = new QueryWrapper<SysUser>().eq("THIRD_USER_ID", accessToken.getThirdUserId());
             SysUser dbQueryUser = iSysUserService.getOne(queryWrapper);
             if (dbQueryUser == null) {
+                //希望用户修改自己的默认名称，所以这里以"平台+昵称"的方式注册默认用户昵称
+                accessToken.setUserName(accessToken.getPlatform() + "_" + accessToken.getUserName());
                 boolean saveSuccess = iSysUserService.save(accessToken);
                 if (saveSuccess) {
                     log.warn("新用户注册成功!用户名:{}", accessToken.getUserName());
@@ -167,10 +172,27 @@ public class LoginController {
     /***************************************************三方通用登陆 end**************************************************************/
 
 
+    //@GetMapping("login")
+    //public String toLoginPage() {
+    //    return "shiro/login";
+    //}
+
+    /**
+     * 未登录返回json，不返回页面了
+     *
+     * @return 返回未登录数据
+     */
     @GetMapping("login")
-    public String toLoginPage() {
-        return "shiro/login";
+    @ResponseBody
+    public AjaxResponse toLoginPage(HttpServletRequest request) {
+        SavedRequest savedRequest = WebUtils.getSavedRequest(request);
+        String requestUrl = savedRequest.getRequestUrl();
+        String resultMsg = String.format("当前用户处于未登录状态，请登录后重试!");
+        AjaxResponse ajaxResponse = new AjaxResponse("401", resultMsg);
+        ajaxResponse.setData(requestUrl);
+        return ajaxResponse;
     }
+
 
     @AccessLog("系统用户登陆")
     @PostMapping("blog/user/login")
@@ -210,9 +232,17 @@ public class LoginController {
         return "shiro/fail";
     }
 
-    @GetMapping("/unauthorized")
-    public String toUnauthorizedPage() {
-        return "shiro/unauthorized";
+    //@GetMapping("/unauthorized")
+    //public String toUnauthorizedPage() {
+    //    return "shiro/unauthorized";
+    //}
+
+
+    @GetMapping("/unauthorize")
+    @ResponseBody
+    public AjaxResponse toUnauthorizedPage(HttpServletRequest request) {
+        AjaxResponse ajaxResponse = new AjaxResponse("403", "当前没有对此资源的操作权限，请联系管理员(1099501218@qq.com)！");
+        return ajaxResponse;
     }
 
     @GetMapping("/remember")

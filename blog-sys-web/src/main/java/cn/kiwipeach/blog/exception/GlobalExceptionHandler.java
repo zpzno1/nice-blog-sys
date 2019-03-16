@@ -28,12 +28,25 @@ public class GlobalExceptionHandler {
         logger.error("服务器内部错误:", e);
         LinkedList<StackTraceElement> humanExceptionStack = getHumanExceptionStack(e);
         logger.error("######################################################################################################################################################################");
-        Map<String, String> paramMap = new HashMap<>();
-        request.setAttribute("javax.servlet.error.status_code", 500);
+        Integer status_code = 500;
+        if (e instanceof BlogException) {
+            BlogException blogException = (BlogException) e;
+            //本站博客需要特殊处理的一些异常：登录异常（401），越权异常（403）
+            switch (blogException.getCode()) {
+                case "-LOGIN_401":
+                    status_code = 401;
+                    break;
+                case "-LOGIN_403":
+                    status_code = 403;
+                    break;
+            }
+        }
+        request.setAttribute("javax.servlet.error.status_code", status_code);
         //人性化异常堆栈，将推送至前端，使系统更快排查报错原因
         request.setAttribute("humanExceptionStack", humanExceptionStack);
         return "forward:/error";
     }
+
 
     private LinkedList<StackTraceElement> getHumanExceptionStack(Exception e) {
         StackTraceElement[] stackTrace = e.getStackTrace();

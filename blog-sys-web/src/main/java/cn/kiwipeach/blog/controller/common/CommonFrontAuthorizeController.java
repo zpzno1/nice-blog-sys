@@ -15,6 +15,8 @@
  */
 package cn.kiwipeach.blog.controller.common;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -34,6 +36,7 @@ public class CommonFrontAuthorizeController {
      */
     @RequestMapping("blog/about")
     //@RequiresPermissions(value = "blog:page:about")
+    //@RequiresRoles("user")
     public String toBlogAboutPage() {
         //FIXME 有更明确的url，会不会先找更加明确地地址呢？
         return "blog/about";

@@ -8,6 +8,8 @@
         <result column="USER_NAME" property="userName"/>
         <result column="PASSWORD" property="password"/>
         <result column="NICK_NAME" property="nickName"/>
+        <result column="PLATFORM" property="platform"/>
+        <result column="OPEN_ID" property="openId"/>
         <result column="HEAD_URL" property="headUrl"/>
         <result column="EMAIL" property="email"/>
         <result column="ACCOUNT_LOCK" property="accountLock"/>
@@ -16,7 +18,7 @@
         <result column="UPDATE_TIME" property="updateTime"/>
     </resultMap>
     <sql id="Base_Column_List">
-        ID, THIRD_USER_ID, USER_NAME, PASSWORD, NICK_NAME, HEAD_URL, EMAIL, ACCOUNT_LOCK, LOCK_REASON, CREATE_TIME, UPDATE_TIME
+        ID, THIRD_USER_ID, USER_NAME, PASSWORD, NICK_NAME,PLATFORM, OPEN_ID,HEAD_URL, EMAIL, ACCOUNT_LOCK, LOCK_REASON, CREATE_TIME, UPDATE_TIME
     </sql>
 
     <!-- self-part create by kiwipeach [1099501218@qq.com] -->

@@ -65,6 +65,19 @@ public class SysUser implements Serializable {
     private String nickName;
 
     /**
+     * 平台[qq,gitee,github,system]
+     */
+    @TableField("PLATFORM")
+    private String platform;
+
+    /**
+     * 网站对外的openId
+     */
+    @TableField("OPEN_ID")
+    private String openId;
+
+
+    /**
      * 用户头像 (默认三方平台头像，可后期自行更换头像,本地系统使用默认头像)
      */
     @TableField("HEAD_URL")
@@ -99,6 +112,22 @@ public class SysUser implements Serializable {
      */
     @TableField("UPDATE_TIME")
     private LocalDateTime updateTime;
+
+    public String getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
 
     public String getId() {
         return id;

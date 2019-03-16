@@ -13,37 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.controller;
+package cn.kiwipeach.blog.service.impl;
 
-
-import cn.kiwipeach.blog.anno.CurrentUser;
-import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.CommentReply;
+import cn.kiwipeach.blog.mapper.BlogMapper;
+import cn.kiwipeach.blog.mapper.CommentReplyMapper;
 import cn.kiwipeach.blog.service.ICommentReplyService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.kiwipeach.blog.shiro.token.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.stereotype.Service;
 
 /**
- * 评论 前端控制器
+ * 评论 服务实现类
  *
  * @author kiwipeach
  * @create 2019-03-16
  */
-@Controller
-@RequestMapping("/commentReply")
-public class CommentReplyController {
+@Service
+public class CommentReplyServiceImpl extends ServiceImpl<CommentReplyMapper, CommentReply> implements ICommentReplyService {
 
     @Autowired
-    private ICommentReplyService iCommentReplyService;
+    private BlogMapper blogMapper;
 
-    @PostMapping("comment/create")
-    @ResponseBody
-    public AjaxResponse<Boolean> createBlogComment(CommentReply commentReply, @CurrentUser AccessToken accessToken) {
-        //FIXME 前端传过来的都是openId
-        return new AjaxResponse<>(iCommentReplyService.createCommentReply(commentReply, accessToken));
+    @Override
+    public boolean createCommentReply(CommentReply commentReply, AccessToken accessToken) {
+        // 评论当前用户信息
+        commentReply.setActivePerson(accessToken.getThirdUserId());
+        // 保存评论信息
+        save(commentReply);
+        //TODO 发表博客完之后，需要是自己的comment_count进行+1操作
+
+        return true;
     }
 }
