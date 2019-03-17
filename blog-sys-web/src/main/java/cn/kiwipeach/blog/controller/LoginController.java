@@ -119,9 +119,8 @@ public class LoginController {
             SysUser dbQueryUser = iSysUserService.getOne(queryWrapper);
             if (dbQueryUser == null) {
                 //希望用户修改自己的默认名称，所以这里以"平台+昵称"的方式注册默认用户昵称
-                accessToken.setUserName(accessToken.getPlatform() + "_" + accessToken.getUserName());
-                boolean saveSuccess = iSysUserService.save(accessToken);
-                if (saveSuccess) {
+                boolean createSuccess = iSysUserService.createSysUser(accessToken);
+                if (createSuccess) {
                     log.warn("新用户注册成功!用户名:{}", accessToken.getUserName());
                 }
             }

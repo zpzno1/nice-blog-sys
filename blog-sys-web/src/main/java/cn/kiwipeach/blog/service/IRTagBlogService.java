@@ -1,5 +1,5 @@
 /*
-* Copyright 2019 kiwipeach(1099501218@qq.com).
+* Copyright 2019 kiwipeach[1099501218@qq.com].
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -21,8 +21,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 博客VS标签 服务接口类
  *
- * @author kiwipeach [1099501218@qq.com]
- * @create 2019-01-24
+ * @author kiwipeach
+ * @create 2019-03-17
  */
 public interface IRTagBlogService extends IService<RTagBlog> {
 

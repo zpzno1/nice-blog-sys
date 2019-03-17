@@ -1,5 +1,5 @@
 /*
-* Copyright 2019 kiwipeach(1099501218@qq.com).
+* Copyright 2019 kiwipeach[1099501218@qq.com].
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -15,26 +15,19 @@
 */
 package cn.kiwipeach.blog.mapper;
 
-import cn.kiwipeach.blog.domain.SysPermission;
-import cn.kiwipeach.blog.domain.vo.RolePermissionVO;
+import cn.kiwipeach.blog.domain.RRolePermission;
+import cn.kiwipeach.blog.domain.RUserRole;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 /**
- * 系统权限 Mapper 接口
+ * 用户VS权限 Mapper 接口
  *
- * @author kiwipeach [1099501218@qq.com]
- * @create 2019-01-24
+ * @author kiwipeach
+ * @create 2019-03-17
  */
-public interface SysPermissionMapper extends BaseMapper<SysPermission> {
-
-    /**
-     * 查询角色的授权信息
-     * @param roleId 角色编号
-     * @return 返回角色的授权信息
-     */
-    List<RolePermissionVO> selectRolePermisssion(@Param("roleId") String roleId);
+public interface RRolePermissionMapper extends BaseMapper<RRolePermission> {
 
 }

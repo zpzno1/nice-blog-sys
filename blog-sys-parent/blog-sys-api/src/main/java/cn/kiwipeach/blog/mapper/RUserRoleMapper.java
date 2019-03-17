@@ -1,5 +1,5 @@
 /*
-* Copyright 2019 kiwipeach(1099501218@qq.com).
+* Copyright 2019 kiwipeach[1099501218@qq.com].
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -15,15 +15,15 @@
 */
 package cn.kiwipeach.blog.mapper;
 
-import cn.kiwipeach.blog.domain.RUserPermission;
+import cn.kiwipeach.blog.domain.RUserRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
- * 用户VS权限 Mapper 接口
+ * 用户VS角色 Mapper 接口
  *
- * @author kiwipeach [1099501218@qq.com]
- * @create 2019-01-24
+ * @author kiwipeach
+ * @create 2019-03-17
  */
-public interface RUserPermissionMapper extends BaseMapper<RUserPermission> {
+public interface RUserRoleMapper extends BaseMapper<RUserRole> {
 
 }

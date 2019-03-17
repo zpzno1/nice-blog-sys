@@ -13,21 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.service;
+package cn.kiwipeach.blog.domain.vo;
 
-import cn.kiwipeach.blog.domain.SysUser;
-import com.baomidou.mybatisplus.extension.service.IService;
-import org.kiwipeach.blog.shiro.token.AccessToken;
+import cn.kiwipeach.blog.domain.SysPermission;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
 
 /**
- * 系统用户 服务接口类
+ * 角色权限信息
  *
- * @author kiwipeach [1099501218@qq.com]
- * @create 2019-01-24
+ * @author kiwipeach
+ * @create 2019-03-17
  */
-public interface ISysUserService extends IService<SysUser> {
-
-
-    boolean createSysUser(AccessToken accessToken);
-
+@Getter
+@Setter
+public class RolePermissionVO {
+    private String roleId;
+    private String roleName;
+    List<SysPermission> permissions;
 }

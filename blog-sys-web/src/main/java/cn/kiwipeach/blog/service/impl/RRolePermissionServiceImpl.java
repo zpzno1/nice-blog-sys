@@ -1,5 +1,5 @@
 /*
-* Copyright 2019 kiwipeach(1099501218@qq.com).
+* Copyright 2019 kiwipeach[1099501218@qq.com].
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -15,19 +15,19 @@
 */
 package cn.kiwipeach.blog.service.impl;
 
-import cn.kiwipeach.blog.domain.RUserPermission;
-import cn.kiwipeach.blog.mapper.RUserPermissionMapper;
-import cn.kiwipeach.blog.service.IRUserPermissionService;
+import cn.kiwipeach.blog.domain.RRolePermission;
+import cn.kiwipeach.blog.mapper.RRolePermissionMapper;
+import cn.kiwipeach.blog.service.IRRolePermissionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
  * 用户VS权限 服务实现类
  *
- * @author kiwipeach [1099501218@qq.com]
- * @create 2019-01-24
+ * @author kiwipeach
+ * @create 2019-03-17
  */
 @Service
-public class RUserPermissionServiceImpl extends ServiceImpl<RUserPermissionMapper, RUserPermission> implements IRUserPermissionService {
+public class RRolePermissionServiceImpl extends ServiceImpl<RRolePermissionMapper, RRolePermission> implements IRRolePermissionService {
 
 }

@@ -15,10 +15,15 @@
  */
 package org.kiwipeach.blog.shiro.realam;
 
+import cn.kiwipeach.blog.domain.RRolePermission;
+import cn.kiwipeach.blog.domain.RUserRole;
+import cn.kiwipeach.blog.domain.SysRole;
 import cn.kiwipeach.blog.domain.SysUser;
+import cn.kiwipeach.blog.domain.vo.RolePermissionVO;
+import cn.kiwipeach.blog.domain.vo.UserRoleVO;
 import cn.kiwipeach.blog.enums.CodeEnum;
 import cn.kiwipeach.blog.exception.BlogException;
-import cn.kiwipeach.blog.mapper.SysUserMapper;
+import cn.kiwipeach.blog.mapper.*;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
@@ -32,10 +37,7 @@ import org.kiwipeach.blog.shiro.token.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.security.auth.login.AccountLockedException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 博客自定义认证授权Realm
@@ -48,6 +50,13 @@ public class CustomShiroRealm extends AuthorizingRealm {
 
     @Autowired
     private SysUserMapper sysUserMapper;
+
+    @Autowired
+    private SysRoleMapper sysRoleMapper;
+
+    @Autowired
+    private SysPermissionMapper sysPermissionMapper;
+
 
     public CustomShiroRealm(CredentialsMatcher credentialsMatcher) {
         //需要配置token的类型，否则会报错
@@ -129,33 +138,47 @@ public class CustomShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        //1.获取认证对象
-        //SecUser secUser = (SecUser) principalCollection.getPrimaryPrincipal();
-        //2.加载该认证对象的角色信息以及该用户的权限信息
-        //SysUser secUser;
-        //String username = secUser.getUserName();
-        //Set<String> roles = secUserService.queryRoles(username);
-        //List<String> permissions = secUserService.queryPermissions(username);
-        ////3.包装授权信息，并且进行返回
-        //SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roles);
-        //info.addStringPermissions(permissions);
-        //return info;
         AccessToken accessToken = (AccessToken) principalCollection.getPrimaryPrincipal();
-        //准备角色权限信息
-        Set<String> roles = new HashSet<String>();
-        List<String> permissions = new ArrayList<String>();
-        if (accessToken.getUserName().equals("kiwipeach")&&accessToken.getPlatform().equals("system")){
-            roles.add("BlogAdmin");
-            roles.add("BlogUser");
-            //roles.add("user");
-            //permissions.add("blog:page:aboutxxx");
-            //分装当前用户的角色授权信息并返回
+        // 1）查询当前用户的完成信息
+        String decorateUserName = accessToken.getUserName();
+        Wrapper<SysUser> userQuery = new QueryWrapper<SysUser>().eq("USER_NAME", decorateUserName);
+        SysUser sysUser = sysUserMapper.selectOne(userQuery);
+        if (sysUser == null) {
+            // 没有任何权限
+            return new SimpleAuthorizationInfo();
         }
+
+        // 2）准备角色权限信息
+        // 角色
+        UserRoleVO userRoleVO = sysRoleMapper.selectUserRole(sysUser.getId());
+        Set<String> roles = new HashSet<String>();
+        List<RolePermissionVO> permissionVOList = new ArrayList<>();
+        // 权限
+        for (SysRole sysRole : userRoleVO.getRoles()) {
+            roles.add(sysRole.getName());
+            permissionVOList.addAll(sysPermissionMapper.selectRolePermisssion(sysRole.getId()));
+        }
+        // 3封装返回包装的用户角色权限信息
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roles);
-        info.addStringPermissions(permissions);
-        //3. 返回 SimpleAuthorizationInfo 对象.
+        info.addStringPermissions(getPermissionsSet(permissionVOList));
         return info;
         //无权限抛出AuthorizationException异常，可以在全局异常处理中对该异常进行判断，跳转到未授权页面
+    }
+
+    private Collection<String> getPermissionsSet(List<RolePermissionVO> permissionVOList) {
+        List<String> permissions = new ArrayList<String>();
+        for (RolePermissionVO rolePermissionVO : permissionVOList) {
+            permissions.add(rolePermissionVO.getRoleName());
+        }
+        return permissions;
+    }
+
+    private Set<String> getRoleSet(UserRoleVO userRoleVO) {
+        Set<String> roles = new HashSet<String>();
+        for (SysRole sysRole : userRoleVO.getRoles()) {
+
+        }
+        return null;
     }
 
 

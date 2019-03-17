@@ -16,5 +16,25 @@
     </sql>
 
     <!-- self-part create by kiwipeach [1099501218@qq.com] -->
+    <!--用户角色实体类-->
+    <resultMap id="userRoleVOResultMap" type="cn.kiwipeach.blog.domain.vo.UserRoleVO">
+        <id column="USER_ID" property="userId"/>
+        <result column="THIRD_USER_ID" property="thirdUserId"/>
+        <result column="PLATFORM" property="platform"/>
+        <result column="USER_NAME" property="userName"/>
+        <collection property="roles" ofType="cn.kiwipeach.blog.domain.SysRole">
+            <id column="ID" property="id"/>
+            <result column="NAME" property="name"/>
+        </collection>
+    </resultMap>
+
+    <!--查询用户的角色信息-->
+    <select id="selectUserRole" resultMap="userRoleVOResultMap">
+        select U.ID AS USER_ID,U.THIRD_USER_ID,U.PLATFORM,U.USER_NAME,R.ID,R.NAME
+        from sys_user u
+        left join r_user_role rur on u.id = rur.user_id
+        left join sys_role r on rur.role_id = r.id
+        where u.id = #{userId}
+    </select>
 
 </mapper>

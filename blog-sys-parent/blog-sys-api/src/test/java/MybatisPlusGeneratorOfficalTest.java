@@ -30,19 +30,19 @@ import java.util.*;
 
 /**
  * 官方的生成代码方式
- *
+ * <p>
  * new AutoGenerator().setGlobalConfig(
- *     ...
+ * ...
  * ).setDataSource(
- *     ...
+ * ...
  * ).setStrategy(
- *     ...
+ * ...
  * ).setPackageInfo(
- *     ...
+ * ...
  * ).setCfg(
- *     ...
+ * ...
  * ).setTemplate(
- *     ...
+ * ...
  * ).execute();
  *
  * @author kiwipeach [1099501218@qq.com]
@@ -60,7 +60,7 @@ public class MybatisPlusGeneratorOfficalTest {
         tableFillList.add(new TableFill("ASDD_SS", FieldFill.INSERT_UPDATE));
 
         //String tables[] = new String[]{"SYS_PERMISSION", "PK_SYS_PERMISSION", "T_BLOG", "PK_T_BLOG", "R_TAG_BLOG", "PK_R_TAG_BLOG", "SYS_PARAM", "SYS_USER", "PK_SYS_USER", "T_BLOG_CATEGORY", "PK_T_BLOG_CATEGORY", "T_BLOG_TAG", "PK_T_BLOG_TAG", "SYS_FUNCTION", "PK_T_COMMENT", "T_COMMENT_MSG", "R_USER_PERMISSION"};
-        String tables[] = new String[]{"SYS_ROLE"};
+        String tables[] = new String[]{"R_USER_ROLE", "R_TAG_BLOG","R_ROLE_PERMISSION"};
 
 
         // 代码生成器
@@ -93,12 +93,12 @@ public class MybatisPlusGeneratorOfficalTest {
                             public DbColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
                                 System.out.println("自动检测到数据库类型：" + fieldType);
                                 //金额或者敏感数值单位需要精确
-                                if (fieldType.contains("NUMBER(")&&fieldType.contains("2)")) {//含有这种格式的识别为金额类型
+                                if (fieldType.contains("NUMBER(") && fieldType.contains("2)")) {//含有这种格式的识别为金额类型
                                     return DbColumnType.BIG_DECIMAL;
                                     //编码枚举数值类型或者布尔类型使用整形表示
-                                } else if (fieldType.contains("NUMBER")&&!fieldType.contains(",")) {
+                                } else if (fieldType.contains("NUMBER") && !fieldType.contains(",")) {
                                     return DbColumnType.INTEGER;
-                                }else {
+                                } else {
                                     //使用默认的
                                     return super.processTypeConvert(globalConfig, fieldType);
                                 }
@@ -111,7 +111,7 @@ public class MybatisPlusGeneratorOfficalTest {
         ).setStrategy(
                 // 策略配置
 
-        new StrategyConfig()
+                new StrategyConfig()
                         // .setCapitalMode(true)// 全局大写命名
                         // .setDbColumnUnderline(true)//全局下划线命名
                         .setTablePrefix(new String[]{"t_"})// 此处可以修改为您的表前缀

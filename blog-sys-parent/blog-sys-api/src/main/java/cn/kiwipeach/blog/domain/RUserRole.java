@@ -21,27 +21,27 @@ import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 /**
- * 博客VS标签
+ * 用户VS角色
  *
  * @author kiwipeach
  * @create 2019-03-17
  */
-@TableName("R_TAG_BLOG")
-public class RTagBlog implements Serializable {
+@TableName("R_USER_ROLE")
+public class RUserRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 标签编号
+     * 用户编号
      */
-    @TableId("TAG_ID")
-    private String tagId;
+    @TableField("USER_ID")
+    private String userId;
 
     /**
-     * 博客编号
+     * 角色编号
      */
-    @TableField("BLOG_ID")
-    private String blogId;
+    @TableId("ROLE_ID")
+    private String roleId;
 
     /**
      * 创建时间
@@ -55,19 +55,19 @@ public class RTagBlog implements Serializable {
     @TableField("UPDATE_TIME")
     private LocalDateTime updateTime;
 
-    public String getTagId() {
-        return tagId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setTagId(String tagId) {
-        this.tagId = tagId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
-    public String getBlogId() {
-        return blogId;
+    public String getRoleId() {
+        return roleId;
     }
 
-    public void setBlogId(String blogId) {
-        this.blogId = blogId;
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
     }
     public LocalDateTime getCreateTime() {
         return createTime;
@@ -86,9 +86,9 @@ public class RTagBlog implements Serializable {
 
     @Override
     public String toString() {
-        return "RTagBlog{" +
-        "tagId=" + tagId +
-        ", blogId=" + blogId +
+        return "RUserRole{" +
+        "userId=" + userId +
+        ", roleId=" + roleId +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +
         "}";

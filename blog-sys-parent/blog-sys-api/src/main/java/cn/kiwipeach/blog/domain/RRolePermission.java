@@ -1,5 +1,5 @@
 /*
-* Copyright 2019 kiwipeach(1099501218@qq.com).
+* Copyright 2019 kiwipeach[1099501218@qq.com].
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -15,29 +15,27 @@
 */
 package cn.kiwipeach.blog.domain;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
-
+import com.baomidou.mybatisplus.annotation.TableField;
+import java.io.Serializable;
 /**
  * 用户VS权限
  *
- * @author kiwipeach [1099501218@qq.com]
- * @create 2019-01-24
+ * @author kiwipeach
+ * @create 2019-03-17
  */
-@TableName("R_USER_PERMISSION")
-public class RUserPermission implements Serializable {
+@TableName("R_ROLE_PERMISSION")
+public class RRolePermission implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 用户编号
+     * 角色编号
      */
-    @TableId("USER_ID")
-    private String userId;
+    @TableId("ROLE_ID")
+    private String roleId;
 
     /**
      * 权限标志编号
@@ -57,12 +55,12 @@ public class RUserPermission implements Serializable {
     @TableField("UPDATE_TIME")
     private LocalDateTime updateTime;
 
-    public String getUserId() {
-        return userId;
+    public String getRoleId() {
+        return roleId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
     }
     public String getPermissionId() {
         return permissionId;
@@ -88,8 +86,8 @@ public class RUserPermission implements Serializable {
 
     @Override
     public String toString() {
-        return "RUserPermission{" +
-        "userId=" + userId +
+        return "RRolePermission{" +
+        "roleId=" + roleId +
         ", permissionId=" + permissionId +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +

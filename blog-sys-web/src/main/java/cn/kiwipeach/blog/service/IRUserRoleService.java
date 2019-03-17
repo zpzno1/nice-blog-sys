@@ -13,17 +13,17 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package cn.kiwipeach.blog.mapper;
+package cn.kiwipeach.blog.service;
 
-import cn.kiwipeach.blog.domain.RTagBlog;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import cn.kiwipeach.blog.domain.RUserRole;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
- * 博客VS标签 Mapper 接口
+ * 用户VS角色 服务接口类
  *
  * @author kiwipeach
  * @create 2019-03-17
  */
-public interface RTagBlogMapper extends BaseMapper<RTagBlog> {
+public interface IRUserRoleService extends IService<RUserRole> {
 
 }
