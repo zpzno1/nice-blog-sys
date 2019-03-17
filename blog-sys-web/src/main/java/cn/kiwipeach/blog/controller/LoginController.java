@@ -115,6 +115,7 @@ public class LoginController {
             AccessToken accessToken = loginService.login(code);
             //记录平台信息
             accessToken.setPlatform(platform);
+            accessToken.setUserName(accessToken.getPlatform() + "_" + accessToken.getUserName());
             Wrapper<SysUser> queryWrapper = new QueryWrapper<SysUser>().eq("THIRD_USER_ID", accessToken.getThirdUserId());
             SysUser dbQueryUser = iSysUserService.getOne(queryWrapper);
             if (dbQueryUser == null) {
