@@ -10,7 +10,7 @@
         <result column="CONTENT" property="content"/>
         <result column="STAR_COUNT" property="starCount"/>
         <result column="COMMENT_COUNT" property="commentCount"/>
-        <result column="VIEWS" property="views"/>
+        <result column="VIEW_COUNT" property="viewCount"/>
         <result column="TOP" property="top"/>
         <result column="CREATE_TIME" property="createTime"/>
         <result column="UPDATE_TIME" property="updateTime"/>
@@ -19,7 +19,7 @@
         <result column="ICON_URL" property="iconUrl"/>
     </resultMap>
     <sql id="Base_Column_List">
-        ID, USER_ID, CATE_ID, TITLE, CONTENT, STAR_COUNT, COMMENT_COUNT,VIEWS, TOP, CREATE_TIME, UPDATE_TIME
+        ID, USER_ID, CATE_ID, TITLE, CONTENT, STAR_COUNT, COMMENT_COUNT,VIEW_COUNT, TOP, CREATE_TIME, UPDATE_TIME
     </sql>
 
     <!-- self-part create by kiwipeach [1099501218@qq.com] -->
@@ -28,13 +28,14 @@
     <resultMap type="cn.kiwipeach.blog.domain.vo.BlogInfoVO" id="blogInfoVOResultMap">
         <id column="ID" property="id"/>
         <result column="USER_ID" property="userId"/>
+        <result column="NICK_NAME" property="nickName"/>
         <result column="CATE_ID" property="cateId"/>
         <result column="CATEGORY_NAME" property="categoryName"/>
         <result column="TITLE" property="title"/>
         <result column="CONTENT" property="content"/>
         <result column="STAR_COUNT" property="starCount"/>
         <result column="COMMENT_COUNT" property="commentCount"/>
-        <result column="VIEWS" property="views"/>
+        <result column="VIEW_COUNT" property="viewCount"/>
         <result column="TOP" property="top"/>
         <result column="CREATE_TIME" property="createTime"/>
         <result column="UPDATE_TIME" property="updateTime"/>
@@ -63,7 +64,7 @@
         b.CONTENT,
         b.STAR_COUNT,
         b.COMMENT_COUNT,
-        b.VIEWS,
+        b.VIEW_COUNT,
         b.TOP,
         b.CREATE_TIME,
         b.UPDATE_TIME,
@@ -91,13 +92,14 @@
     <select id="selectBlog" resultMap="blogInfoVOResultMap">
          SELECT b.ID,
                b.USER_ID,
+               u.NICK_NAME,
                b.CATE_ID,
                c.NAME as CATEGORY_NAME,
                b.TITLE,
                b.CONTENT,
                b.STAR_COUNT,
                 b.COMMENT_COUNT,
-               b.VIEWS,
+               b.VIEW_COUNT,
                b.TOP,
                b.CREATE_TIME,
                b.UPDATE_TIME,
@@ -106,6 +108,7 @@
                b.ICON_URL
           FROM T_BLOG b
           left join t_blog_category c on b.cate_id = c.id
+          left join sys_user u on b.user_id = u.id
           where b.id = #{blogId}
     </select>
 
@@ -170,5 +173,10 @@
           LEFT JOIN t_blog_category bc ON t.cate_id = bc.id
          ORDER BY t.create_time DESC
     </select>
+
+
+    <update id="updateCommentCount">
+        update t_blog set comment_count = comment_count + 1 where id = #{blogId}
+    </update>
 
 </mapper>

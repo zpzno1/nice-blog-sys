@@ -183,7 +183,7 @@ public class ARBlog extends Model<ARBlog> /*implements Serializable */{
                 ", title=" + title +
                 ", content=" + content +
                 ", starCount=" + starCount +
-                ", views=" + views +
+                ", viewCount=" + views +
                 ", top=" + top +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +

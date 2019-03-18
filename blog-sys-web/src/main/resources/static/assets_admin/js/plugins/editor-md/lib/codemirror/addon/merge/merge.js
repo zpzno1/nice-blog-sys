@@ -429,7 +429,7 @@
                          Pos(chunk.editFrom, 0), Pos(chunk.editTo, 0));
   }
 
-  // Merge view, containing 0, 1, or 2 diff views.
+  // Merge view, containing 0, 1, or 2 diff viewCount.
 
   var MergeView = CodeMirror.MergeView = function(node, options) {
     if (!(this instanceof MergeView)) return new MergeView(node, options);

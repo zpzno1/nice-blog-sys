@@ -79,8 +79,8 @@ public class Blog implements Serializable {
     /**
      * 浏览总量
      */
-    @TableField("VIEWS")
-    private Integer views;
+    @TableField("VIEW_COUNT")
+    private Integer viewCount;
 
     /**
      * 是否置顶
@@ -166,12 +166,12 @@ public class Blog implements Serializable {
         this.starCount = starCount;
     }
 
-    public Integer getViews() {
-        return views;
+    public Integer getViewCount() {
+        return viewCount;
     }
 
-    public void setViews(Integer views) {
-        this.views = views;
+    public void setViewCount(Integer viewCount) {
+        this.viewCount = viewCount;
     }
 
     public Integer getTop() {
@@ -240,7 +240,7 @@ public class Blog implements Serializable {
                 ", content=" + content +
                 ", starCount=" + starCount +
                 ", commentCount=" + commentCount +
-                ", views=" + views +
+                ", viewCount=" + viewCount +
                 ", top=" + top +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +

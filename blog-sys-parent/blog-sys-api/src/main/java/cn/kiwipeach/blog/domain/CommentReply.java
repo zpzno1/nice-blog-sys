@@ -1,30 +1,34 @@
 /*
-* Copyright 2019 kiwipeach[1099501218@qq.com].
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*      http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2019 kiwipeach[1099501218@qq.com].
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package cn.kiwipeach.blog.domain;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.time.LocalDateTime;
+
 import com.baomidou.mybatisplus.annotation.TableField;
+
 import java.io.Serializable;
+
 /**
  * 评论
  *
  * @author kiwipeach
- * @create 2019-03-16
+ * @create 2019-03-18
  */
 @TableName("T_COMMENT_REPLY")
 public class CommentReply implements Serializable {
@@ -38,7 +42,7 @@ public class CommentReply implements Serializable {
     private String id;
 
     /**
-     * 评论回复类型[1:博客评论回复 2:留言评论回复]
+     * 评论回复类型[BLOG_COMMENT,BLOG_REPLY,LAM_COMMENT,LAM_REPLY]
      */
     @TableField("TYPE")
     private String type;
@@ -52,14 +56,14 @@ public class CommentReply implements Serializable {
     /**
      * 主动评论或者回复的人
      */
-    @TableField("ACTIVE_PERSON")
-    private String activePerson;
+    @TableField("ACTIVE_USER_ID")
+    private String activeUserId;
 
     /**
      * 被评论或者回复的人
      */
-    @TableField("PASSIVE_PERSON")
-    private String passivePerson;
+    @TableField("PASSIVE_USER_ID")
+    private String passiveUserId;
 
     /**
      * 评论内容
@@ -88,8 +92,14 @@ public class CommentReply implements Serializable {
     /**
      * 评论回复点赞数量
      */
-    @TableField("STAR")
-    private Integer star;
+    @TableField("STAR_COUNT")
+    private Integer starCount;
+
+    /**
+     * 回复统计（在评论中回复需要对该字段+1）
+     */
+    @TableField("REPLY_COUNT")
+    private Integer replyCount;
 
     public String getId() {
         return id;
@@ -98,6 +108,7 @@ public class CommentReply implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
+
     public String getType() {
         return type;
     }
@@ -105,6 +116,7 @@ public class CommentReply implements Serializable {
     public void setType(String type) {
         this.type = type;
     }
+
     public String getParentId() {
         return parentId;
     }
@@ -112,20 +124,23 @@ public class CommentReply implements Serializable {
     public void setParentId(String parentId) {
         this.parentId = parentId;
     }
-    public String getActivePerson() {
-        return activePerson;
+
+    public String getActiveUserId() {
+        return activeUserId;
     }
 
-    public void setActivePerson(String activePerson) {
-        this.activePerson = activePerson;
-    }
-    public String getPassivePerson() {
-        return passivePerson;
+    public void setActiveUserId(String activeUserId) {
+        this.activeUserId = activeUserId;
     }
 
-    public void setPassivePerson(String passivePerson) {
-        this.passivePerson = passivePerson;
+    public String getPassiveUserId() {
+        return passiveUserId;
     }
+
+    public void setPassiveUserId(String passiveUserId) {
+        this.passiveUserId = passiveUserId;
+    }
+
     public String getContent() {
         return content;
     }
@@ -133,6 +148,7 @@ public class CommentReply implements Serializable {
     public void setContent(String content) {
         this.content = content;
     }
+
     public Integer getDeleted() {
         return deleted;
     }
@@ -140,6 +156,7 @@ public class CommentReply implements Serializable {
     public void setDeleted(Integer deleted) {
         this.deleted = deleted;
     }
+
     public LocalDateTime getCreateTime() {
         return createTime;
     }
@@ -147,6 +164,7 @@ public class CommentReply implements Serializable {
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
+
     public LocalDateTime getUpdateTime() {
         return updateTime;
     }
@@ -154,27 +172,37 @@ public class CommentReply implements Serializable {
     public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
     }
-    public Integer getStar() {
-        return star;
+
+    public Integer getStarCount() {
+        return starCount;
     }
 
-    public void setStar(Integer star) {
-        this.star = star;
+    public void setStarCount(Integer starCount) {
+        this.starCount = starCount;
+    }
+
+    public Integer getReplyCount() {
+        return replyCount;
+    }
+
+    public void setReplyCount(Integer replyCount) {
+        this.replyCount = replyCount;
     }
 
     @Override
     public String toString() {
         return "CommentReply{" +
-        "id=" + id +
-        ", type=" + type +
-        ", parentId=" + parentId +
-        ", activePerson=" + activePerson +
-        ", passivePerson=" + passivePerson +
-        ", content=" + content +
-        ", deleted=" + deleted +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", star=" + star +
-        "}";
+                "id=" + id +
+                ", type=" + type +
+                ", parentId=" + parentId +
+                ", activeUserId=" + activeUserId +
+                ", passiveUserId=" + passiveUserId +
+                ", content=" + content +
+                ", deleted=" + deleted +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", starCount=" + starCount +
+                ", replyCount=" + replyCount +
+                "}";
     }
 }

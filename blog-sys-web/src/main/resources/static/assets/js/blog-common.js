@@ -4,6 +4,19 @@
  * @create 2018/11/15
  */
 (function ($, window) {
+    //拓展ajax插件
+    $.ajaxSetup({
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            var res = XMLHttpRequest.responseJSON;
+            swal({
+                title: '提示：' + res.msg,
+                text: res.data.path,
+                icon: "error",
+                timer: 40000
+            });
+            this;
+        }
+    });
 
     window.blog_common = {
         /**
@@ -286,7 +299,7 @@
             }
         }
     };
-    
+
     /**
      * 公共部分默认组件初始化
      */
@@ -366,7 +379,7 @@
             '                            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i\n' +
             '                                    class="fas fa-thumbs-up"></i></label>&nbsp;&nbsp;<span>' + item.starCount + '</span>\n' +
             '                            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i\n' +
-            '                                    class="fa fa-eye"></i></label>&nbsp;&nbsp;<span>' + item.views + '</span>\n' +
+            '                                    class="fa fa-eye"></i></label>&nbsp;&nbsp;<span>' + item.viewCount + '</span>\n' +
             '                            </label>\n' +
             '                        </div>\n' +
             '                        <div class="card-text">\n' +

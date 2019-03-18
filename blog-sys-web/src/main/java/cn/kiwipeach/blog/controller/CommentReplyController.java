@@ -43,7 +43,6 @@ public class CommentReplyController {
     @PostMapping("comment/create")
     @ResponseBody
     public AjaxResponse<Boolean> createBlogComment(CommentReply commentReply, @CurrentUser AccessToken accessToken) {
-        //FIXME 前端传过来的都是openId
         return new AjaxResponse<>(iCommentReplyService.createCommentReply(commentReply, accessToken));
     }
 }

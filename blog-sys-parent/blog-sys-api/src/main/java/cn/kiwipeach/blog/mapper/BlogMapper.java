@@ -71,18 +71,18 @@ public interface BlogMapper extends BaseMapper<Blog> {
     /**
      * 查询按照时间归档博客信息
      *
-     * @param page 分页对象
-     * @param pattern     归档格式 主要有三种:yyyy,yyyyMM,yyyyQ
+     * @param page    分页对象
+     * @param pattern 归档格式 主要有三种:yyyy,yyyyMM,yyyyQ
      * @return 返回归档博客信息
      */
     List<ArchiveBlogTimelineVO> selectArchiveBlog(IPage<ArchiveBlogTimelineVO> page, @Param("pattern") String pattern);
 
     /**
-     * 获取博客归档时间范围
+     * 博客评论记录总数+1操作
      *
-     * @param pattern 归档格式 主要有三种:yyyy,yyyyMM,yyyyQ
-     * @return 返回归档时间范围
+     * @param blogId 博客编号
+     * @return 返回更新结果
      */
-    List<String> selectArchiveRange(@Param("pattern") String pattern);
+    Integer updateCommentCount(@Param("blogId") String blogId);
 
 }

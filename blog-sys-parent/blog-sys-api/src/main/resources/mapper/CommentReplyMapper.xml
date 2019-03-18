@@ -6,18 +6,20 @@
         <id column="ID" property="id"/>
         <result column="TYPE" property="type"/>
         <result column="PARENT_ID" property="parentId"/>
-        <result column="ACTIVE_PERSON" property="activePerson"/>
-        <result column="PASSIVE_PERSON" property="passivePerson"/>
+        <result column="ACTIVE_USER_ID" property="activeUserId"/>
+        <result column="PASSIVE_USER_ID" property="passiveUserId"/>
         <result column="CONTENT" property="content"/>
         <result column="DELETED" property="deleted"/>
         <result column="CREATE_TIME" property="createTime"/>
         <result column="UPDATE_TIME" property="updateTime"/>
-        <result column="STAR" property="star"/>
+        <result column="STAR_COUNT" property="starCount"/>
+        <result column="REPLY_COUNT" property="replyCount"/>
     </resultMap>
     <sql id="Base_Column_List">
-        ID, TYPE, PARENT_ID, ACTIVE_PERSON, PASSIVE_PERSON, CONTENT, DELETED, CREATE_TIME, UPDATE_TIME, STAR
+        ID, TYPE, PARENT_ID, ACTIVE_USER_ID, PASSIVE_USER_ID, CONTENT, DELETED, CREATE_TIME, UPDATE_TIME, STAR_COUNT, REPLY_COUNT
     </sql>
 
     <!-- self-part create by kiwipeach [1099501218@qq.com] -->
+
 
 </mapper>

@@ -1,6 +1,8 @@
 /**
  * 博客详情页面的js脚本,主要功能是:初始化详情页面插件和注册博客详情相关的事件。
  */
+
+
 (function ($, window) {
     console.log('detail js');
     // 默认事件(回到顶部)
@@ -33,7 +35,7 @@ function open_blog_comment_btn() {
             keyboard: true,
         };
         $('#commentReplyDialog').modal(options);
-        // 模态框关闭事件坚挺
+        // 模态框关闭事件
         $('#commentReplyDialog').on('hidden.bs.modal', function (e) {
             // 重置发表界面内容
             $('#commentMessageText').val('');
@@ -50,16 +52,23 @@ function send_blog_comment_btn() {
     $('#sendCommentReplyBtn').bind('click', function () {
         var requestData = JSON.parse(sessionStorage.getItem("COMMENT_TARGET"));
         requestData.content = $('#commentMessageText').val();
-        debugger
         $.ajax({
             url: '/commentReply/comment/create',
             method: 'post',
             data: requestData,
             success: function (res) {
-                debugger
                 if ("0" == res.code) {
+                    //更新ui
+                    var newestCount = (parseInt($('#commentReplyBtn').attr('comment-count')) + 1);
+                    $('#commentReplyBtn').html('<i class="fas fa-comment"></i>' + newestCount);
                     $('#commentReplyDialog').modal('hide');
-                    swal("您发表评论成功！", "支持嵌套评论，不服求干！", "success")
+                    var dialogOpt = {
+                        title: '您发表评论成功！',
+                        text: '支持嵌套评论，不服求干！',
+                        icon: "success",
+                        // timer: 2000
+                    };
+                    swal(dialogOpt);
                 } else {
                     blog_util.failMessage(res);
                 }

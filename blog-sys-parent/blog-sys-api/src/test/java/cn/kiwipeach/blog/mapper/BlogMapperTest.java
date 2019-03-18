@@ -47,6 +47,20 @@ public class BlogMapperTest extends BlogApiApplicationTests {
         log.info("total:{}", page.getTotal());
     }
 
+    @Test
+    @Rollback(value = false)
+    public void updateBlogTitle() {
+        //简单更新
+        Blog blog = new Blog();
+        blog.setId("100");
+        blog.setTitle("50岁的程序员该何去何从");
+        Integer updateRow = blogMapper.updateById(blog);
+
+        //测试更新comment_count=comment_count+1
+        //blogMapper.selectCount()
+        log.warn("结果：{}", updateRow);
+    }
+
     /**
      * clob:大文本
      * blob：大的二进制文件
@@ -75,4 +89,6 @@ public class BlogMapperTest extends BlogApiApplicationTests {
         }
         return contentBuffer.toString();
     }
+
+
 }

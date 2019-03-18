@@ -169,12 +169,12 @@
                         <label>
                             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
                                     class="fas fa-user"></i></label>&nbsp;&nbsp;<span
-                                th:text="${blogDetail.getUserId()}">kiwipeach</span>
+                                th:text="${blogDetail.getNickName()}">kiwipeach</span>
                             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
                                     class="fas fa-comments"></i></label>&nbsp;&nbsp;<span
                                 th:text="${blogDetail.getStarCount()}">666</span>
                             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                                    class="fas fa-eye"></i></label>&nbsp;&nbsp;<span th:text="${blogDetail.getViews()}">98</span>
+                                    class="fas fa-eye"></i></label>&nbsp;&nbsp;<span th:text="${blogDetail.getViewCount()}">98</span>
                         </label>
                     </div>
                     <!--清除浮动,博客发表时间和标签浮动-->
@@ -241,12 +241,15 @@
                                 <svg class="alibaba-icon">
                                     <use xlink:href="#icon-agree"></use>
                                 </svg>
-                                ([[${blogDetail.getViews()}]])
+                                ([[${blogDetail.getViewCount()}]])
                             </button>
                             <button id="commentReplyBtn"
                                     class="btn btn-primary btn-round" style="font-size: 18px;"
-                                    comment-type="comment"
-                                    th:attr="comment-data=${blogDetail.getId()}"><i class="fas fa-comment"></i>([[${blogDetail.getCommentCount()}]])
+                                    comment-type="BLOG_COMMENT"
+                                    th:attr="comment-data=${blogDetail.getId()},comment-count=${blogDetail.getCommentCount()}"
+
+                            >
+                                <i class="fas fa-comment"></i>([[${blogDetail.getCommentCount()}]])
                             </button>
                         </div>
 

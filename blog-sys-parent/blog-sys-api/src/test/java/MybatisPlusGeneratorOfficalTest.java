@@ -60,7 +60,7 @@ public class MybatisPlusGeneratorOfficalTest {
         tableFillList.add(new TableFill("ASDD_SS", FieldFill.INSERT_UPDATE));
 
         //String tables[] = new String[]{"SYS_PERMISSION", "PK_SYS_PERMISSION", "T_BLOG", "PK_T_BLOG", "R_TAG_BLOG", "PK_R_TAG_BLOG", "SYS_PARAM", "SYS_USER", "PK_SYS_USER", "T_BLOG_CATEGORY", "PK_T_BLOG_CATEGORY", "T_BLOG_TAG", "PK_T_BLOG_TAG", "SYS_FUNCTION", "PK_T_COMMENT", "T_COMMENT_MSG", "R_USER_PERMISSION"};
-        String tables[] = new String[]{"R_USER_ROLE", "R_TAG_BLOG","R_ROLE_PERMISSION"};
+        String tables[] = new String[]{"T_COMMENT_REPLY"};
 
 
         // 代码生成器

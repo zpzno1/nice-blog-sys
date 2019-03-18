@@ -2017,7 +2017,7 @@ button.jqx-button, input[type=button].jqx-button,  input[type=submit].jqx-button
     padding: 0;
     margin: 0;
 }
-/*applied to a calendar cell in decade and year views.*/
+/*applied to a calendar cell in decade and year viewCount.*/
 .jqx-calendar-cell-decade, .jqx-calendar-cell-year {
    text-align: center;
  }

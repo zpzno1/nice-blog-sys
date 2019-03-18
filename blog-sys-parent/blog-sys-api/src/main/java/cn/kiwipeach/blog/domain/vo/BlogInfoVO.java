@@ -33,13 +33,14 @@ import java.util.List;
 public class BlogInfoVO{
     private String id;
     private String userId;
+    private String nickName;
     private String cateId;
     private String categoryName;
     private String title;
     private String content;
     private String starCount;
     private String commentCount;
-    private String views;
+    private String viewCount;
     private String top;
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private String createTime;

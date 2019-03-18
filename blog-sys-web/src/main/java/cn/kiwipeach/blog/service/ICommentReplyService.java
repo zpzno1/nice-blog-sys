@@ -16,6 +16,7 @@
 package cn.kiwipeach.blog.service;
 
 import cn.kiwipeach.blog.domain.CommentReply;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.kiwipeach.blog.shiro.token.AccessToken;
 
@@ -35,4 +36,13 @@ public interface ICommentReplyService extends IService<CommentReply> {
      * @return
      */
     boolean createCommentReply(CommentReply commentReply, AccessToken accessToken);
+
+    /**
+     * 分页查询博客评论信息
+     *
+     * @param page   分页入参
+     * @param blogId 博客编号
+     * @return 返回博客评论分页信息
+     */
+    IPage<CommentReply> queryBlogComment(IPage<CommentReply> page, String blogId);
 }

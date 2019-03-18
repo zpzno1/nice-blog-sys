@@ -81,7 +81,26 @@ public class DemoTest {
         System.out.println("-----");
         System.out.print(System.getProperty("line.separator"));
         System.out.println("-----");
-        System.out.println(hello + "\n"+world);
+        System.out.println(hello + "\n" + world);
+    }
+
+    @Test
+    public void testSwitchCase() {
+        System.out.println(caseMethod("fdsadf"));
+    }
+
+    public String caseMethod(String key) {
+        switch (key) {
+            case "ok":
+                System.out.println("xxx");
+                return "确定";
+            case "cancel":
+                System.out.println("yyy");
+                return "取消";
+            default:
+                System.out.println("zzz");
+                return "desc";
+        }
     }
 
 }
