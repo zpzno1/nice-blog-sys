@@ -18,6 +18,7 @@ package cn.kiwipeach.blog.controller;
 
 import cn.kiwipeach.blog.anno.AccessLog;
 import cn.kiwipeach.blog.base.AjaxResponse;
+import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO;
 import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
 import cn.kiwipeach.blog.service.IBlogService;
@@ -56,9 +57,9 @@ public class BlogController {
      */
     @GetMapping("query")
     @ResponseBody
-    public AjaxResponse<IPage> pageQuery(Page page,
-                                         @RequestParam(required = false, value = "categoryId") String categoryId,
-                                         @RequestParam(required = false, value = "tagName") String tagName) {
+    public AjaxResponse<IPage<Blog>> pageQuery(Page page,
+                                               @RequestParam(required = false, value = "categoryId") String categoryId,
+                                               @RequestParam(required = false, value = "tagName") String tagName) {
         IPage iPage = iBlogService.pageQuery(page, categoryId, tagName);
         return AjaxResponse.success(iPage);
     }

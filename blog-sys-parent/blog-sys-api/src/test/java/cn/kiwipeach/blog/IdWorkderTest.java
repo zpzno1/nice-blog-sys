@@ -19,6 +19,8 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @author kiwipeach
  * @create 2019-02-24
@@ -27,9 +29,28 @@ import org.junit.Test;
 public class IdWorkderTest {
 
     @Test
-    public void testId(){
-      log.info("getIdStr：{}"+ IdWorker.getIdStr());
-      log.info("getId：{}"+ IdWorker.getId());
-      log.info("get32UUID：{}"+ IdWorker.get32UUID());
+    public void testId() {
+        log.info("getIdStr：{}" + IdWorker.getIdStr());
+        log.info("getId：{}" + IdWorker.getId());
+        log.info("get32UUID：{}" + IdWorker.get32UUID());
+    }
+
+    @Test
+    public void testNotNull() {
+        boolean flagA = true;
+        boolean flagB = true;
+        boolean flagC = false;
+        if (flagA){
+            System.out.println("1111111111111111");
+        }else if(flagA&&flagB){
+            System.out.println("22222222");
+        }else {
+            System.out.println("3333333333333");
+        }
+
+    }
+
+    public String method(String value) {
+        return value;
     }
 }

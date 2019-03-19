@@ -20,12 +20,14 @@ import cn.kiwipeach.blog.anno.CurrentUser;
 import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.CommentReply;
 import cn.kiwipeach.blog.service.ICommentReplyService;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.kiwipeach.blog.shiro.token.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 评论 前端控制器
@@ -40,9 +42,35 @@ public class CommentReplyController {
     @Autowired
     private ICommentReplyService iCommentReplyService;
 
+    /**
+     * 发表博客
+     *
+     * @param commentReply 评论回复对象
+     * @param accessToken  当前登录用户
+     * @return 返回发表博客评论结果
+     */
     @PostMapping("comment/create")
     @ResponseBody
     public AjaxResponse<Boolean> createBlogComment(CommentReply commentReply, @CurrentUser AccessToken accessToken) {
         return new AjaxResponse<>(iCommentReplyService.createCommentReply(commentReply, accessToken));
     }
+
+    /**
+     * 评论回复分页查询接口
+     *
+     * @param page      分页入参
+     * @param queryType 查询类型,[BLOG_COMMENT,BLOG_REPLY,LAM_COMMENT,LAM_REPLY]
+     * @param parentId  父节点编号
+     * @return 返回分页结果
+     */
+    @GetMapping("query")
+    @ResponseBody
+    public AjaxResponse<IPage<CommentReply>> pageQuery(Page page,
+                                                       @RequestParam(required = true, value = "queryType") String queryType,
+                                                       @RequestParam(required = true, value = "parentId") String parentId) {
+        IPage iPage = iCommentReplyService.queryCommentByPage(page, parentId, queryType);
+        return AjaxResponse.success(iPage);
+    }
+
+
 }

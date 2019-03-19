@@ -9,20 +9,29 @@
         <result column="TITLE" property="title"/>
         <result column="CONTENT" property="content"/>
         <result column="STAR_COUNT" property="starCount"/>
-        <result column="VIEWS" property="views"/>
+        <result column="COMMENT_COUNT" property="commentCount"/>
+        <result column="VIEW_COUNT" property="viewCount"/>
         <result column="TOP" property="top"/>
         <result column="CREATE_TIME" property="createTime"/>
         <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="CONTENT_TYPE" property="contentType"/>
+        <result column="INTRODUCTION" property="introduction"/>
+        <result column="ICON_URL" property="iconUrl"/>
     </resultMap>
     <sql id="Base_Column_List">
-        ID, USER_ID, CATE_ID, TITLE, CONTENT, STAR_COUNT, VIEWS, TOP, CREATE_TIME, UPDATE_TIME
+        ID, USER_ID, CATE_ID, TITLE, CONTENT, STAR_COUNT, COMMENT_COUNT,VIEW_COUNT, TOP, CREATE_TIME, UPDATE_TIME
     </sql>
 
     <!-- self-part create by kiwipeach [1099501218@qq.com] -->
     <select id="selectBlogListDemo" resultMap="BaseResultMap">
-        SELECT <include refid="Base_Column_List"></include>
+        SELECT
+        <include refid="Base_Column_List"></include>
         from T_BLOG t
-        where t.USER_ID = #{userId}
+        <where>
+            <if test="userId !=null and userId !=''">
+                and t.USER_ID = #{userId}
+            </if>
+        </where>
     </select>
 
 </mapper>

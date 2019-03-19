@@ -69,7 +69,8 @@ public class ResourceFilterMapFactory {
         //2)配置需要拦截的路径
         filterChainDefinitionMap.put("/user/logout", "logout");
         filterChainDefinitionMap.put("/login/success", "authc");//必须认证和授权，记住我无效
-        filterChainDefinitionMap.put("/commentReply/**", "user");//评论回复，只需要记住我即可
+        filterChainDefinitionMap.put("/commentReply/query", "anon");
+        filterChainDefinitionMap.put("/commentReply/comment/create", "user");//评论回复，只需要记住我即可
         filterChainDefinitionMap.put("/**", "anon");//认证过或“记住我”都可访问,例如helo或remember页面
         return filterChainDefinitionMap;
     }

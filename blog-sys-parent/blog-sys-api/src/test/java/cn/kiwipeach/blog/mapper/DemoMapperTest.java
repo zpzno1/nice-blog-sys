@@ -47,7 +47,7 @@ public class DemoMapperTest extends BlogApiApplicationTests {
     @Test
     public void 测试分页selectPage查询() {
         //QueryWrapper<Blog> Wrapper = new QueryWrapper<Blog>().eq("user_id", "10086");
-        QueryWrapper<Blog> Wrapper = new QueryWrapper<Blog>().orderByDesc("TOP","UPDATE_TIME");
+        QueryWrapper<Blog> Wrapper = new QueryWrapper<Blog>().orderByDesc("TOP", "UPDATE_TIME");
         // 分页结果中不含有total信息，默认首页为:1
         IPage<Blog> blogPage = new Page<Blog>(1, 5);
         IPage<Blog> blogIPage = demoMapper.selectPage(blogPage, Wrapper);
@@ -60,7 +60,8 @@ public class DemoMapperTest extends BlogApiApplicationTests {
     @Test
     public void 测试selectBlogList分页功能() {
         Page<Blog> page = new Page<>(2, 3);
-        List<Blog> blogs = demoMapper.selectBlogListDemo(page, "10086");
+        //List<Blog> blogs = demoMapper.selectBlogListDemo(page, "10086");
+        List<Blog> blogs = demoMapper.selectBlogListDemo(page, null);
         log.info("selectBlogList==>{}", page);
     }
 

@@ -15,11 +15,41 @@
         <result column="STAR_COUNT" property="starCount"/>
         <result column="REPLY_COUNT" property="replyCount"/>
     </resultMap>
+
     <sql id="Base_Column_List">
         ID, TYPE, PARENT_ID, ACTIVE_USER_ID, PASSIVE_USER_ID, CONTENT, DELETED, CREATE_TIME, UPDATE_TIME, STAR_COUNT, REPLY_COUNT
     </sql>
 
     <!-- self-part create by kiwipeach [1099501218@qq.com] -->
 
+    <select id="selectCommenByPage" resultType="cn.kiwipeach.blog.domain.vo.BlogCommentVO">
+        select cr.ID,
+            cr.TYPE,
+            cr.PARENT_ID,
+            cr.ACTIVE_USER_ID ,
+            u1.nick_name AS ACTIVE_NICK_NAME,
+            u1.head_url as ACTIVE_USER_HEAD_URL,
+            cr.PASSIVE_USER_ID,
+            u2.nick_name AS PASSIVE_NICK_NAME,
+            u2.head_url as PASSIVE_USER_HEAD_URL,
+            cr.CONTENT,
+            cr.DELETED,
+            cr.CREATE_TIME,
+            cr.UPDATE_TIME,
+            cr.STAR_COUNT,
+            cr.REPLY_COUNT
+        from t_comment_reply cr
+        left join sys_user u1 on cr.ACTIVE_USER_ID = u1.id
+        left join sys_user u2 on cr.PASSIVE_USER_ID = u2.id
+        <where>
+            <if test="type !=null and type !=''">
+                and cr.type = #{type}
+            </if>
+            <if test="parentId !=null and parentId !=''">
+                and cr.parent_id = #{parentId}
+            </if>
+        </where>
+
+    </select>
 
 </mapper>

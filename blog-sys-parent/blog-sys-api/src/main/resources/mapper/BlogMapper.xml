@@ -58,6 +58,7 @@
     <select id="selectByPage" resultMap="blogInfoVOResultMap">
         SELECT b.ID,
         b.USER_ID,
+        u.NICK_NAME,
         b.CATE_ID,
         c.NAME as CATEGORY_NAME,
         b.TITLE,
@@ -73,12 +74,13 @@
         b.ICON_URL
         FROM T_BLOG b
         left join t_blog_category c on b.cate_id = c.id
+        left join sys_user u on b.user_id = u.id
         <where>
             <if test="categoryId !=null and categoryId !=''">
-                b.CATE_ID = #{categoryId}
+                and b.CATE_ID = #{categoryId}
             </if>
             <if test="tagName !=null and tagName !=''">
-                b.id in (
+                and b.id in (
                 select rt.blog_id from r_tag_blog rt, t_blog_tag bt
                 where bt.id = rt.tag_id
                 and bt.name = #{tagName}

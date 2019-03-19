@@ -374,7 +374,7 @@
             '                                    class="fa fa-calendar"></i></label>&nbsp;&nbsp;<span>' + item.updateTime + '</span>\n' +
             '                            <label>\n' +
             '                                <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i\n' +
-            '                                        class="fas fa-user"></i></label>&nbsp;&nbsp;<span>' + item.userId + '</span>\n' +
+            '                                        class="fas fa-user"></i></label>&nbsp;&nbsp;<span>' + item.nickName + '</span>\n' +
             '                            </label>\n' +
             '                            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i\n' +
             '                                    class="fas fa-thumbs-up"></i></label>&nbsp;&nbsp;<span>' + item.starCount + '</span>\n' +

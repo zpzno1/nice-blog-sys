@@ -19,8 +19,10 @@ import cn.kiwipeach.blog.domain.Blog;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import lombok.NonNull;
 import org.apache.ibatis.annotations.Param;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -34,7 +36,7 @@ public interface DemoMapper extends BaseMapper<Blog> {
     /**
      * 测试分页查询，需要在service才能够体现分页效果
      */
-    List<Blog> selectBlogListDemo(IPage<Blog> page, @Param("userId") String userId);
+    List<Blog> selectBlogListDemo(IPage<Blog> page, @NotNull @Param("userId") String userId);
 
 
 

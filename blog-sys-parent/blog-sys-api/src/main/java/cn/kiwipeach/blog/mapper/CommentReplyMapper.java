@@ -16,8 +16,12 @@
 package cn.kiwipeach.blog.mapper;
 
 import cn.kiwipeach.blog.domain.CommentReply;
+import cn.kiwipeach.blog.domain.vo.BlogCommentVO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 评论 Mapper 接口
@@ -27,5 +31,16 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface CommentReplyMapper extends BaseMapper<CommentReply> {
 
+    /**
+     * 分页查询博客的评论信息
+     *
+     * @param page     分页入参
+     * @param parentId 父节点信息
+     * @param type     查询类型
+     * @return 返回分页评论信息
+     */
+    List<BlogCommentVO> selectCommenByPage(IPage<BlogCommentVO> page,
+                                           @Param("parentId") String parentId,
+                                           @Param("type") String type);
 
 }
