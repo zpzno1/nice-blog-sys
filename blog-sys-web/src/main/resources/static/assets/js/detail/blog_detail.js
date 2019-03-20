@@ -3,6 +3,7 @@
  */
 
 var currentIndex = 1;
+var fistTime2Bottom = false;
 (function ($, window) {
     console.log('detail js');
     // 默认事件(回到顶部)
@@ -16,29 +17,39 @@ var currentIndex = 1;
     });
     // 滚动检测加载评论信息
     scroll_load_blog_comment(currentIndex);
-
-    // 加载更多评论按钮
-    bind_load_comment_btn();
     // 博客评论按钮
     open_blog_comment_btn();
     // 博客评论发表按钮
     send_blog_comment_btn();
+    //博客点赞按钮
+    make_blog_agree_btn();
 })(jQuery);
+
+/**
+ * 点赞按钮
+ */
+function make_blog_agree_btn() {
+    $('#makeAgreeBtn').bind('click', function () {
+
+    });
+}
 
 /**
  * 检测滚动条事件，并且动态加载评论信息
  */
 function scroll_load_blog_comment() {
-    currentIndex += 1;
-    var opt = {
-        queryType: 'BLOG_COMMENT',
-        parentId: '109950',
-        current: currentIndex,
-        size: 3
-    };
+
     $(window).scroll(function () {
         //如果到达了博客底部，那么继续动态加载博客信息
         if (blog_util.isScrollToPageBottom()) {
+            currentIndex = currentIndex + 1;
+            console.log('当前页面：', currentIndex);
+            var opt = {
+                queryType: 'BLOG_COMMENT',
+                parentId: '109950',
+                current: currentIndex,
+                size: 3
+            };
             load_blog_comment(opt);
         }
     })
@@ -61,16 +72,20 @@ function load_blog_comment(opt) {
         },
         success: function (res) {
             if (res.code == '0') {
-                if (res.data.pages != res.data.pages.current) {
+                if (res.data.pages >= res.data.current) {
                     var dnamicHtml = '';
                     $.each(res.data.records, function (index, item) {
                         dnamicHtml += _render_blog_comment_item(item);
                     })
                     $('#blogCommentContainer').append(dnamicHtml);
+                    //到底了，只提醒一次
                 } else {
-                    layer.msg('没有更多的评论了');
+                    if (!fistTime2Bottom) {
+                        $('#blogCommentContainer').append('<h4 style="text-align: center" class="animated rubberBand">已经到底啦~~</h4>');
+                        fistTime2Bottom = true;
+                    }
                 }
-            } else if (res.code == '0') {
+            } else {
                 layer.msg(res.msg);
             }
         }
@@ -104,7 +119,7 @@ function open_blog_comment_btn() {
         // 缓存当前需要评论的对象
         var commentObj = new Object();
         commentObj.type = $(this).attr('comment-type');
-        commentObj.passivePerson = $(this).attr('comment-data');
+        commentObj.passiveUserId = $(this).attr('comment-data');
         commentObj.parentId = $(this).attr('comment-data');
         sessionStorage.setItem("COMMENT_TARGET", JSON.stringify(commentObj));
         // 弹出模态框
@@ -155,18 +170,6 @@ function send_blog_comment_btn() {
     });
 }
 
-/**
- * 加载更多评论
- */
-function bind_load_comment_btn() {
-    $('#load_comment_btn').bind('click', function () {
-        var comment_load_layer = layer.load(0, {shade: false});
-        setTimeout(function () {
-            layer.close(comment_load_layer);
-        }, 500);
-        //alert('load comment event.');
-    });
-}
 
 /**
  * 动态生成博客评论内容
@@ -176,7 +179,7 @@ function bind_load_comment_btn() {
  */
 function _render_blog_comment_item(item) {
     var commentItem = '  <div class="card">\n' +
-        '                <div class="card-body comment-body">\n' +
+        '                <div class="card-body comment-body animated fadeInLeft">\n' +
         '                    <div class="author">\n' +
         '                        <a href="#pablo">\n' +
         '                            <img src="' + item.activeUserHeadUrl + '"\n' +

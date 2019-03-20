@@ -368,7 +368,7 @@
             '\n' +
             '                    </div>\n' +
             '\n' +
-            '                    <div class="card-body">\n' +
+            '                    <div class="card-body animated fadeInLeft">\n' +
             '                        <div class="card-text">\n' +
             '                            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i\n' +
             '                                    class="fa fa-calendar"></i></label>&nbsp;&nbsp;<span>' + item.updateTime + '</span>\n' +

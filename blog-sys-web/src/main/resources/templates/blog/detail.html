@@ -172,9 +172,10 @@
                                 th:text="${blogDetail.getNickName()}">kiwipeach</span>
                             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
                                     class="fas fa-comments"></i></label>&nbsp;&nbsp;<span
-                                th:text="${blogDetail.getStarCount()}">666</span>
+                                th:text="${blogDetail.getCommentCount()}">666</span>
                             <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
-                                    class="fas fa-eye"></i></label>&nbsp;&nbsp;<span th:text="${blogDetail.getViewCount()}">98</span>
+                                    class="fas fa-eye"></i></label>&nbsp;&nbsp;<span
+                                th:text="${blogDetail.getViewCount()}">98</span>
                         </label>
                     </div>
                     <!--清除浮动,博客发表时间和标签浮动-->
@@ -224,7 +225,7 @@
                         </script>
                     </div>
                     <hr>
-                    <!--点赞:begin-->
+                    <!--点赞评论:begin-->
                     <div class="row">
                         <div style="font-size: 18px;padding-top: 20px;text-align: left;font-weight: bold"
                              class="col-md-4">
@@ -237,18 +238,19 @@
                                 <span th:text="${blogDetail.getPreviousBlog().getTitle()}"></span></a>
                         </div>
                         <div class="col-md-4 text-center">
-                            <button class="btn btn-sm btn-primary btn-round" style="font-size: 24px;">
+                            <!--点赞按钮-->
+                            <button id="makeAgreeBtn" class="btn btn-sm btn-primary btn-round" style="font-size: 24px;"
+                                    comment-type="BLOG_COMMENT"
+                                    th:attr="comment-data=${blogDetail.getId()},comment-count=${blogDetail.getStarCount()}">
                                 <svg class="alibaba-icon">
                                     <use xlink:href="#icon-agree"></use>
                                 </svg>
-                                ([[${blogDetail.getViewCount()}]])
+                                ([[${blogDetail.getStarCount()}]])
                             </button>
-                            <button id="commentReplyBtn"
-                                    class="btn btn-primary btn-round" style="font-size: 18px;"
+                            <!--评论按钮-->
+                            <button id="commentReplyBtn" class="btn btn-primary btn-round" style="font-size: 18px;"
                                     comment-type="BLOG_COMMENT"
-                                    th:attr="comment-data=${blogDetail.getId()},comment-count=${blogDetail.getCommentCount()}"
-
-                            >
+                                    th:attr="comment-data=${blogDetail.getId()},comment-count=${blogDetail.getCommentCount()}">
                                 <i class="fas fa-comment"></i>([[${blogDetail.getCommentCount()}]])
                             </button>
                         </div>
@@ -265,7 +267,8 @@
                             </a>
                         </div>
                     </div>
-                    <!--点赞:end-->
+                    <!--点赞评论:end-->
+
                     <!--文章转载须知信息:begin-->
                     <div class="card col-md-10 offset-md-1">
                         <div class="card-body text-dark text-center">
@@ -298,127 +301,127 @@
             <!--评论专区:begin-->
 
             <!--单条完成评论：begin-->
-           <!-- <div class="card">
-                <div class="card-body comment-body">
-                    <div class="author">
-                        <a href="#pablo">
-                            <img src="/assets/images/index/me-logo.png"
-                                 alt="..." class="avatar img-raised">
-                            <span>Lord Alex</span>
-                        </a>
-                    </div>
-                    <h6 class="card-title">
-                        <a href="#pablo">你的回复也很棒棒喔(#^.^#)</a>
-                    </h6>
-                    <div class="collapse" id="collapseExample">
+            <!-- <div class="card">
+                 <div class="card-body comment-body">
+                     <div class="author">
+                         <a href="#pablo">
+                             <img src="/assets/images/index/me-logo.png"
+                                  alt="..." class="avatar img-raised">
+                             <span>Lord Alex</span>
+                         </a>
+                     </div>
+                     <h6 class="card-title">
+                         <a href="#pablo">你的回复也很棒棒喔(#^.^#)</a>
+                     </h6>
+                     <div class="collapse" id="collapseExample">
 
-                        <div class="card" style="background: #f9f7f7;margin: 3px 0px 3px 0px">
-                            <div class="card-body" style="padding: 10px 0px 0px 15px">
-                                <div class="author">
-                                    <a href="#pablo">
-                                        <img src="/assets/images/index/me-logo.png"
-                                             alt="..." class="avatar img-raised">
-                                        <span>Lord Alex&nbsp;&nbsp;&nbsp;<label>回复</label>&nbsp;&nbsp;&nbsp;kiwipeach</span>
-                                    </a>
-                                </div>
-                                <h6 class="card-text">
-                                    <a href="#pablo" class="text-dark">你的文章好棒棒哦</a>
-                                </h6>
-                            </div>
-                            <div class="card-footer" style="padding: 0px 15px 10px 15px">
-                                <div class="stats ml-auto">
-                                    <a href="javascript:;" class="text-dark" title="点赞">
-                                        <svg class="alibaba-icon" aria-hidden="true">
-                                            <use xlink:href="#icon-agree"></use>
-                                        </svg>
-                                        45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                                    <a href="#collapseExample"class="text-dark" title="回复" data-toggle="collapse"><i class="fa fa-reply"></i>回复</a>
-                                </div>
-                            </div>
-                        </div>
+                         <div class="card" style="background: #f9f7f7;margin: 3px 0px 3px 0px">
+                             <div class="card-body" style="padding: 10px 0px 0px 15px">
+                                 <div class="author">
+                                     <a href="#pablo">
+                                         <img src="/assets/images/index/me-logo.png"
+                                              alt="..." class="avatar img-raised">
+                                         <span>Lord Alex&nbsp;&nbsp;&nbsp;<label>回复</label>&nbsp;&nbsp;&nbsp;kiwipeach</span>
+                                     </a>
+                                 </div>
+                                 <h6 class="card-text">
+                                     <a href="#pablo" class="text-dark">你的文章好棒棒哦</a>
+                                 </h6>
+                             </div>
+                             <div class="card-footer" style="padding: 0px 15px 10px 15px">
+                                 <div class="stats ml-auto">
+                                     <a href="javascript:;" class="text-dark" title="点赞">
+                                         <svg class="alibaba-icon" aria-hidden="true">
+                                             <use xlink:href="#icon-agree"></use>
+                                         </svg>
+                                         45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                     <a href="#collapseExample"class="text-dark" title="回复" data-toggle="collapse"><i class="fa fa-reply"></i>回复</a>
+                                 </div>
+                             </div>
+                         </div>
 
-                        <div class="card" style="background: #f9f7f7;margin: 3px 0px 3px 0px">
-                            <div class="card-body" style="padding: 10px 0px 0px 15px">
-                                <div class="author">
-                                    <a href="#pablo">
-                                        <img src="/assets/images/index/me-logo.png"
-                                             alt="..." class="avatar img-raised">
-                                        <span>Lord Alex&nbsp;&nbsp;&nbsp;<label>回复</label>&nbsp;&nbsp;&nbsp;kiwipeach</span>
-                                    </a>
-                                </div>
-                                <h6 class="card-text">
-                                    <a href="#pablo" class="text-dark">你的文章好棒棒哦</a>
-                                </h6>
-                            </div>
-                            <div class="card-footer" style="padding: 0px 15px 10px 15px">
-                                <div class="stats ml-auto">
-                                    <a href="javascript:;" class="text-dark" title="点赞">
-                                        <svg class="alibaba-icon" aria-hidden="true">
-                                            <use xlink:href="#icon-agree"></use>
-                                        </svg>
-                                        45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                                    <a href="#collapseExample"class="text-dark" title="回复" data-toggle="collapse"><i class="fa fa-reply"></i>回复</a>
-                                </div>
-                            </div>
-                        </div>
+                         <div class="card" style="background: #f9f7f7;margin: 3px 0px 3px 0px">
+                             <div class="card-body" style="padding: 10px 0px 0px 15px">
+                                 <div class="author">
+                                     <a href="#pablo">
+                                         <img src="/assets/images/index/me-logo.png"
+                                              alt="..." class="avatar img-raised">
+                                         <span>Lord Alex&nbsp;&nbsp;&nbsp;<label>回复</label>&nbsp;&nbsp;&nbsp;kiwipeach</span>
+                                     </a>
+                                 </div>
+                                 <h6 class="card-text">
+                                     <a href="#pablo" class="text-dark">你的文章好棒棒哦</a>
+                                 </h6>
+                             </div>
+                             <div class="card-footer" style="padding: 0px 15px 10px 15px">
+                                 <div class="stats ml-auto">
+                                     <a href="javascript:;" class="text-dark" title="点赞">
+                                         <svg class="alibaba-icon" aria-hidden="true">
+                                             <use xlink:href="#icon-agree"></use>
+                                         </svg>
+                                         45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                     <a href="#collapseExample"class="text-dark" title="回复" data-toggle="collapse"><i class="fa fa-reply"></i>回复</a>
+                                 </div>
+                             </div>
+                         </div>
 
-                        <div class="card" style="background: #f9f7f7;margin: 3px 0px 3px 0px">
-                            <div class="card-body" style="padding: 10px 0px 0px 15px">
-                                <div class="author">
-                                    <a href="#pablo">
-                                        <img src="/assets/images/index/me-logo.png"
-                                             alt="..." class="avatar img-raised">
-                                        <span>Lord Alex&nbsp;&nbsp;&nbsp;<label>回复</label>&nbsp;&nbsp;&nbsp;kiwipeach</span>
-                                    </a>
-                                </div>
-                                <h6 class="card-text">
-                                    <a href="#pablo" class="text-dark">你的文章好棒棒哦</a>
-                                </h6>
-                            </div>
-                            <div class="card-footer" style="padding: 0px 15px 10px 15px">
-                                <div class="stats ml-auto">
-                                    <a href="javascript:;" class="text-dark" title="点赞">
-                                        <svg class="alibaba-icon" aria-hidden="true">
-                                            <use xlink:href="#icon-agree"></use>
-                                        </svg>
-                                        45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                                    <a href="#collapseExample"class="text-dark" title="回复" data-toggle="collapse"><i class="fa fa-reply"></i>回复</a>
-                                </div>
-                            </div>
-                        </div>
-                        &lt;!&ndash;回复分页插件&ndash;&gt;
-                        <div class="row">
-                            <div id="blog_reply_pagination_div" style="margin: 5px auto;"></div>
-                        </div>
-                        <script src="../../static/assets/plugins/jquery_pagination/jquery.pagination.js"
-                                th:src="@{/assets/plugins/jquery_pagination/jquery.pagination.js}"></script>
-                        <script type="text/javascript">
-                            var opt = {
-                                total: 236,
-                                items_per_page: 5,
-                                num_display_entries: 3,
-                                num_edge_entries: 2,
-                                next_text: '下一页',
-                                prev_text: '前一页',
-                                callback: function (new_page_index, pagination_container) {
-                                    console.log("当前页码:" + new_page_index)
-                                    return false;
-                                }
-                            };
-                            blog_common.plugin.pagination.init($("#blog_reply_pagination_div"), opt);
-                        </script>
-                    </div>
-                </div>
-                <div class="card-footer ">
-                    <div class="stats ml-auto">
-                        <a href="javascript:;" class="text-dark">
-                            <i class="fa fa-thumbs-up"></i>
-                            45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        <a href="#collapseExample"class="text-dark" title="回复" data-toggle="collapse"><i class="fa fa-reply"></i>回复&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        <a href="#collapseExample" class="text-dark blog-comment-collapse" data-toggle="collapse" data-status="closed"><span>查看回复(38)</span><i class="fa fa-chevron-down"></i></a>
-                    </div>
-                </div>
-            </div>-->
+                         <div class="card" style="background: #f9f7f7;margin: 3px 0px 3px 0px">
+                             <div class="card-body" style="padding: 10px 0px 0px 15px">
+                                 <div class="author">
+                                     <a href="#pablo">
+                                         <img src="/assets/images/index/me-logo.png"
+                                              alt="..." class="avatar img-raised">
+                                         <span>Lord Alex&nbsp;&nbsp;&nbsp;<label>回复</label>&nbsp;&nbsp;&nbsp;kiwipeach</span>
+                                     </a>
+                                 </div>
+                                 <h6 class="card-text">
+                                     <a href="#pablo" class="text-dark">你的文章好棒棒哦</a>
+                                 </h6>
+                             </div>
+                             <div class="card-footer" style="padding: 0px 15px 10px 15px">
+                                 <div class="stats ml-auto">
+                                     <a href="javascript:;" class="text-dark" title="点赞">
+                                         <svg class="alibaba-icon" aria-hidden="true">
+                                             <use xlink:href="#icon-agree"></use>
+                                         </svg>
+                                         45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                     <a href="#collapseExample"class="text-dark" title="回复" data-toggle="collapse"><i class="fa fa-reply"></i>回复</a>
+                                 </div>
+                             </div>
+                         </div>
+                         &lt;!&ndash;回复分页插件&ndash;&gt;
+                         <div class="row">
+                             <div id="blog_reply_pagination_div" style="margin: 5px auto;"></div>
+                         </div>
+                         <script src="../../static/assets/plugins/jquery_pagination/jquery.pagination.js"
+                                 th:src="@{/assets/plugins/jquery_pagination/jquery.pagination.js}"></script>
+                         <script type="text/javascript">
+                             var opt = {
+                                 total: 236,
+                                 items_per_page: 5,
+                                 num_display_entries: 3,
+                                 num_edge_entries: 2,
+                                 next_text: '下一页',
+                                 prev_text: '前一页',
+                                 callback: function (new_page_index, pagination_container) {
+                                     console.log("当前页码:" + new_page_index)
+                                     return false;
+                                 }
+                             };
+                             blog_common.plugin.pagination.init($("#blog_reply_pagination_div"), opt);
+                         </script>
+                     </div>
+                 </div>
+                 <div class="card-footer ">
+                     <div class="stats ml-auto">
+                         <a href="javascript:;" class="text-dark">
+                             <i class="fa fa-thumbs-up"></i>
+                             45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                         <a href="#collapseExample"class="text-dark" title="回复" data-toggle="collapse"><i class="fa fa-reply"></i>回复&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                         <a href="#collapseExample" class="text-dark blog-comment-collapse" data-toggle="collapse" data-status="closed"><span>查看回复(38)</span><i class="fa fa-chevron-down"></i></a>
+                     </div>
+                 </div>
+             </div>-->
             <!--单条完成评论：end-->
             <div id="blogCommentContainer">
 
