@@ -49,6 +49,7 @@
                 and cr.parent_id = #{parentId}
             </if>
         </where>
+        order by cr.create_time desc
 
     </select>
 

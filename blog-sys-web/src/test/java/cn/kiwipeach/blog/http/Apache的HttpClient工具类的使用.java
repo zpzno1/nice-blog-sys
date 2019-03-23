@@ -33,6 +33,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -73,7 +74,7 @@ public class Apache的HttpClient工具类的使用 {
         if (response != null) {
             entity = response.getEntity();
             //1)打印方案一, EntityUtils.toString会自动释放资源，但是官方不推荐
-            //logger.info("响应内容:{}", EntityUtils.toString(entity));
+            logger.info("响应内容:{}", EntityUtils.toString(entity));
             //2)打印方案二，IOUtils.toString不会释放资源，需手工释放，官方推荐
             InputStream content = response.getEntity().getContent();
             //logger.info("响应内容:{}", IOUtils.toString(content, "UTF-8"));

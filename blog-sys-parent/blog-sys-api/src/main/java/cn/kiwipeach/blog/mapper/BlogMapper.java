@@ -83,6 +83,6 @@ public interface BlogMapper extends BaseMapper<Blog> {
      * @param blogId 博客编号
      * @return 返回更新结果
      */
-    Integer updateCommentCount(@Param("blogId") String blogId);
+    Integer updateCommentCountByBlogId(@Param("blogId") String blogId);
 
 }

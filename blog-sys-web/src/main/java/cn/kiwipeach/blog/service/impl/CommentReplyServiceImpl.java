@@ -17,14 +17,20 @@ package cn.kiwipeach.blog.service.impl;
 
 import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.domain.CommentReply;
+import cn.kiwipeach.blog.domain.SysUser;
 import cn.kiwipeach.blog.domain.vo.BlogCommentVO;
 import cn.kiwipeach.blog.exception.BlogException;
 import cn.kiwipeach.blog.mapper.BlogMapper;
 import cn.kiwipeach.blog.mapper.CommentReplyMapper;
+import cn.kiwipeach.blog.mapper.SysUserMapper;
+import cn.kiwipeach.blog.param.CommentReplyParam;
 import cn.kiwipeach.blog.service.ICommentReplyService;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.kiwipeach.blog.shiro.token.AccessToken;
+import org.kiwipeach.blog.utils.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,34 +52,48 @@ public class CommentReplyServiceImpl extends ServiceImpl<CommentReplyMapper, Com
     private CommentReplyMapper commentReplyMapper;
 
     @Override
-    public boolean createCommentReply(CommentReply commentReply, AccessToken accessToken) {
-        //1）若为评论类型，需要维护博客的统计字段（COMMENT_COUNT）; 若为回复类型，需要维护博客的统计字段（COMMENT_COUNT）和评论的统计字段（REPLY_COUNT）
-        String commentType = commentReply.getType();
-        switch (commentType) {
-            case "BLOG_COMMENT":
-                String blogId = commentReply.getParentId();
-                Blog blog = blogMapper.selectById(blogId);
-                commentReply.setActiveUserId(accessToken.getThirdUserId());
-                commentReply.setPassiveUserId(blog.getUserId());
-                //保存评论信息，更新博客评论统计
-                return save(commentReply) && updateBlogCommentCount(commentReply.getParentId());
-            case "LAM_REPLY":
-                String passiveUserId = commentReply.getParentId();
-                commentReply.setActiveUserId(accessToken.getThirdUserId());
-                commentReply.setPassiveUserId(passiveUserId);
-                //保存评论信息，更新博客评论统计，更新评论回复统计
-                return save(commentReply) && updateBlogCommentCount(commentReply.getParentId()) && updateCommentReplyCount(commentReply);
-            default:
-                throw new BlogException("-SYS_001", "未知系统参数异常");
+    public boolean createBlogComment(CommentReplyParam commentReply, AccessToken accessToken) {
+        // 0) 查找当前登录用户信息
+        AccessToken currentUser = UserUtil.getCurrentUser();
+        commentReply.setActiveUserId(currentUser.getId());
+        // 1) 插入评论内容
+        commentReply.setType("B_BLOG_COMMENT");
+        if (commentReplyMapper.insert(commentReply) == 0) {
+            throw new BlogException("-COMMENT-002", "评论插入失败！");
         }
+        // 2）更新博客统计字段
+        if (updateBlogCommentCount(commentReply.getParentId()) == false) {
+            throw new BlogException("-COMMENT-002", "博客评论统计更新失败！");
+        }
+        return true;
     }
 
+    @Override
+    public boolean createCommentReply(CommentReplyParam commentReply, AccessToken accessToken) {
+        // 1)插入回复内容
+        commentReply.setType("B_COMMENT_REPLY");
+        if (commentReplyMapper.insert(commentReply) == 0) {
+            throw new BlogException("-COMMENT-002", "回复内容插入失败！");
+        }
+        // 2)维护博客评论回复统计字段
+        if (updateBlogCommentCount(commentReply.getBlogId()) == false) {
+            throw new BlogException("-COMMENT-002", "博客评论统计更新失败！");
+        }
+        // 3)维护评论回复统计字段
+        CommentReply curCommentReply = commentReplyMapper.selectById(commentReply.getParentId());
+        curCommentReply.setReplyCount(curCommentReply.getReplyCount() + 1);
+        if (commentReplyMapper.updateById(curCommentReply) == 0) {
+            throw new BlogException("-COMMENT-002", "博客评论回复统计失败！");
+        }
+        return true;
+    }
 
     @Override
     public IPage<BlogCommentVO> queryCommentByPage(IPage<BlogCommentVO> page, String parentId, String type) {
         List<BlogCommentVO> commentReplies = commentReplyMapper.selectCommenByPage(page, parentId, type);
         return page.setRecords(commentReplies);
     }
+
 
     /**
      * 更新博客统计字段
@@ -82,7 +102,7 @@ public class CommentReplyServiceImpl extends ServiceImpl<CommentReplyMapper, Com
      * @return 返回更新成功
      */
     private boolean updateBlogCommentCount(String blogId) {
-        return blogMapper.updateCommentCount(blogId) > 0 ? true : false;
+        return blogMapper.updateCommentCountByBlogId(blogId) > 0 ? true : false;
     }
 
     /**

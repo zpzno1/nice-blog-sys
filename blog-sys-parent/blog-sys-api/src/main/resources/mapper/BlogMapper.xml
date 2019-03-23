@@ -177,8 +177,10 @@
     </select>
 
 
-    <update id="updateCommentCount">
+    <update id="updateCommentCountByBlogId">
         update t_blog set comment_count = comment_count + 1 where id = #{blogId}
     </update>
+
+
 
 </mapper>

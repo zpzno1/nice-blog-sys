@@ -101,6 +101,15 @@ public class CommentReply implements Serializable {
     @TableField("REPLY_COUNT")
     private Integer replyCount;
 
+    public CommentReply() {
+    }
+
+    public CommentReply(String type, String parentId, String content) {
+        this.type = type;
+        this.parentId = parentId;
+        this.content = content;
+    }
+
     public String getId() {
         return id;
     }

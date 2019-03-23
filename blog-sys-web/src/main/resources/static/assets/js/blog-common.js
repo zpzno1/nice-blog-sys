@@ -4,16 +4,33 @@
  * @create 2018/11/15
  */
 (function ($, window) {
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "progressBar": false,
+        "preventDuplicates": true,
+        "positionClass": "toast-top-center",
+        "onclick": null,
+        "showDuration": "400",
+        "hideDuration": "1000",
+        "timeOut": "1000",
+        "extendedTimeOut": "2000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };
     //拓展ajax插件
     $.ajaxSetup({
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             var res = XMLHttpRequest.responseJSON;
-            swal({
-                title: '提示：' + res.msg,
-                text: res.data.path,
-                icon: "error",
-                timer: 40000
-            });
+            toastr.error("提示信息：" + res.msg);
+            // swal({
+            //     title: '提示：' + res.msg,
+            //     text: res.data.path,
+            //     icon: "error",
+            //     timer: 40000
+            // });
             this;
         }
     });

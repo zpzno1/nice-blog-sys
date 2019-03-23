@@ -157,6 +157,9 @@
             <!--博客详情:begin-->
             <div id="content-wrap" class="card card-nav-tabs">
                 <h4 class="card-header card-header">
+                    <input name="blogId" th:value="${blogDetail.getId()}" type="hidden"/>
+                    <input name="commentCount" th:value="${blogDetail.getCommentCount()}" type="hidden"/>
+                    <input name="starCount" th:value="${blogDetail.getStarCount()}" type="hidden"/>
                     <a href="detail.html" class="text-dark"><span class="badge badge-pill badge-dark"
                                                                   th:text="${blogDetail.getCategoryName()}">Java</span><span
                             th:text="${blogDetail.getTitle()}">曾经许下的誓言让我们共同了解</span></a>
@@ -225,6 +228,7 @@
                         </script>
                     </div>
                     <hr>
+
                     <!--点赞评论:begin-->
                     <div class="row">
                         <div style="font-size: 18px;padding-top: 20px;text-align: left;font-weight: bold"
@@ -239,9 +243,9 @@
                         </div>
                         <div class="col-md-4 text-center">
                             <!--点赞按钮-->
-                            <button id="makeAgreeBtn" class="btn btn-sm btn-primary btn-round" style="font-size: 24px;"
-                                    comment-type="BLOG_COMMENT"
-                                    th:attr="comment-data=${blogDetail.getId()},comment-count=${blogDetail.getStarCount()}">
+                            <button class="btn btn-sm btn-primary btn-round" style="font-size: 24px;"
+                                    onclick="blogAgreeClick(this)"
+                                    th:attr="comment-type='B_BLOG_COMMENT',comment-blogId=${blogDetail.getId()},comment-parentId=${blogDetail.getId()},comment-count=${blogDetail.getStarCount()}">
                                 <svg class="alibaba-icon">
                                     <use xlink:href="#icon-agree"></use>
                                 </svg>
@@ -249,11 +253,13 @@
                             </button>
                             <!--评论按钮-->
                             <button id="commentReplyBtn" class="btn btn-primary btn-round" style="font-size: 18px;"
-                                    comment-type="BLOG_COMMENT"
-                                    th:attr="comment-data=${blogDetail.getId()},comment-count=${blogDetail.getCommentCount()}">
+                                    onclick="showBlogCommentReplyDialog(this)"
+                                    comment-type="B_BLOG_COMMENT"
+                                    th:attr="comment-url='/commentReply/comment/create',comment-passiveUserId=${blogDetail.getUserId()},comment-parentId=${blogDetail.getId()},comment-count=${blogDetail.getStarCount()}">
                                 <i class="fas fa-comment"></i>([[${blogDetail.getCommentCount()}]])
                             </button>
                         </div>
+
 
                         <div style="font-size: 18px;padding-top: 20px;text-align: right;font-weight: bold"
                              class="col-md-4">
@@ -528,7 +534,8 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button id="sendCommentReplyBtn" type="button" class="btn btn-primary btn-round"
+                    <button id="sendCommentReplyBtn" type="button" onclick="commentReplySendClick()"
+                            class="btn btn-primary btn-round"
                             style="margin-bottom: 30px;width: 300px;">发&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表
                     </button>
                 </div>
@@ -540,5 +547,29 @@
 <!--前段框架依赖开始-->
 <script type="text/javascript" src="../../static/assets/js/detail/blog_detail.js"
         th:src="@{/assets/js/detail/blog_detail.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+    var fistTime2Bottom = false;
+    var blogId = /*[[${blogDetail.getId()}]]*/ "109950";
+    (function ($, window) {
+        // 默认事件(回到顶部)
+        blog_common.defaul_plugin_init();
+        // 默认加载评论信息
+        loadBlogCommentRequest({
+            queryType: 'B_BLOG_COMMENT',
+            parentId: blogId,
+            current: currentIndex,
+            size: 3
+        });
+        // 滚动检测加载评论信息
+        blogCommentScroll({
+            queryType: 'B_BLOG_COMMENT',
+            parentId: blogId,
+            current: currentIndex,
+            size: 5
+        });
+        // 模态框关闭处理
+        commentReplyDialogClose();
+    })(jQuery);
+</script>
 </body>
 </html>

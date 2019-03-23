@@ -1,0 +1,2 @@
+[cn.kiwipeach.blog.quartz]
+HelloQuartzJob.run = */2 * * * * *

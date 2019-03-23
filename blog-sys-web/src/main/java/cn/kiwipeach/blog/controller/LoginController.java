@@ -124,6 +124,9 @@ public class LoginController {
                 if (createSuccess) {
                     log.warn("新用户注册成功!用户名:{}", accessToken.getUserName());
                 }
+            } else {
+                //将数据库的用户编号维护到AccessToken中
+                accessToken.setId(dbQueryUser.getId());
             }
             Subject currentUser = SecurityUtils.getSubject();
             //2.判断是否认证过，否则进行重新认证

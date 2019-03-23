@@ -19,9 +19,8 @@ package cn.kiwipeach.blog.controller;
 import cn.kiwipeach.blog.anno.CurrentUser;
 import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.CommentReply;
+import cn.kiwipeach.blog.param.CommentReplyParam;
 import cn.kiwipeach.blog.service.ICommentReplyService;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.kiwipeach.blog.shiro.token.AccessToken;
@@ -42,18 +41,38 @@ public class CommentReplyController {
     @Autowired
     private ICommentReplyService iCommentReplyService;
 
+
     /**
-     * 发表博客
+     * 发表博客评论
      *
-     * @param commentReply 评论回复对象
+     * @param commentReply 评论对象
      * @param accessToken  当前登录用户
-     * @return 返回发表博客评论结果
+     * @return 返回评论结果
      */
     @PostMapping("comment/create")
     @ResponseBody
-    public AjaxResponse<Boolean> createBlogComment(CommentReply commentReply, @CurrentUser AccessToken accessToken) {
+    public AjaxResponse<Boolean> createBlogComment(
+            CommentReplyParam commentReply,
+            @CurrentUser AccessToken accessToken) {
+        return new AjaxResponse<>(iCommentReplyService.createBlogComment(commentReply, accessToken));
+    }
+
+
+    /**
+     * 博客评论回复
+     *
+     * @param commentReply 评论对象
+     * @param accessToken  当前登录用户
+     * @return
+     */
+    @PostMapping("reply/create")
+    @ResponseBody
+    public AjaxResponse<Boolean> createCommentReply(
+            CommentReplyParam commentReply,
+            @CurrentUser AccessToken accessToken) {
         return new AjaxResponse<>(iCommentReplyService.createCommentReply(commentReply, accessToken));
     }
+
 
     /**
      * 评论回复分页查询接口

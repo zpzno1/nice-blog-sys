@@ -43,9 +43,10 @@ public class CommonSysController {
     public AjaxResponse<UserInfoVO> queryUserInfo() {
         AccessToken curUser = (AccessToken) SecurityUtils.getSubject().getPrincipal();
         if (curUser == null) {
-            return AjaxResponse.fail("-USERINFO_OO1", "未查询到用户信息");
+            return AjaxResponse.fail("USER_NOT_LOGIN", "未查询到用户信息");
         } else {
-            UserInfoVO userInfoVO = new UserInfoVO(curUser.getUserName(), curUser.getNickName(), curUser.getHeadUrl(), curUser.getOpenId(), curUser.getPlatform());
+            //FIXME openid建议不要跟id一致，后期在做处理了。
+            UserInfoVO userInfoVO = new UserInfoVO(curUser.getUserName(), curUser.getNickName(), curUser.getHeadUrl(), curUser.getId(), curUser.getPlatform());
             return AjaxResponse.success(userInfoVO);
         }
     }
