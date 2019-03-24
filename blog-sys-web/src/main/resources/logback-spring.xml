@@ -50,7 +50,7 @@
         <logger name="cn.kiwipeach.blog.mapper" level="warn"/>
     </springProfile>
     <!-- 日志级别TRACE<DEBUG<INFO<WARN<ERROR -->
-    <root level="ERROR">
+    <root level="WARN">
         <!--<appender-ref ref="ROLL_APPENDER"/>-->
         <appender-ref ref="CONSOLE_APPENDER"/>
     </root>

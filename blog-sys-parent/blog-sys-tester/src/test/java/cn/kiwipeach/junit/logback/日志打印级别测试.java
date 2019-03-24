@@ -13,22 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.quartz;
+package cn.kiwipeach.junit.logback;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * 第一个测试定时任务
+ * 测试logback日志打印级别
  *
  * @author kiwipeach
- * @create 2019-03-22
+ * @create 2019-03-24
  */
-public class HelloQuartzJob  {
+//@Slf4j
+public class 日志打印级别测试 {
 
-    public void run() {
-        String dataTime = new SimpleDateFormat("yyyyMMdd HH:mm:ss").format(new Date());
-        System.out.println(dataTime);
+    private Logger log = LoggerFactory.getLogger(日志打印级别测试.class);
+
+    @Test
+    public void 五个日志级别测试() {
+        log.trace("Trace Level");
+        log.debug("Debug Level");
+        log.info("Info Level");
+        log.warn("Warn Level");
+        log.error("ErrorLevel");
     }
-
 }

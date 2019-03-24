@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration debug="false">
+    <!-- 控制台 -->
+    <appender name="CONSOLE_APPENDER" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!-- 日志级别TRACE<DEBUG<INFO<WARN<ERROR 会记录配置级别和配置级别以上的log -->
+    <root level="TRACE">
+      <!--  <appender-ref ref="ROLL_APPENDER"/>-->
+        <appender-ref ref="CONSOLE_APPENDER"/>
+    </root>
+</configuration>

@@ -18,6 +18,7 @@
         <module>blog-sys-core</module>
         <module>blog-sys-api</module>
         <module>blog-sys-starters</module>
+        <module>blog-sys-tester</module>
     </modules>
 
 

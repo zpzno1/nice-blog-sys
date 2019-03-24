@@ -8,6 +8,7 @@
     7. 具有缓存和缓存管理器的侦听接口
     8. 支持多缓存管理器实例，以及一个实例的多个缓存区域
     9. 提供Hibernate的缓存实现、等等
+    官网配置案例：http://www.ehcache.org/documentation/3.7/examples.html
   -->
 <ehcache>
 
@@ -79,44 +80,12 @@
             overflowToDisk="false"
             diskPersistent="false"
             diskExpiryThreadIntervalSeconds="120"
-            />
-
-    <!-- We want eternal="true" and no timeToIdle or timeToLive settings because Shiro manages session
-         expirations explicitly.  If we set it to false and then set corresponding timeToIdle and timeToLive properties,
-         ehcache would evict sessions without Shiro's knowledge, which would cause many problems
-        (e.g. "My Shiro session timeout is 30 minutes - why isn't a session available after 2 minutes?"
-               Answer - ehcache expired it due to the timeToIdle property set to 120 seconds.)
-
-        diskPersistent=true since we want an enterprise session management feature - ability to use sessions after
-        even after a JVM restart.  -->
-    <cache name="shiro-activeSessionCache"
-           maxElementsInMemory="10000"
-           overflowToDisk="true"
-           eternal="true"
-           timeToLiveSeconds="0"
-           timeToIdleSeconds="0"
-           diskPersistent="true"
-           diskExpiryThreadIntervalSeconds="600"/>
-
-    <cache name="org.apache.shiro.realm.text.PropertiesRealm-0-accounts"
-           maxElementsInMemory="1000"
-           eternal="true"
-           overflowToDisk="true"/>
-
-
-    <!-- helloworld缓存 -->
-    <cache name="HelloWordCache"
-           maxElementsInMemory="5"
-           eternal="false"
-           timeToIdleSeconds="5"
-           timeToLiveSeconds="5"
-           overflowToDisk="false"
-           memoryStoreEvictionPolicy="LRU"/>
+    />
 
     <!--属性测试：只能存五个，不能永久在内存中留存，不会刷新到磁盘，超过5s没被使用就会从内存中被清除掉，寿命只有30s，清除策略
         遵守最近最少使用原则，意思是说，如果缓存达到上限了，有没有空闲的能够判断清理，并且所有的寿命都没有到，那么这个时候，就
         需要按照最近最少使用的策略去清除内存中的缓存。-->
-    <cache name="cacheAttributeTest"
+    <cache name="HelloWordCache"
            maxElementsInMemory="5"
            eternal="false"
            overflowToDisk="false"
