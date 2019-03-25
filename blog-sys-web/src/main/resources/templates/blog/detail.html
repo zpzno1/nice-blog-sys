@@ -307,7 +307,7 @@
             <!--评论专区:begin-->
 
             <!--单条完成评论：begin-->
-            <!-- <div class="card">
+             <div class="card">
                  <div class="card-body comment-body">
                      <div class="author">
                          <a href="#pablo">
@@ -331,7 +331,7 @@
                                      </a>
                                  </div>
                                  <h6 class="card-text">
-                                     <a href="#pablo" class="text-dark">你的文章好棒棒哦</a>
+                                     <a href="#pablo" class="text-dark">我是回复内容</a>
                                  </h6>
                              </div>
                              <div class="card-footer" style="padding: 0px 15px 10px 15px">
@@ -356,7 +356,7 @@
                                      </a>
                                  </div>
                                  <h6 class="card-text">
-                                     <a href="#pablo" class="text-dark">你的文章好棒棒哦</a>
+                                     <a href="#pablo" class="text-dark">我是回复内容</a>
                                  </h6>
                              </div>
                              <div class="card-footer" style="padding: 0px 15px 10px 15px">
@@ -381,7 +381,7 @@
                                      </a>
                                  </div>
                                  <h6 class="card-text">
-                                     <a href="#pablo" class="text-dark">你的文章好棒棒哦</a>
+                                     <a href="#pablo" class="text-dark">我是回复内容</a>
                                  </h6>
                              </div>
                              <div class="card-footer" style="padding: 0px 15px 10px 15px">
@@ -395,42 +395,42 @@
                                  </div>
                              </div>
                          </div>
-                         &lt;!&ndash;回复分页插件&ndash;&gt;
+                         <!--回复分页插件-->
                          <div class="row">
                              <div id="blog_reply_pagination_div" style="margin: 5px auto;"></div>
                          </div>
-                         <script src="../../static/assets/plugins/jquery_pagination/jquery.pagination.js"
-                                 th:src="@{/assets/plugins/jquery_pagination/jquery.pagination.js}"></script>
-                         <script type="text/javascript">
-                             var opt = {
-                                 total: 236,
-                                 items_per_page: 5,
-                                 num_display_entries: 3,
-                                 num_edge_entries: 2,
-                                 next_text: '下一页',
-                                 prev_text: '前一页',
-                                 callback: function (new_page_index, pagination_container) {
-                                     console.log("当前页码:" + new_page_index)
-                                     return false;
-                                 }
-                             };
-                             blog_common.plugin.pagination.init($("#blog_reply_pagination_div"), opt);
-                         </script>
                      </div>
+                     <script src="../../static/assets/plugins/jquery_pagination/jquery.pagination.js"
+                             th:src="@{/assets/plugins/jquery_pagination/jquery.pagination.js}"></script>
+                     <script type="text/javascript">
+                         var opt = {
+                             total: 236,
+                             items_per_page: 5,
+                             num_display_entries: 3,
+                             num_edge_entries: 2,
+                             next_text: '下一页',
+                             prev_text: '前一页',
+                             callback: function (new_page_index, pagination_container) {
+                                 console.log("当前页码:" + new_page_index)
+                                 return false;
+                             }
+                         };
+                         blog_common.plugin.pagination.init($("#blog_reply_pagination_div"), opt);
+                     </script>
                  </div>
                  <div class="card-footer ">
                      <div class="stats ml-auto">
                          <a href="javascript:;" class="text-dark">
                              <i class="fa fa-thumbs-up"></i>
                              45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                         <a href="#collapseExample"class="text-dark" title="回复" data-toggle="collapse"><i class="fa fa-reply"></i>回复&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                         <a class="text-dark" title="回复"><i class="fa fa-reply"></i>回复&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                          <a href="#collapseExample" class="text-dark blog-comment-collapse" data-toggle="collapse" data-status="closed"><span>查看回复(38)</span><i class="fa fa-chevron-down"></i></a>
                      </div>
                  </div>
-             </div>-->
+             </div>
             <!--单条完成评论：end-->
-            <div id="blogCommentContainer">
 
+            <div id="blogCommentContainer">
             </div>
             <!--评论专区:end-->
         </div>

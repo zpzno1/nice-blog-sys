@@ -12,18 +12,19 @@ function blogAgreeClick(target) {
  */
 function showBlogCommentReplyDialog(target) {
     // 缓存当前需要评论的对象
+    var dataTarget = $(target).parent();
     $.ajax({
         url: '/user',
         success: function (res) {
             if (res.code == 'USER_NOT_LOGIN') {
-                toastr.info("登陆后才能进行评论喔~");
+                toastr.error("登陆后才能进行评论喔~");
                 return;
             } else {
                 var requestData = new Object();
-                requestData.parentId = $(target).attr('comment-parentId');
+                requestData.parentId = $(dataTarget).attr('comment-parentId');
                 requestData.activeUserId = res.data.openId;
-                requestData.passiveUserId = $(target).attr('comment-passiveUserId');
-                requestData.commentUrl = $(target).attr('comment-url');
+                requestData.passiveUserId = $(dataTarget).attr('comment-passiveUserId');
+                requestData.commentUrl = $(dataTarget).attr('comment-url');
                 requestData.blogId = $('[name=blogId]').val();
                 requestData.commentCount = $('[name=commentCount]').val();
                 sessionStorage.setItem("COMMENT_TARGET", JSON.stringify(requestData));
@@ -76,7 +77,9 @@ function commentReplyClick(target) {
  * 博客回复展开
  */
 function commentClickCollapse(target) {
-    console.log(target);
+    var replyTarget = $(target).parent();
+    console.log(replyTarget);
+    debugger
     var $show = '';
     if ($(target).attr('data-status') == 'closed') {
         $show = '<i class="fa fa-chevron-up"></i>';
@@ -203,18 +206,110 @@ function _generate_blog_comment_item(item) {
         '                    <h6 class="card-title">\n' +
         '                        <a href="#pablo">' + item.content + '</a>\n' +
         '                    </h6>\n' +
+        ''+get_test_commentDom()+
         '                </div>\n' +
         '                <div class="card-footer ">\n' +
-        '                    <div class="stats ml-auto">\n' +
+        '                    <div class="stats ml-auto" comment-url="/commentReply/reply/create" comment-parentId="' + item.id + '" comment-passiveUserId="' + item.activeUserId + '" >\n' +
         '                        <a href="javascript:;" class="text-dark">\n' +
         '                            <i class="fa fa-thumbs-up"></i>\n' +
         '                            ' + item.starCount + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>\n' +
-        '                        <a href="#collapseExample" onclick="showBlogCommentReplyDialog(this)" comment-url="/commentReply/reply/create" comment-parentId="' + item.id + '" comment-passiveUserId="' + item.activeUserId + '" class="text-dark" title="回复" data-toggle="collapse"><i class="fa fa-reply"></i>回复&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>\n' +
-        '                        <a href="#collapseExample" onclick="commentClickCollapse(this);" class="text-dark blog-comment-collapse" data-toggle="collapse" data-status="closed"><span>查看回复(' + item.replyCount + ')</span><i class="fa fa-chevron-down"></i></a>\n' +
+        '                        <a onclick="showBlogCommentReplyDialog(this)" class="text-dark" title="回复" data-toggle="collapse"><i class="fa fa-reply"></i>回复&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>\n' +
+        '                        <a onclick="commentClickCollapse(this);" class="text-dark blog-comment-collapse" data-toggle="collapse" data-status="closed"><span>查看回复(' + item.replyCount + ')</span><i class="fa fa-chevron-down"></i></a>\n' +
         '                    </div>\n' +
         '                </div>\n' +
         '            </div>  ';
 
     return commentItem;
+}
+
+
+function _generate_comment_reply_item() {
+
+}
+
+
+function get_test_commentDom() {
+    var textDom ='<div class="collapse" id="collapseExample">\n' +
+        '\n' +
+        '                         <div class="card" style="background: #f9f7f7;margin: 3px 0px 3px 0px">\n' +
+        '                             <div class="card-body" style="padding: 10px 0px 0px 15px">\n' +
+        '                                 <div class="author">\n' +
+        '                                     <a href="#pablo">\n' +
+        '                                         <img src="/assets/images/index/me-logo.png"\n' +
+        '                                              alt="..." class="avatar img-raised">\n' +
+        '                                         <span>Lord Alex&nbsp;&nbsp;&nbsp;<label>回复</label>&nbsp;&nbsp;&nbsp;kiwipeach</span>\n' +
+        '                                     </a>\n' +
+        '                                 </div>\n' +
+        '                                 <h6 class="card-text">\n' +
+        '                                     <a href="#pablo" class="text-dark">我是回复内容</a>\n' +
+        '                                 </h6>\n' +
+        '                             </div>\n' +
+        '                             <div class="card-footer" style="padding: 0px 15px 10px 15px">\n' +
+        '                                 <div class="stats ml-auto">\n' +
+        '                                     <a href="javascript:;" class="text-dark" title="点赞">\n' +
+        '                                         <svg class="alibaba-icon" aria-hidden="true">\n' +
+        '                                             <use xlink:href="#icon-agree"></use>\n' +
+        '                                         </svg>\n' +
+        '                                         45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>\n' +
+        '                                     <a href="#collapseExample"class="text-dark" title="回复" data-toggle="collapse"><i class="fa fa-reply"></i>回复</a>\n' +
+        '                                 </div>\n' +
+        '                             </div>\n' +
+        '                         </div>\n' +
+        '\n' +
+        '                         <div class="card" style="background: #f9f7f7;margin: 3px 0px 3px 0px">\n' +
+        '                             <div class="card-body" style="padding: 10px 0px 0px 15px">\n' +
+        '                                 <div class="author">\n' +
+        '                                     <a href="#pablo">\n' +
+        '                                         <img src="/assets/images/index/me-logo.png"\n' +
+        '                                              alt="..." class="avatar img-raised">\n' +
+        '                                         <span>Lord Alex&nbsp;&nbsp;&nbsp;<label>回复</label>&nbsp;&nbsp;&nbsp;kiwipeach</span>\n' +
+        '                                     </a>\n' +
+        '                                 </div>\n' +
+        '                                 <h6 class="card-text">\n' +
+        '                                     <a href="#pablo" class="text-dark">我是回复内容</a>\n' +
+        '                                 </h6>\n' +
+        '                             </div>\n' +
+        '                             <div class="card-footer" style="padding: 0px 15px 10px 15px">\n' +
+        '                                 <div class="stats ml-auto">\n' +
+        '                                     <a href="javascript:;" class="text-dark" title="点赞">\n' +
+        '                                         <svg class="alibaba-icon" aria-hidden="true">\n' +
+        '                                             <use xlink:href="#icon-agree"></use>\n' +
+        '                                         </svg>\n' +
+        '                                         45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>\n' +
+        '                                     <a href="#collapseExample"class="text-dark" title="回复" data-toggle="collapse"><i class="fa fa-reply"></i>回复</a>\n' +
+        '                                 </div>\n' +
+        '                             </div>\n' +
+        '                         </div>\n' +
+        '\n' +
+        '                         <div class="card" style="background: #f9f7f7;margin: 3px 0px 3px 0px">\n' +
+        '                             <div class="card-body" style="padding: 10px 0px 0px 15px">\n' +
+        '                                 <div class="author">\n' +
+        '                                     <a href="#pablo">\n' +
+        '                                         <img src="/assets/images/index/me-logo.png"\n' +
+        '                                              alt="..." class="avatar img-raised">\n' +
+        '                                         <span>Lord Alex&nbsp;&nbsp;&nbsp;<label>回复</label>&nbsp;&nbsp;&nbsp;kiwipeach</span>\n' +
+        '                                     </a>\n' +
+        '                                 </div>\n' +
+        '                                 <h6 class="card-text">\n' +
+        '                                     <a href="#pablo" class="text-dark">我是回复内容</a>\n' +
+        '                                 </h6>\n' +
+        '                             </div>\n' +
+        '                             <div class="card-footer" style="padding: 0px 15px 10px 15px">\n' +
+        '                                 <div class="stats ml-auto">\n' +
+        '                                     <a href="javascript:;" class="text-dark" title="点赞">\n' +
+        '                                         <svg class="alibaba-icon" aria-hidden="true">\n' +
+        '                                             <use xlink:href="#icon-agree"></use>\n' +
+        '                                         </svg>\n' +
+        '                                         45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>\n' +
+        '                                     <a href="#collapseExample"class="text-dark" title="回复" data-toggle="collapse"><i class="fa fa-reply"></i>回复</a>\n' +
+        '                                 </div>\n' +
+        '                             </div>\n' +
+        '                         </div>\n' +
+        '                         <!--回复分页插件-->\n' +
+        '                         <div class="row">\n' +
+        '                             <div id="blog_reply_pagination_div" style="margin: 5px auto;"></div>\n' +
+        '                         </div>\n' +
+        '                     </div>';
+    return textDom;
 }
 
