@@ -74,26 +74,26 @@ function commentReplyClick(target) {
 }
 
 /**
- * 博客回复展开
+ * 博客回复展开图标处理
  */
 function commentClickCollapse(target) {
     var replyTarget = $(target).parent();
+    var $collapseExample = $(target).parent().parent().parent().find('.collapse');
+
     console.log(replyTarget);
-    debugger
     var $show = '';
     if ($(target).attr('data-status') == 'closed') {
         $show = '<i class="fa fa-chevron-up"></i>';
         $(target).attr('data-status', 'open');
+        $collapseExample.collapse('show');
     } else {
         $show = '<i class="fa fa-chevron-down"></i>';
         $(target).attr('data-status', 'closed');
+        $collapseExample.collapse('hide');
     }
     var $span = $(target).find('span').prop("outerHTML");
     $(target).html($span + $show);
-    var $collapseExample = $(target).parent().parent().parent().find('.collapse');
-    $collapseExample.collapse('toggle');
 }
-
 
 /**
  * 博客评论滚动加载
@@ -128,23 +128,82 @@ function loadBlogCommentRequest(opt) {
         success: function (res) {
             if (res.code == '0') {
                 if (res.data.pages >= res.data.current) {
-                    var dnamicHtml = '';
                     $.each(res.data.records, function (index, item) {
-                        dnamicHtml += _generate_blog_comment_item(item);
+                        $('#blogCommentContainer').append(_generate_blog_comment_item(item));
                     })
-                    $('#blogCommentContainer').append(dnamicHtml);
-                    //到底了，只提醒一次
                 } else {
+                    //到底了，只提醒一次
                     if (!fistTime2Bottom) {
                         $('#blogCommentContainer').append('<h4 style="text-align: center" class="animated rubberBand">已经到底啦~~</h4>');
                         fistTime2Bottom = true;
                     }
                 }
             } else {
-                layer.msg(res.msg);
+                blog_util.failMessage(res);
             }
         }
     })
+}
+
+
+/**
+ * 加载评论回复功能
+ */
+function loadCommentReplyRequest(param, $blogCommentContainer) {
+    var requestData = $.extend({size: 4}, param);
+    var replyCommentId = requestData.parentId;
+    $.ajax({
+        url: '/commentReply/query',
+        method: 'get',
+        data: requestData,
+        beforeSend: function () {
+            this.layerIndex = layer.load(1, {
+                shade: [0.1, '#fff'] //0.1透明度的白色背景
+            });
+        },
+        complete: function () {
+            layer.close(this.layerIndex);
+        },
+        success: function (res) {
+            var opt = {
+                total: res.data.total,
+                items_per_page: 4,
+                num_display_entries: 3,
+                num_edge_entries: 2,
+                next_text: '下一页',
+                prev_text: '前一页',
+                /*分页回调*/
+                callback: function (new_page_index, pagination_container) {
+                    var $commentContainer = $blogCommentContainer.find('#comment-reply-' + replyCommentId);
+                    $commentContainer.html('');
+                    if (new_page_index == 0) {
+                        _renderCommentReplyContaner(res, $commentContainer);
+                    } else {
+                        var requestData = $.extend(param, {size: 4, current: new_page_index + 1});
+                        $.ajax({
+                            url: '/commentReply/query',
+                            data: requestData,
+                            method: 'get',
+                            beforeSend: function () {
+                                this.dialogIndex = index = layer.load(1, {shade: [0.1, '#fff']});////0.1透明度的白色背景
+                            },
+                            complete: function () {
+                                layer.close(this.dialogIndex);
+                            },
+                            success: function (res) {
+                                _renderCommentReplyContaner(res, $commentContainer);
+                            }
+                        });
+                    }
+                    return false;
+                }
+            };
+            //TODO 这里获取的回复插件中的ID和当前操作的数据对不上
+            var $replyPagePlugin = $blogCommentContainer.find('#comment-reply-page-' + replyCommentId);
+            var total = opt.total;
+            $replyPagePlugin.pagination(total, opt);
+        }
+    });
 }
 
 
@@ -194,6 +253,7 @@ function makeBlogCommentRequest(requestData) {
  * @private
  */
 function _generate_blog_comment_item(item) {
+    //FIXME 需要动态的在此绑定事件
     var commentItem = '  <div class="card">\n' +
         '                <div class="card-body comment-body animated fadeInLeft">\n' +
         '                    <div class="author">\n' +
@@ -201,12 +261,16 @@ function _generate_blog_comment_item(item) {
         '                            <img src="' + item.activeUserHeadUrl + '"\n' +
         '                                 alt="..." class="avatar img-raised">\n' +
         '                            <span>' + item.activeNickName + '</span>\n' +
+        '                            <span>&nbsp;&nbsp;&nbsp;' + item.createTime + '</span>\n' +
         '                        </a>\n' +
         '                    </div>\n' +
         '                    <h6 class="card-title">\n' +
         '                        <a href="#pablo">' + item.content + '</a>\n' +
         '                    </h6>\n' +
-        ''+get_test_commentDom()+
+        '<div class="collapse">' +
+        '<div id="comment-reply-' + item.id + '" class="commentReplyContainer"></div>' +
+        '<div class="row"><div id="comment-reply-page-' + item.id + '" class="commentReplyPageContainer" style="margin: 5px auto;"></div></div>' +
+        '</div>' +
         '                </div>\n' +
         '                <div class="card-footer ">\n' +
         '                    <div class="stats ml-auto" comment-url="/commentReply/reply/create" comment-parentId="' + item.id + '" comment-passiveUserId="' + item.activeUserId + '" >\n' +
@@ -218,30 +282,53 @@ function _generate_blog_comment_item(item) {
         '                    </div>\n' +
         '                </div>\n' +
         '            </div>  ';
-
-    return commentItem;
+    var $blogCommentContainer = $(commentItem);
+    // debugger
+    $blogCommentContainer.find('.collapse').on('shown.bs.collapse', function () {
+        var requestData = {
+            parentId: item.id,
+            queryType: 'B_COMMENT_REPLY'
+        };
+        loadCommentReplyRequest(requestData, $blogCommentContainer);
+    });
+    return $blogCommentContainer;
 }
 
-
-function _generate_comment_reply_item() {
-
+/**
+ * 渲染评论视图
+ * @private
+ */
+function _renderCommentReplyContaner(res, $target) {
+    if (res.code == '0') {
+        if (res.data.records.length > 0) {
+            $.each(res.data.records, function (index, item) {
+                $target.append(_generate_comment_reply_item(item));
+            });
+        } else {
+            $target.append('<div class="text-center"><h3>已经没有更多的数据了</h3></div>');
+        }
+    } else {
+        blog_util.failMessage(res);
+    }
 }
 
-
-function get_test_commentDom() {
-    var textDom ='<div class="collapse" id="collapseExample">\n' +
-        '\n' +
-        '                         <div class="card" style="background: #f9f7f7;margin: 3px 0px 3px 0px">\n' +
+/**
+ * 生成评论回复html
+ * @returns {string}
+ * @private
+ */
+function _generate_comment_reply_item(item) {
+    var commentReplyItemDom = '<div class="card" style="background: #f9f7f7;margin: 3px 0px 3px 0px">\n' +
         '                             <div class="card-body" style="padding: 10px 0px 0px 15px">\n' +
         '                                 <div class="author">\n' +
         '                                     <a href="#pablo">\n' +
-        '                                         <img src="/assets/images/index/me-logo.png"\n' +
+        '                                         <img src="' + item.activeUserHeadUrl + '"\n' +
         '                                              alt="..." class="avatar img-raised">\n' +
-        '                                         <span>Lord Alex&nbsp;&nbsp;&nbsp;<label>回复</label>&nbsp;&nbsp;&nbsp;kiwipeach</span>\n' +
+        '                                         <span>' + item.activeNickName + '&nbsp;&nbsp;&nbsp;<label>回复</label>&nbsp;&nbsp;&nbsp;<img class="avatar img-raised" src="' + item.passiveUserHeadUrl + '"/>' + item.passiveNickName + '&nbsp;&nbsp;&nbsp;' + item.createTime + '</span>\n' +
         '                                     </a>\n' +
         '                                 </div>\n' +
         '                                 <h6 class="card-text">\n' +
-        '                                     <a href="#pablo" class="text-dark">我是回复内容</a>\n' +
+        '                                     <a href="#pablo" class="text-dark">' + item.content + '</a>\n' +
         '                                 </h6>\n' +
         '                             </div>\n' +
         '                             <div class="card-footer" style="padding: 0px 15px 10px 15px">\n' +
@@ -250,66 +337,10 @@ function get_test_commentDom() {
         '                                         <svg class="alibaba-icon" aria-hidden="true">\n' +
         '                                             <use xlink:href="#icon-agree"></use>\n' +
         '                                         </svg>\n' +
-        '                                         45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>\n' +
+        '                                         ' + item.starCount + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>\n' +
         '                                     <a href="#collapseExample"class="text-dark" title="回复" data-toggle="collapse"><i class="fa fa-reply"></i>回复</a>\n' +
         '                                 </div>\n' +
         '                             </div>\n' +
-        '                         </div>\n' +
-        '\n' +
-        '                         <div class="card" style="background: #f9f7f7;margin: 3px 0px 3px 0px">\n' +
-        '                             <div class="card-body" style="padding: 10px 0px 0px 15px">\n' +
-        '                                 <div class="author">\n' +
-        '                                     <a href="#pablo">\n' +
-        '                                         <img src="/assets/images/index/me-logo.png"\n' +
-        '                                              alt="..." class="avatar img-raised">\n' +
-        '                                         <span>Lord Alex&nbsp;&nbsp;&nbsp;<label>回复</label>&nbsp;&nbsp;&nbsp;kiwipeach</span>\n' +
-        '                                     </a>\n' +
-        '                                 </div>\n' +
-        '                                 <h6 class="card-text">\n' +
-        '                                     <a href="#pablo" class="text-dark">我是回复内容</a>\n' +
-        '                                 </h6>\n' +
-        '                             </div>\n' +
-        '                             <div class="card-footer" style="padding: 0px 15px 10px 15px">\n' +
-        '                                 <div class="stats ml-auto">\n' +
-        '                                     <a href="javascript:;" class="text-dark" title="点赞">\n' +
-        '                                         <svg class="alibaba-icon" aria-hidden="true">\n' +
-        '                                             <use xlink:href="#icon-agree"></use>\n' +
-        '                                         </svg>\n' +
-        '                                         45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>\n' +
-        '                                     <a href="#collapseExample"class="text-dark" title="回复" data-toggle="collapse"><i class="fa fa-reply"></i>回复</a>\n' +
-        '                                 </div>\n' +
-        '                             </div>\n' +
-        '                         </div>\n' +
-        '\n' +
-        '                         <div class="card" style="background: #f9f7f7;margin: 3px 0px 3px 0px">\n' +
-        '                             <div class="card-body" style="padding: 10px 0px 0px 15px">\n' +
-        '                                 <div class="author">\n' +
-        '                                     <a href="#pablo">\n' +
-        '                                         <img src="/assets/images/index/me-logo.png"\n' +
-        '                                              alt="..." class="avatar img-raised">\n' +
-        '                                         <span>Lord Alex&nbsp;&nbsp;&nbsp;<label>回复</label>&nbsp;&nbsp;&nbsp;kiwipeach</span>\n' +
-        '                                     </a>\n' +
-        '                                 </div>\n' +
-        '                                 <h6 class="card-text">\n' +
-        '                                     <a href="#pablo" class="text-dark">我是回复内容</a>\n' +
-        '                                 </h6>\n' +
-        '                             </div>\n' +
-        '                             <div class="card-footer" style="padding: 0px 15px 10px 15px">\n' +
-        '                                 <div class="stats ml-auto">\n' +
-        '                                     <a href="javascript:;" class="text-dark" title="点赞">\n' +
-        '                                         <svg class="alibaba-icon" aria-hidden="true">\n' +
-        '                                             <use xlink:href="#icon-agree"></use>\n' +
-        '                                         </svg>\n' +
-        '                                         45&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>\n' +
-        '                                     <a href="#collapseExample"class="text-dark" title="回复" data-toggle="collapse"><i class="fa fa-reply"></i>回复</a>\n' +
-        '                                 </div>\n' +
-        '                             </div>\n' +
-        '                         </div>\n' +
-        '                         <!--回复分页插件-->\n' +
-        '                         <div class="row">\n' +
-        '                             <div id="blog_reply_pagination_div" style="margin: 5px auto;"></div>\n' +
-        '                         </div>\n' +
-        '                     </div>';
-    return textDom;
+        '                         </div>';
+    return $(commentReplyItemDom);
 }
-

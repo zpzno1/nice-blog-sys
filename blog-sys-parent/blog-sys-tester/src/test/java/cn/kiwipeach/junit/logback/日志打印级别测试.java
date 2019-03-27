@@ -33,6 +33,7 @@ public class 日志打印级别测试 {
 
     @Test
     public void 五个日志级别测试() {
+        System.out.println("测试日志System.out");
         log.trace("Trace Level");
         log.debug("Debug Level");
         log.info("Info Level");
