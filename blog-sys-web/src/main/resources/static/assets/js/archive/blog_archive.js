@@ -87,7 +87,7 @@
      * @private
      */
     function _get_row_blog_dom(blog) {
-        var resultHtml = '<div class="timeline-row">\n' +
+        var resultHtml = '<div class="timeline-row animated fadeInDown">\n' +
             '                                <span class="node"></span>\n' +
             '                                <div class="content">\n' +
             '                                    <h1 itemprop="name">\n' +

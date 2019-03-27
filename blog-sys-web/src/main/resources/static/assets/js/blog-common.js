@@ -361,8 +361,7 @@
         if (res.code == '0') {
             if (res.data.records.length > 0) {
                 $.each(res.data.records, function (index, item) {
-                    var blogItemHtml = _get_blog_item(item);
-                    $blogListContainer.append(blogItemHtml);
+                    $blogListContainer.append(_get_blog_item(item));
                 });
             } else {
                 $blogListContainer.append('<div class="text-center"><h3>已经没有再多数据了，去别处看看吧,<a href="/">返回首页</a></h3></div>');
@@ -379,14 +378,14 @@
      * @private
      */
     function _get_blog_item(item) {
-        var $blogListItem = '' +
+        var blogListItem = '' +
             ' <div class="card card-nav-tabs">\n' +
-            '                    <div class="card-header card-header" style="font-size: 20px;">\n' +
+            '                    <div class="card-header" style="font-size: 20px;">\n' +
             '                        <div class="row">\n' +
             '                            <div class="col-md-11">\n' +
             '                                <span class="badge badge-pill badge-dark">' + item.categoryName + '</span>\n' +
-            '                                <a href="detail.html" th:href="@{/blog/detail.html}"\n' +
-            '                                   class="text-dark">' + item.title + '</a>\n' +
+            '                                <a href="/blog/detail/'+item.id+'"\n' +
+        '                                   class="text-dark">' + item.title + '</a>\n' +
             '                            </div>\n' +
             '                            <div class="col-md-1">\n' +
             '                            ' + _get_top_dom(item.top) +
@@ -395,7 +394,7 @@
             '\n' +
             '                    </div>\n' +
             '\n' +
-            '                    <div class="card-body animated fadeInLeft">\n' +
+            '                    <div class="card-body animated fadeInDown">\n' +
             '                        <div class="card-text">\n' +
             '                            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i\n' +
             '                                    class="fa fa-calendar"></i></label>&nbsp;&nbsp;<span>' + item.updateTime + '</span>\n' +
@@ -436,6 +435,17 @@
             '                        </div>\n' +
             '                    </div>\n' +
             '                </div>';
+        //图片光标移动放大体验
+        var $blogListItem = $(blogListItem);
+        var $blogHeader = $blogListItem.find('img');
+        $blogHeader.bind('mouseenter', function () {
+            console.log("add");
+            $(this).addClass("animated tada");
+        });
+        $blogHeader.bind('mouseout', function () {
+            console.log("remove");
+            $(this).removeClass("animated tada");
+        });
         return $blogListItem;
     }
 
