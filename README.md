@@ -4,7 +4,7 @@
   </a>
 </p>
 <p align=center>
-  nice blog system 是一个基于Java开发，简单、易用、好看的博客系统
+  nice blog system 是一个基于Java开发，便捷轻巧、高性能、外形Nice的博客系统
 </p>
 
 <p align="center">
@@ -22,7 +22,7 @@ https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg"></a>
 
 
 #### 项目说明
- 纯Java编写的个人博客系统，力求以“轻巧”、“易维护”、“高性能”为目标，我不完美，但日趋美丽。
+ 纯Java编写的个人博客系统，力求以“便捷轻巧、高性能、外形Nice”为目标，我不完美，但向往远方。
 
 #### 项目亮点
 - 新的技术选型[maven，spring-boot,mybatis-plus,shiro,thymeleaf,bootstrap，jquery....]
