@@ -18,8 +18,8 @@ spring:
     cache: false
   # 3)数据源配置
   datasource:
-    username: kiwipeach
-    password: Cnzg8hutIv6NPHhylRPqjvC7OkQOqdb543vwfW5JCfsBnBDtMctnENGO3MfMF3VJo8Q/Ixou8Q/6d2hipLBEew==
+    username: <?>
+    password: <?>
     url: jdbc:oracle:thin:@localhost:1521:ORCL
     driver-class-name: oracle.jdbc.driver.OracleDriver
     type: com.alibaba.druid.pool.DruidDataSource
@@ -117,8 +117,8 @@ github:
 
 gitee:
   client:
-    clientId: 5dd66a99095b62d59758399d1c220ec746b683b54bfbe87dcfd9fb4618be9e17
-    clientSecret: c6eb84d1ab96d3697d489cc615b26629c8ced21aef14fb0d7ee27db88a0bc264
+    clientId: <?>
+    clientSecret: <?>
     accessTokenUri: https://gitee.com/oauth/token
     userAuthorizationUri: https://gitee.com/oauth/authorize
     redirectURI: http://www.kiwipeach.cn/gitee/oauth2.0/callback
