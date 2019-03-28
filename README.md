@@ -1,6 +1,6 @@
 <p align=center>
   <a href="http://www.layui.com">
-    <img src="https://images.gitee.com/uploads/images/2018/1209/104133_aeeef844_1387578.png" alt="nice blog system">
+    <img src="https://images.gitee.com/uploads/images/2019/0329/012240_a69e0cc1_1387578.png" alt="nice blog system">
   </a>
 </p>
 <p align=center>
@@ -49,11 +49,11 @@ https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg"></a>
 
 - 博客首页
 
-![博客首页](http://img.kiwipeach.cn/90e51784904916a9a19c8f3882902b5b.png)
+![博客首页](https://images.gitee.com/uploads/images/2019/0329/012203_91911626_1387578.png)
 
 - 博客详情
 
-![博客详情](http://img.kiwipeach.cn/94d2080a243db7f9072f67528ff84b2f.png)
+![博客详情](https://images.gitee.com/uploads/images/2019/0329/012203_59856321_1387578.png)
 
 
 ##### 后台管理（更新中...）
