@@ -4,15 +4,13 @@ var currentIndex = 1;
  * 博客点赞按钮
  */
 function blogAgreeClick(target) {
-    alert('点赞:' + JSON.stringify(target));
+    alert('紧急赶制中...');
 }
 
 /**
- * 打开博客按钮
+ * 博客评论点击
  */
-function showBlogCommentReplyDialog(target) {
-    // 缓存当前需要评论的对象
-    var dataTarget = $(target).parent();
+function blogCommentClick(target) {
     $.ajax({
         url: '/user',
         success: function (res) {
@@ -21,23 +19,86 @@ function showBlogCommentReplyDialog(target) {
                 return;
             } else {
                 var requestData = new Object();
-                requestData.parentId = $(dataTarget).attr('comment-parentId');
+                requestData.parentId = $(target).attr('comment-parentId');
                 requestData.activeUserId = res.data.openId;
-                requestData.passiveUserId = $(dataTarget).attr('comment-passiveUserId');
-                requestData.commentUrl = $(dataTarget).attr('comment-url');
+                requestData.passiveUserId = $(target).attr('comment-passiveUserId');
+                requestData.commentUrl = $(target).attr('comment-url');
                 requestData.blogId = $('[name=blogId]').val();
                 requestData.commentCount = $('[name=commentCount]').val();
+                // 缓存当前需要评论的对象
                 sessionStorage.setItem("COMMENT_TARGET", JSON.stringify(requestData));
-                // 弹出模态框
-                var options = {
-                    backdrop: true,
-                    keyboard: true,
-                };
-                $('#commentReplyDialog').modal(options);
+                _showBlogCommentReplyDialog();
             }
         }
     });
+}
 
+/**
+ * 博客评论回复点击
+ */
+function commentReplyClick(target) {
+    $.ajax({
+        url: '/user',
+        success: function (res) {
+            if (res.code == 'USER_NOT_LOGIN') {
+                toastr.error("登陆后才能进行评论喔~");
+                return;
+            } else {
+                var realTarget = $(target).parent().parent().parent();
+                var requestData = new Object();
+                requestData.parentId = $(realTarget).attr('comment-parentId');
+                requestData.activeUserId = res.data.openId;
+                requestData.passiveUserId = $(realTarget).attr('comment-passiveUserId');
+                requestData.commentUrl = $(realTarget).attr('comment-url');
+                requestData.blogId = $('[name=blogId]').val();
+                requestData.commentCount = $('[name=commentCount]').val();
+                // 缓存当前需要评论的对象
+                sessionStorage.setItem("COMMENT_TARGET", JSON.stringify(requestData));
+                _showBlogCommentReplyDialog();
+            }
+        }
+    });
+}
+
+/**
+ * 回复的回复点击事件
+ * @param target
+ */
+function replyReplyClick(target) {
+    $.ajax({
+        url: '/user',
+        success: function (res) {
+            if (res.code == 'USER_NOT_LOGIN') {
+                toastr.error("登陆后才能进行评论喔~");
+                return;
+            } else {
+                var realTarget = $(target).parent().parent().parent();
+                debugger
+                var requestData = new Object();
+                requestData.parentId = $(realTarget).parent().parent().parent().parent().attr('comment-parentId');
+                requestData.activeUserId = res.data.openId;
+                requestData.passiveUserId = $(realTarget).attr('comment-passiveUserId');
+                requestData.commentUrl = $(realTarget).attr('comment-url');
+                requestData.blogId = $('[name=blogId]').val();
+                requestData.commentCount = $('[name=commentCount]').val();
+                // 缓存当前需要评论的对象
+                sessionStorage.setItem("COMMENT_TARGET", JSON.stringify(requestData));
+                _showBlogCommentReplyDialog();
+            }
+        }
+    });
+}
+
+
+/**
+ * 弹出发表评论的模态框
+ */
+function _showBlogCommentReplyDialog() {
+    var options = {
+        backdrop: true,
+        keyboard: true,
+    };
+    $('#commentReplyDialog').modal(options);
 }
 
 /**
@@ -62,16 +123,6 @@ function commentReplySendClick() {
     makeBlogCommentRequest(requestData);
 }
 
-/**
- * 博客评论回复点击事件
- * @param target
- */
-function commentReplyClick(target) {
-    var requestData = new Object();
-    requestData.parentId = $(target).attr('data-parentId');
-    requestData.parentId = $(target).attr('data-parentId');
-    makeBlogCommentRequest();
-}
 
 /**
  * 博客回复展开图标处理
@@ -212,6 +263,7 @@ function loadCommentReplyRequest(param, $blogCommentContainer) {
  */
 function makeBlogCommentRequest(requestData) {
     console.log("评论回复请求数据:", requestData);
+    debugger
     $.ajax({
         url: requestData.commentUrl,
         method: 'post',
@@ -254,45 +306,62 @@ function makeBlogCommentRequest(requestData) {
  */
 function _generate_blog_comment_item(item) {
     //FIXME 需要动态的在此绑定事件
-    var commentItem = '  <div class="card">\n' +
-        '                <div class="card-body comment-body animated fadeInLeft">\n' +
-        '                    <div class="author">\n' +
-        '                        <a href="#pablo">\n' +
-        '                            <img src="' + item.activeUserHeadUrl + '"\n' +
-        '                                 alt="..." class="avatar img-raised">\n' +
-        '                            <span>' + item.activeNickName + '</span>\n' +
-        '                            <span>&nbsp;&nbsp;&nbsp;' + item.createTime + '</span>\n' +
-        '                        </a>\n' +
-        '                    </div>\n' +
-        '                    <h6 class="card-title">\n' +
-        '                        <a href="#pablo">' + item.content + '</a>\n' +
-        '                    </h6>\n' +
+    var commentItem = '<div  class="card" comment-id="' + item.id + '" comment-url="/commentReply/reply/create" comment-parentId="' + item.id + '" comment-passiveUserId="' + item.activeUserId + '" >' +
+        '                <div class="card-body comment-body animated fadeInLeft">' +
+        '                    <div class="author">' +
+        '                        <a href="#pablo">' +
+        '                            <img src="' + item.activeUserHeadUrl + '"' +
+        '                                 alt="..." class="avatar img-raised">' +
+        '                            <span>' + item.activeNickName + '</span>' +
+        '                            <span>&nbsp;&nbsp;&nbsp;' + item.createTime + '</span>' +
+        '                        </a>' +
+        '                    </div>' +
+        '                    <h6 class="card-title">' +
+        '                        <a href="#pablo">' + item.content + '</a>' +
+        '                    </h6>' +
         '<div class="collapse">' +
         '<div id="comment-reply-' + item.id + '" class="commentReplyContainer"></div>' +
         '<div class="row"><div id="comment-reply-page-' + item.id + '" class="commentReplyPageContainer" style="margin: 5px auto;"></div></div>' +
         '</div>' +
-        '                </div>\n' +
-        '                <div class="card-footer ">\n' +
-        '                    <div class="stats ml-auto" comment-url="/commentReply/reply/create" comment-parentId="' + item.id + '" comment-passiveUserId="' + item.activeUserId + '" >\n' +
-        '                        <a href="javascript:;" class="text-dark">\n' +
-        '                            <i class="fa fa-thumbs-up"></i>\n' +
-        '                            ' + item.starCount + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>\n' +
-        '                        <a onclick="showBlogCommentReplyDialog(this)" class="text-dark" title="回复" data-toggle="collapse"><i class="fa fa-reply"></i>回复&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>\n' +
-        '                        <a onclick="commentClickCollapse(this);" class="text-dark blog-comment-collapse" data-toggle="collapse" data-status="closed"><span>查看回复(' + item.replyCount + ')</span><i class="fa fa-chevron-down"></i></a>\n' +
-        '                    </div>\n' +
-        '                </div>\n' +
+        '                </div>' +
+        '                <div class="card-footer ">' +
+        '                    <div class="stats ml-auto">' +
+        '                        <a href="javascript:;" class="text-dark">' +
+        '                            <i class="fa fa-thumbs-up"></i>' +
+        '                            ' + item.starCount + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>' +
+        '                        <a onclick="commentReplyClick(this)" class="text-dark" title="回复" data-toggle="collapse"><i class="fa fa-reply"></i>回复&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>' +
+        '' + _getReplyPermissionDom(item) +
+        '                    </div>' +
+        '                </div>' +
         '            </div>  ';
     var $blogCommentContainer = $(commentItem);
-    // debugger
-    $blogCommentContainer.find('.collapse').on('shown.bs.collapse', function () {
-        var requestData = {
-            parentId: item.id,
-            queryType: 'B_COMMENT_REPLY'
-        };
-        loadCommentReplyRequest(requestData, $blogCommentContainer);
-    });
+    if (item.replyCount != 0) {
+        $blogCommentContainer.find('.collapse').on('shown.bs.collapse', function () {
+            var requestData = {
+                parentId: item.id,
+                queryType: 'B_COMMENT_REPLY'
+            };
+            loadCommentReplyRequest(requestData, $blogCommentContainer);
+        });
+    }
     return $blogCommentContainer;
 }
+
+/**
+ * 获取回复dom元素
+ * @param item
+ * @returns {string}
+ * @private
+ */
+function _getReplyPermissionDom(item) {
+    var dataToggle = item.replyCount > 0 ? 'data-toggle=collapse' : '';
+    if (item.replyCount > 0) {
+        return '<a onclick="commentClickCollapse(this);" data-status="closed" class="text-dark blog-comment-collapse"' + dataToggle + '><span>更多回复(' + item.replyCount + ')</span><i class="fa fa-chevron-down"></i></a>';
+    } else {
+        return '<a data-status="closed" class="text-dark blog-comment-collapse"' + dataToggle + '><span>更多回复(' + item.replyCount + ')</span></a>';
+    }
+}
+
 
 /**
  * 渲染评论视图
@@ -318,29 +387,29 @@ function _renderCommentReplyContaner(res, $target) {
  * @private
  */
 function _generate_comment_reply_item(item) {
-    var commentReplyItemDom = '<div class="card" style="background: #f9f7f7;margin: 3px 0px 3px 0px">\n' +
-        '                             <div class="card-body" style="padding: 10px 0px 0px 15px">\n' +
-        '                                 <div class="author">\n' +
-        '                                     <a href="#pablo">\n' +
-        '                                         <img src="' + item.activeUserHeadUrl + '"\n' +
-        '                                              alt="..." class="avatar img-raised">\n' +
-        '                                         <span>' + item.activeNickName + '&nbsp;&nbsp;&nbsp;<label>回复</label>&nbsp;&nbsp;&nbsp;<img class="avatar img-raised" src="' + item.passiveUserHeadUrl + '"/>' + item.passiveNickName + '&nbsp;&nbsp;&nbsp;' + item.createTime + '</span>\n' +
-        '                                     </a>\n' +
-        '                                 </div>\n' +
-        '                                 <h6 class="card-text">\n' +
-        '                                     <a href="#pablo" class="text-dark">' + item.content + '</a>\n' +
-        '                                 </h6>\n' +
-        '                             </div>\n' +
-        '                             <div class="card-footer" style="padding: 0px 15px 10px 15px">\n' +
-        '                                 <div class="stats ml-auto">\n' +
-        '                                     <a href="javascript:;" class="text-dark" title="点赞">\n' +
-        '                                         <svg class="alibaba-icon" aria-hidden="true">\n' +
-        '                                             <use xlink:href="#icon-agree"></use>\n' +
-        '                                         </svg>\n' +
-        '                                         ' + item.starCount + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>\n' +
-        '                                     <a href="#collapseExample"class="text-dark" title="回复" data-toggle="collapse"><i class="fa fa-reply"></i>回复</a>\n' +
-        '                                 </div>\n' +
-        '                             </div>\n' +
+    var commentReplyItemDom = '<div class="card" comment-url="/commentReply/reply/create" comment-passiveUserId="' + item.activeUserId + '" style="background: #f9f7f7;margin: 3px 0px 3px 0px">' +
+        '                             <div class="card-body" style="padding: 10px 0px 0px 15px">' +
+        '                                 <div class="author">' +
+        '                                     <a href="#pablo">' +
+        '                                         <img src="' + item.activeUserHeadUrl + '"' +
+        '                                              alt="..." class="avatar img-raised">' +
+        '                                         <span>' + item.activeNickName + '&nbsp;&nbsp;&nbsp;<label>回复</label>&nbsp;&nbsp;&nbsp;<img class="avatar img-raised" src="' + item.passiveUserHeadUrl + '"/>' + item.passiveNickName + '&nbsp;&nbsp;&nbsp;' + item.createTime + '</span>' +
+        '                                     </a>' +
+        '                                 </div>' +
+        '                                 <h6 class="card-text">' +
+        '                                     <a href="#pablo" class="text-dark">' + item.content + '</a>' +
+        '                                 </h6>' +
+        '                             </div>' +
+        '                             <div class="card-footer" style="padding: 0px 15px 10px 15px">' +
+        '                                 <div class="stats ml-auto">' +
+        '                                     <a href="javascript:;" class="text-dark" title="点赞">' +
+        '                                         <svg class="alibaba-icon" aria-hidden="true">' +
+        '                                             <use xlink:href="#icon-agree"></use>' +
+        '                                         </svg>' +
+        '                                         ' + item.starCount + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>' +
+        '                                     <a onclick="replyReplyClick(this)" class="text-dark" title="回复" data-toggle="collapse"><i class="fa fa-reply"></i>回复</a>' +
+        '                                 </div>' +
+        '                             </div>' +
         '                         </div>';
     return $(commentReplyItemDom);
 }

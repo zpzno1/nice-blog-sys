@@ -250,12 +250,11 @@
                                 ([[${blogDetail.getStarCount()}]])
                             </button>
                             <!--评论按钮-->
-                            <button id="commentReplyBtn" class="btn btn-primary btn-round" style="font-size: 18px;"
-                                    onclick="showBlogCommentReplyDialog(this)"
-                                    comment-type="B_BLOG_COMMENT"
-                                    th:attr="comment-url='/commentReply/comment/create',comment-passiveUserId=${blogDetail.getUserId()},comment-parentId=${blogDetail.getId()},comment-count=${blogDetail.getStarCount()}">
-                                <i class="fas fa-comment"></i>([[${blogDetail.getCommentCount()}]])
-                            </button>
+                                <button id="commentReplyBtn" comment-type="B_BLOG_COMMENT"
+                                        th:attr="comment-url='/commentReply/comment/create',comment-passiveUserId=${blogDetail.getUserId()},comment-parentId=${blogDetail.getId()},comment-count=${blogDetail.getStarCount()}" class="btn btn-primary btn-round" style="font-size: 18px;"
+                                        onclick="blogCommentClick(this)">
+                                    <i class="fas fa-comment"></i>([[${blogDetail.getCommentCount()}]])
+                                </button>
                         </div>
 
 

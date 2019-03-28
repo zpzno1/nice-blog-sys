@@ -59,7 +59,7 @@ public class CommentReplyServiceImpl extends ServiceImpl<CommentReplyMapper, Com
         // 1) 插入评论内容
         commentReply.setType("B_BLOG_COMMENT");
         if (commentReplyMapper.insert(commentReply) == 0) {
-            throw new BlogException("-COMMENT-002", "评论插入失败！");
+            throw new BlogException("-COMMENT-002", "博客评论插入失败！");
         }
         // 2）更新博客统计字段
         if (updateBlogCommentCount(commentReply.getParentId()) == false) {
@@ -73,7 +73,7 @@ public class CommentReplyServiceImpl extends ServiceImpl<CommentReplyMapper, Com
         // 1)插入回复内容
         commentReply.setType("B_COMMENT_REPLY");
         if (commentReplyMapper.insert(commentReply) == 0) {
-            throw new BlogException("-COMMENT-002", "回复内容插入失败！");
+            throw new BlogException("-COMMENT-002", "评论回复内容插入失败！");
         }
         // 2)维护博客评论回复统计字段
         if (updateBlogCommentCount(commentReply.getBlogId()) == false) {
@@ -87,6 +87,7 @@ public class CommentReplyServiceImpl extends ServiceImpl<CommentReplyMapper, Com
         }
         return true;
     }
+
 
     @Override
     public IPage<BlogCommentVO> queryCommentByPage(IPage<BlogCommentVO> page, String parentId, String type) {
