@@ -23,6 +23,8 @@ import cn.kiwipeach.blog.mapper.BlogMapper;
 import cn.kiwipeach.blog.mapper.BlogTagMapper;
 import cn.kiwipeach.blog.service.IMarkdownStoreageService;
 import cn.kiwipeach.blog.service.adapter.BlogServiceAdapter;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,7 +86,7 @@ public class BlogServiceImpl extends BlogServiceAdapter {
         //给分页查询结果添加标签
         for (ArchiveBlogTimelineVO tagVOS : archiveBlogTimelineVOS) {
             List<TagVO> tagVOList = blogTagMapper.selectBlogTag(tagVOS.getId());
-            tagVOS.setTagVOList(tagVOList);
+            tagVOS.setTagVOList(JSONArray.parseArray(JSON.toJSONString(tagVOList)));
         }
         return page.setRecords(archiveBlogTimelineVOS);
     }

@@ -29,6 +29,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class CategoryTreeVO implements Serializable {
+    private static final long serialVersionUID = -8399494703950520144L;
     private String id;
     private String name;
     private String parentId;

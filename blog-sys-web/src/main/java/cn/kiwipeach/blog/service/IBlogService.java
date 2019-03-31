@@ -41,7 +41,7 @@ public interface IBlogService extends IService<Blog> {
      * @param tagName    标签名称
      * @return 博客列表
      */
-    @Cacheable(value = {"INDEX_BLOG_LIST"}, key = "'page_'+#page.current+'_'+#page.size")
+    @Cacheable(value = {"INDEX_BLOG_LIST"}, key = "'page_'+#page.current+'_'+#page.size+'_'+#categoryId+'_'+#tagName")
     IPage<BlogInfoVO> pageQuery(IPage<BlogInfoVO> page, String categoryId, String tagName);
 
     /**
@@ -61,7 +61,7 @@ public interface IBlogService extends IService<Blog> {
      * @param pattern 归档格式
      * @return 返回归档博客
      */
-    //@Cacheable(value = {"ARCHIVE_TIME_LINE"}, key = "'page_'+#pattern+'_'+#page.current+'_'+#page.size")
+    @Cacheable(value = {"ARCHIVE_TIME_LINE"}, key = "'page_'+#pattern+'_'+#page.current+'_'+#page.size")
     IPage<ArchiveBlogTimelineVO> archiveBlogQuery(IPage<ArchiveBlogTimelineVO> page, String pattern);
 
     /*##################################################后台##################################################*/

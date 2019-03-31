@@ -32,6 +32,7 @@ import java.util.List;
 @Getter
 @Setter
 public class BlogInfoVO implements Serializable {
+    private static final long serialVersionUID = -1076318301346864686L;
     private String id;
     private String userId;
     private String nickName;

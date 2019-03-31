@@ -31,6 +31,7 @@ import java.util.List;
 @Getter
 @Setter
 public class RolePermissionVO implements Serializable {
+    private static final long serialVersionUID = -8427175008335897857L;
     private String roleId;
     private String roleName;
     List<SysPermission> permissions;

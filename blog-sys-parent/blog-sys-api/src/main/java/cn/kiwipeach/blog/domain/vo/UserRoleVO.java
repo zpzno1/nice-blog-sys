@@ -31,6 +31,7 @@ import java.util.List;
 @Getter
 @Setter
 public class UserRoleVO implements Serializable {
+    private static final long serialVersionUID = 7778656866315417091L;
     private String userId;
     private String thirdUserId;
     private String platform;

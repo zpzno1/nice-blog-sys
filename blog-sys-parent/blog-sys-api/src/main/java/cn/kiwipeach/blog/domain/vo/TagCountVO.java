@@ -29,6 +29,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class TagCountVO implements Serializable {
+    private static final long serialVersionUID = -5811463036861845175L;
     private String tagId;
     private String tagName;
     private String count;

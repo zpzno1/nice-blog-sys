@@ -15,6 +15,7 @@
  */
 package cn.kiwipeach.blog.domain.vo;
 
+import com.alibaba.fastjson.JSONArray;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,6 +32,7 @@ import java.util.List;
 @Setter
 public class ArchiveBlogTimelineVO implements Serializable {
 
+    private static final long serialVersionUID = -511933440274272503L;
     private String id;
     private String title;
     private String categoryName;
@@ -46,5 +48,5 @@ public class ArchiveBlogTimelineVO implements Serializable {
     /**
      * 所有的博客标签，程序后面赋值
      */
-    private List<TagVO> tagVOList;
+    private JSONArray tagVOList;
 }

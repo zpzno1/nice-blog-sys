@@ -68,6 +68,7 @@
             <artifactId>spring-boot-configuration-processor</artifactId><!--启用配置文件智能提示-->
             <optional>true</optional>
         </dependency>
+        <!--在使用redis缓存的时候，调试的需要关闭这个工具jar包-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId><!--devtools热部署插件依赖-->

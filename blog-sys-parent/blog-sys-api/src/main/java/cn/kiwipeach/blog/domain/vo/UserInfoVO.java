@@ -29,6 +29,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class UserInfoVO implements Serializable {
+    private static final long serialVersionUID = -1461173513579198239L;
     /**
      * 登录账号(三方登陆账号)
      */

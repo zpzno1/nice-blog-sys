@@ -29,6 +29,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class TagVO implements Serializable {
+    private static final long serialVersionUID = 5838026190242250811L;
     private String id;
     private String name;
     private String icon;

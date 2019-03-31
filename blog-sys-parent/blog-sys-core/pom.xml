@@ -14,6 +14,10 @@
     <description>博客其他所有模块的核心(core)基础依赖</description>
     <!--项目依赖-->
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId><!--sprintboot-->
+        </dependency>
         <!--http-->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
