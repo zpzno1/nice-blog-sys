@@ -18,6 +18,7 @@ package cn.kiwipeach.blog.domain.vo;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-public class ArchiveBlogTimelineVO {
+public class ArchiveBlogTimelineVO implements Serializable {
 
     private String id;
     private String title;

@@ -21,7 +21,7 @@
             user.dir - SysUser's current working directory 如：D:\souce_code\mine_source\nice-blog-sys\blog-sys-web
             java.io.tmpdir - Default temp file path  如：C:\Users\KIWIPE~1\AppData\Local\Temp\
     -->
-    <diskStore path="java.io.tmpdir/shiro-ehcache"/>
+    <diskStore path="java.io.tmpdir/shiro-demo"/>
 
 
     <!--Default Cache configuration. These will applied to caches programmatically created through
@@ -82,17 +82,30 @@
             diskExpiryThreadIntervalSeconds="120"
     />
 
-    <!--属性测试：只能存五个，不能永久在内存中留存，不会刷新到磁盘，超过5s没被使用就会从内存中被清除掉，寿命只有30s，清除策略
-        遵守最近最少使用原则，意思是说，如果缓存达到上限了，有没有空闲的能够判断清理，并且所有的寿命都没有到，那么这个时候，就
-        需要按照最近最少使用的策略去清除内存中的缓存。-->
-    <cache name="HelloWordCache"
+    <!--shiro依赖-->
+    <cache name="shiro-activeSessionCache"
+           maxElementsInMemory="10000"
+           overflowToDisk="true"
+           eternal="true"
+           timeToLiveSeconds="0"
+           timeToIdleSeconds="0"
+           diskPersistent="true"
+           diskExpiryThreadIntervalSeconds="600"/>
+
+    <cache name="org.apache.shiro.realm.text.PropertiesRealm-0-accounts"
+           maxElementsInMemory="1000"
+           eternal="true"
+           overflowToDisk="true"/>
+
+
+    <!--案例演示Cache-->
+    <cache name="blogCache"
            maxElementsInMemory="5"
            eternal="false"
            overflowToDisk="false"
            timeToIdleSeconds="5"
            timeToLiveSeconds="30"
            memoryStoreEvictionPolicy="LRU"/>
-
 </ehcache>
 
 

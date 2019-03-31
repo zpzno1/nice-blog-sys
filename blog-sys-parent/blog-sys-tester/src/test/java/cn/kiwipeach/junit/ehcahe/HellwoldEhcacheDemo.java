@@ -45,7 +45,7 @@ public class HellwoldEhcacheDemo {
     @Test
     public void 获取已配置缓存的信息名称() {
 
-        InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream("ehcache.xml");
+        InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream("ehcache-demo.xml");
         CacheManager cacheManager = CacheManager.create(resourceAsStream);
         String[] cacheNames = cacheManager.getInstance().getCacheNames();
         System.out.println("配置的缓存名称：");
@@ -57,27 +57,31 @@ public class HellwoldEhcacheDemo {
     @Test
     public void Ehcache缓存使用() throws FileNotFoundException {
         // 1. 创建缓存管理器
-        InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream("ehcache.xml");
+        InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream("ehcache-demo.xml");
         CacheManager cacheManager = CacheManager.create(resourceAsStream);
-        String[] cacheNames = cacheManager.getCacheNames();
-
-
         // 2. 获取缓存对象
         Cache cache = cacheManager.getCache("HelloWordCache");
+        //cache.removeAll();
 
-        // 3. 创建元素
-        Element element = new Element("key1", "value1");
+        // 3. 创建元素，name元素会持久化到磁盘上，重启单元测试能够重新检测到。
+        log.info("程序一开始：");
+        printCacheMail(cache, "nickName");
 
         // 4. 将元素添加到缓存
-        cache.put(element);
+        cache.put(new Element("nickName", "kiwipewach"));
+        cache.put(new Element("deleteKey", "测试"));
+        for (int i = 0; i < 10; i++) {
+            cache.put(new Element("email-" + i, "1099501218@qq.com-" + i));
+        }
+        log.info("程序添加emial缓存成功.");
 
         // 5. 获取缓存
-        Element value = cache.get("key1");
-        System.out.println(value);
-        System.out.println(value.getObjectValue());
+        printCacheMail(cache, "deleteKey");
 
         // 6. 删除元素
-        cache.remove("key1");
+        cache.remove("deleteKey");
+        log.info("程序已删除email缓存：");
+        printCacheMail(cache, "deleteKey");
 
         //Dog dog = new Dog("1", "taidi","2");
         //Element element2 = new Element("taidi", dog);
@@ -86,18 +90,19 @@ public class HellwoldEhcacheDemo {
         //Dog dog2 = (Dog) value2.getObjectValue();
         //System.out.println(dog2);
 
-        System.out.println(cache.getSize());
-
         // 7. 刷新缓存
+        log.info("程序已flush缓存：");
         cache.flush();
 
         // 8. 关闭缓存管理器
+        log.info("程序已shutdown.");
         cacheManager.shutdown();
-    }
-
-    @Test
-    public void 属性测试maxElementsInMemory() {
 
     }
+
+    private void printCacheMail(Cache cache, String key) {
+        log.info("获取缓存对象:{}={},cache size ={}", key, cache.get(key), cache.getSize());
+    }
+
 
 }

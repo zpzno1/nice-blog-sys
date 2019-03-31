@@ -2,17 +2,17 @@ package cn.kiwipeach.blog;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 @EnableTransactionManagement
 @SpringBootApplication(scanBasePackages = {"cn.kiwipeach.blog", "org.kiwipeach.blog"})
+@EnableCaching
 //@ImportResource(locations = {"classpath:spring-shiro.xml"})
 public class BlogWebApplication extends SpringBootServletInitializer {
 

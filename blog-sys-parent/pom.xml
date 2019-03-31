@@ -2,14 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>nice-blog-sys</artifactId>
-        <groupId>cn.kiwipeach.blog</groupId>
-        <version>1.0.0-SNAPSHOT</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+       <!-- <version>1.5.14.RELEASE</version>-->
+        <version>2.1.3.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
+    <groupId>cn.kiwipeach.blog</groupId>
     <artifactId>blog-sys-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <description>博客仲裁中心，所有博客相关模块的父容器xxx</description>
 
@@ -37,7 +41,7 @@
         <jetty.plugin.port>80</jetty.plugin.port>
         <jetty.plugin.contextPath>/</jetty.plugin.contextPath>
         <!--thymeleaf-->
-        <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
+        <thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
         <thymeleaf-layout-dialect.version>2.3.0</thymeleaf-layout-dialect.version>
         <!--mybatis oracle-->
         <oracle.version>11.2.0.4</oracle.version>
@@ -81,7 +85,7 @@
     <!--仓库-->
     <repositories>
         <!--alimaven-->
-        <repository>
+        <!--<repository>
             <id>alimaven</id>
             <name>aliyun maven</name>
             <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
@@ -91,7 +95,7 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </repository>
+        </repository>-->
         <!--apache central maven-->
         <repository>
             <id>central</id>

@@ -18,6 +18,8 @@ package cn.kiwipeach.blog.domain.vo;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
  * 博客分类树形实体
  *
@@ -26,7 +28,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class CategoryTreeVO {
+public class CategoryTreeVO implements Serializable {
     private String id;
     private String name;
     private String parentId;

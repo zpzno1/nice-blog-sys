@@ -18,6 +18,8 @@ package cn.kiwipeach.blog.domain.vo;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
  * 标签统计情况实体类
  *
@@ -26,7 +28,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class TagCountVO {
+public class TagCountVO implements Serializable {
     private String tagId;
     private String tagName;
     private String count;

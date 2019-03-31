@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 kiwipeach.
+ * Copyright 2019 kiwipeach.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.service;
+package cn.kiwipeach.blog.service.demo;
 
 import cn.kiwipeach.blog.domain.Blog;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -44,5 +44,10 @@ public interface IDemoService extends IService<Blog> {
     @Transactional
     void testTranactional(Blog blog);
 
+    /**
+     * 测试运行时异常
+     */
     void testRuntimeException();
+
+
 }

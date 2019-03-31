@@ -20,6 +20,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -30,7 +31,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-public class BlogInfoVO{
+public class BlogInfoVO implements Serializable {
     private String id;
     private String userId;
     private String nickName;

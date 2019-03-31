@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.kiwipeach.blog.web;
+package org.kiwipeach.blog.autoconfig;
 
 import org.kiwipeach.blog.resolver.CurrentUserMethodArgumentResolver;
 import org.springframework.context.annotation.Configuration;
@@ -34,7 +34,7 @@ import java.util.List;
 @Configuration
 public class BlogMvcConfiguration extends WebMvcConfigurerAdapter {
 
-
+    
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         // 设置默认欢迎页面

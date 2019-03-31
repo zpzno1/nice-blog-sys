@@ -13,21 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.controller;
+package cn.kiwipeach.blog.controller.demo;
 
 
 import cn.kiwipeach.blog.anno.AccessLog;
 import cn.kiwipeach.blog.base.AjaxResponse;
-import cn.kiwipeach.blog.service.IDemoService;
+import cn.kiwipeach.blog.service.demo.IDemoService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.PostConstruct;
 
 /**
  * 博客 前端控制器  【开播提醒群号:679722876】，不定时随缘直播，今天调试直播间，不写代码

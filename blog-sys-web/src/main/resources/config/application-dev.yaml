@@ -1,11 +1,13 @@
 # 端口
 server:
   port: 80
-  context-path: /
+  servlet:
+    context-path: /
+
 
 # 1)系统启动广告
-banner:
-  location: classpath:system/banner.txt
+#banner:
+#  location: classpath:system/banner.txt
 
 spring:
   # 2)thymeleaf 模板引擎
@@ -13,13 +15,17 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
     mode: HTML
-    content-type: text/html
     encoding: UTF-8
     cache: false
+    servlet:
+      content-type:  text/html
   # 3)数据源配置
+  main:
+    # 当有自定义bean的时候，是否允许覆盖springboot的默认bean，默认为false
+    allow-bean-definition-overriding: true
   datasource:
-    username: <?>
-    password: <?>
+    username: kiwipeach
+    password: Cnzg8hutIv6NPHhylRPqjvC7OkQOqdb543vwfW5JCfsBnBDtMctnENGO3MfMF3VJo8Q/Ixou8Q/6d2hipLBEew==
     url: jdbc:oracle:thin:@localhost:1521:ORCL
     driver-class-name: oracle.jdbc.driver.OracleDriver
     type: com.alibaba.druid.pool.DruidDataSource
@@ -39,6 +45,29 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
     connectionProperties: config.decrypt=true;druid.stat.logSlowSql=true;druid.stat.slowSqlMillis=200;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMDHEqPdRifJ9Y0ci1y3Lt6q1XVXwLJlYYnDnT4O6vTI6fpvsC0msjEUVtHaUUDEgFgv0ekPSuCq68zq4+r8LYkCAwEAAQ==
+  # 应用缓存配置
+#  cache:
+#    type: ehcache
+#    ehcache:
+#      config: classpath:ehcache-demo.xml
+  # 缓存类型切换，本项目使用redis
+  cache:
+    type: redis
+  ehcache:
+    config: classpath:ehcache.xml
+  redis:
+    host: 120.79.212.45
+    password: kiwipeach
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+    timeout: 5000
+    port: 6379
+    database: 0
+
 # 4)mybatis-plus配置
 mybatis-plus:
   mapper-locations: classpath*:/mapper/*Mapper.xml
@@ -61,8 +90,6 @@ mybatis-plus:
       db-type: oracle
     refresh: true
       #自定义填充策略接口实现
-      #meta-object-handler: com.baomidou.springboot.xxx
-      #meta-object-handler: com.baomidou.springboot.xxx
     #meta-object-handler: com.baomidou.springboot.xxx
     #自定义SQL注入器
     #sql-injector: com.baomidou.springboot.xxx
@@ -90,11 +117,10 @@ blog:
       unauthorizedUrl: /unauthorize
 
 # 6)三方登陆配置
-# 6)三方登陆配置 <?> 代表您需要自定义的配置项
 qq:
   client:
-    app_ID:  <?>
-    app_KEY:  <?>
+    app_ID: 101495727
+    app_KEY: 6d4d93e59731ef57deae952ccec2774a
     accessTokenURL: https://graph.qq.com/oauth2.0/token
     authorizeURL: https://graph.qq.com/oauth2.0/authorize
     redirectURI: http://www.kiwipeach.cn/qq/oauth2.0/callback
@@ -106,8 +132,8 @@ qq:
 
 github:
   client:
-    clientId:  <?>
-    clientSecret:  <?>
+    clientId: 892f3976910e28e3f9a0
+    clientSecret: f377aaf3bc9d38b6607b85af6b5524bd44a57329
     accessTokenUri: https://github.com/login/oauth/access_token
     userAuthorizationUri: https://github.com/login/oauth/authorize
     clientAuthenticationScheme: form
@@ -117,8 +143,8 @@ github:
 
 gitee:
   client:
-    clientId: <?>
-    clientSecret: <?>
+    clientId: 5dd66a99095b62d59758399d1c220ec746b683b54bfbe87dcfd9fb4618be9e17
+    clientSecret: c6eb84d1ab96d3697d489cc615b26629c8ced21aef14fb0d7ee27db88a0bc264
     accessTokenUri: https://gitee.com/oauth/token
     userAuthorizationUri: https://gitee.com/oauth/authorize
     redirectURI: http://www.kiwipeach.cn/gitee/oauth2.0/callback
@@ -128,8 +154,8 @@ gitee:
 # 7)博客文件对象配置
 
 qiniu:
-  access-key:  <?>
-  private-key:  <?>
+  access-key: egP7QEuBIF-kN03VuxuUeqAYtfylyZR5h9VSTM8h
+  private-key: XEbTW-3zyO26deFxW0_PBt79bNGH6IhQcji59LLB
   # 公共存储对象，用来存放博客静态图片文件
   image-bucket: image-public-bucket
   image-domain: http://img.kiwipeach.cn
@@ -138,6 +164,4 @@ qiniu:
   markdown-domain: http://md.kiwipeach.cn
   expire-time: 3600
 
-
-
-
+# 8)博客应用缓存配置

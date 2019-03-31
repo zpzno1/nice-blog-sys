@@ -20,6 +20,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
+
 /**
  * 博客评论实体类
  *
@@ -28,7 +30,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Getter
 @Setter
-public class BlogCommentVO{
+public class BlogCommentVO implements Serializable {
     private String id;
     private String type;
     private String parentId;

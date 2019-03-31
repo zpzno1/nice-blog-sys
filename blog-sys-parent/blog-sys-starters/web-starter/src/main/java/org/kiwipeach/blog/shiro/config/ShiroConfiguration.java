@@ -19,7 +19,6 @@ import org.kiwipeach.blog.shiro.credential.BlogCredentialsMatcher;
 import org.kiwipeach.blog.shiro.factory.ResourceFilterMapFactory;
 import org.kiwipeach.blog.shiro.realam.CustomShiroRealm;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -29,11 +28,9 @@ import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.Cookie;
 import org.apache.shiro.web.servlet.SimpleCookie;
-import org.kiwipeach.blog.shiro.token.AccessToken;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -62,9 +59,8 @@ import java.util.Map;
 @ConditionalOnWebApplication /*声明在web应用中才生效*/
 public class ShiroConfiguration {
 
-    private static final Logger logger = LoggerFactory.getLogger(ShiroConfiguration.class);
-
     //region 1.配置shiro的核心拦截器DelegatingFilterProxy
+
     /**
      * 核心:shiroFilter拦截器,ioc容器中的
      *
@@ -83,14 +79,16 @@ public class ShiroConfiguration {
     //endregion
 
     //region 2.配置shiro与拦截器有关联的ShiroFilterFactoryBean,
+
     /**
      * 核心:ShiroFilterFactoryBean 必须和拦截器DelegatingFilterProxy中的gargetBeanName保持一致
-     * @param securityManager shiro安全管理器
+     *
+     * @param securityManager          shiro安全管理器
      * @param resourceFilterMapFactory shiro权限规则加载实例工厂
      * @return shiroFilterFactoryBean
      */
     @Bean(name = "shiroFilter")
-    @ConfigurationProperties(prefix = "blog.shiro.shiroFilter")
+    @ConfigurationProperties(prefix = "blog.shiro.shiro-filter")
     public ShiroFilterFactoryBean shiroFilterFactoryBean(
             @Autowired DefaultWebSecurityManager securityManager,
             @Autowired ResourceFilterMapFactory resourceFilterMapFactory) {
@@ -101,6 +99,7 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
+
     /**
      * shiro验证规则实例工厂
      *
@@ -113,16 +112,18 @@ public class ShiroConfiguration {
     //endregion
 
     //region 3.配置shiro的核心DefaultWebSecurityManager
+
     /**
      * shiro安装管理器
-     * @param cacheManager 缓存管理器
-     * @param realmCollection 认证授权Realm
+     *
+     * @param cacheManager            缓存管理器
+     * @param realmCollection         认证授权Realm
      * @param cookieRememberMeManager cookie管理器
      * @return securityManager
      */
     @Bean("securityManager")
     public DefaultWebSecurityManager defaultWebSecurityManager(
-            @Autowired EhCacheManager cacheManager,
+            @Autowired @Qualifier("shiroEhcacheManager") EhCacheManager cacheManager,
             @Autowired Collection<Realm> realmCollection,
             @Autowired CookieRememberMeManager cookieRememberMeManager) {
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
@@ -137,6 +138,7 @@ public class ShiroConfiguration {
     //endregion
 
     //region 4.配置自定义Realm
+
     /**
      * 自定义的shiro控制器,包括密码比对器
      *
@@ -154,7 +156,7 @@ public class ShiroConfiguration {
      * @return credentialsMatcher
      */
     @Bean
-    @ConfigurationProperties(prefix = "blog.shiro.credentialsMatcher")
+    @ConfigurationProperties(prefix = "blog.shiro.credentials-matcher")
     public CredentialsMatcher credentialsMatcher() {
 //        return new HashedCredentialsMatcher();
         return new BlogCredentialsMatcher();
@@ -162,19 +164,21 @@ public class ShiroConfiguration {
     //endregion
 
     //region 5.配置shiro缓存
+
     /**
      * 配置shiro缓存管理器
      *
      * @return cacheManager
      */
-    @ConfigurationProperties(prefix = "blog.shiro.cacheManager")
-    @Bean
+    @ConfigurationProperties(prefix = "blog.shiro.cache-manager")
+    @Bean("shiroEhcacheManager")
     public EhCacheManager cacheManager() {
         return new EhCacheManager();
     }
     //endregion
 
     //region 6.配置记住我功能
+
     /**
      * shiro cookie
      *
@@ -192,7 +196,7 @@ public class ShiroConfiguration {
      * @return cookieRememberMeManager
      */
     @Bean
-    @ConfigurationProperties(prefix = "blog.shiro.cookieRememberMeManager")
+    @ConfigurationProperties(prefix = "blog.shiro.cookie-remember-me-manager")
     public CookieRememberMeManager cookieRememberMeManager(@Autowired Cookie cookie) {
         CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
         cookieRememberMeManager.setCookie(cookie);
@@ -205,6 +209,7 @@ public class ShiroConfiguration {
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
     }
+
     @Bean
     @DependsOn("lifecycleBeanPostProcessor")
     public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
@@ -212,6 +217,7 @@ public class ShiroConfiguration {
         advisorAutoProxyCreatora.setProxyTargetClass(true);
         return advisorAutoProxyCreatora;
     }
+
     @Bean
     public AuthorizationAttributeSourceAdvisor attributeSourceAdvisor(DefaultWebSecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor sourceAdvisor = new AuthorizationAttributeSourceAdvisor();

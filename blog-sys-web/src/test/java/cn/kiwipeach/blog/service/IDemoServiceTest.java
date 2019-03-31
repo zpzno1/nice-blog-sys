@@ -3,6 +3,7 @@ package cn.kiwipeach.blog.service;
 import cn.kiwipeach.blog.BlogWebApplicationTests;
 import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.mapper.DemoMapper;
+import cn.kiwipeach.blog.service.demo.IDemoService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;

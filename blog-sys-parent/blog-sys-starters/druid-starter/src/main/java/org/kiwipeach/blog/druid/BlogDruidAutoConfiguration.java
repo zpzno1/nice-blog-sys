@@ -40,7 +40,7 @@ import java.util.Map;
 @Configuration/*声明这是配置类*/
 @ConditionalOnWebApplication /*声明在web应用中才生效*/
 //@EnableConfigurationProperties(HelloProperties.class)/*导入IOC容器中的属性配置Bean*/
-public class DruidAutoConfiguration {
+public class BlogDruidAutoConfiguration {
 
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")

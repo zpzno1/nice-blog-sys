@@ -21,6 +21,7 @@ import cn.kiwipeach.blog.param.CommentReplyParam;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.kiwipeach.blog.shiro.token.AccessToken;
+import org.springframework.cache.annotation.Cacheable;
 
 /**
  * 评论 服务接口类
@@ -58,5 +59,6 @@ public interface ICommentReplyService extends IService<CommentReply> {
      * @param type     查询类型
      * @return 返回博客评论分页信息
      */
+    //@Cacheable(value = {"BLOG_COMMENT_REPLY"}, key = "'page_'+#type+'_'+#parentId+'_'+#page.current+'_'+#page.size")
     IPage<BlogCommentVO> queryCommentByPage(IPage<BlogCommentVO> page, String parentId, String type);
 }

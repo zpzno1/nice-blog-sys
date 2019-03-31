@@ -21,6 +21,7 @@ import cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO;
 import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -40,6 +41,7 @@ public interface IBlogService extends IService<Blog> {
      * @param tagName    标签名称
      * @return 博客列表
      */
+    @Cacheable(value = {"INDEX_BLOG_LIST"}, key = "'page_'+#page.current+'_'+#page.size")
     IPage<BlogInfoVO> pageQuery(IPage<BlogInfoVO> page, String categoryId, String tagName);
 
     /**
@@ -48,6 +50,7 @@ public interface IBlogService extends IService<Blog> {
      * @param blogId 博客编号
      * @return 返回博客信息
      */
+    @Cacheable(value = {"BLOG_DETAIL_INFO"}, key = "'blog_id_'+#blogId")
     BlogInfoVO queryById(String blogId);
 
 
@@ -58,6 +61,7 @@ public interface IBlogService extends IService<Blog> {
      * @param pattern 归档格式
      * @return 返回归档博客
      */
+    //@Cacheable(value = {"ARCHIVE_TIME_LINE"}, key = "'page_'+#pattern+'_'+#page.current+'_'+#page.size")
     IPage<ArchiveBlogTimelineVO> archiveBlogQuery(IPage<ArchiveBlogTimelineVO> page, String pattern);
 
     /*##################################################后台##################################################*/

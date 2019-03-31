@@ -19,6 +19,7 @@ import cn.kiwipeach.blog.domain.SysPermission;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -29,7 +30,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-public class RolePermissionVO {
+public class RolePermissionVO implements Serializable {
     private String roleId;
     private String roleName;
     List<SysPermission> permissions;

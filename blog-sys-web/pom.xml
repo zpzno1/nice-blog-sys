@@ -38,6 +38,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-exception</artifactId>&lt;!&ndash;springboot exception&ndash;&gt;
         </dependency>-->
+        <!--cache-->
+
+
+
 
         <!--七牛云存储依赖 begin-->
         <dependency>

@@ -18,6 +18,7 @@ package cn.kiwipeach.blog.service;
 import cn.kiwipeach.blog.domain.BlogTag;
 import cn.kiwipeach.blog.domain.vo.TagCountVO;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
@@ -29,6 +30,7 @@ import java.util.List;
  */
 public interface IBlogTagService extends IService<BlogTag> {
 
+    @Cacheable(value = {"INDEX_TAG"}, key = "'tag_count'")
     List<TagCountVO> queryTagCountInfo();
 
 }

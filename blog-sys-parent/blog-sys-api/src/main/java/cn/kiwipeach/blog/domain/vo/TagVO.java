@@ -18,6 +18,8 @@ package cn.kiwipeach.blog.domain.vo;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
  * 标签实体类
  *
@@ -26,7 +28,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class TagVO {
+public class TagVO implements Serializable {
     private String id;
     private String name;
     private String icon;

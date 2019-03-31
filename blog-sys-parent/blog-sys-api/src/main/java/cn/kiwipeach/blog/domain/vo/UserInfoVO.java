@@ -18,6 +18,8 @@ package cn.kiwipeach.blog.domain.vo;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
  * 账号个人信息
  *
@@ -26,7 +28,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class UserInfoVO {
+public class UserInfoVO implements Serializable {
     /**
      * 登录账号(三方登陆账号)
      */

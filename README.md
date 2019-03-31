@@ -27,7 +27,9 @@ https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg"></a>
 #### 项目亮点
 - 新的技术选型[maven，spring-boot,mybatis-plus,shiro,thymeleaf,bootstrap，jquery....]
 - 支持多平台(q、github、gitee)社交账号登陆及本地系统账号登录。
-- Shiro做安全权限验证，博客资源链接能做安全过滤，权限管理。
+- 使用SpirngBoot最新版本(当前2.1.3.RELEASE)，关注我就等于关注最新SpringBoot整合技巧方案，(*^__^*).....
+- Shiro做安全权限验证，博客资源链接能做安全过滤，权限管理,对于私密链接有保障。
+- 使用了Redis缓存，提升博客网站的性能。
 - 博客系统同时支持MySQL和Oracle数据库。
 - 独具特色的评论回复功能，增强博客的互动性。
 - 采用国内七牛云图床，简单、稳定、易用。

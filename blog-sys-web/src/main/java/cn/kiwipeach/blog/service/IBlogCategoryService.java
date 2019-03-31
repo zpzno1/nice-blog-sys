@@ -21,6 +21,7 @@ import cn.kiwipeach.blog.domain.vo.CategoryTreeVO;
 import cn.kiwipeach.blog.mapper.BlogCategoryMapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
@@ -32,6 +33,7 @@ import java.util.List;
  */
 public interface IBlogCategoryService extends IService<BlogCategory> {
 
+    @Cacheable(value = {"BLOG_CATEGORY"}, key = "'category_tree'")
     List<CategoryTreeVO> queryBlogCategoryTree();
 
 }

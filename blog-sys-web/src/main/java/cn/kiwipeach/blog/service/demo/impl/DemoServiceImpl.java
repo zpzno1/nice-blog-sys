@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.service.impl;
+package cn.kiwipeach.blog.service.demo.impl;
 
 import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.exception.BlogException;
 import cn.kiwipeach.blog.mapper.DemoMapper;
-import cn.kiwipeach.blog.service.IDemoService;
+import cn.kiwipeach.blog.service.demo.IDemoService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
