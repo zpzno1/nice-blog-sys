@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <configuration debug="true">
-    <property name="logDir" value="D:/souce_code/mine_source/nice-blog-sys/blog-sys-web/target/logs/"/>
+    <property name="logDir" value="/weblogs/nice-blog-sys/"/>
 
     <!--文件滚动日志-->
     <appender name="ROLL_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -43,15 +43,23 @@
     <logger name="org.springframework.boot.web" level="INFO"/>
     <!--关闭自动配置注解-->
     <logger name="org.springframework.boot.autoconfigure" level="INFO"/>
-    <springProfile name="dev">
+    <springProfile name="development">
         <logger name="cn.kiwipeach.blog.mapper" level="debug"/>
     </springProfile>
-    <springProfile name="prod">
+    <springProfile name="production">
         <logger name="cn.kiwipeach.blog.mapper" level="warn"/>
     </springProfile>
     <!-- 日志级别TRACE<DEBUG<INFO<WARN<ERROR -->
-    <root level="INFO">
-        <!--<appender-ref ref="ROLL_APPENDER"/>-->
-        <appender-ref ref="CONSOLE_APPENDER"/>
-    </root>
+    <springProfile name="development">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE_APPENDER"/>
+        </root>
+    </springProfile>
+    <springProfile name="production">
+        <root level="WARN">
+            <appender-ref ref="ROLL_APPENDER"/>
+            <appender-ref ref="CONSOLE_APPENDER"/>
+        </root>
+    </springProfile>
+
 </configuration>

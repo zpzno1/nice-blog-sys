@@ -69,11 +69,11 @@
             <optional>true</optional>
         </dependency>
         <!--在使用redis缓存的时候，调试的需要关闭这个工具jar包-->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId><!--devtools热部署插件依赖-->
-            <optional>true</optional> <!-- 这个需要为 true 热部署才有效 -->
-        </dependency>
+            <artifactId>spring-boot-devtools</artifactId>&lt;!&ndash;devtools热部署插件依赖&ndash;&gt;
+            <optional>true</optional> &lt;!&ndash; 这个需要为 true 热部署才有效 &ndash;&gt;
+        </dependency>-->
         <!--lombok 插件-->
         <dependency>
             <groupId>org.projectlombok</groupId>

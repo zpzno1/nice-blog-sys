@@ -39,11 +39,25 @@ https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg"></a>
 
 #### 安装教程
 
+
+##### 方式一：jar包部署
+```jshelllanguage
+    java -jar blog-sys-web.jar --spring.config.location=${配置文件位置}/application.properties
+```
+
+##### 方式二：war包部署
+```jshelllanguage
+    具体流程略
+```
+##### 方式三：本地开发
+
 1. 拉取源代码:`git clone https://gitee.com/KiWiPeach/nice-blog-sys.git`
 
-2. 前台启动类:`nice-blog-sys/blog-sys-web/src/main/java/cn/kiwipeach/blog/BlogWebApplication.java`
+2. 准备数据库，redis环境,并且修改对应配置文件。温馨提示：`blog.shiro.cookie.domain`配置参数为你自己博客域名，本地可以改host模拟线上。
 
-3. 注意：数据库脚本等待系统稳定后上传最新版，目前为旧版SQL脚本，慎用！
+3. 前台启动类:`nice-blog-sys/blog-sys-web/src/main/java/cn/kiwipeach/blog/BlogWebApplication.java`
+
+4. 访问页面，例如：www.kiwipeach.cn (为你自己host配置的域名，方便本地开发调试)。
 
 #### 系统截图
 
@@ -51,7 +65,7 @@ https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg"></a>
 
 - 博客首页
 
-![博客首页](https://images.gitee.com/uploads/images/2019/0329/012203_91911626_1387578.png)
+![博客首页内容](http://img.kiwipeach.cn/1f86a039ad9109d9bb175f20d9cb6d5b.png)
 
 - 博客详情
 

@@ -1,3 +1,4 @@
+#默认使用生产环境
 spring:
   profiles:
-    active: dev
+    active: production
