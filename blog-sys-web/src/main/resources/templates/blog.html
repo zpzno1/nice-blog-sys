@@ -101,12 +101,19 @@
      id="sectionsNav">
     <div class="container">
         <div class="navbar-translate">
-            <a  href="blog/index.html" th:href="@{/}">
+            <a href="blog/index.html" th:href="@{/}">
                 <!-- <svg class="alibaba-icon" style="font-size: 42px;">
                      <use xlink:href="#icon-China"></use>
                  </svg>-->
-                <img src="static/assets/images/index/site_logo.png" th:src="@{/assets/images/index/site_logo.png}" style="width: 200px;height: 50px;    ">
+                <img src="static/assets/images/index/site_logo.png" th:src="@{/assets/images/index/site_logo.png}"
+                     style="width: 200px;height: 50px;    ">
             </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
@@ -147,6 +154,16 @@
         </div>
     </div>
 </nav>
+
+<!--#.页面顶部banner-->
+<div th:fragment="banner(blogCount,tagCount,categoryCount,commentReplyComment,formateNowDate)" class="card">
+    <div class="card-body">
+        <h4 class="card-title text-center">
+            <a href="#pablo" style="color: grey">博文统计：本站博客共【<span class="text-dark" th:text="${blogCount}">100</span>】个，分类【<span class="text-dark" th:text="${categoryCount}">10</span>】个，标签【<span class="text-dark" th:text="${tagCount}">16</span>】个，当前日期:<span class="text-dark" th:text="${formateNowDate}">2018年05月19日 星期六 10:54:29</span></a>
+        </h4>
+    </div>
+</div>
+
 <!--#.大图文字 node_modules/material-kit/assets/img/kit/bg2.jpg-->
 <div th:fragment="background" class="page-header header-filter clear-filter big_bg" style="height: 40vh;"
      th:style="'height: 40vh;background:url(' + @{/assets/images/index/idea_bg.png} + ')  repeat -9px -580px;'">
@@ -154,13 +171,12 @@
         <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
                 <div class="brand">
-                    <h4>古人云：“有时候，你不努力下，你都不知道什么叫做绝望。”</h4>
+                    <h4>“有时候，你不努力下，你都不知道什么叫做绝望。”</h4>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
 <!--#.右侧导航-分类、标签、橱窗、友链-->
 <div th:fragment="side_bar_common">
@@ -258,11 +274,9 @@
             我的友链
         </h4>
         <div class="card-body">
-            <span class="badge badge-default">卡卡罗特</span>
-            <span class="badge badge-default">在乎你的在乎</span>
-            <span class="badge badge-default">哈哈</span>
-            <span class="badge badge-default">Default</span>
-            <span class="badge badge-default">Default</span>
+            <span class="badge badge-pill badge-dark"><a href="http://www.javacoffee.club" target="_blank"
+                                                         class="text-white">Maodun</a></span>
+            <span class="badge badge-pill badge-dark">在乎你的在乎</span>
         </div>
     </div>
     <!--友链部分:end-->
@@ -318,22 +332,22 @@
         <nav class="pull-left">
             <ul>
                 <li>
-                    <a href="https://www.creative-tim.com">
+                    <a href="https://gitee.com/kiwipeach" target="_blank">
                         博主Gitee
                     </a>
                 </li>
                 <li>
-                    <a href="http://presentation.creative-tim.com">
+                    <a href="javascript:;">
                         意见反馈
                     </a>
                 </li>
                 <li>
-                    <a href="http://blog.creative-tim.com">
+                    <a href="javascript:;">
                         联系博主
                     </a>
                 </li>
                 <li>
-                    <a href="https://www.creative-tim.com/license">
+                    <a href="javascript:;">
                         友情链接
                     </a>
                 </li>
@@ -387,7 +401,7 @@
                                         <i class="fas fa-envelope-square fa-lg"></i>
                                     </span>
                                         <input name="userName" type="text" class="form-control" placeholder="邮箱/账号"
-                                               value="kiwipeach">
+                                               value="">
                                     </div>
                                 </div>
                                 <div class="form-group bmd-form-group">
@@ -396,7 +410,7 @@
                                        <i class="fas fa-lock fa-lg"></i>
                                     </span>
                                         <input name="password" type="password" placeholder="请输入密码" class="form-control"
-                                               value="123456">
+                                               value="">
                                     </div>
                                 </div>
                                 <div class="form-check">

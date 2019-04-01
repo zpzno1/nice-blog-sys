@@ -139,15 +139,7 @@
         <!--容器左侧内容:begin-->
         <div class="col-md-9">
             <!--博客顶端:begin-->
-            <div class="card">
-                <div class="card-body ">
-                    <h4 class="card-title">
-                        <a href="#pablo" style="color: grey">博文统计：本站博客共【<span class="text-dark">100</span>】个，分类【<span
-                                class="text-dark">10</span>】个，标签【<span class="text-dark">16</span>】个，当前日期:<span
-                                class="text-dark">2018年05月19日 星期六 10:54:29</span></a>
-                    </h4>
-                </div>
-            </div>
+            <div th:replace="blog::banner(${sysBannerInvoVO.blogCount},${sysBannerInvoVO.tagCount},${sysBannerInvoVO.blogCount},${sysBannerInvoVO.commentReplyCount},${sysBannerInvoVO.formateNowDate})"></div>
             <!--博客顶端:end-->
             <!--归档历史树开始-->
             <div class="card" id="blogContainer">

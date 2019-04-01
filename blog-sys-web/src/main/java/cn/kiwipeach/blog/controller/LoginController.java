@@ -18,28 +18,21 @@ package cn.kiwipeach.blog.controller;
 import cn.kiwipeach.blog.anno.AccessLog;
 import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.SysUser;
-import cn.kiwipeach.blog.enums.CodeEnum;
+import cn.kiwipeach.blog.enums.PlatForm;
 import cn.kiwipeach.blog.exception.BlogException;
-import cn.kiwipeach.blog.service.IBlogService;
 import cn.kiwipeach.blog.service.ILoginService;
 import cn.kiwipeach.blog.service.ISysUserService;
-import cn.kiwipeach.blog.service.impl.QQLoginServiceImpl;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.el.lang.ELArithmetic;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
 import org.kiwipeach.blog.shiro.token.AccessToken;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -158,13 +151,13 @@ public class LoginController {
      */
     private ILoginService decideLoginService(String platform) {
         ILoginService loginService = null;
-        if (CodeEnum.QQ.toString().equalsIgnoreCase(platform)) {
+        if (PlatForm.QQ.toString().equalsIgnoreCase(platform)) {
             loginService = qqLoginService;
-        } else if (CodeEnum.GITHUB.toString().equalsIgnoreCase(platform)) {
+        } else if (PlatForm.GITHUB.toString().equalsIgnoreCase(platform)) {
             loginService = githubLoginService;
-        } else if (CodeEnum.GITEE.toString().equalsIgnoreCase(platform)) {
+        } else if (PlatForm.GITEE.toString().equalsIgnoreCase(platform)) {
             loginService = giteeLoginService;
-        } else if (CodeEnum.SYSTEM.toString().equals(platform)) {
+        } else if (PlatForm.SYSTEM.toString().equals(platform)) {
             loginService = systemLoginService;
         } else {
             throw new IllegalArgumentException("非法入参:" + platform);

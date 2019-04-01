@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 kiwipeach(1099501218@qq.com).
+ * Copyright 2019 liuburu@qq.com.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,31 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.controller.common;
+package cn.kiwipeach.blog.service;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import cn.kiwipeach.blog.domain.vo.SysBannerInvoVO;
 
 /**
- * 前端授权页面跳转
+ * 描述：博客通用服务实现类
  *
  * @author kiwipeach
- * @create 2019-01-24
+ * @create 2019-04-02
  */
-@Controller
-public class CommonFrontAuthorizeController {
+public interface IBlogCommService {
 
     /**
-     * 博客关于页面
+     * 查询系统banner公共信息
      *
-     * @return
+     * @return 返回系统公共banner信息
      */
-    @RequestMapping("blog/about")
-    //@RequiresPermissions(value = "blog:page:about")
-    //@RequiresRoles("user")
-    public String toBlogAboutPage() {
-        //FIXME 有更明确的url，会不会先找更加明确地地址呢？
-        return "blog/about";
-    }
+    SysBannerInvoVO querySysBannerInfo();
 
 }

@@ -17,9 +17,10 @@ package cn.kiwipeach.blog.controller.common;
 
 import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.vo.UserInfoVO;
-import cn.kiwipeach.blog.exception.BlogException;
+import cn.kiwipeach.blog.service.IBlogCommService;
 import org.apache.shiro.SecurityUtils;
 import org.kiwipeach.blog.shiro.token.AccessToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -49,14 +50,6 @@ public class CommonSysController {
             UserInfoVO userInfoVO = new UserInfoVO(curUser.getUserName(), curUser.getNickName(), curUser.getHeadUrl(), curUser.getId(), curUser.getPlatform());
             return AjaxResponse.success(userInfoVO);
         }
-    }
-
-    @GetMapping("exception")
-    public String test500InternalException() {
-        if (true) {
-            throw new BlogException("-BLOG_TEST", "测试SpringBoot业务异常");
-        }
-        return null;
     }
 
 

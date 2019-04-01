@@ -50,7 +50,7 @@ public class ResourceFilterMapFactory {
         filterChainDefinitionMap.put("/blog/index.html", "anon");
         filterChainDefinitionMap.put("/blog/detail.html", "anon");
         filterChainDefinitionMap.put("/blog/archive.html", "anon");
-        filterChainDefinitionMap.put("/blog/about.html", "roles[BlogUser]");
+        //filterChainDefinitionMap.put("/blog/about.html", "roles[BlogUser]");
 
         filterChainDefinitionMap.put("/user", "anon");
 

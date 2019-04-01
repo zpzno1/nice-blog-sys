@@ -25,6 +25,7 @@
     </properties>
 
     <dependencies>
+
         <!--单元测试依赖-->
         <dependency>
             <groupId>junit</groupId>

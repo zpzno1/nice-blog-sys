@@ -41,12 +41,12 @@ https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg"></a>
 
 
 ##### 方式一：jar包部署
-```jshelllanguage
-    java -jar blog-sys-web.jar --spring.config.location=${配置文件位置}/application.properties
+```shell
+    nohup java -Xms513m -Xmx1024m -jar ${项目位置}/blog-sys-web.jar --spring.config.location=${配置文件位置}/application-production.yaml &
 ```
 
 ##### 方式二：war包部署
-```jshelllanguage
+```shell
     具体流程略
 ```
 ##### 方式三：本地开发

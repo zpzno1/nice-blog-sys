@@ -15,16 +15,11 @@
  */
 package cn.kiwipeach.blog.utils;
 
-import cn.kiwipeach.blog.domain.Blog;
-import cn.kiwipeach.blog.domain.CommentReply;
 import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.kiwipeach.blog.shiro.token.AccessToken;
 import org.kiwipeach.blog.utils.UserUtil;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 博客详情页面的工具类

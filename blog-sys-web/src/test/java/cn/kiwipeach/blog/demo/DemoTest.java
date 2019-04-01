@@ -15,15 +15,20 @@
  */
 package cn.kiwipeach.blog.demo;
 
-import cn.kiwipeach.blog.enums.CodeEnum;
+import cn.kiwipeach.blog.enums.PlatForm;
 import cn.kiwipeach.blog.enums.CodeValueEnum;
 import com.alibaba.fastjson.JSON;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 /**
  * @author kiwipeach
  * @create 2019-01-26
  */
+@Slf4j
 public class DemoTest {
 
     public class ApplicationPersonalBean {
@@ -66,7 +71,7 @@ public class DemoTest {
 
     @Test
     public void testEnum() {
-        CodeEnum platform = CodeEnum.QQ;
+        PlatForm platform = PlatForm.QQ;
         System.out.println(platform);
         System.out.println(platform.toString().equals("qq"));
 
@@ -101,6 +106,13 @@ public class DemoTest {
                 System.out.println("zzz");
                 return "desc";
         }
+    }
+
+
+    @Test
+    public void 获取格式化时间(){
+        LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Shanghai"));
+        log.info("{}年{}月{}日 {}时{}分{}秒 星期{}",now.getYear(),now.getMonth(),now.getDayOfMonth(),now.getHour(),now.getMinute(),now.getSecond(),now.getDayOfWeek());
     }
 
 }

@@ -21,6 +21,8 @@ import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO;
 import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
+import cn.kiwipeach.blog.domain.vo.SysBannerInvoVO;
+import cn.kiwipeach.blog.service.IBlogCommService;
 import cn.kiwipeach.blog.service.IBlogService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -43,6 +45,8 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/blog")
 public class BlogController {
 
+    @Autowired
+    private IBlogCommService iBlogCommService;
     @Autowired
     @Qualifier("blogServiceImpl")
     private IBlogService iBlogService;
@@ -75,6 +79,9 @@ public class BlogController {
     public String queryBlogDetail(@PathVariable("blogId") String blogId, Model model) {
         BlogInfoVO blogInfoVO = iBlogService.queryById(blogId);
         model.addAttribute("blogDetail", blogInfoVO);
+        //当前系统banner信息
+        SysBannerInvoVO sysBannerInvoVO = iBlogCommService.querySysBannerInfo();
+        model.addAttribute("sysBannerInvoVO", sysBannerInvoVO);
         return "blog/detail";
     }
 
