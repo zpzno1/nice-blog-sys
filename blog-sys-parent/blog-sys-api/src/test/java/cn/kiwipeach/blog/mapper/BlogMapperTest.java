@@ -69,9 +69,9 @@ public class BlogMapperTest extends BlogApiApplicationTests {
     @Rollback(value = false)
     public void 测试Clob大文本插入方法() throws IOException {
         Blog blog = new Blog();
-        blog.setTitle("MySQL解压版安装教程（保存在数据库中）");
+        blog.setTitle("Http接口文档规范");
         blog.setUserId("kiwipeach");
-        blog.setIntroduction("一般的上传流程是用户获得上传凭证之后直接将资源上传到七牛空间，然后七牛回返回一个上传成功或者失败的信息，用户业务服务器是不清楚这些信息的，可以参考下面的流程图：\n");
+        blog.setIntroduction("接口规范可以这么来写，哈哈");
         String markDown = getMarkDown();
         blog.setContent(markDown);
         blog.setIconUrl("http://7xkn2v.dl1.z0.glb.clouddn.com/QQ20151019-4@2x.png");
@@ -80,7 +80,7 @@ public class BlogMapperTest extends BlogApiApplicationTests {
     }
 
     private String getMarkDown() throws IOException {
-        FileReader fileReader = new FileReader("D:\\资料文档库\\10.我的文档\\Typora笔记文档\\数据库\\MySQL数据库\\解压版安装教程.md");
+        FileReader fileReader = new FileReader("C:\\Users\\kiwipeach\\Desktop\\临时目录\\interface.md");
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String line = null;
         StringBuffer contentBuffer = new StringBuffer();

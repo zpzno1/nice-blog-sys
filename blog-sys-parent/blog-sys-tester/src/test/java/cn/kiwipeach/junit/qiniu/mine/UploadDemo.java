@@ -22,7 +22,7 @@ public class UploadDemo extends QiniuJunitBase {
     public void testPrivateUpload() {
         selectBucketname("private-bucket");
         try {
-            File file = new File("D:\\souce_code\\mine_source\\nice-blog-sys\\开发语录.md");
+            File file = new File("C:\\Users\\kiwipeach\\Desktop\\临时目录\\interface.md");
             //调用put方法上传
             Response res = uploadManager.put(file, file.getName(), getUpToken());
             //Response res = uploadManager.put(new File(FilePath), key, getUpToken());

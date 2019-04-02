@@ -5,6 +5,9 @@ banner:
 
 # 2)thymeleaf模板引擎配置
 spring:
+  main:
+    # 当有自定义bean的时候，是否允许覆盖springboot的默认bean，默认为false
+    allow-bean-definition-overriding: true
 # 3)数据源配置
   datasource:
     username: kiwipeach

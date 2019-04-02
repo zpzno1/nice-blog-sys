@@ -29,6 +29,8 @@
     <script src="../../static/assets/plugins/material-kit/assets/js/material-kit.js?v=2.0.2"></script>
     <!--前段框架依赖结束-->
 </head>
+<link rel="stylesheet" href="../../static/assets_admin/js/plugins/editor-md/css/editormd.preview.min.css"
+      th:href="@{/assets_admin/js/plugins/editor-md/css/editormd.preview.min.css}"/>
 
 <body class="index-page ">
 <!--导航条:begin-->
@@ -129,8 +131,8 @@
             <div th:replace="blog::banner(${sysBannerInvoVO.blogCount},${sysBannerInvoVO.tagCount},${sysBannerInvoVO.blogCount},${sysBannerInvoVO.commentReplyCount},${sysBannerInvoVO.formateNowDate})"></div>
             <!--博客顶端:end-->
             <!--归档历史树开始-->
-            <div class="card">
-                <div class="card-body animated fadeInDown">
+            <div class="card" id="blogContainer">
+                <!--<div class="card-body animated fadeInDown">
                     <h3 class="card-title">个人简介</h3>
                     <div class="card-text">
                         <p>
@@ -152,8 +154,43 @@
                         <p>前段框架:JQuery,JavaScript,Bootstrap,EasyUI,LayUI...</p>
                     </div>
 
-                </div>
+                </div>-->
             </div>
+            <!--博客详情渲染-->
+            <script src="../../static/assets_admin/js/plugins/editor-md/lib/marked.min.js"
+                    th:src="@{/assets_admin/js/plugins/editor-md/lib/marked.min.js}"></script>
+            <script src="../../static/assets_admin/js/plugins/editor-md/lib/prettify.min.js"
+                    th:src="@{/assets_admin/js/plugins/editor-md/lib/prettify.min.js}"></script>
+            <script src="../../static/assets_admin/js/plugins/editor-md/lib/raphael.min.js"
+                    th:src="@{/assets_admin/js/plugins/editor-md/lib/raphael.min.js}"></script>
+            <script src="../../static/assets_admin/js/plugins/editor-md/lib/underscore.min.js"
+                    th:src="@{/assets_admin/js/plugins/editor-md/lib/underscore.min.js}"></script>
+            <script src="../../static/assets_admin/js/plugins/editor-md/lib/sequence-diagram.min.js"
+                    th:src="@{/assets_admin/js/plugins/editor-md/lib/sequence-diagram.min.js}"></script>
+            <script src="../../static/assets_admin/js/plugins/editor-md/lib/flowchart.min.js"
+                    th:src="@{/assets_admin/js/plugins/editor-md/lib/flowchart.min.js}"></script>
+            <script src="../../static/assets_admin/js/plugins/editor-md/lib/jquery.flowchart.min.js"
+                    th:src="@{/assets_admin/js/plugins/editor-md/lib/jquery.flowchart.min.js}"></script>
+            <script src="../../static/assets_admin/js/plugins/editor-md/editormd.min.js"
+                    th:src="@{/assets_admin/js/plugins/editor-md/editormd.min.js}"></script>
+            <script type="application/javascript" th:inline="javascript">
+                var markdown = "dmeo/test.md";
+                $(function () {
+                    $.get("/markdown/aboutMe.md", function (md) {
+                        editormd.markdownToHTML("blogContainer", {
+                            markdown: md,
+                            htmlDecode: "style,script,iframe",  // you can filter tags decode
+                            tocm: true,    // Using [TOCM]
+                            emoji: true,
+                            taskList: true,
+                            tex: true,  // 默认不解析
+                            flowChart: true,  // 默认不解析
+                            sequenceDiagram: true,  // 默认不解析
+                        });
+                    });
+
+                });
+            </script>
             <!--归档历史树结束-->
         </div>
         <!--容器左侧内容:end-->

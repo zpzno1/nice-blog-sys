@@ -42,6 +42,9 @@ public class LocalDateTimeTest {
         Locale locale = Locale.CHINA;
         String format = String.format("%s年%s%s日 %s时%s分%s秒 %s", now.getYear(), now.getMonth().getValue(), now.getDayOfMonth(), now.getHour(), now.getMinute(), now.getSecond(), now.getDayOfWeek().getDisplayName(style,locale));
         log.info(format);
+
     }
+
+
 
 }
