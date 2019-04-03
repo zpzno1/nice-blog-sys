@@ -26,7 +26,7 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
@@ -209,9 +209,20 @@ public class LoginController {
             accessToken.setRememberMe(remember);
             try {
                 currentUser.login(accessToken);
+            } catch (DisabledAccountException e) {
+                throw new BlogException("-LOGIN_001", "博客账号已经被禁用，请联系系统管理员(1099501218@qq.com)");
+            } catch (ConcurrentAccessException e) {
+                throw new BlogException("-LOGIN_001", "账号已经在异地登录");
+            } catch (ExcessiveAttemptsException e) {
+                throw new BlogException("-LOGIN_001", "用户登录设备到达上线");
+            } catch (UnknownAccountException e) {
+                throw new BlogException("-LOGIN_001", "该账号不存在");
+            } catch (IncorrectCredentialsException e) {
+                throw new BlogException("-LOGIN_001", "密码不正确");
+            } catch (ExpiredCredentialsException e) {
+                throw new BlogException("-LOGIN_001", "密码超期，请及时更新");
             } catch (AuthenticationException e) {
-                throw e;
-                //System.out.println("用户信息登陆失败,失败原因:" + e.getLocalizedMessage());
+                throw new BlogException("-LOGIN_001", "用户登录异常");
             }
         }
         //登陆成功，则用户认证成功，进入成功页面；登陆失败，则认证失败，会被拦截到登陆地址。

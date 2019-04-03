@@ -5,7 +5,9 @@
 <body>
 <div class="index-page">
     <!--导航条:begin-->
-    <nav th:replace="blog::navbar" class="navbar navbar-color-on-scroll navbar-transparent  fixed-top  navbar-expand-lg " color-on-scroll="100" id="sectionsNav"></nav>
+    <nav th:replace="blog::navbar"
+         class="navbar navbar-color-on-scroll navbar-transparent  fixed-top  navbar-expand-lg " color-on-scroll="100"
+         id="sectionsNav"></nav>
     <!--导航条:end-->
 
     <!--大图文字:begin-->
@@ -36,7 +38,6 @@
                 </script>
                 <!--分页插件:end-->
             </div>
-
             <!--容器左侧内容:end-->
 
             <!--容器右侧内容:begin-->
@@ -94,6 +95,8 @@
 </div>
 <!--对话模态框-->
 <div th:replace="blog::modal_dialog"></div>
+<!--页面公共js-->
+<div th:include="blog::body_script"></div>
 
 <script type="text/javascript" src="../../static/assets/js/index/blog_index.js"
         th:src="@{/assets/js/index/blog_index.js}"></script>

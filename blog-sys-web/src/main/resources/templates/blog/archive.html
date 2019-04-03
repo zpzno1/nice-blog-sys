@@ -504,6 +504,8 @@
 <!--对话模态框-->
 <div th:replace="blog::modal_dialog"></div>
 </div>
+<!--页面公共js-->
+<div th:include="blog::body_script"></div>
 <!--归档模块脚本-->
 <script type="text/javascript" src="../../static/assets/js/archive/blog_archive.js"
         th:src="@{/assets/js/archive/blog_archive.js}"></script>
