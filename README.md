@@ -1,10 +1,10 @@
 <p align=center>
-  <a href="http://www.layui.com">
+  <a href="http://www.kiwipeach.cn">
     <img src="https://images.gitee.com/uploads/images/2019/0329/012240_a69e0cc1_1387578.png" alt="nice blog system">
   </a>
 </p>
 <p align=center>
-  nice blog system 是一个基于Java开发，便捷轻巧、高性能、外形Nice的博客系统
+  nice blog system 是一个基于Java开发，`便捷轻巧、高性能、外形Nice`的博客系统
 </p>
 
 <p align="center">
@@ -25,16 +25,16 @@ https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg"></a>
  纯Java编写的个人博客系统，力求以“便捷轻巧、高性能、外形Nice”为目标，我不完美，但向往远方。
 
 #### 项目亮点
-- 新的技术选型[maven，spring-boot,mybatis-plus,shiro,thymeleaf,bootstrap，jquery....]
+- 项目演示：[在线演示](http://www.kiwipeach.cn) 
+- 最新的技术选型,使用SpirngBoot最新版本(当前2.1.3.RELEASE)，关注我就等于关注最新SpringBoot整合技巧方案，(*^__^*).....
+- 项目技术选型[maven，spring-boot,mybatis-plus,shiro,thymeleaf,bootstrap4，jquery....]
 - 支持多平台(q、github、gitee)社交账号登陆及本地系统账号登录。
-- 使用SpirngBoot最新版本(当前2.1.3.RELEASE)，关注我就等于关注最新SpringBoot整合技巧方案，(*^__^*).....
 - Shiro做安全权限验证，博客资源链接能做安全过滤，权限管理,对于私密链接有保障。
 - 使用了Redis缓存，提升博客网站的性能。
 - 博客系统同时支持MySQL和Oracle数据库。
 - 独具特色的评论回复功能，增强博客的互动性。
 - 采用国内七牛云图床，简单、稳定、易用。
 - 持续开源更新，站长亲自撸码，经久不衰的持续更新。
-- 项目演示：[在线演示地址](http://www.kiwipeach.cn) （还未部署，尽情期待...）
 
 
 #### 安装教程
@@ -42,7 +42,6 @@ https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg"></a>
 
 ##### 方式一：jar包部署
 ```shell
-    nohup java -Xms513m -Xmx1024m -jar ${项目位置}/blog-sys-web.jar --spring.config.location=${配置文件位置}/application-production.yaml &
     nohup java -Xms513m -Xmx1024m -jar blog-sys-web.jar --spring.profiles.active=aliyun &
 ```
 
@@ -52,13 +51,29 @@ https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg"></a>
 ```
 ##### 方式三：本地开发
 
-1. 拉取源代码:`git clone https://gitee.com/KiWiPeach/nice-blog-sys.git`
+1. 拉取源代码:
+```shell
+git clone https://gitee.com/KiWiPeach/nice-blog-sys.git
+```
 
-2. 准备数据库，redis环境,并且修改对应配置文件。温馨提示：`blog.shiro.cookie.domain`配置参数为你自己博客域名，本地可以改host模拟线上。
+2. Maven编译执行
+```shell
+#注意：oracle驱动包，在中央仓库中未包含，推荐本地安装解决
+mvn clean package
+```
 
-3. 前台启动类:`nice-blog-sys/blog-sys-web/src/main/java/cn/kiwipeach/blog/BlogWebApplication.java`
+2. 准备数据库，redis环境,并且修改对应配置文件,具体见配置文件。
+> 主要修改配置：`数据库连接`、`缓存Redis`、`三方登录参数`、`shiro缓存cookie域名`
 
-4. 访问页面，例如：www.kiwipeach.cn (为你自己host配置的域名，方便本地开发调试)。
+
+3. 系统启动类
+``` shell
+nice-blog-sys/blog-sys-web/src/main/java/cn/kiwipeach/blog/BlogWebApplication.java
+```
+
+4. 访问页面。
+
+
 
 #### 系统截图
 
