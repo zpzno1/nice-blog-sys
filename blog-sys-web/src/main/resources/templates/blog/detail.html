@@ -235,11 +235,11 @@
                             <!--点赞按钮-->
                             <button class="btn btn-sm btn-primary btn-round" style="font-size: 24px;"
                                     onclick="blogAgreeClick(this)"
-                                    th:attr="comment-type='B_BLOG_COMMENT',comment-blogId=${blogDetail.getId()},comment-parentId=${blogDetail.getId()},comment-count=${blogDetail.getStarCount()}">
+                                    th:attr="comment-blogId=${blogDetail.getId()},comment-count=${blogDetail.getStarCount()}">
                                 <svg class="alibaba-icon">
                                     <use xlink:href="#icon-agree"></use>
                                 </svg>
-                                ([[${blogDetail.getStarCount()}]])
+                                (<span th:text="${blogDetail.getStarCount()}"></span>)
                             </button>
                             <!--评论按钮-->
                                 <button id="commentReplyBtn" comment-type="B_BLOG_COMMENT"

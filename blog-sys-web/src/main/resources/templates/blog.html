@@ -263,7 +263,7 @@
             url: '/user',
             success: function (res) {
                 var $content;
-                if (res.code == 0) {
+                if (res.code == '0' && res.data != null) {
                     $content = $('<div style="font-size: 20px;">' +
                         '<img src="' + res.data.headUrl + '"class="img-raised rounded-circle img-fluid" style="width: 60px;height: 60px;">' +
                         '<p>亲爱的 <span style="font-size: 18px;font-weight: bold">“' + res.data.nickName + '”</span>欢迎光临</p>' +
@@ -425,7 +425,8 @@
                             </button>
                         </div>
                     </form>
-                    <script type="text/javascript" th:src="@{/assets/plugins/jquery.form.js/dist/jquery.form.min.js}"></script>
+                    <script type="text/javascript"
+                            th:src="@{/assets/plugins/jquery.form.js/dist/jquery.form.min.js}"></script>
                     <script type="text/javascript">
 
                         $("#loginForm").submit(function (e) {

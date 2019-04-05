@@ -27,7 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * 博客 服务接口类
  *
- * @author kiwipeach [1099501218@qq.com]
+ * @author kiwipeach
  * @create 2019-01-24
  */
 public interface IBlogService extends IService<Blog> {
@@ -63,6 +63,14 @@ public interface IBlogService extends IService<Blog> {
      */
     @Cacheable(value = {"ARCHIVE_TIME_LINE"}, key = "'page_'+#pattern+'_'+#page.current+'_'+#page.size")
     IPage<ArchiveBlogTimelineVO> archiveBlogQuery(IPage<ArchiveBlogTimelineVO> page, String pattern);
+
+    /**
+     * 博客点赞接口
+     *
+     * @param blogId 博客编号
+     * @return 返回点赞是否成功
+     */
+    AjaxResponse<Boolean> createBlogAgree(String blogId);
 
     /*##################################################后台##################################################*/
 

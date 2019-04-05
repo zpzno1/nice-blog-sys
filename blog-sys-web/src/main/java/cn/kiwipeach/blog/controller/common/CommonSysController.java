@@ -20,6 +20,7 @@ import cn.kiwipeach.blog.domain.vo.UserInfoVO;
 import cn.kiwipeach.blog.service.IBlogCommService;
 import org.apache.shiro.SecurityUtils;
 import org.kiwipeach.blog.shiro.token.AccessToken;
+import org.kiwipeach.blog.utils.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,12 +43,12 @@ public class CommonSysController {
     @GetMapping("user")
     @ResponseBody
     public AjaxResponse<UserInfoVO> queryUserInfo() {
-        AccessToken curUser = (AccessToken) SecurityUtils.getSubject().getPrincipal();
-        if (curUser == null) {
-            return AjaxResponse.fail("USER_NOT_LOGIN", "未查询到用户信息");
+        AccessToken currentUser = UserUtil.getCurrentUser();
+        if (currentUser == null) {
+            return AjaxResponse.success(null);
         } else {
             //FIXME openid建议不要跟id一致，后期在做处理了。
-            UserInfoVO userInfoVO = new UserInfoVO(curUser.getUserName(), curUser.getNickName(), curUser.getHeadUrl(), curUser.getId(), curUser.getPlatform());
+            UserInfoVO userInfoVO = new UserInfoVO(currentUser.getUserName(), currentUser.getNickName(), currentUser.getHeadUrl(), currentUser.getId(), currentUser.getPlatform());
             return AjaxResponse.success(userInfoVO);
         }
     }

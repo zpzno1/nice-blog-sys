@@ -114,15 +114,25 @@ public class AjaxResponse<T> {
     /**
      * 返回失败数据
      *
+     * @param msg 失败报文
+     * @param <T> 报文类型
+     * @return 统一返回把报文数据
+     */
+    public static <T> AjaxResponse<T> fail(String msg) {
+        //默认系统错误码：4000
+        return new AjaxResponse<T>("4000", msg);
+    }
+
+    /**
+     * 返回失败数据
+     *
      * @param code 失败状态码
      * @param msg  失败报文
      * @param <T>  报文类型
      * @return 统一返回把报文数据
      */
     public static <T> AjaxResponse<T> fail(String code, String msg) {
-        AjaxResponse<T> ajaxResponse = new AjaxResponse<T>(code, msg);
-        ajaxResponse.setCode(code);
-        return ajaxResponse;
+        return new AjaxResponse<T>(code, msg);
     }
 
 }

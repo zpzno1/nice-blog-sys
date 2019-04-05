@@ -39,7 +39,4 @@
            and rt.blog_id = t.id
          group by bt.id, bt.name
     </select>
-
-
-
 </mapper>

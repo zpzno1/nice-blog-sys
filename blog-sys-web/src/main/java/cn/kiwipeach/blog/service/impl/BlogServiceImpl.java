@@ -15,22 +15,26 @@
  */
 package cn.kiwipeach.blog.service.impl;
 
+import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO;
 import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
 import cn.kiwipeach.blog.domain.vo.TagVO;
+import cn.kiwipeach.blog.exception.BlogException;
 import cn.kiwipeach.blog.mapper.BlogMapper;
 import cn.kiwipeach.blog.mapper.BlogTagMapper;
-import cn.kiwipeach.blog.service.IMarkdownStoreageService;
 import cn.kiwipeach.blog.service.adapter.BlogServiceAdapter;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 博客 服务实现类
@@ -48,7 +52,7 @@ public class BlogServiceImpl extends BlogServiceAdapter {
     private BlogTagMapper blogTagMapper;
 
     @Autowired
-    private IMarkdownStoreageService iMarkdownStoreageService;
+    private ValueOperations<String, Object> valueOperations;
 
     @Override
     public IPage<BlogInfoVO> pageQuery(IPage<BlogInfoVO> page, String categoryId, String tagName) {
@@ -89,6 +93,24 @@ public class BlogServiceImpl extends BlogServiceAdapter {
             tagVOS.setTagVOList(JSONArray.parseArray(JSON.toJSONString(tagVOList)));
         }
         return page.setRecords(archiveBlogTimelineVOS);
+    }
+
+    @Override
+    public AjaxResponse<Boolean> createBlogAgree(String blogId) {
+        //如果缓存中存在点赞数据，则不允许重复点赞
+        String cacheKey = new StringBuffer("BLOG_STAR_COUNT::blog_id_" + blogId).toString();
+        if (Objects.isNull(valueOperations.get(cacheKey))) {
+            Integer integer = blogMapper.updateBlogStarCount(blogId);
+            if (integer > 0) {
+                valueOperations.set(cacheKey, 1, 2, TimeUnit.MINUTES);
+                return AjaxResponse.success(true);
+            } else {
+                return AjaxResponse.fail("-BLOG_STAR_001", "博客点赞失败");
+            }
+        } else {
+            return AjaxResponse.fail("-BLOG_STAR_001", "您近期点过赞");
+        }
+
     }
 
     /**

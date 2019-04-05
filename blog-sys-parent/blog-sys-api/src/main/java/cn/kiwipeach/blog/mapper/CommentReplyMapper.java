@@ -43,4 +43,12 @@ public interface CommentReplyMapper extends BaseMapper<CommentReply> {
                                            @Param("parentId") String parentId,
                                            @Param("type") String type);
 
+    /**
+     * 更新评论回复的点赞数量
+     *
+     * @param commentId 评论对象
+     * @return 返回更新记录行数
+     */
+    Integer updateCommentStarCount(@Param("commentId") String commentId);
+
 }

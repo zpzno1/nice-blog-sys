@@ -176,11 +176,19 @@
          ORDER BY t.create_time DESC
     </select>
 
-
+    <!--博客统计数加1-->
     <update id="updateCommentCountByBlogId">
         update t_blog set comment_count = comment_count + 1 where id = #{blogId}
     </update>
 
+    <!--博客浏览数加1-->
+    <update id="updateBlogViewCountByBlogId">
+        update t_blog set view_count = view_count + 1 where id = #{blogId}
+    </update>
 
+    <!--更新博客点赞数量-->
+    <update id="updateBlogStarCount">
+        update t_blog set star_count = star_count+1 where id = #{blogId}
+    </update>
 
 </mapper>

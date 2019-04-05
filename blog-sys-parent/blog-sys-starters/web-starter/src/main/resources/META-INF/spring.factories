@@ -5,6 +5,6 @@
 # org.kiwipeach.blog.autoconfig.BlogAutoConfigBean,\
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.kiwipeach.blog.autoconfig.RedisCacheTtlAutoConfig,\
+org.kiwipeach.blog.autoconfig.RedisCacheAutoConfig,\
 org.kiwipeach.blog.autoconfig.BlogMvcConfiguration
   

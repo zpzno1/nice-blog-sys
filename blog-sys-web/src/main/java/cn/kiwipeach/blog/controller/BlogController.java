@@ -16,7 +16,6 @@
 package cn.kiwipeach.blog.controller;
 
 
-import cn.kiwipeach.blog.anno.AccessLog;
 import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO;
@@ -26,7 +25,6 @@ import cn.kiwipeach.blog.service.IBlogCommService;
 import cn.kiwipeach.blog.service.IBlogService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -92,14 +90,23 @@ public class BlogController {
      * @param pattern 博客归档格式（yyyy,yyyyMM,yyyyQ）
      * @return 返回博客归档列表信息
      */
-    @AccessLog("日志归档信息查询")
-    @GetMapping(value = "archive/query", produces = "application/json")
+    //@AccessLog("日志归档信息查询")
+    @GetMapping(value = "archive/query")
     @ResponseBody
     public AjaxResponse<IPage<ArchiveBlogTimelineVO>> archiveBlogQuery(Page page,
-                                                                       @RequestParam(value = "pattern", defaultValue = "yyyy") String pattern,
-                                                                       HttpServletResponse response) {
+                                                                       @RequestParam(value = "pattern", defaultValue = "yyyy") String pattern) {
         IPage iPage = iBlogService.archiveBlogQuery(page, pattern);
         return AjaxResponse.success(iPage);
     }
+
+    /**
+     * @return
+     */
+    @PostMapping(value = "agree/{blogId}")
+    @ResponseBody
+    public AjaxResponse<Boolean> makeBlogAgree(@PathVariable("blogId") String blogId) {
+        return iBlogService.createBlogAgree(blogId);
+    }
+
 
 }

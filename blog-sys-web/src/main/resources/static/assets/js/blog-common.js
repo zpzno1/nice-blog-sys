@@ -25,13 +25,26 @@
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             var res = XMLHttpRequest.responseJSON;
             toastr.error("提示信息：" + res.msg);
-            // swal({
-            //     title: '提示：' + res.msg,
-            //     text: res.data.path,
-            //     icon: "error",
-            //     timer: 40000
-            // });
-            this;
+        },
+        dataType: 'json',
+        dataFilter: function (data, type) {
+            var res = new Object();
+            if (typeof data == 'string') {
+                res = JSON.parse(data);
+            }
+            //系统异常：未登录
+            if (res.code == '401') {
+                toastr.error('提示信息，当前用户未登录，请进行登陆操作！');
+            } else if (res.code == '403') {
+                //系统异常：未授权
+                toastr.error('你没有访问该资源的权限，请联系管理员(1099501218@qq.com)！');
+            } else if (res.code == '4001') {
+                return data;
+            } else if (res.code != '0') {
+                //业务异常：BlogException类型
+                toastr.error("提示信息：" + res.msg);
+            }
+            return data;
         }
     });
 
@@ -384,8 +397,8 @@
             '                        <div class="row">\n' +
             '                            <div class="col-md-11">\n' +
             '                                <span class="badge badge-pill badge-dark">' + item.categoryName + '</span>\n' +
-            '                                <a href="/blog/detail/'+item.id+'"\n' +
-        '                                   class="text-dark">' + item.title + '</a>\n' +
+            '                                <a href="/blog/detail/' + item.id + '"\n' +
+            '                                   class="text-dark">' + item.title + '</a>\n' +
             '                            </div>\n' +
             '                            <div class="col-md-1">\n' +
             '                            ' + _get_top_dom(item.top) +

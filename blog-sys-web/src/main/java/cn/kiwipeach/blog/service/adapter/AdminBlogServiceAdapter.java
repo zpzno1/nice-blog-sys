@@ -15,6 +15,7 @@
  */
 package cn.kiwipeach.blog.service.adapter;
 
+import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO;
 import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
@@ -46,4 +47,8 @@ public abstract class AdminBlogServiceAdapter  extends ServiceImpl<BlogMapper, B
         return null;
     }
 
+    @Override
+    public AjaxResponse<Boolean> createBlogAgree(String blogId) {
+        return null;
+    }
 }

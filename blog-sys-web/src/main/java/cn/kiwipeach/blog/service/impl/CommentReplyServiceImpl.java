@@ -15,6 +15,7 @@
  */
 package cn.kiwipeach.blog.service.impl;
 
+import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.domain.CommentReply;
 import cn.kiwipeach.blog.domain.SysUser;
@@ -32,9 +33,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.kiwipeach.blog.shiro.token.AccessToken;
 import org.kiwipeach.blog.utils.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 评论 服务实现类
@@ -50,6 +54,9 @@ public class CommentReplyServiceImpl extends ServiceImpl<CommentReplyMapper, Com
 
     @Autowired
     private CommentReplyMapper commentReplyMapper;
+    @Autowired
+    private ValueOperations<String, Object> valueOperations;
+
 
     @Override
     public boolean createBlogComment(CommentReplyParam commentReply, AccessToken accessToken) {
@@ -93,6 +100,23 @@ public class CommentReplyServiceImpl extends ServiceImpl<CommentReplyMapper, Com
     public IPage<BlogCommentVO> queryCommentByPage(IPage<BlogCommentVO> page, String parentId, String type) {
         List<BlogCommentVO> commentReplies = commentReplyMapper.selectCommenByPage(page, parentId, type);
         return page.setRecords(commentReplies);
+    }
+
+    @Override
+    public AjaxResponse<Boolean> modifyCommentReplyStarCount(String commentId) {
+        //如果缓存中存在点赞数据，则不允许重复点赞
+        String cacheKey = new StringBuffer("BLOG_COMMENT_REPLY_COUNT::comment_id_" + commentId).toString();
+        if (Objects.isNull(valueOperations.get(cacheKey))) {
+            Integer integer = commentReplyMapper.updateCommentStarCount(commentId);
+            if (integer > 0) {
+                valueOperations.set(cacheKey, 1, 2, TimeUnit.MINUTES);
+                return AjaxResponse.success(true);
+            } else {
+                return AjaxResponse.fail("-BLOG_STAR_001", "评论点赞失败");
+            }
+        } else {
+            return AjaxResponse.fail("-BLOG_STAR_001", "您近期点过赞");
+        }
     }
 
 

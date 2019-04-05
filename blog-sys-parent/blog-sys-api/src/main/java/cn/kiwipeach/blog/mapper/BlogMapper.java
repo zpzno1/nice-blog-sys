@@ -22,6 +22,7 @@ import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
@@ -84,5 +85,22 @@ public interface BlogMapper extends BaseMapper<Blog> {
      * @return 返回更新结果
      */
     Integer updateCommentCountByBlogId(@Param("blogId") String blogId);
+
+    /**
+     * 更新博客浏览量
+     *
+     * @param blogId 博客编号
+     * @return 返回博客浏览量
+     */
+    Integer updateBlogViewCountByBlogId(@Param("blogId") String blogId);
+
+    /**
+     * 更新博客点赞数量
+     *
+     * @param blogId 博客编号
+     * @return 返回更新结果
+     */
+    Integer updateBlogStarCount(@Param("blogId") String blogId);
+
 
 }

@@ -15,30 +15,40 @@
  */
 package org.kiwipeach.blog.autoconfig;
 
+import cn.kiwipeach.blog.mapper.BlogMapper;
+import org.kiwipeach.blog.interceptor.BlogViewCountInterceptor;
 import org.kiwipeach.blog.resolver.CurrentUserMethodArgumentResolver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
 /**
  * springmvc拓展类,拓展拦截器，过滤器，监听器等等组件。
+ * 在jdk8中可以不用继承该适配器了（WebMvcConfigurerAdapter），直接使用接口即可。
  *
  * @author kiwipeach [1099501218@qq.com]
  * @create 2018/07/28
  */
 @Configuration
-public class BlogMvcConfiguration extends WebMvcConfigurerAdapter {
+public class BlogMvcConfiguration implements WebMvcConfigurer {
 
-    
+    @Autowired
+    private BlogMapper blogMapper;
+
+    @Autowired
+    private ValueOperations valueOperations;
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         // 设置默认欢迎页面
-        super.addViewControllers(registry);
+        //super.addViewControllers(registry);
         registry.addViewController("/").setViewName("forward:/blog/index.html");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
@@ -50,9 +60,9 @@ public class BlogMvcConfiguration extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        super.addInterceptors(registry);
-        //registry.addInterceptor(new AccessLogInterceptor())
-        //        .addPathPatterns("/**");
+        //super.addInterceptors(registry);
+        registry.addInterceptor(new BlogViewCountInterceptor(blogMapper,valueOperations))
+                .addPathPatterns("/blog/detail/**");
     }
 
     /**
@@ -62,7 +72,7 @@ public class BlogMvcConfiguration extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        super.addArgumentResolvers(argumentResolvers);
+        //super.addArgumentResolvers(argumentResolvers);
         argumentResolvers.add(new CurrentUserMethodArgumentResolver());
     }
 }

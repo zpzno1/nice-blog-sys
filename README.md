@@ -43,6 +43,7 @@ https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg"></a>
 ##### 方式一：jar包部署
 ```shell
     nohup java -Xms513m -Xmx1024m -jar ${项目位置}/blog-sys-web.jar --spring.config.location=${配置文件位置}/application-production.yaml &
+    nohup java -Xms513m -Xmx1024m -jar blog-sys-web.jar --spring.profiles.active=aliyun &
 ```
 
 ##### 方式二：war包部署

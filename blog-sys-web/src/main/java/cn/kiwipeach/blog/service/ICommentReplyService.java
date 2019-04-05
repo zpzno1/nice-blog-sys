@@ -15,6 +15,7 @@
  */
 package cn.kiwipeach.blog.service;
 
+import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.CommentReply;
 import cn.kiwipeach.blog.domain.vo.BlogCommentVO;
 import cn.kiwipeach.blog.param.CommentReplyParam;
@@ -61,4 +62,12 @@ public interface ICommentReplyService extends IService<CommentReply> {
      */
     //@Cacheable(value = {"BLOG_COMMENT_REPLY"}, key = "'page_'+#type+'_'+#parentId+'_'+#page.current+'_'+#page.size")
     IPage<BlogCommentVO> queryCommentByPage(IPage<BlogCommentVO> page, String parentId, String type);
+
+    /**
+     * 修改博客评论回复的点赞数
+     *
+     * @param commentId 回复id
+     * @return 返回更新结果
+     */
+    AjaxResponse<Boolean> modifyCommentReplyStarCount(String commentId);
 }

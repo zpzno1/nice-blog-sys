@@ -92,4 +92,17 @@ public class CommentReplyController {
     }
 
 
+    /**
+     * 评论回复点赞接口
+     *
+     * @param commentId 评论编号
+     * @return 返回博客点赞结果
+     */
+    @PostMapping(value = "agree/{commentId}")
+    @ResponseBody
+    public AjaxResponse<Boolean> makeBlogAgree(@PathVariable("commentId") String commentId) {
+        return iCommentReplyService.modifyCommentReplyStarCount(commentId);
+    }
+
+
 }
