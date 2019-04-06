@@ -37,13 +37,6 @@
             url: '/blog/archive/query',
             data: requestData,
             method: 'get',
-            beforeSend: function () {
-                // this.dialogIndex = layer.load(0, {shade: false}); 橘黄
-                this.dialogIndex = index = layer.load(1, {shade: [0.1, '#fff']});////0.1透明度的白色背景
-            },
-            complete: function () {
-                layer.close(this.dialogIndex);
-            },
             success: function (res) {
                 if (res.code == '0') {
                     sessionStorage.setItem("archive_page_current", requestData.current);

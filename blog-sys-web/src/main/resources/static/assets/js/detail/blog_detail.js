@@ -210,14 +210,6 @@ function loadBlogCommentRequest(opt) {
     $.ajax({
         url: '/commentReply/query',
         data: opt,
-        beforeSend: function () {
-            this.layerIndex = layer.load(1, {
-                shade: [0.1, '#fff'] //0.1透明度的白色背景
-            });
-        },
-        complete: function () {
-            layer.close(this.layerIndex);
-        },
         success: function (res) {
             if (res.code == '0') {
                 if (res.data.pages >= res.data.current) {
@@ -249,14 +241,6 @@ function loadCommentReplyRequest(param, $blogCommentContainer) {
         url: '/commentReply/query',
         method: 'get',
         data: requestData,
-        beforeSend: function () {
-            this.layerIndex = layer.load(1, {
-                shade: [0.1, '#fff'] //0.1透明度的白色背景
-            });
-        },
-        complete: function () {
-            layer.close(this.layerIndex);
-        },
         success: function (res) {
             var opt = {
                 total: res.data.total,
@@ -277,12 +261,6 @@ function loadCommentReplyRequest(param, $blogCommentContainer) {
                             url: '/commentReply/query',
                             data: requestData,
                             method: 'get',
-                            beforeSend: function () {
-                                this.dialogIndex = index = layer.load(1, {shade: [0.1, '#fff']});////0.1透明度的白色背景
-                            },
-                            complete: function () {
-                                layer.close(this.dialogIndex);
-                            },
                             success: function (res) {
                                 _renderCommentReplyContaner(res, $commentContainer);
                             }

@@ -39,8 +39,7 @@
             var scrollHeight = window.pageYOffset ||
                 document.documentElement.scrollTop ||
                 document.body.scrollTop || 0;
-
-            return documentHeight - viewPortHeight - scrollHeight < 20;
+            return documentHeight - viewPortHeight - scrollHeight <= 20;
         }
     }
 })(jQuery, window);

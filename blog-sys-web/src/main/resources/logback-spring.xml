@@ -46,7 +46,10 @@
     <springProfile name="development">
         <logger name="cn.kiwipeach.blog.mapper" level="debug"/>
     </springProfile>
-    <springProfile name="production">
+    <springProfile name="gitee">
+        <logger name="cn.kiwipeach.blog.mapper" level="warn"/>
+    </springProfile>
+    <springProfile name="aliyun">
         <logger name="cn.kiwipeach.blog.mapper" level="warn"/>
     </springProfile>
     <!-- 日志级别TRACE<DEBUG<INFO<WARN<ERROR -->
@@ -55,7 +58,12 @@
             <appender-ref ref="CONSOLE_APPENDER"/>
         </root>
     </springProfile>
-    <springProfile name="production">
+    <springProfile name="gitee">
+        <root level="WARN">
+            <appender-ref ref="CONSOLE_APPENDER"/>
+        </root>
+    </springProfile>
+    <springProfile name="aliyun">
         <root level="WARN">
             <appender-ref ref="ROLL_APPENDER"/>
             <appender-ref ref="CONSOLE_APPENDER"/>

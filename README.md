@@ -4,7 +4,7 @@
   </a>
 </p>
 <p align=center>
-  nice blog system 是一个基于Java开发，`便捷轻巧、高性能、外形Nice`的博客系统
+   Nice Blog System 是一个基于Java开发，“便捷轻巧、高性能、外形Nice”的博客系统
 </p>
 
 <p align="center">
@@ -20,12 +20,12 @@ https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg"></a>
  <a href="javascript:;">QQ交流群 :679722876</p>
 </p>
 
+## 项目说明
 
-#### 项目说明
- 纯Java编写的个人博客系统，力求以“便捷轻巧、高性能、外形Nice”为目标，我不完美，但向往远方。
+ 纯Java编写的个人博客系统，力求以`便捷轻巧、高性能、外形Nice`为目标，适用于个人快速搭建博客平台。我不完美，但向往远方。[在线演示](http://www.kiwipeach.cn) 
 
-#### 项目亮点
-- 项目演示：[在线演示](http://www.kiwipeach.cn) 
+## 项目亮点
+
 - 最新的技术选型,使用SpirngBoot最新版本(当前2.1.3.RELEASE)，关注我就等于关注最新SpringBoot整合技巧方案，(*^__^*).....
 - 项目技术选型[maven，spring-boot,mybatis-plus,shiro,thymeleaf,bootstrap4，jquery....]
 - 支持多平台(q、github、gitee)社交账号登陆及本地系统账号登录。
@@ -37,7 +37,7 @@ https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg"></a>
 - 持续开源更新，站长亲自撸码，经久不衰的持续更新。
 
 
-#### 安装教程
+## 安装教程
 
 
 ##### 方式一：jar包部署
@@ -63,7 +63,9 @@ mvn clean package
 ```
 
 2. 准备数据库，redis环境,并且修改对应配置文件,具体见配置文件。
-> 主要修改配置：`数据库连接`、`缓存Redis`、`三方登录参数`、`shiro缓存cookie域名`
+```shell
+#主要修改配置：数据库连接、缓存Redis、三方登录参数、shiro缓存cookie域名
+```
 
 
 3. 系统启动类
@@ -75,25 +77,20 @@ nice-blog-sys/blog-sys-web/src/main/java/cn/kiwipeach/blog/BlogWebApplication.ja
 
 
 
-#### 系统截图
+## 系统截图
 
-##### 前台博客(更新中...)
-
-- 博客首页
+##### 博客首页
 
 ![博客首页内容](http://img.kiwipeach.cn/1f86a039ad9109d9bb175f20d9cb6d5b.png)
 
-- 博客详情
+##### 博客详情
 
 ![博客详情](https://images.gitee.com/uploads/images/2019/0329/012203_59856321_1387578.png)
 
-
-##### 后台管理（更新中...）
-
-- 博客后台一角:
+##### 博客后台一角:
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/1127/113125_8043f6a4_1387578.png "屏幕截图.png")
 
-- 发表博文界面：
+##### 发表博文界面：
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/1209/113059_fa9be492_1387578.png "XSXZ(]B3KJPS6K6[71}S266.png")

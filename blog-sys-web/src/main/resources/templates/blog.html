@@ -11,6 +11,10 @@
     <title th:text="${title}"></title>
     <!--/*前端框架样式依赖开始*/-->
     <link rel="stylesheet" th:href="@{/assets/plugins/material-kit/assets/css/material-kit.min.css}">
+    <!-- Our project just needs Font Awesome Solid + Brands -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/font-awesome/css/fontawesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/plugins/font-awesome/css/brands.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/plugins/font-awesome/css/solid.min.css}">
     <!--/*pace样式*/-->
     <link rel="stylesheet" th:href="@{/assets/plugins/pace-progress/themes/silver/pace-theme-minimal.css}">
     <!--/*回到最顶部(totop)插件*/-->
@@ -41,6 +45,8 @@
     <!--/*博客通用js*/-->
     <!--/*toastr*/-->
     <script type="text/javascript" th:src="@{/assets/plugins/toastr/toastr.min.js}"></script>
+    <!--/*弹出框layer依赖*/-->
+    <script type="text/javascript" th:src="@{/assets/plugins/layui-layer/dist/layer.js}"></script>
     <script type="text/javascript" th:src="@{/assets/js/blog-common.js}"></script>
     <script type="text/javascript" th:src="@{/assets/js/blog-util.js}"></script>
 </head>
@@ -317,19 +323,17 @@
 <!--#.页面body需要加载的公共js-->
 <div th:fragment="body_script">
     <!--/*fontawsome图标*/-->
-    <script type="text/javascript" th:src="@{/assets/plugins/font-awesome/js/all.min.js}"></script>
+    <!-- <script type="text/javascript" th:src="@{/assets/plugins/font-awesome/js/all.min.js}"></script>-->
     <!--/*aliyun fonticon base*/-->
     <script type="text/javascript" src="http://at.alicdn.com/t/font_1032912_vw8ub3a45wg.js"></script>
     <!--/*aliyun fonticon ext*/-->
     <script type="text/javascript" src="http://at.alicdn.com/t/font_1032873_28w9eh66h8l.js"></script>
-    <!--/*弹出框layer依赖*/-->
-    <script type="text/javascript" th:src="@{/assets/plugins/layui-layer/dist/layer.js}"></script>
     <!--/*前段框架依赖*/-->
     <script th:src="@{/assets/plugins/material-kit/assets/js/core/popper.min.js}"></script>
     <script th:src="@{/assets/plugins/material-kit/assets/js/bootstrap-material-design.min.js}"></script>
     <script th:src="@{/assets/plugins/material-kit/assets/js/plugins/moment.min.js}"></script>
-    <script th:src="@{/assets/plugins/material-kit/assets/js/plugins/bootstrap-datetimepicker.min.js}"></script>
-    <script th:src="@{/assets/plugins/material-kit/assets/js/plugins/nouislider.min.js}"></script>
+   <!-- <script th:src="@{/assets/plugins/material-kit/assets/js/plugins/bootstrap-datetimepicker.min.js}"></script>
+    <script th:src="@{/assets/plugins/material-kit/assets/js/plugins/nouislider.min.js}"></script>-->
     <script th:src="@{/assets/plugins/material-kit/assets/js/material-kit.min.js}"></script>
     <!--/*回到最顶端(totop)插件*/-->
     <script th:src="@{/assets/plugins/jquery_totop_plugin/js/easing.js}" type="text/javascript"></script>
@@ -396,7 +400,7 @@
                                         <i class="fas fa-envelope-square fa-lg"></i>
                                     </span>
                                         <input name="userName" type="text" required class="form-control"
-                                               placeholder="邮箱/账号(kiwipeach)"
+                                               placeholder="邮箱/账号"
                                                value="">
                                     </div>
                                 </div>
@@ -405,7 +409,7 @@
                                     <span class="input-group-addon">
                                        <i class="fas fa-lock fa-lg"></i>
                                     </span>
-                                        <input name="password" type="password" required placeholder="请输入密码（123456）"
+                                        <input name="password" type="password" required placeholder="请输入密码"
                                                class="form-control"
                                                value="">
                                     </div>

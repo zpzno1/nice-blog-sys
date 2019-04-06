@@ -22,15 +22,24 @@
     };
     //拓展ajax插件
     $.ajaxSetup({
+        /*后台服务器异常*/
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            var res = XMLHttpRequest.responseJSON;
-            toastr.error("提示信息：" + res.msg);
+            try {
+                var res = XMLHttpRequest.responseJSON;
+                toastr.error("提示信息：" + res.msg);
+            } catch (e) {
+                toastr.error("提示信息：" + textStatus + ':' + errorThrown);
+            }
         },
-        dataType: 'json',
+        /*后台业务异常处理*/
         dataFilter: function (data, type) {
             var res = new Object();
             if (typeof data == 'string') {
-                res = JSON.parse(data);
+                try {
+                    res = JSON.parse(data);
+                } catch (e) {
+                    return data;
+                }
             }
             //系统异常：未登录
             if (res.code == '401') {
@@ -45,7 +54,16 @@
                 toastr.error("提示信息：" + res.msg);
             }
             return data;
-        }
+        },
+        /*所有的请求异步加载*/
+        beforeSend: function () {
+            this.layerIndex = layer.load(1, {
+                shade: [0.1, '#fff'] //0.1透明度的白色背景
+            });
+        },
+        complete: function () {
+            layer.close(this.layerIndex);
+        },
     });
 
     window.blog_common = {
@@ -298,12 +316,6 @@
                                         url: '/blog/query',
                                         data: requestData,
                                         method: 'get',
-                                        beforeSend: function () {
-                                            this.dialogIndex = index = layer.load(1, {shade: [0.1, '#fff']});////0.1透明度的白色背景
-                                        },
-                                        complete: function () {
-                                            layer.close(this.dialogIndex);
-                                        },
                                         success: function (res) {
                                             _render_blog_index_page(res);
                                         }
