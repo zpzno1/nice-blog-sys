@@ -59,7 +59,7 @@ public interface BlogMapper extends BaseMapper<Blog> {
      * @param blogId 目标博客编号
      * @return 返回博客信息
      */
-    Blog selectPreviousBlog(@Param("blogId") String blogId);
+    Blog selectPreviousBlog(IPage<Blog> page,@Param("blogId") String blogId);
 
     /**
      * 查询上一篇博客
@@ -67,7 +67,7 @@ public interface BlogMapper extends BaseMapper<Blog> {
      * @param blogId 目标博客编号
      * @return 返回博客信息
      */
-    Blog selectNextBlog(@Param("blogId") String blogId);
+    Blog selectNextBlog(IPage<Blog> page,@Param("blogId") String blogId);
 
     /**
      * 查询按照时间归档博客信息

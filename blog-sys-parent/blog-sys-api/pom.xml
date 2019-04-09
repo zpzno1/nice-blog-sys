@@ -39,6 +39,13 @@
             <version>${oracle.version}</version>
         </dependency>
 
+        <!--Cannot resolve com.mysq.jdbc.Connection.ping method.  Will use 'SELECT 1' instead.-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId><!--mysql数据库驱动-->
+            <version>5.1.46</version>
+        </dependency>
+
         <!--mybaits-plus的场景启动器-->
         <dependency>
             <groupId>com.baomidou</groupId>

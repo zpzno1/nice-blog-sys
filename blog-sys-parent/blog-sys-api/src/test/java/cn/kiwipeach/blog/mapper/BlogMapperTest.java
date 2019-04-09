@@ -34,8 +34,9 @@ public class BlogMapperTest extends BlogApiApplicationTests {
 
     @Test
     public void selectNextPrevious() {
-        Blog nextBlog = blogMapper.selectNextBlog("106");
-        Blog previousBlog = blogMapper.selectPreviousBlog("106");
+        Page<Blog> page = new Page<>(1, 1);
+        Blog nextBlog = blogMapper.selectNextBlog(page,"106");
+        Blog previousBlog = blogMapper.selectPreviousBlog(page,"106");
         System.out.println(JSON.toJSONString(nextBlog));
         System.out.println(JSON.toJSONString(previousBlog));
     }
@@ -60,6 +61,7 @@ public class BlogMapperTest extends BlogApiApplicationTests {
         //blogMapper.selectCount()
         log.warn("结果：{}", updateRow);
     }
+
 
     /**
      * clob:大文本

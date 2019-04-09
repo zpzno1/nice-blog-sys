@@ -172,8 +172,6 @@ function commentReplySendClick() {
 function commentClickCollapse(target) {
     var replyTarget = $(target).parent();
     var $collapseExample = $(target).parent().parent().parent().find('.collapse');
-
-    console.log(replyTarget);
     var $show = '';
     if ($(target).attr('data-status') == 'closed') {
         $show = '<i class="fa fa-chevron-up"></i>';
@@ -196,7 +194,6 @@ function blogCommentScroll(opt) {
         //如果到达了博客底部，那么继续动态加载博客信息
         if (blog_util.isScrollToPageBottom()) {
             currentIndex = currentIndex + 1;
-            console.log("-->" + currentIndex)
             opt.current = currentIndex;
             loadBlogCommentRequest(opt);
         }
@@ -282,7 +279,6 @@ function loadCommentReplyRequest(param, $blogCommentContainer) {
  * 发表博客评论或者回复
  */
 function makeBlogCommentRequest(requestData) {
-    console.log("评论回复请求数据:", requestData);
     debugger
     $.ajax({
         url: requestData.commentUrl,

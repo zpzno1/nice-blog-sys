@@ -56,32 +56,20 @@
 
     <!--分页查询博客信息-->
     <select id="selectByPage" resultMap="blogInfoVOResultMap">
-        SELECT b.ID,
-        b.USER_ID,
-        u.NICK_NAME,
-        b.CATE_ID,
-        c.NAME as CATEGORY_NAME,
-        b.TITLE,
-        b.CONTENT,
-        b.STAR_COUNT,
-        b.COMMENT_COUNT,
-        b.VIEW_COUNT,
-        b.TOP,
-        b.CREATE_TIME,
-        b.UPDATE_TIME,
-        b.CONTENT_TYPE,
-        b.INTRODUCTION,
-        b.ICON_URL
+        SELECT b.ID, b.USER_ID, u.NICK_NAME, b.CATE_ID, c.NAME AS CATEGORY_NAME
+        , b.TITLE, b.CONTENT, b.STAR_COUNT, b.COMMENT_COUNT, b.VIEW_COUNT
+        , b.TOP, b.CREATE_TIME, b.UPDATE_TIME, b.CONTENT_TYPE, b.INTRODUCTION
+        , b.ICON_URL
         FROM T_BLOG b
-        left join t_blog_category c on b.cate_id = c.id
-        left join sys_user u on b.user_id = u.id
+        LEFT JOIN T_BLOG_CATEGORY c ON b.cate_id = c.id
+        LEFT JOIN SYS_USER u ON b.user_id = u.id
         <where>
             <if test="categoryId !=null and categoryId !=''">
                 and b.CATE_ID = #{categoryId}
             </if>
             <if test="tagName !=null and tagName !=''">
                 and b.id in (
-                select rt.blog_id from r_tag_blog rt, t_blog_tag bt
+                select rt.blog_id from R_TAG_BLOG rt, T_BLOG_TAG bt
                 where bt.id = rt.tag_id
                 and bt.name = #{tagName}
                 )
@@ -92,103 +80,100 @@
 
     <!--查询博客详情信息-->
     <select id="selectBlog" resultMap="blogInfoVOResultMap">
-         SELECT b.ID,
-               b.USER_ID,
-               u.NICK_NAME,
-               b.CATE_ID,
-               c.NAME as CATEGORY_NAME,
-               b.TITLE,
-               b.CONTENT,
-               b.STAR_COUNT,
-                b.COMMENT_COUNT,
-               b.VIEW_COUNT,
-               b.TOP,
-               b.CREATE_TIME,
-               b.UPDATE_TIME,
-               b.CONTENT_TYPE,
-               b.INTRODUCTION,
-               b.ICON_URL
-          FROM T_BLOG b
-          left join t_blog_category c on b.cate_id = c.id
-          left join sys_user u on b.user_id = u.id
-          where b.id = #{blogId}
+        SELECT b.ID, b.USER_ID, u.NICK_NAME, b.CATE_ID, c.NAME AS CATEGORY_NAME
+            , b.TITLE, b.CONTENT, b.STAR_COUNT, b.COMMENT_COUNT, b.VIEW_COUNT
+            , b.TOP, b.CREATE_TIME, b.UPDATE_TIME, b.CONTENT_TYPE, b.INTRODUCTION
+            , b.ICON_URL
+        FROM T_BLOG b
+        LEFT JOIN T_BLOG_CATEGORY c ON b.cate_id = c.id
+        LEFT JOIN SYS_USER u ON b.user_id = u.id
+        WHERE b.id = #{blogId}
     </select>
 
 
-    <!--查询博客上一篇-->
+    <!--查询博客上一篇,取分页的第一条数据即可-->
     <select id="selectPreviousBlog" resultMap="BaseResultMap">
-        SELECT *
-        FROM (SELECT TMP.*, ROWNUM ROW_ID
-        FROM (
-        select
+        SELECT
         <include refid="Base_Column_List"></include>
-        from t_blog t
-        where 1 = 1
-        and t.update_time <![CDATA[ >= ]]>
-        (select update_time from t_blog where id = #{blogId})
+        FROM T_BLOG t
+        WHERE 1 = 1
+        AND t.update_time <![CDATA[ >= ]]>
+        (select update_time from T_BLOG where id = #{blogId})
         order by t.update_time asc
-        ) TMP
-        WHERE ROWNUM <![CDATA[ <= ]]> 2)
-        WHERE ROW_ID <![CDATA[ > ]]> 1
     </select>
 
     <!--下一篇博客信息-->
     <select id="selectNextBlog" resultMap="BaseResultMap">
-        SELECT *
-        FROM (SELECT TMP.*, ROWNUM ROW_ID
-        FROM (
         select
         <include refid="Base_Column_List"></include>
-        from t_blog t
+        from T_BLOG t
         where 1 = 1
         and t.update_time <![CDATA[ <= ]]>
-        (select update_time from t_blog where id = #{blogId})
+        (select update_time from T_BLOG where id = #{blogId})
         order by t.update_time desc
-        ) TMP
-        WHERE ROWNUM <![CDATA[ <= ]]> 2)
-        WHERE ROW_ID <![CDATA[ > ]]> 1
     </select>
 
     <!--查询按照时间归档博客信息-->
+    <!--FIXME ORACLE和MYSQL实现方式不一样-->
     <select id="selectArchiveBlog" resultMap="ArchiveBlogTimelineVOResultMap">
-        SELECT t.id,
-               t.title,
-               to_char(t.create_time, 'yyyy-MM-dd HH:mm:ss') AS createTime,
-               to_char(t.create_time, '${pattern}') AS archiveTime,
-               bc.name AS categoryName,
-               CASE
-                 WHEN to_char(t.create_time, 'yyyy-MM-dd HH:mm:ss') =
-                      (SELECT to_char(MAX(create_time), 'yyyy-MM-dd HH:mm:ss')
-                         FROM t_blog
-                        WHERE to_char(create_time, '${pattern}') =
-                              to_char(t.create_time, '${pattern}')) THEN
-                  'true'
-                 ELSE
-                  'false'
-               END AS isTop
-          FROM t_blog t
-          LEFT JOIN (SELECT to_char(b.create_time, '${pattern}') AS archive_time
-                       FROM t_blog b
-                      GROUP BY to_char(b.create_time, '${pattern}')) tmp ON to_char(t.create_time,
-                                                                              '${pattern}') =
-                                                                      tmp.archive_time
-          LEFT JOIN t_blog_category bc ON t.cate_id = bc.id
-         ORDER BY t.create_time DESC
+        SELECT t.id, t.title, to_char(t.create_time, 'yyyy-MM-dd HH:mm:ss') AS createTime
+            , to_char(t.create_time, '${pattern}') AS archiveTime, bc.name AS categoryName
+            , CASE
+                WHEN to_char(t.create_time, 'yyyy-MM-dd HH:mm:ss') = (
+                    SELECT to_char(MAX(create_time), 'yyyy-MM-dd HH:mm:ss')
+                    FROM T_BLOG
+                    WHERE to_char(create_time, '${pattern}') = to_char(t.create_time, '${pattern}')
+                ) THEN 'true'
+                ELSE 'false'
+            END AS isTop
+        FROM T_BLOG t
+        LEFT JOIN (
+            SELECT to_char(b.create_time, '${pattern}') AS archive_time
+            FROM T_BLOG b
+            GROUP BY to_char(b.create_time, '${pattern}')
+        ) tmp ON to_char(t.create_time, '${pattern}') = tmp.archive_time
+            LEFT JOIN T_BLOG_CATEGORY bc ON t.cate_id = bc.id
+        ORDER BY t.create_time DESC
     </select>
+    <!--需要改造的sql
+    SELECT to_char(t.create_time, 'yyyy"年"MM"月"') AS archiveTime,
+       t.id,
+       t.title,
+       to_char(t.create_time, 'yyyy-MM-dd HH:mm:ss') AS createTime,
+       bc.name AS categoryName,
+       CASE
+         WHEN to_char(t.create_time, 'yyyy-MM-dd HH:mm:ss') =
+              (SELECT to_char(MAX(create_time), 'yyyy-MM-dd HH:mm:ss')
+                 FROM T_BLOG
+                WHERE to_char(create_time, 'yyyy"年"MM"月"') =
+                      to_char(t.create_time, 'yyyy"年"MM"月"')) THEN
+          'true'
+         ELSE
+          'false'
+       END AS isTop
+  FROM T_BLOG t
+  LEFT JOIN (SELECT to_char(b.create_time, 'yyyy"年"MM"月"') AS archive_time
+               FROM T_BLOG b
+              GROUP BY to_char(b.create_time, 'yyyy"年"MM"月"')) tmp ON to_char(t.create_time,
+                                                                              'yyyy"年"MM"月"') =
+                                                                      tmp.archive_time
+  LEFT JOIN T_BLOG_CATEGORY bc ON t.cate_id = bc.id
+ ORDER BY t.create_time DESC
+    -->
 
     <!--博客统计数加1-->
     <update id="updateCommentCountByBlogId">
-        update t_blog set comment_count = comment_count + 1 where id = #{blogId}
+       UPDATE T_BLOG SET comment_count = comment_count + 1 WHERE id = #{blogId}
     </update>
 
     <!--博客浏览数加1-->
     <update id="updateBlogViewCountByBlogId">
-        update t_blog set view_count = view_count + 1 where id = #{blogId}
+        UPDATE T_BLOG SET view_count = view_count + 1 WHERE id = #{blogId}
     </update>
 
     <!--更新博客点赞数量-->
     <update id="updateBlogStarCount">
-        update t_blog set star_count = star_count+1 where id = #{blogId}
+        UPDATE T_BLOG SET star_count = star_count+1 WHERE id = #{blogId}
     </update>
 
 </mapper>

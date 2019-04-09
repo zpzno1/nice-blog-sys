@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2019/3/31 23:58:42                           */
+/* Created on:     2019/4/8 22:46:15                            */
 /*==============================================================*/
 
 
@@ -42,8 +42,8 @@ create table KIWIPEACH.R_ROLE_PERMISSION
 (
    ROLE_ID              varchar(32) not null comment '角色编号',
    PERMISSION_ID        varchar(32) not null comment '权限标志编号',
-   CREATE_TIME          timestamp default 'SYSDATE' comment '创建时间',
-   UPDATE_TIME          timestamp default 'SYSDATE' comment '修改时间',
+   CREATE_TIME          timestamp default CURRENT_TIMESTAMP comment '创建时间',
+   UPDATE_TIME          timestamp default CURRENT_TIMESTAMP comment '修改时间',
    primary key (ROLE_ID, PERMISSION_ID)
 );
 
@@ -56,8 +56,8 @@ create table KIWIPEACH.R_TAG_BLOG
 (
    TAG_ID               varchar(32) not null comment '标签编号',
    BLOG_ID              varchar(32) not null comment '博客编号',
-   CREATE_TIME          timestamp default 'SYSDATE' comment '创建时间',
-   UPDATE_TIME          timestamp default 'SYSDATE' comment '修改时间',
+   CREATE_TIME          timestamp default CURRENT_TIMESTAMP comment '创建时间',
+   UPDATE_TIME          timestamp default CURRENT_TIMESTAMP comment '修改时间',
    primary key (TAG_ID, BLOG_ID)
 );
 
@@ -70,8 +70,8 @@ create table KIWIPEACH.R_USER_ROLE
 (
    USER_ID              varchar(32) not null comment '用户编号',
    ROLE_ID              varchar(32) not null comment '角色编号',
-   CREATE_TIME          timestamp default 'SYSDATE' comment '创建时间',
-   UPDATE_TIME          timestamp default 'SYSDATE' comment '修改时间',
+   CREATE_TIME          timestamp default CURRENT_TIMESTAMP comment '创建时间',
+   UPDATE_TIME          timestamp default CURRENT_TIMESTAMP comment '修改时间',
    primary key (ROLE_ID, USER_ID)
 );
 
@@ -130,8 +130,8 @@ create table KIWIPEACH.SYS_PARAM
    DESCRIPTION          varchar(200) comment '描述',
    PARENT_ID            varchar(32) comment '父节点编号(具有级联属性的编码参数)',
    TYPE                 varchar(16) default 'sys' comment 'sys:系统参数单条 code:编码类型多条 cascade:级联类型多条',
-   CREATE_TIME          timestamp default 'SYSDATE' comment '创建时间',
-   UPDATE_TIME          timestamp default 'SYSDATE' comment '更新时间'
+   CREATE_TIME          timestamp default CURRENT_TIMESTAMP comment '创建时间',
+   UPDATE_TIME          timestamp default CURRENT_TIMESTAMP comment '更新时间'
 );
 
 alter table KIWIPEACH.SYS_PARAM comment '系统参数';
@@ -145,8 +145,8 @@ create table KIWIPEACH.SYS_PERMISSION
    NAME                 varchar(32) not null comment '权限英文编码(格式:资源+模块+操作,blog:page:access)',
    WEIGHT               numeric(1,0) default 1 comment '权限权重',
    ICON                 varchar(32) default 'defalut_permission_icon' comment '权限图标',
-   CREATE_TIME          timestamp default 'SYSDATE' comment '创建时间',
-   UPDATE_TIME          timestamp default 'SYSDATE' comment '修改时间',
+   CREATE_TIME          timestamp default CURRENT_TIMESTAMP comment '创建时间',
+   UPDATE_TIME          timestamp default CURRENT_TIMESTAMP comment '修改时间',
    DESCRIPTION          varchar(32) comment '权限描述',
    primary key (ID)
 );
@@ -162,8 +162,8 @@ create table KIWIPEACH.SYS_ROLE
    NAME                 varchar(16) not null comment '角色名称',
    WEIGHT               numeric(1,0) default 1 comment '权重',
    ICON                 varchar(32) default 'defalut_role_icon' comment '图标',
-   CREATE_TIME          timestamp default 'SYSDATE' comment '创建时间',
-   UPDATE_TIME          timestamp default 'SYSDATE' comment '更新时间',
+   CREATE_TIME          timestamp default CURRENT_TIMESTAMP comment '创建时间',
+   UPDATE_TIME          timestamp default CURRENT_TIMESTAMP comment '更新时间',
    DESCRIPTION          varchar(200) comment '角色描述信息',
    primary key (ID)
 );
@@ -184,8 +184,8 @@ create table KIWIPEACH.SYS_USER
    EMAIL                varchar(32) comment '用户邮箱 (用户信息完善时候提供)',
    ACCOUNT_LOCK         numeric(1,0) default 0 comment '账号是否锁定[0:正常 1:锁定] （对于一些非法账号的控制）',
    LOCK_REASON          numeric(2,0) comment '账号锁定原因[1:不当言论](改变账号状态的理由)',
-   CREATE_TIME          timestamp default 'SYSDATE' comment '创建时间',
-   UPDATE_TIME          timestamp default 'SYSDATE' comment '修改时间',
+   CREATE_TIME          timestamp default CURRENT_TIMESTAMP comment '创建时间',
+   UPDATE_TIME          timestamp default CURRENT_TIMESTAMP comment '修改时间',
    OPEN_ID              varchar(32) comment '本站给其他网站交互的用户唯一标志',
    PLATFORM             varchar(16) comment '平台[qq,gitee,github,system]',
    primary key (ID)
@@ -201,17 +201,17 @@ create table KIWIPEACH.T_BLOG
    ID                   varchar(32) not null comment '博客编号',
    USER_ID              varchar(32) not null comment '用户编号',
    CATE_ID              varchar(32) default '0' comment '分类编号(0:未分类)',
-   TITLE                varchar(80) not null comment '博客标题',
+   TITLE                varchar(400) not null comment '博客标题',
    STAR_COUNT           numeric(8,0) default 0 comment '博客点赞',
    VIEW_COUNT           numeric(8,0) default 0 comment '浏览总量',
    TOP                  numeric(1,0) default 0 comment '是否置顶',
-   CREATE_TIME          timestamp default 'SYSDATE' comment '创建时间',
-   UPDATE_TIME          timestamp default 'SYSDATE' comment '修改时间',
+   CREATE_TIME          timestamp default CURRENT_TIMESTAMP comment '创建时间',
+   UPDATE_TIME          timestamp default CURRENT_TIMESTAMP comment '修改时间',
    CONTENT_TYPE         varchar(8) default '1' comment '博客内容类型[0:markdown 1:html）]',
    INTRODUCTION         varchar(400) comment '博客简介',
    ICON_URL             varchar(200) comment '博客图标',
    CONTENT              text comment '博客内容（根据内容类型存放不同的内容数据）',
-   COMMENT_COUNT        numeric(8,0) comment '评论数量（无论是评论还是回复都需要对此字段+1）',
+   COMMENT_COUNT        numeric(8,0) default 0 comment '评论数量（无论是评论还是回复都需要对此字段+1）',
    primary key (ID)
 );
 
@@ -226,8 +226,8 @@ create table KIWIPEACH.T_BLOG_CATEGORY
    NAME                 varchar(16) not null comment '分类名称',
    WEIGHT               numeric(3,0) default 1 comment '分类同级权重',
    ICON                 varchar(32) default 'default_category_icon' comment '分类图标',
-   CREATE_TIME          timestamp default 'SYSDATE' comment '创建时间',
-   UPDATE_TIME          timestamp default 'SYSDATE' comment '修改时间',
+   CREATE_TIME          timestamp default CURRENT_TIMESTAMP comment '创建时间',
+   UPDATE_TIME          timestamp default CURRENT_TIMESTAMP comment '修改时间',
    PARENT_ID            varchar(32) comment '父类分类编号',
    primary key (ID)
 );
@@ -243,8 +243,8 @@ create table KIWIPEACH.T_BLOG_TAG
    NAME                 varchar(32) not null comment '标签名称',
    WEIGHT               numeric(3,0) default 1 comment '标签权重',
    ICON                 varchar(256) default 'default_tag_icon' comment '标签图标',
-   CREATE_TIME          timestamp default 'SYSDATE' comment '创建时间',
-   UPDATE_TIME          timestamp default 'SYSDATE' comment '修改时间',
+   CREATE_TIME          timestamp default CURRENT_TIMESTAMP comment '创建时间',
+   UPDATE_TIME          timestamp default CURRENT_TIMESTAMP comment '修改时间',
    primary key (ID)
 );
 
@@ -262,8 +262,8 @@ create table KIWIPEACH.T_COMMENT_REPLY
    PASSIVE_USER_ID      varchar(32) not null comment '被评论或者回复的人',
    CONTENT              varchar(300) not null comment '评论内容',
    DELETED              numeric(1,0) default 0 comment '该评论留言是否删除[0:正常 1:删除]',
-   CREATE_TIME          timestamp default 'SYSDATE' comment '创建时间',
-   UPDATE_TIME          timestamp default 'SYSDATE' comment '修改时间',
+   CREATE_TIME          timestamp default CURRENT_TIMESTAMP comment '创建时间',
+   UPDATE_TIME          timestamp default CURRENT_TIMESTAMP comment '修改时间',
    STAR_COUNT           numeric(8,0) default 0 comment '评论回复点赞数量',
    REPLY_COUNT          numeric(8,0) default 0 comment '评论回复统计（注意：只有评论才有此概念，回复无此概念）',
    primary key (ID)

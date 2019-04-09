@@ -30,11 +30,11 @@
 
     <!--查询用户的角色信息-->
     <select id="selectUserRole" resultMap="userRoleVOResultMap">
-        select U.ID AS USER_ID,U.THIRD_USER_ID,U.PLATFORM,U.USER_NAME,R.ID,R.NAME
-        from sys_user u
-        left join r_user_role rur on u.id = rur.user_id
-        left join sys_role r on rur.role_id = r.id
-        where u.id = #{userId}
-    </select>
+       SELECT U.ID AS USER_ID, U.THIRD_USER_ID, U.PLATFORM, U.USER_NAME, R.ID,R.NAME
+        FROM SYS_USER u
+        LEFT JOIN R_USER_ROLE rur ON u.id = rur.user_id
+            LEFT JOIN SYS_ROLE r ON rur.role_id = r.id
+        WHERE u.id = #{userId}
+          </select>
 
 </mapper>

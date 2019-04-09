@@ -1,8 +1,7 @@
 package cn.kiwipeach.blog.mapper;
 
 import cn.kiwipeach.blog.BlogApiApplicationTests;
-import cn.kiwipeach.blog.domain.vo.CategoryTreeVO;
-import com.alibaba.fastjson.JSON;
+import cn.kiwipeach.blog.domain.BlogCategory;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Slf4j
-public class BlogCategoryMapperTest extends BlogApiApplicationTests {
+public class BlogCategoryMapperTest  extends BlogApiApplicationTests {
 
     @Autowired
     private BlogCategoryMapper blogCategoryMapper;
 
     @Test
-    public void selectCategoryTree() {
-        List<CategoryTreeVO> blogCategories = blogCategoryMapper.selectCategoryTree();
-        log.info("博客分类树:{}", JSON.toJSONString(blogCategories));
+    public void 递归查询所有的博客分类信息() {
+        List<BlogCategory> blogCategories= blogCategoryMapper.selectList(null);
+        for (BlogCategory blogCategory : blogCategories) {
+
+        }
     }
 
 }

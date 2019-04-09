@@ -18,11 +18,11 @@
     <!-- self-part create by kiwipeach [1099501218@qq.com] -->
 
     <select id="selectRolePermisssion" resultType="cn.kiwipeach.blog.domain.vo.RolePermissionVO">
-            select role_id as roleId,r.name as roleName,p.*
-            from sys_role r
-            left join r_role_permission rrp on r.id = rrp.role_id
-            left join sys_permission p on rrp.permission_id = p.id
-            where r.id = #{roleId}
+        SELECT role_id AS roleId, r.name AS roleName, p.*
+        FROM SYS_ROLE r
+        LEFT JOIN R_ROLE_PERMISSION rrp ON r.id = rrp.role_id
+            LEFT JOIN SYS_PERMISSION p ON rrp.permission_id = p.id
+        WHERE r.id = #{roleId}
     </select>
 
 </mapper>

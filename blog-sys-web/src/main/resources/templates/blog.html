@@ -12,9 +12,10 @@
     <!--/*前端框架样式依赖开始*/-->
     <link rel="stylesheet" th:href="@{/assets/plugins/material-kit/assets/css/material-kit.min.css}">
     <!-- Our project just needs Font Awesome Solid + Brands -->
-    <link rel="stylesheet" th:href="@{/assets/plugins/font-awesome/css/fontawesome.min.css}">
+    <!--<link rel="stylesheet" th:href="@{/assets/plugins/font-awesome/css/fontawesome.min.css}">
     <link rel="stylesheet" th:href="@{/assets/plugins/font-awesome/css/brands.min.css}">
-    <link rel="stylesheet" th:href="@{/assets/plugins/font-awesome/css/solid.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/plugins/font-awesome/css/solid.min.css}">-->
+
     <!--/*pace样式*/-->
     <link rel="stylesheet" th:href="@{/assets/plugins/pace-progress/themes/silver/pace-theme-minimal.css}">
     <!--/*回到最顶部(totop)插件*/-->
@@ -41,7 +42,13 @@
     <link th:href="@{/assets/plugins/toastr/toastr.min.css}" rel="stylesheet" type="text/css"/>
     <!--/*博客页面通用样式*/-->
     <link rel="stylesheet" th:href="@{/assets/css/blog_common.css}">
+
     <script type="text/javascript" th:src="@{/assets/plugins/jquery/dist/jquery.min.js}"></script>
+    <!--/*fontawsome字体*/-->
+    <script defer th:src="@{/assets/plugins/font-awesome/js/fontawesome.min.js}"></script>
+    <script defer th:src="@{/assets/plugins/font-awesome/js/brands.min.js}"></script>
+    <script defer th:src="@{/assets/plugins/font-awesome/js/solid.min.js}"></script>
+
     <!--/*博客通用js*/-->
     <!--/*toastr*/-->
     <script type="text/javascript" th:src="@{/assets/plugins/toastr/toastr.min.js}"></script>
@@ -89,6 +96,11 @@
                         <i class="fas fa-user-secret fa-lg"></i><span>关于博主</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://gitee.com/kiwipeach/nice-blog-sys" target="_blank">
+                        <i class="fas fa-fax fa-lg"></i><span>博客源码</span>
+                    </a>
+                </li>
                 <li class="dropdown nav-item">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <i class="fa fa-th fa-lg"></i> <span>更多功能</span>
@@ -99,11 +111,11 @@
                            class="dropdown-item">
                             <i class="fa fa-book fa-lg"></i><span> Material-Kit官方手册</span>
                         </a>
-                        <a href="https://gitee.com/kiwipeach/nice-blog-sys"
+                       <!-- <a href=""
                            target="_blank"
                            class="dropdown-item">
-                            <i class="fa fa-book fa-lg"></i><span>本站源码地址（欢迎star）</span>
-                        </a>
+                            <i class="fa fa-book fa-lg"></i><span></span>
+                        </a>-->
                     </div>
                 </li>
             </ul>
@@ -142,7 +154,7 @@
     <!--分类信息:begin-->
     <div class="card">
         <h4 href="#" class="list-group-item" style="color: #0e0e0e">
-            分类`
+            分类
         </h4>
         <div class="card-body">
             <ul id="treeDemo" class="ztree"></ul>
@@ -234,9 +246,11 @@
             我的友链
         </h4>
         <div class="card-body">
-            <span class="badge badge-pill badge-dark"><a href="http://www.javacoffee.club" target="_blank"
+            <span class="badge badge-pill badge-dark text-lowercase"><a href="http://www.javacoffee.club" target="_blank"
                                                          class="text-white">Maodun</a></span>
-            <span class="badge badge-pill badge-dark">在乎你的在乎</span>
+            <span class="badge badge-pill badge-dark text-lowercase"><a href="http://youngxhui.top/" target="_blank"
+                                                         class="text-white">youngxhui</a></span>
+            <span class="badge badge-pill badge-dark text-lowercase">在乎你的在乎</span>
         </div>
     </div>
     <!--友链部分:end-->
@@ -248,10 +262,7 @@
         <h4 href="#" class="list-group-item" style="color: #0e0e0e">
             用户信息
         </h4>
-
-
         <div class="card-body">
-
             <div th:id="user_login_div" class="tab-pane active" id="dashboard-1"
                  style="text-align: center">
                 <!--登陆成功状态-->
@@ -261,8 +272,6 @@
             </div>
         </div>
     </div>
-
-
     <script type="application/javascript">
         $.ajax({
             method: 'get',
@@ -277,7 +286,7 @@
                         '</div><');
                 } else {
                     //登陆注册按钮
-                    $content = $('<button class="btn btn-primary btn-round" data-toggle="modal"data-target="#loginModal"><i class="fas fa-sign-in-alt fa-lg"></i> 登陆 </button> ' +
+                    $content = $('<button class="btn btn-primary btn-round" data-toggle="modal"data-target="#loginModal"><i class="fas fa-sign-in-alt fa-lg"></i> 登录 </button> ' +
                         '<button class="btn btn-primary btn-round" data-toggle="modal"data-target="#signupModal"><i class="fa fa-registered fa-lg"></i> 注册 </button>');
                 }
                 $('#user_login_div').html($content);

@@ -15,6 +15,7 @@
     </sql>
 
     <!-- self-part create by kiwipeach [1099501218@qq.com] -->
+
     <!--cn.kiwipeach.blog.domain.vo.TagVO-->
     <resultMap id="TagVoResultMap" type="cn.kiwipeach.blog.domain.vo.TagVO">
         <id column="ID" property="id"/>
@@ -26,7 +27,7 @@
     <!--查询单条博客的所有标签-->
     <select id="selectBlogTag" resultMap="TagVoResultMap">
         SELECT rt.blog_id, rt.tag_id as id, t.name, t.icon
-        FROM r_tag_blog rt, t_blog_tag t
+        FROM R_TAG_BLOG rt, T_BLOG_TAG t
         WHERE rt.tag_id = t.id
         AND rt.blog_id = #{blogId}
     </select>
@@ -34,9 +35,9 @@
     <!--查询博客标签统计情况-->
     <select id="selectTagCountInfo" resultType="cn.kiwipeach.blog.domain.vo.TagCountVO">
         select bt.id as tagId, bt.name as tagName, count(1) as count
-          from t_blog_tag bt, t_blog t, r_tag_blog rt
-         where rt.tag_id = bt.id
-           and rt.blog_id = t.id
+          from T_BLOG_TAG bt
+          left join R_TAG_BLOG rt on rt.tag_id = bt.id
+          left join T_BLOG t on rt.blog_id = t.id
          group by bt.id, bt.name
     </select>
 </mapper>

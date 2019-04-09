@@ -42,7 +42,7 @@ https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg"></a>
 
 ##### 方式一：jar包部署
 ```shell
-    nohup java -Xms513m -Xmx1024m -jar blog-sys-web.jar --spring.profiles.active=aliyun &
+    nohup java -Xms513m -Xmx1024m -jar blog-sys-web.jar --spring.profiles.active=aliyun > /weblogs/nice-blog-sys.log &
 ```
 
 ##### 方式二：war包部署

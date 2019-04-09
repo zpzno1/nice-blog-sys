@@ -464,11 +464,9 @@
         var $blogListItem = $(blogListItem);
         var $blogHeader = $blogListItem.find('img');
         $blogHeader.bind('mouseenter', function () {
-            console.log("add");
             $(this).addClass("animated tada");
         });
         $blogHeader.bind('mouseout', function () {
-            console.log("remove");
             $(this).removeClass("animated tada");
         });
         return $blogListItem;

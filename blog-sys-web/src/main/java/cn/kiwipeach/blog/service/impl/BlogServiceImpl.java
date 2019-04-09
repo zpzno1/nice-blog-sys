@@ -28,6 +28,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
@@ -67,13 +68,14 @@ public class BlogServiceImpl extends BlogServiceAdapter {
     public BlogInfoVO queryById(String blogId) {
         BlogInfoVO blogInfoVO = blogMapper.selectBlog(blogId);
         dealTagsName(blogInfoVO);
-        Blog nextBlog = blogMapper.selectNextBlog(blogId);
+        Page<Blog> page = new Page<>(1, 1);
+        Blog nextBlog = blogMapper.selectNextBlog(page,blogId);
         // 处理最后一篇博客下一篇问题
         if (nextBlog == null) {
             QueryWrapper<Blog> queryWrapper = new QueryWrapper<Blog>().eq("top", "1");
             nextBlog = blogMapper.selectOne(queryWrapper);
         }
-        Blog previousBlog = blogMapper.selectPreviousBlog(blogId);
+        Blog previousBlog = blogMapper.selectPreviousBlog(page,blogId);
         // 处理第一篇博客上一篇问题
         if (previousBlog == null) {
             QueryWrapper<Blog> queryWrapper = new QueryWrapper<Blog>().eq("top", "1");

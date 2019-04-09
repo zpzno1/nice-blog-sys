@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <configuration debug="true">
-    <property name="logDir" value="/weblogs/nice-blog-sys/"/>
+    <property name="logDir" value="/weblogs/nice-blog-sys"/>
 
     <!--文件滚动日志-->
     <appender name="ROLL_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${logDir}/kiwipeach-blog.log</file>
+        <file>${logDir}/nice-blog-sys.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
             <fileNamePattern>${logDir}/kiwipeach-blog.%i.log.zip</fileNamePattern>
             <!--设置滚动窗口大小，表示在index从1~12之间滚动，按照队列先进先出进行日志滚动输出-->
@@ -43,27 +43,27 @@
     <logger name="org.springframework.boot.web" level="INFO"/>
     <!--关闭自动配置注解-->
     <logger name="org.springframework.boot.autoconfigure" level="INFO"/>
-    <springProfile name="development">
+    <springProfile name="oracle">
         <logger name="cn.kiwipeach.blog.mapper" level="debug"/>
     </springProfile>
-    <springProfile name="gitee">
-        <logger name="cn.kiwipeach.blog.mapper" level="warn"/>
+    <springProfile name="mysql">
+        <logger name="cn.kiwipeach.blog.mapper" level="debug"/>
     </springProfile>
-    <springProfile name="aliyun">
+    <springProfile name="public">
         <logger name="cn.kiwipeach.blog.mapper" level="warn"/>
     </springProfile>
     <!-- 日志级别TRACE<DEBUG<INFO<WARN<ERROR -->
-    <springProfile name="development">
+    <springProfile name="oracle">
         <root level="INFO">
             <appender-ref ref="CONSOLE_APPENDER"/>
         </root>
     </springProfile>
-    <springProfile name="gitee">
-        <root level="WARN">
+    <springProfile name="mysql">
+        <root level="INFO">
             <appender-ref ref="CONSOLE_APPENDER"/>
         </root>
     </springProfile>
-    <springProfile name="aliyun">
+    <springProfile name="public">
         <root level="WARN">
             <appender-ref ref="ROLL_APPENDER"/>
             <appender-ref ref="CONSOLE_APPENDER"/>

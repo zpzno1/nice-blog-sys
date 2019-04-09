@@ -40,9 +40,6 @@
         </dependency>-->
         <!--cache-->
 
-
-
-
         <!--七牛云存储依赖 begin-->
         <dependency>
             <groupId>com.qiniu</groupId>
@@ -85,6 +82,7 @@
     </dependencies>
 
     <build>
+        <finalName>NiceBlog</finalName>
         <plugins>
             <!--spring boot package plugin-->
             <plugin>
