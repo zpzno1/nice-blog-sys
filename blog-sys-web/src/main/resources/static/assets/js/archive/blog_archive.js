@@ -29,8 +29,8 @@
     function loadArchiveContent(opt) {
         //获取选中单选按钮，然后动态加载归档博客
         var patternValue = $('input[name=queryTypeRadioOptions]:checked').val();
-        var targetPattern = patternValue == 'yyyy' ? 'yyyy"年"' : patternValue == 'yyyyQ' ? 'yyyy"年"Q"季"' : 'yyyy"年"MM"月"';
-        var defaultData = {pattern: targetPattern, size: 8, current: "1"};
+        // var targetPattern = patternValue == 'yyyy' ? 'yyyy"年"' : patternValue == 'yyyyQ' ? 'yyyy"年"Q"季"' : 'yyyy"年"MM"月"';
+        var defaultData = {pattern: patternValue, size: 8, current: "1"};
         var requestData = $.extend(defaultData, opt);
         $.ajax({
             url: '/blog/archive/query',

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 kiwipeach.
+ * Copyright 2019 liuburu@qq.com.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,36 +15,25 @@
  */
 package cn.kiwipeach.blog.mapper;
 
-import cn.kiwipeach.blog.domain.Blog;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import lombok.NonNull;
 import org.apache.ibatis.annotations.Param;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- * mybatis-plus案例相关操作
+ * 描述：博客归档接口
  *
- * @author kiwipeach [1099501218@qq.com]
- * @create 2018/08/11
+ * @author kiwipeach
+ * @create 2019-04-11
  */
-public interface DemoMapper extends BaseMapper<Blog> {
-
-    /**
-     * 测试分页查询，需要在service才能够体现分页效果
-     */
-    List<Blog> selectBlogListDemo(IPage<Blog> page, @NotNull @Param("userId") String userId);
+public interface BlogArchiveMapper {
 
 
-    /**
-     * 测试多数据库厂商解决方案
-     *
-     * @return 返回系统时间
-     */
-    String selectSysTime();
+    List<ArchiveBlogTimelineVO> selectArchiveBlogByYear(IPage<ArchiveBlogTimelineVO> page);
 
+    List<ArchiveBlogTimelineVO> selectArchiveBlogByYearQuarter(IPage<ArchiveBlogTimelineVO> page);
+
+    List<ArchiveBlogTimelineVO> selectArchiveBlogByYearMonth(IPage<ArchiveBlogTimelineVO> page);
 
 }

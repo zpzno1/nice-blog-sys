@@ -20,7 +20,7 @@ import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO;
 import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
 import cn.kiwipeach.blog.domain.vo.TagVO;
-import cn.kiwipeach.blog.exception.BlogException;
+import cn.kiwipeach.blog.mapper.BlogArchiveMapper;
 import cn.kiwipeach.blog.mapper.BlogMapper;
 import cn.kiwipeach.blog.mapper.BlogTagMapper;
 import cn.kiwipeach.blog.service.adapter.BlogServiceAdapter;
@@ -29,10 +29,14 @@ import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
+import java.sql.DatabaseMetaData;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -53,7 +57,13 @@ public class BlogServiceImpl extends BlogServiceAdapter {
     private BlogTagMapper blogTagMapper;
 
     @Autowired
+    private BlogArchiveMapper blogArchiveMapper;
+
+    @Autowired
     private ValueOperations<String, Object> valueOperations;
+
+    @Autowired
+    private SqlSessionTemplate sqlSessionTemplate;
 
     @Override
     public IPage<BlogInfoVO> pageQuery(IPage<BlogInfoVO> page, String categoryId, String tagName) {
@@ -69,13 +79,13 @@ public class BlogServiceImpl extends BlogServiceAdapter {
         BlogInfoVO blogInfoVO = blogMapper.selectBlog(blogId);
         dealTagsName(blogInfoVO);
         Page<Blog> page = new Page<>(1, 1);
-        Blog nextBlog = blogMapper.selectNextBlog(page,blogId);
+        Blog nextBlog = blogMapper.selectNextBlog(page, blogId);
         // 处理最后一篇博客下一篇问题
         if (nextBlog == null) {
             QueryWrapper<Blog> queryWrapper = new QueryWrapper<Blog>().eq("top", "1");
             nextBlog = blogMapper.selectOne(queryWrapper);
         }
-        Blog previousBlog = blogMapper.selectPreviousBlog(page,blogId);
+        Blog previousBlog = blogMapper.selectPreviousBlog(page, blogId);
         // 处理第一篇博客上一篇问题
         if (previousBlog == null) {
             QueryWrapper<Blog> queryWrapper = new QueryWrapper<Blog>().eq("top", "1");
@@ -88,13 +98,31 @@ public class BlogServiceImpl extends BlogServiceAdapter {
 
     @Override
     public IPage<ArchiveBlogTimelineVO> archiveBlogQuery(IPage<ArchiveBlogTimelineVO> page, String pattern) {
-        List<ArchiveBlogTimelineVO> archiveBlogTimelineVOS = blogMapper.selectArchiveBlog(page, pattern);
+        List<ArchiveBlogTimelineVO> archiveBlogTimelineVOS = queryArchiveBlogByPattern(page,pattern);
         //给分页查询结果添加标签
         for (ArchiveBlogTimelineVO tagVOS : archiveBlogTimelineVOS) {
             List<TagVO> tagVOList = blogTagMapper.selectBlogTag(tagVOS.getId());
             tagVOS.setTagVOList(JSONArray.parseArray(JSON.toJSONString(tagVOList)));
         }
         return page.setRecords(archiveBlogTimelineVOS);
+    }
+
+    /**
+     * 将前端传过来的日期类型转换成MySql本地语法
+     *
+     * @param pattern 前端日期
+     * @return 返回mysql日期表示
+     */
+    private List<ArchiveBlogTimelineVO> queryArchiveBlogByPattern(IPage<ArchiveBlogTimelineVO> page,String pattern) {
+        if ("yyyy".equals(pattern)) {
+            return blogArchiveMapper.selectArchiveBlogByYear(page);
+        } else if ("yyyyQ".equals(pattern)) {
+            return blogArchiveMapper.selectArchiveBlogByYearQuarter(page);
+        } else if ("yyyyMM".equals(pattern)) {
+            return blogArchiveMapper.selectArchiveBlogByYearMonth(page);
+        } else {
+            throw new IllegalArgumentException("非法参数异常:" + pattern);
+        }
     }
 
     @Override

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.kiwipeach.blog.mapper.BlogArchiveMapper">
+
+    <resultMap id="ArchiveBlogTimelineVOResultMap" type="cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO">
+        <id column="ARCHIVETIME" property="archiveTime"/>
+        <id column="ID" property="id"/>
+        <result column="TITLE" property="title"/>
+        <result column="CREATETIME" property="createTime"/>
+        <result column="CATEGORYNAME" property="categoryName"/>
+        <result column="ISTOP" property="isTop"/>
+    </resultMap>
+
+    <!--oracle 版本-->
+    <select id="selectArchiveBlogByYear" resultMap="ArchiveBlogTimelineVOResultMap" databaseId="oracle">
+              SELECT to_char(t.create_time, 'yyyy"年度"') AS archiveTime,
+               t.id,
+               t.title,
+               to_char(t.create_time, 'yyyy-MM-dd HH:mm:ss') AS createTime,
+               bc.name AS categoryName,
+               CASE
+                 WHEN t.create_time =
+                      (SELECT MAX(create_time)
+                         FROM T_BLOG
+                        WHERE to_char(create_time, 'yyyy"年度"') =
+                              to_char(t.create_time, 'yyyy"年度"')) THEN
+                  'true'
+                 ELSE
+                  'false'
+               END AS isTop
+          FROM T_BLOG t
+          LEFT JOIN (SELECT to_char(b.create_time, 'yyyy"年度"') AS archive_time
+                       FROM T_BLOG b
+                      GROUP BY to_char(b.create_time, 'yyyy"年度"')) tmp ON to_char(t.create_time,
+                                                                                      'yyyy"年度"') =
+                                                                              tmp.archive_time
+          LEFT JOIN T_BLOG_CATEGORY bc ON t.cate_id = bc.id
+         ORDER BY t.create_time DESC
+  </select>
+    <select id="selectArchiveBlogByYearQuarter" resultMap="ArchiveBlogTimelineVOResultMap" databaseId="oracle">
+           SELECT to_char(t.create_time, 'yyyy"年"Q"季度"') AS archiveTime,
+               t.id,
+               t.title,
+               to_char(t.create_time, 'yyyy-MM-dd HH:mm:ss') AS createTime,
+               bc.name AS categoryName,
+               CASE
+                 WHEN t.create_time =
+                      (SELECT MAX(create_time)
+                         FROM T_BLOG
+                        WHERE to_char(create_time, 'yyyy"年"Q"季度"') =
+                              to_char(t.create_time, 'yyyy"年"Q"季度"')) THEN
+                  'true'
+                 ELSE
+                  'false'
+               END AS isTop
+          FROM T_BLOG t
+          LEFT JOIN (SELECT to_char(b.create_time, 'yyyy"年"Q"季度"') AS archive_time
+                       FROM T_BLOG b
+                      GROUP BY to_char(b.create_time, 'yyyy"年"Q"季度"')) tmp ON to_char(t.create_time,
+                                                                                      'yyyy"年"Q"季度"') =
+                                                                              tmp.archive_time
+          LEFT JOIN T_BLOG_CATEGORY bc ON t.cate_id = bc.id
+         ORDER BY t.create_time DESC
+  </select>
+    <select id="selectArchiveBlogByYearMonth" resultMap="ArchiveBlogTimelineVOResultMap" databaseId="oracle">
+              SELECT to_char(t.create_time, 'yyyy"年"MM"月份"') AS archiveTime,
+               t.id,
+               t.title,
+               to_char(t.create_time, 'yyyy-MM-dd HH:mm:ss') AS createTime,
+               bc.name AS categoryName,
+               CASE
+                 WHEN t.create_time =
+                      (SELECT MAX(create_time)
+                         FROM T_BLOG
+                        WHERE to_char(create_time, 'yyyy"年"MM"月份"') =
+                              to_char(t.create_time, 'yyyy"年"MM"月份"')) THEN
+                  'true'
+                 ELSE
+                  'false'
+               END AS isTop
+          FROM T_BLOG t
+          LEFT JOIN (SELECT to_char(b.create_time, 'yyyy"年"MM"月份"') AS archive_time
+                       FROM T_BLOG b
+                      GROUP BY to_char(b.create_time, 'yyyy"年"MM"月份"')) tmp ON to_char(t.create_time,
+                                                                                      'yyyy"年"MM"月份"') =
+                                                                              tmp.archive_time
+          LEFT JOIN T_BLOG_CATEGORY bc ON t.cate_id = bc.id
+         ORDER BY t.create_time DESC
+  </select>
+
+    <!--mysql 版本-->
+    <select id="selectArchiveBlogByYear" resultMap="ArchiveBlogTimelineVOResultMap" databaseId="mysql">
+          SELECT CONCAT(YEAR(t.create_time), '年度') AS archiveTime, t.id
+            , t.title, CONCAT(YEAR(t.create_time), '年度') AS createTime
+            , bc.NAME AS categoryName
+            , CASE
+                WHEN t.create_time = (
+                    SELECT MAX(create_time)
+                    FROM T_BLOG
+                    WHERE YEAR(create_time) = YEAR(t.create_time)
+                ) THEN 'true'
+                ELSE 'false'
+            END AS isTop
+        FROM T_BLOG t
+            LEFT JOIN (
+                SELECT YEAR(create_time) AS archive_time
+                FROM T_BLOG
+                GROUP BY YEAR(create_time)
+            ) tmp
+            ON YEAR(t.create_time) = tmp.archive_time
+            LEFT JOIN T_BLOG_CATEGORY bc ON t.cate_id = bc.id
+        ORDER BY t.create_time DESC
+  </select>
+    <select id="selectArchiveBlogByYearQuarter" resultMap="ArchiveBlogTimelineVOResultMap" databaseId="mysql">
+         SELECT CONCAT(YEAR(t.create_time), '年', QUARTER(t.create_time), '季度') AS archiveTime
+        , t.id, t.title
+        , CONCAT(YEAR(t.create_time), '年', QUARTER(t.create_time), '季度') AS createTime
+        , bc.NAME AS categoryName
+        , CASE
+            WHEN t.create_time = (
+                SELECT MAX(create_time)
+                FROM T_BLOG
+                WHERE CONCAT(YEAR(create_time), QUARTER(create_time)) = CONCAT(YEAR(t.create_time), QUARTER(t.create_time))
+            ) THEN 'true'
+            ELSE 'false'
+        END AS isTop
+    FROM T_BLOG t
+        LEFT JOIN (
+            SELECT CONCAT(YEAR(b.create_time), QUARTER(b.create_time)) AS archive_time
+            FROM T_BLOG b
+            GROUP BY CONCAT(YEAR(b.create_time), QUARTER(b.create_time))
+        ) tmp
+        ON CONCAT(YEAR(t.create_time), QUARTER(t.create_time)) = tmp.archive_time
+        LEFT JOIN T_BLOG_CATEGORY bc ON t.cate_id = bc.id
+    ORDER BY t.create_time DESC
+  </select>
+    <select id="selectArchiveBlogByYearMonth" resultMap="ArchiveBlogTimelineVOResultMap" databaseId="mysql">
+          SELECT date_format(t.create_time, '%Y年%m月份') AS archiveTime, t.id, t.title
+            , date_format(t.create_time, '%Y年%m月份') AS createTime, bc.NAME AS categoryName
+            , CASE
+                WHEN t.create_time = (
+                    SELECT MAX(create_time)
+                    FROM T_BLOG
+                    WHERE date_format(create_time, '%Y-%m') = date_format(t.create_time, '%Y-%m')
+                ) THEN 'true'
+                ELSE 'false'
+            END AS isTop
+        FROM T_BLOG t
+            LEFT JOIN (
+                SELECT date_format(b.create_time, '%Y-%m') AS archive_time
+                FROM T_BLOG b
+                GROUP BY date_format(b.create_time, '%Y-%m')
+            ) tmp
+            ON date_format(t.create_time, '%Y-%m') = tmp.archive_time
+            LEFT JOIN T_BLOG_CATEGORY bc ON t.cate_id = bc.id
+        ORDER BY t.create_time DESC
+  </select>
+
+</mapper>

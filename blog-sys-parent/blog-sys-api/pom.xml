@@ -33,6 +33,7 @@
             <artifactId>druid</artifactId><!--duird数据源-->
             <version>${druid.version}</version>
         </dependency>
+        <!--oracle驱动问题请自行解决，如果您选择的是MySQL数据库，可注释掉此处依赖-->
         <dependency>
             <groupId>cn.kiwipeach</groupId>
             <artifactId>ojdbc6</artifactId><!--oracle数据库驱动-->

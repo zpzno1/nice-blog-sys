@@ -34,4 +34,12 @@
         </where>
     </select>
 
+    <select id="selectSysTime" resultType="string" databaseId="oracle">
+        select to_char(sysdate,'yyyy-MM-dd HH:mm:ss') from dual
+    </select>
+
+    <select id="selectSysTime" resultType="string" databaseId="mysql">
+       select date_format(SYSDATE(),'%Y-%c-%d %h:%i:%s')
+    </select>
+
 </mapper>

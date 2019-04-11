@@ -119,4 +119,11 @@ public class DemoMapperTest extends BlogApiApplicationTests {
 
     }
 
+
+    @Test
+    public void 测试多数据库() {
+        String s = demoMapper.selectSysTime();
+        log.warn("时间：{}", s);
+    }
+
 }

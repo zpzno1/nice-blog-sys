@@ -115,12 +115,33 @@
 
     <!--查询按照时间归档博客信息-->
     <!--FIXME ORACLE和MYSQL实现方式不一样-->
+    <!--<select id="selectArchiveBlog" resultMap="ArchiveBlogTimelineVOResultMap">
+        SELECT t.id, t.title, to_char(t.create_time, 'yyyy-MM-dd HH:mm:ss') AS createTime
+            , to_char(t.create_time, '${pattern}') AS archiveTime, bc.name AS categoryName
+            , CASE
+                WHEN t.create_time = (
+                    SELECT MAX(create_time)
+                    FROM T_BLOG
+                    WHERE to_char(create_time, '${pattern}') = to_char(t.create_time, '${pattern}')
+                ) THEN 'true'
+                ELSE 'false'
+            END AS isTop
+        FROM T_BLOG t
+        LEFT JOIN (
+            SELECT to_char(b.create_time, '${pattern}') AS archive_time
+            FROM T_BLOG b
+            GROUP BY to_char(b.create_time, '${pattern}')
+        ) tmp ON to_char(t.create_time, '${pattern}') = tmp.archive_time
+            LEFT JOIN T_BLOG_CATEGORY bc ON t.cate_id = bc.id
+        ORDER BY t.create_time DESC
+    </select>-->
+
     <select id="selectArchiveBlog" resultMap="ArchiveBlogTimelineVOResultMap">
         SELECT t.id, t.title, to_char(t.create_time, 'yyyy-MM-dd HH:mm:ss') AS createTime
             , to_char(t.create_time, '${pattern}') AS archiveTime, bc.name AS categoryName
             , CASE
-                WHEN to_char(t.create_time, 'yyyy-MM-dd HH:mm:ss') = (
-                    SELECT to_char(MAX(create_time), 'yyyy-MM-dd HH:mm:ss')
+                WHEN t.create_time = (
+                    SELECT MAX(create_time)
                     FROM T_BLOG
                     WHERE to_char(create_time, '${pattern}') = to_char(t.create_time, '${pattern}')
                 ) THEN 'true'
@@ -135,31 +156,6 @@
             LEFT JOIN T_BLOG_CATEGORY bc ON t.cate_id = bc.id
         ORDER BY t.create_time DESC
     </select>
-    <!--需要改造的sql
-    SELECT to_char(t.create_time, 'yyyy"年"MM"月"') AS archiveTime,
-       t.id,
-       t.title,
-       to_char(t.create_time, 'yyyy-MM-dd HH:mm:ss') AS createTime,
-       bc.name AS categoryName,
-       CASE
-         WHEN to_char(t.create_time, 'yyyy-MM-dd HH:mm:ss') =
-              (SELECT to_char(MAX(create_time), 'yyyy-MM-dd HH:mm:ss')
-                 FROM T_BLOG
-                WHERE to_char(create_time, 'yyyy"年"MM"月"') =
-                      to_char(t.create_time, 'yyyy"年"MM"月"')) THEN
-          'true'
-         ELSE
-          'false'
-       END AS isTop
-  FROM T_BLOG t
-  LEFT JOIN (SELECT to_char(b.create_time, 'yyyy"年"MM"月"') AS archive_time
-               FROM T_BLOG b
-              GROUP BY to_char(b.create_time, 'yyyy"年"MM"月"')) tmp ON to_char(t.create_time,
-                                                                              'yyyy"年"MM"月"') =
-                                                                      tmp.archive_time
-  LEFT JOIN T_BLOG_CATEGORY bc ON t.cate_id = bc.id
- ORDER BY t.create_time DESC
-    -->
 
     <!--博客统计数加1-->
     <update id="updateCommentCountByBlogId">
