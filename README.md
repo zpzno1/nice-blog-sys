@@ -24,7 +24,7 @@ https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg"></a>
 
  纯Java编写的个人博客系统，力求以`便捷轻巧、高性能、外形Nice`为目标，适用于个人快速搭建博客平台。我不完美，但向往远方。[在线演示](http://www.kiwipeach.cn) 
 
-## 项目亮点
+## 项目特点
 
 - 最新的技术选型,使用SpirngBoot最新版本(当前2.1.3.RELEASE)，关注我就等于关注最新SpringBoot整合技巧方案，(*^__^*).....
 - 项目技术选型[maven，spring-boot,mybatis-plus,shiro,thymeleaf,bootstrap4，jquery....]
@@ -46,12 +46,8 @@ https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg"></a>
 | Java Runtime Environment | 推荐使用jdk1.8及1.8以上的版本 |
 | Redis                    | 应用缓存，缓解数据库访问压力  |
 
-##### 步骤二：拉取代码
-```shell
-git clone https://gitee.com/KiWiPeach/nice-blog-sys.git
-```
+##### 步骤二：修改配置
 
-##### 步骤三：修改配置
 ```yaml
 #数据库配置
 spirng
@@ -67,8 +63,7 @@ spirng
     redis:
     host: <?>
     password: <?>
-	...
-	
+    ......	
 #三方登录配置(qq,github.gitee)
 qq:
   client:
@@ -102,20 +97,7 @@ nice-blog-sys/blog-sys-web/src/main/java/cn/kiwipeach/blog/BlogWebApplication.ja
 nohup java -Xms513m -Xmx1024m -jar NiceBlog.jar --spring.profiles.active=public  &
 ```
 
-2. 准备数据库，redis环境,并且修改对应配置文件,具体见配置文件。
-```shell
-#主要修改配置：数据库连接、缓存Redis、三方登录参数、shiro缓存cookie域名
-```
-
-
-3. 系统启动类
-``` shell
-
-```
-
-4. 访问页面。
-
-## 系统截图
+## 系统运行截图
 
 ##### 博客首页
 
