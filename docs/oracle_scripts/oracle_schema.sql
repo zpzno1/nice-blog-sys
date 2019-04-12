@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 11g                           */
-/* Created on:     2019/3/31 23:55:58                           */
+/* Created on:     2019/4/12 12:40:41                           */
 /*==============================================================*/
 
 
@@ -48,32 +48,7 @@ create table KIWIPEACH.R_ROLE_PERMISSION
    CREATE_TIME          TIMESTAMP            default SYSDATE,
    UPDATE_TIME          TIMESTAMP            default SYSDATE,
    constraint PK_R_USER_PERMISSIO primary key (ROLE_ID, PERMISSION_ID)
-         using index pctfree 10
-   initrans 2
-   storage
-   (
-       initial 64K
-       next 1024K
-       minextents 1
-       maxextents unlimited
-   )
-   logging
-   tablespace KIWIPEACH_DATA
-)
-pctfree 10
-initrans 1
-storage
-(
-    initial 64K
-    next 8K
-    minextents 1
-    maxextents unlimited
-)
-tablespace KIWIPEACH_DATA
-logging
- nocompress
- monitoring
- noparallel;
+);
 
 comment on table KIWIPEACH.R_ROLE_PERMISSION is
 '角色VS权限';
@@ -100,32 +75,7 @@ create table KIWIPEACH.R_TAG_BLOG
    CREATE_TIME          TIMESTAMP            default SYSDATE,
    UPDATE_TIME          TIMESTAMP            default SYSDATE,
    constraint PK_R_TAG_BLOG primary key (TAG_ID, BLOG_ID)
-         using index pctfree 10
-   initrans 2
-   storage
-   (
-       initial 64K
-       next 1024K
-       minextents 1
-       maxextents unlimited
-   )
-   logging
-   tablespace KIWIPEACH_DATA
-)
-pctfree 10
-initrans 1
-storage
-(
-    initial 128K
-    next 8K
-    minextents 1
-    maxextents unlimited
-)
-tablespace KIWIPEACH_DATA
-logging
- nocompress
- monitoring
- noparallel;
+);
 
 comment on table KIWIPEACH.R_TAG_BLOG is
 '博客VS标签';
@@ -152,32 +102,7 @@ create table KIWIPEACH.R_USER_ROLE
    CREATE_TIME          TIMESTAMP            default SYSDATE,
    UPDATE_TIME          TIMESTAMP            default SYSDATE,
    constraint PK_R_USER_ROLE primary key (ROLE_ID, USER_ID)
-         using index pctfree 10
-   initrans 2
-   storage
-   (
-       initial 64K
-       next 1024K
-       minextents 1
-       maxextents unlimited
-   )
-   logging
-   tablespace KIWIPEACH_DATA
-)
-pctfree 10
-initrans 1
-storage
-(
-    initial 64K
-    next 1024K
-    minextents 1
-    maxextents unlimited
-)
-tablespace KIWIPEACH_DATA
-logging
- nocompress
- monitoring
- noparallel;
+);
 
 comment on table KIWIPEACH.R_USER_ROLE is
 '用户VS角色';
@@ -212,37 +137,7 @@ create table KIWIPEACH.SYS_ACCESSLOG
    NAME                 VARCHAR2(64),
    REQUEST_HEADER       CLOB,
    constraint PK_SYS_ACCESSLOG primary key (ID)
-         using index pctfree 10
-   initrans 2
-   storage
-   (
-       initial 64K
-       next 1024K
-       minextents 1
-       maxextents unlimited
-   )
-   logging
-   tablespace KIWIPEACH_DATA
-)
-pctfree 10
-initrans 1
-storage
-(
-    initial 64K
-    next 8K
-    minextents 1
-    maxextents unlimited
-)
-tablespace KIWIPEACH_DATA
-logging
- nocompress
- lob
- (REQUEST_HEADER)
-    store as
-         basicfile
- (tablespace KIWIPEACH_DATA
-        chunk 8192
- retention nocache);
+);
 
 comment on table KIWIPEACH.SYS_ACCESSLOG is
 '系统访问日志';
@@ -292,38 +187,13 @@ create table KIWIPEACH.SYS_FUNCTION
    LOCATION             VARCHAR2(256),
    TEXT                 VARCHAR2(100)        not null,
    PARENTID             VARCHAR2(32),
-   WEIGHT               NUMBER(4),
+   WEIGHT               NUMBER(4,0),
    NODE_TYPE            VARCHAR2(8)          not null,
    ICON                 VARCHAR2(200),
    DESCRIPTION          VARCHAR2(1024),
    PERMISSION_ID        VARCHAR2(100),
    constraint PK_SYS_FUNCTION primary key (ID)
-         using index pctfree 10
-   initrans 2
-   storage
-   (
-       initial 64K
-       next 1024K
-       minextents 1
-       maxextents unlimited
-   )
-   logging
-   tablespace KIWIPEACH_DATA
-)
-pctfree 10
-initrans 1
-storage
-(
-    initial 64K
-    next 1024K
-    minextents 1
-    maxextents unlimited
-)
-tablespace KIWIPEACH_DATA
-logging
- nocompress
- monitoring
- noparallel;
+);
 
 comment on table KIWIPEACH.SYS_FUNCTION is
 '系统菜单表';
@@ -362,28 +232,14 @@ create table KIWIPEACH.SYS_PARAM
 (
    ID                   VARCHAR2(32)         not null,
    NAME                 VARCHAR2(16)         not null,
-   VALUE                NUMBER(4)            not null,
-   ENABLE               NUMBER(1)            default 1 not null,
+   VALUE                NUMBER(4,0)          not null,
+   ENABLE               NUMBER(1,0)          default 1 not null,
    DESCRIPTION          VARCHAR2(200),
    PARENT_ID            VARCHAR2(32),
    TYPE                 VARCHAR2(16)         default 'sys',
    CREATE_TIME          TIMESTAMP            default SYSDATE,
    UPDATE_TIME          TIMESTAMP            default SYSDATE
-)
-pctfree 10
-initrans 1
-storage
-(
-    initial 128K
-    next 8K
-    minextents 1
-    maxextents unlimited
-)
-tablespace KIWIPEACH_DATA
-logging
- nocompress
- monitoring
- noparallel;
+);
 
 comment on table KIWIPEACH.SYS_PARAM is
 '系统参数';
@@ -422,38 +278,13 @@ create table KIWIPEACH.SYS_PERMISSION
 (
    ID                   VARCHAR2(32)         not null,
    NAME                 VARCHAR2(32)         not null,
-   WEIGHT               NUMBER(1)            default 1,
+   WEIGHT               NUMBER(1,0)          default 1,
    ICON                 VARCHAR2(32)         default 'defalut_permission_icon',
    CREATE_TIME          TIMESTAMP            default SYSDATE,
    UPDATE_TIME          TIMESTAMP            default SYSDATE,
    DESCRIPTION          VARCHAR2(32),
    constraint PK_SYS_PERMISSION primary key (ID)
-         using index pctfree 10
-   initrans 2
-   storage
-   (
-       initial 64K
-       next 1024K
-       minextents 1
-       maxextents unlimited
-   )
-   logging
-   tablespace KIWIPEACH_DATA
-)
-pctfree 10
-initrans 1
-storage
-(
-    initial 64K
-    next 8K
-    minextents 1
-    maxextents unlimited
-)
-tablespace KIWIPEACH_DATA
-logging
- nocompress
- monitoring
- noparallel;
+);
 
 comment on table KIWIPEACH.SYS_PERMISSION is
 '系统权限';
@@ -486,38 +317,13 @@ create table KIWIPEACH.SYS_ROLE
 (
    ID                   VARCHAR2(32)         not null,
    NAME                 VARCHAR2(16)         not null,
-   WEIGHT               NUMBER(1)            default 1,
+   WEIGHT               NUMBER(1,0)          default 1,
    ICON                 VARCHAR2(32)         default 'defalut_role_icon',
    CREATE_TIME          TIMESTAMP            default SYSDATE,
    UPDATE_TIME          TIMESTAMP            default SYSDATE,
    DESCRIPTION          VARCHAR2(200),
    constraint PK_SYS_ROLE primary key (ID)
-         using index pctfree 10
-   initrans 2
-   storage
-   (
-       initial 64K
-       next 1024K
-       minextents 1
-       maxextents unlimited
-   )
-   logging
-   tablespace KIWIPEACH_DATA
-)
-pctfree 10
-initrans 1
-storage
-(
-    initial 64K
-    next 8K
-    minextents 1
-    maxextents unlimited
-)
-tablespace KIWIPEACH_DATA
-logging
- nocompress
- monitoring
- noparallel;
+);
 
 comment on table KIWIPEACH.SYS_ROLE is
 '系统角色';
@@ -555,39 +361,14 @@ create table KIWIPEACH.SYS_USER
    NICK_NAME            VARCHAR2(16)         not null,
    HEAD_URL             VARCHAR2(100)        default 'default_head_url' not null,
    EMAIL                VARCHAR2(32),
-   ACCOUNT_LOCK         NUMBER(1)            default 0,
-   LOCK_REASON          NUMBER(2),
+   ACCOUNT_LOCK         NUMBER(1,0)          default 0,
+   LOCK_REASON          NUMBER(2,0),
    CREATE_TIME          TIMESTAMP            default SYSDATE,
    UPDATE_TIME          TIMESTAMP            default SYSDATE,
    OPEN_ID              VARCHAR2(32),
    PLATFORM             VARCHAR2(16),
    constraint PK_SYS_USER primary key (ID)
-         using index pctfree 10
-   initrans 2
-   storage
-   (
-       initial 64K
-       next 1024K
-       minextents 1
-       maxextents unlimited
-   )
-   logging
-   tablespace KIWIPEACH_DATA
-)
-pctfree 10
-initrans 1
-storage
-(
-    initial 128K
-    next 8K
-    minextents 1
-    maxextents unlimited
-)
-tablespace KIWIPEACH_DATA
-logging
- nocompress
- monitoring
- noparallel;
+);
 
 comment on table KIWIPEACH.SYS_USER is
 '系统用户';
@@ -639,49 +420,19 @@ create table KIWIPEACH.T_BLOG
    ID                   VARCHAR2(32)         not null,
    USER_ID              VARCHAR2(32)         not null,
    CATE_ID              VARCHAR2(32)         default '0',
-   TITLE                VARCHAR2(80)         not null,
-   STAR_COUNT           NUMBER(8)            default 0,
-   VIEW_COUNT           NUMBER(8)            default 0,
-   TOP                  NUMBER(1)            default 0,
+   TITLE                VARCHAR2(400)        not null,
+   STAR_COUNT           NUMBER(8,0)          default 0,
+   VIEW_COUNT           NUMBER(8,0)          default 0,
+   TOP                  NUMBER(1,0)          default 0,
    CREATE_TIME          TIMESTAMP            default SYSDATE,
    UPDATE_TIME          TIMESTAMP            default SYSDATE,
    CONTENT_TYPE         VARCHAR2(8)          default '1',
    INTRODUCTION         VARCHAR2(400),
    ICON_URL             VARCHAR2(200),
    CONTENT              CLOB,
-   COMMENT_COUNT        NUMBER(8),
+   COMMENT_COUNT        NUMBER(8,0)          default 0,
    constraint PK_T_BLOG primary key (ID)
-         using index pctfree 10
-   initrans 2
-   storage
-   (
-       initial 64K
-       next 1024K
-       minextents 1
-       maxextents unlimited
-   )
-   logging
-   tablespace KIWIPEACH_DATA
-)
-pctfree 10
-initrans 1
-storage
-(
-    initial 64K
-    next 8K
-    minextents 1
-    maxextents unlimited
-)
-tablespace KIWIPEACH_DATA
-logging
- nocompress
- lob
- (CONTENT)
-    store as
-         basicfile
- (tablespace KIWIPEACH_DATA
-        chunk 8192
- retention nocache);
+);
 
 comment on table KIWIPEACH.T_BLOG is
 '博客';
@@ -735,38 +486,13 @@ create table KIWIPEACH.T_BLOG_CATEGORY
 (
    ID                   VARCHAR2(32)         not null,
    NAME                 VARCHAR2(16)         not null,
-   WEIGHT               NUMBER(3)            default 1,
+   WEIGHT               NUMBER(3,0)          default 1,
    ICON                 VARCHAR2(32)         default 'default_category_icon',
    CREATE_TIME          TIMESTAMP            default SYSDATE,
    UPDATE_TIME          TIMESTAMP            default SYSDATE,
    PARENT_ID            VARCHAR2(32),
    constraint PK_T_BLOG_CATEGORY primary key (ID)
-         using index pctfree 10
-   initrans 2
-   storage
-   (
-       initial 64K
-       next 1024K
-       minextents 1
-       maxextents unlimited
-   )
-   logging
-   tablespace KIWIPEACH_DATA
-)
-pctfree 10
-initrans 1
-storage
-(
-    initial 128K
-    next 8K
-    minextents 1
-    maxextents unlimited
-)
-tablespace KIWIPEACH_DATA
-logging
- nocompress
- monitoring
- noparallel;
+);
 
 comment on table KIWIPEACH.T_BLOG_CATEGORY is
 '分类';
@@ -799,37 +525,12 @@ create table KIWIPEACH.T_BLOG_TAG
 (
    ID                   VARCHAR2(32)         not null,
    NAME                 VARCHAR2(32)         not null,
-   WEIGHT               NUMBER(3)            default 1,
+   WEIGHT               NUMBER(3,0)          default 1,
    ICON                 VARCHAR2(256)        default 'default_tag_icon',
    CREATE_TIME          TIMESTAMP            default SYSDATE,
    UPDATE_TIME          TIMESTAMP            default SYSDATE,
    constraint PK_T_BLOG_TAG primary key (ID)
-         using index pctfree 10
-   initrans 2
-   storage
-   (
-       initial 64K
-       next 1024K
-       minextents 1
-       maxextents unlimited
-   )
-   logging
-   tablespace KIWIPEACH_DATA
-)
-pctfree 10
-initrans 1
-storage
-(
-    initial 128K
-    next 8K
-    minextents 1
-    maxextents unlimited
-)
-tablespace KIWIPEACH_DATA
-logging
- nocompress
- monitoring
- noparallel;
+);
 
 comment on table KIWIPEACH.T_BLOG_TAG is
 '标签';
@@ -863,38 +564,13 @@ create table KIWIPEACH.T_COMMENT_REPLY
    ACTIVE_USER_ID       VARCHAR2(32)         not null,
    PASSIVE_USER_ID      VARCHAR2(32)         not null,
    CONTENT              VARCHAR2(300)        not null,
-   DELETED              NUMBER(1)            default 0,
+   DELETED              NUMBER(1,0)          default 0,
    CREATE_TIME          TIMESTAMP            default SYSDATE,
    UPDATE_TIME          TIMESTAMP            default SYSDATE,
-   STAR_COUNT           NUMBER(8)            default 0,
-   REPLY_COUNT          NUMBER(8)            default 0,
+   STAR_COUNT           NUMBER(8,0)          default 0,
+   REPLY_COUNT          NUMBER(8,0)          default 0,
    constraint PK_T_COMMENT primary key (ID)
-         using index pctfree 10
-   initrans 2
-   storage
-   (
-       initial 64K
-       next 1024K
-       minextents 1
-       maxextents unlimited
-   )
-   logging
-   tablespace KIWIPEACH_DATA
-)
-pctfree 10
-initrans 1
-storage
-(
-    initial 128K
-    next 8K
-    minextents 1
-    maxextents unlimited
-)
-tablespace KIWIPEACH_DATA
-logging
- nocompress
- monitoring
- noparallel;
+);
 
 comment on table KIWIPEACH.T_COMMENT_REPLY is
 '评论回复表';

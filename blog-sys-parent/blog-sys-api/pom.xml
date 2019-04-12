@@ -33,12 +33,12 @@
             <artifactId>druid</artifactId><!--duird数据源-->
             <version>${druid.version}</version>
         </dependency>
-        <!--oracle驱动问题请自行解决，如果您选择的是MySQL数据库，可注释掉此处依赖-->
-        <dependency>
+        <!--oracle驱动问题请自行解决，如果您选择的是MySQL数据库，可忽略-->
+       <!-- <dependency>
             <groupId>cn.kiwipeach</groupId>
-            <artifactId>ojdbc6</artifactId><!--oracle数据库驱动-->
+            <artifactId>ojdbc6</artifactId>&lt;!&ndash;oracle数据库驱动&ndash;&gt;
             <version>${oracle.version}</version>
-        </dependency>
+        </dependency>-->
 
         <!--Cannot resolve com.mysq.jdbc.Connection.ping method.  Will use 'SELECT 1' instead.-->
         <dependency>

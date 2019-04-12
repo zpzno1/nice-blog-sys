@@ -46,10 +46,10 @@ spring:
     useGlobalDataSourceStat: true
     connectionProperties: config.decrypt=true;druid.stat.logSlowSql=true;druid.stat.slowSqlMillis=200;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMDHEqPdRifJ9Y0ci1y3Lt6q1XVXwLJlYYnDnT4O6vTI6fpvsC0msjEUVtHaUUDEgFgv0ekPSuCq68zq4+r8LYkCAwEAAQ==
   # 应用缓存配置
-#  cache:
-#    type: ehcache
-#    ehcache:
-#      config: classpath:ehcache-demo.xml
+  #  cache:
+  #    type: ehcache
+  #    ehcache:
+  #      config: classpath:ehcache-demo.xml
   # 缓存类型切换，本项目使用redis
   cache:
     type: redis
@@ -89,7 +89,7 @@ mybatis-plus:
       logic-not-delete-value: 1
       db-type: oracle
     refresh: true
-      #自定义填充策略接口实现
+    #自定义填充策略接口实现
     #meta-object-handler: com.baomidou.springboot.xxx
     #自定义SQL注入器
     #sql-injector: com.baomidou.springboot.xxx

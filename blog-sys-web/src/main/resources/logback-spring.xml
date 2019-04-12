@@ -49,24 +49,33 @@
     <springProfile name="mysql">
         <logger name="cn.kiwipeach.blog.mapper" level="debug"/>
     </springProfile>
-    <springProfile name="public">
-        <logger name="cn.kiwipeach.blog.mapper" level="warn"/>
+    <springProfile name="mysql-active">
+        <logger name="cn.kiwipeach.blog.mapper" level="debug"/>
     </springProfile>
     <!-- 日志级别TRACE<DEBUG<INFO<WARN<ERROR -->
+    <springProfile name="mysql-active">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE_APPENDER"/>
+            <appender-ref ref="ROLL_APPENDER"/>
+        </root>
+    </springProfile>
+    <springProfile name="oracle-active">
+        <root level="INFO">
+            <appender-ref ref="ROLL_APPENDER"/>
+            <appender-ref ref="CONSOLE_APPENDER"/>
+        </root>
+    </springProfile>
+
     <springProfile name="oracle">
         <root level="INFO">
             <appender-ref ref="CONSOLE_APPENDER"/>
+            <appender-ref ref="ROLL_APPENDER"/>
         </root>
     </springProfile>
     <springProfile name="mysql">
-        <root level="INFO">
-            <appender-ref ref="CONSOLE_APPENDER"/>
-        </root>
-    </springProfile>
-    <springProfile name="public">
         <root level="WARN">
-            <appender-ref ref="ROLL_APPENDER"/>
             <appender-ref ref="CONSOLE_APPENDER"/>
+            <appender-ref ref="ROLL_APPENDER"/>
         </root>
     </springProfile>
 
