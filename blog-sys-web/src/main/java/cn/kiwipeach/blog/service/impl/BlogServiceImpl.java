@@ -62,9 +62,6 @@ public class BlogServiceImpl extends BlogServiceAdapter {
     @Autowired
     private ValueOperations<String, Object> valueOperations;
 
-    @Autowired
-    private SqlSessionTemplate sqlSessionTemplate;
-
     @Override
     public IPage<BlogInfoVO> pageQuery(IPage<BlogInfoVO> page, String categoryId, String tagName) {
         List<BlogInfoVO> blogInfoVOS = blogMapper.selectByPage(page, categoryId, tagName);
@@ -78,14 +75,13 @@ public class BlogServiceImpl extends BlogServiceAdapter {
     public BlogInfoVO queryById(String blogId) {
         BlogInfoVO blogInfoVO = blogMapper.selectBlog(blogId);
         dealTagsName(blogInfoVO);
-        Page<Blog> page = new Page<>(1, 1);
-        Blog nextBlog = blogMapper.selectNextBlog(page, blogId);
+        Blog nextBlog = blogMapper.selectNextBlog(new Page<>(2, 1), blogId);
         // 处理最后一篇博客下一篇问题
         if (nextBlog == null) {
             QueryWrapper<Blog> queryWrapper = new QueryWrapper<Blog>().eq("top", "1");
             nextBlog = blogMapper.selectOne(queryWrapper);
         }
-        Blog previousBlog = blogMapper.selectPreviousBlog(page, blogId);
+        Blog previousBlog = blogMapper.selectPreviousBlog(new Page<>(0, 1), blogId);
         // 处理第一篇博客上一篇问题
         if (previousBlog == null) {
             QueryWrapper<Blog> queryWrapper = new QueryWrapper<Blog>().eq("top", "1");

@@ -43,17 +43,6 @@
         <result column="INTRODUCTION" property="introduction"/>
         <result column="ICON_URL" property="iconUrl"/>
     </resultMap>
-
-    <!--查询博客归档信息-->
-    <resultMap id="ArchiveBlogTimelineVOResultMap" type="cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO">
-        <id column="ARCHIVETIME" property="archiveTime"/>
-        <id column="ID" property="id"/>
-        <result column="TITLE" property="title"/>
-        <result column="CREATETIME" property="createTime"/>
-        <result column="CATEGORYNAME" property="categoryName"/>
-        <result column="ISTOP" property="isTop"/>
-    </resultMap>
-
     <!--分页查询博客信息-->
     <select id="selectByPage" resultMap="blogInfoVOResultMap">
         SELECT b.ID, b.USER_ID, u.NICK_NAME, b.CATE_ID, c.NAME AS CATEGORY_NAME
@@ -75,7 +64,7 @@
                 )
             </if>
         </where>
-        ORDER BY TOP DESC, UPDATE_TIME DESC
+        ORDER BY TOP DESC, CREATE_TIME DESC
     </select>
 
     <!--查询博客详情信息-->
@@ -97,9 +86,9 @@
         <include refid="Base_Column_List"></include>
         FROM T_BLOG t
         WHERE 1 = 1
-        AND t.update_time <![CDATA[ >= ]]>
-        (select update_time from T_BLOG where id = #{blogId})
-        order by t.update_time asc
+        AND t.create_time <![CDATA[ >= ]]>
+        (select create_time from T_BLOG where id = #{blogId})
+        order by t.create_time ASC
     </select>
 
     <!--下一篇博客信息-->
@@ -108,53 +97,9 @@
         <include refid="Base_Column_List"></include>
         from T_BLOG t
         where 1 = 1
-        and t.update_time <![CDATA[ <= ]]>
-        (select update_time from T_BLOG where id = #{blogId})
-        order by t.update_time desc
-    </select>
-
-    <!--查询按照时间归档博客信息-->
-    <!--FIXME ORACLE和MYSQL实现方式不一样-->
-    <!--<select id="selectArchiveBlog" resultMap="ArchiveBlogTimelineVOResultMap">
-        SELECT t.id, t.title, to_char(t.create_time, 'yyyy-MM-dd HH:mm:ss') AS createTime
-            , to_char(t.create_time, '${pattern}') AS archiveTime, bc.name AS categoryName
-            , CASE
-                WHEN t.create_time = (
-                    SELECT MAX(create_time)
-                    FROM T_BLOG
-                    WHERE to_char(create_time, '${pattern}') = to_char(t.create_time, '${pattern}')
-                ) THEN 'true'
-                ELSE 'false'
-            END AS isTop
-        FROM T_BLOG t
-        LEFT JOIN (
-            SELECT to_char(b.create_time, '${pattern}') AS archive_time
-            FROM T_BLOG b
-            GROUP BY to_char(b.create_time, '${pattern}')
-        ) tmp ON to_char(t.create_time, '${pattern}') = tmp.archive_time
-            LEFT JOIN T_BLOG_CATEGORY bc ON t.cate_id = bc.id
-        ORDER BY t.create_time DESC
-    </select>-->
-
-    <select id="selectArchiveBlog" resultMap="ArchiveBlogTimelineVOResultMap">
-        SELECT t.id, t.title, to_char(t.create_time, 'yyyy-MM-dd HH:mm:ss') AS createTime
-            , to_char(t.create_time, '${pattern}') AS archiveTime, bc.name AS categoryName
-            , CASE
-                WHEN t.create_time = (
-                    SELECT MAX(create_time)
-                    FROM T_BLOG
-                    WHERE to_char(create_time, '${pattern}') = to_char(t.create_time, '${pattern}')
-                ) THEN 'true'
-                ELSE 'false'
-            END AS isTop
-        FROM T_BLOG t
-        LEFT JOIN (
-            SELECT to_char(b.create_time, '${pattern}') AS archive_time
-            FROM T_BLOG b
-            GROUP BY to_char(b.create_time, '${pattern}')
-        ) tmp ON to_char(t.create_time, '${pattern}') = tmp.archive_time
-            LEFT JOIN T_BLOG_CATEGORY bc ON t.cate_id = bc.id
-        ORDER BY t.create_time DESC
+        and t.create_time <![CDATA[ <= ]]>
+        (select create_time from T_BLOG where id = #{blogId})
+        order by t.create_time desc
     </select>
 
     <!--博客统计数加1-->

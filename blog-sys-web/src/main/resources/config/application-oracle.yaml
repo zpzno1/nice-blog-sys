@@ -26,8 +26,8 @@ spring:
   datasource:
     username: <?>
     password: <?>
-    url: jdbc:oracle:thin:@localhost:1521:ORCL
-    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:mysql://<?>/<database>?userUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
 
     initialSize: 5
