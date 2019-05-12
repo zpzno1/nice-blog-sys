@@ -62,8 +62,7 @@ public class BlogController {
     public AjaxResponse<IPage<Blog>> pageQuery(Page page,
                                                @RequestParam(required = false, value = "categoryId") String categoryId,
                                                @RequestParam(required = false, value = "tagName") String tagName) {
-        IPage iPage = iBlogService.pageQuery(page, categoryId, tagName);
-        return AjaxResponse.success(iPage);
+        return iBlogService.pageQuery(page, categoryId, tagName);
     }
 
     /**
@@ -75,11 +74,10 @@ public class BlogController {
      */
     @GetMapping("detail/{blogId}")
     public String queryBlogDetail(@PathVariable("blogId") String blogId, Model model) {
-        BlogInfoVO blogInfoVO = iBlogService.queryById(blogId);
-        model.addAttribute("blogDetail", blogInfoVO);
-        //当前系统banner信息
-        SysBannerInvoVO sysBannerInvoVO = iBlogCommService.querySysBannerInfo();
-        model.addAttribute("sysBannerInvoVO", sysBannerInvoVO);
+        // 博客详情
+        model.addAttribute("blogDetail", iBlogService.queryById(blogId));
+        // 当前系统banner信息
+        model.addAttribute("sysBannerInvoVO", iBlogCommService.querySysBannerInfo());
         return "blog/detail";
     }
 
@@ -95,8 +93,7 @@ public class BlogController {
     @ResponseBody
     public AjaxResponse<IPage<ArchiveBlogTimelineVO>> archiveBlogQuery(Page page,
                                                                        @RequestParam(value = "pattern", defaultValue = "yyyy") String pattern) {
-        IPage iPage = iBlogService.archiveBlogQuery(page, pattern);
-        return AjaxResponse.success(iPage);
+        return iBlogService.archiveBlogQuery(page, pattern);
     }
 
     /**

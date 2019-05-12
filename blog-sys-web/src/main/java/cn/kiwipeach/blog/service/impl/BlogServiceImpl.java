@@ -29,14 +29,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
-import java.sql.DatabaseMetaData;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -63,12 +59,13 @@ public class BlogServiceImpl extends BlogServiceAdapter {
     private ValueOperations<String, Object> valueOperations;
 
     @Override
-    public IPage<BlogInfoVO> pageQuery(IPage<BlogInfoVO> page, String categoryId, String tagName) {
+    public AjaxResponse<IPage<BlogInfoVO>> pageQuery(IPage<BlogInfoVO> page, String categoryId, String tagName) {
         List<BlogInfoVO> blogInfoVOS = blogMapper.selectByPage(page, categoryId, tagName);
         for (BlogInfoVO blogInfoVO : blogInfoVOS) {
             dealTagsName(blogInfoVO);
         }
-        return page.setRecords(blogInfoVOS);
+        page.setRecords(blogInfoVOS);
+        return AjaxResponse.success(page);
     }
 
     @Override
@@ -93,14 +90,15 @@ public class BlogServiceImpl extends BlogServiceAdapter {
     }
 
     @Override
-    public IPage<ArchiveBlogTimelineVO> archiveBlogQuery(IPage<ArchiveBlogTimelineVO> page, String pattern) {
-        List<ArchiveBlogTimelineVO> archiveBlogTimelineVOS = queryArchiveBlogByPattern(page,pattern);
+    public AjaxResponse<IPage<ArchiveBlogTimelineVO>> archiveBlogQuery(IPage<ArchiveBlogTimelineVO> page, String pattern) {
+        List<ArchiveBlogTimelineVO> archiveBlogTimelineVOS = queryArchiveBlogByPattern(page, pattern);
         //给分页查询结果添加标签
         for (ArchiveBlogTimelineVO tagVOS : archiveBlogTimelineVOS) {
             List<TagVO> tagVOList = blogTagMapper.selectBlogTag(tagVOS.getId());
             tagVOS.setTagVOList(JSONArray.parseArray(JSON.toJSONString(tagVOList)));
         }
-        return page.setRecords(archiveBlogTimelineVOS);
+        page.setRecords(archiveBlogTimelineVOS);
+        return AjaxResponse.success(page);
     }
 
     /**
@@ -109,7 +107,7 @@ public class BlogServiceImpl extends BlogServiceAdapter {
      * @param pattern 前端日期
      * @return 返回mysql日期表示
      */
-    private List<ArchiveBlogTimelineVO> queryArchiveBlogByPattern(IPage<ArchiveBlogTimelineVO> page,String pattern) {
+    private List<ArchiveBlogTimelineVO> queryArchiveBlogByPattern(IPage<ArchiveBlogTimelineVO> page, String pattern) {
         if ("yyyy".equals(pattern)) {
             return blogArchiveMapper.selectArchiveBlogByYear(page);
         } else if ("yyyyQ".equals(pattern)) {

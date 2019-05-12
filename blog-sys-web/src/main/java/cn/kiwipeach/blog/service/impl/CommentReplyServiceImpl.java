@@ -16,18 +16,13 @@
 package cn.kiwipeach.blog.service.impl;
 
 import cn.kiwipeach.blog.base.AjaxResponse;
-import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.domain.CommentReply;
-import cn.kiwipeach.blog.domain.SysUser;
 import cn.kiwipeach.blog.domain.vo.BlogCommentVO;
 import cn.kiwipeach.blog.exception.BlogException;
 import cn.kiwipeach.blog.mapper.BlogMapper;
 import cn.kiwipeach.blog.mapper.CommentReplyMapper;
-import cn.kiwipeach.blog.mapper.SysUserMapper;
 import cn.kiwipeach.blog.param.CommentReplyParam;
 import cn.kiwipeach.blog.service.ICommentReplyService;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.kiwipeach.blog.shiro.token.AccessToken;
@@ -59,7 +54,7 @@ public class CommentReplyServiceImpl extends ServiceImpl<CommentReplyMapper, Com
 
 
     @Override
-    public boolean createBlogComment(CommentReplyParam commentReply, AccessToken accessToken) {
+    public AjaxResponse<Boolean> createBlogComment(CommentReplyParam commentReply, AccessToken accessToken) {
         // 0) 查找当前登录用户信息
         AccessToken currentUser = UserUtil.getCurrentUser();
         commentReply.setActiveUserId(currentUser.getId());
@@ -72,11 +67,11 @@ public class CommentReplyServiceImpl extends ServiceImpl<CommentReplyMapper, Com
         if (updateBlogCommentCount(commentReply.getParentId()) == false) {
             throw new BlogException("-COMMENT-002", "博客评论统计更新失败！");
         }
-        return true;
+        return AjaxResponse.success(true);
     }
 
     @Override
-    public boolean createCommentReply(CommentReplyParam commentReply, AccessToken accessToken) {
+    public AjaxResponse<Boolean> createCommentReply(CommentReplyParam commentReply, AccessToken accessToken) {
         // 1)插入回复内容
         commentReply.setType("B_COMMENT_REPLY");
         if (commentReplyMapper.insert(commentReply) == 0) {
@@ -92,14 +87,14 @@ public class CommentReplyServiceImpl extends ServiceImpl<CommentReplyMapper, Com
         if (commentReplyMapper.updateById(curCommentReply) == 0) {
             throw new BlogException("-COMMENT-002", "博客评论回复统计失败！");
         }
-        return true;
+        return AjaxResponse.success(true);
     }
 
 
     @Override
-    public IPage<BlogCommentVO> queryCommentByPage(IPage<BlogCommentVO> page, String parentId, String type) {
-        List<BlogCommentVO> commentReplies = commentReplyMapper.selectCommenByPage(page, parentId, type);
-        return page.setRecords(commentReplies);
+    public AjaxResponse<IPage<BlogCommentVO>> queryCommentByPage(IPage<BlogCommentVO> page, String parentId, String type) {
+        page.setRecords(commentReplyMapper.selectCommenByPage(page, parentId, type));
+        return AjaxResponse.success(page);
     }
 
     @Override

@@ -44,7 +44,7 @@ public class BlogTagController {
     @GetMapping("count/query")
     @ResponseBody
     public AjaxResponse<List<TagCountVO>> queryTagCountInfo() {
-        return AjaxResponse.success(iBlogTagService.queryTagCountInfo());
+        return iBlogTagService.queryTagCountInfo();
     }
 
 }

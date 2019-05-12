@@ -43,35 +43,69 @@
     <logger name="org.springframework.boot.web" level="INFO"/>
     <!--关闭自动配置注解-->
     <logger name="org.springframework.boot.autoconfigure" level="INFO"/>
-    <springProfile name="mysql-active">
-        <!--<logger name="cn.kiwipeach.blog.mapper" level="debug"/>-->
+
+
+    <!--#######################################开发环境配置###########################################-->
+    <!--default mysql||oracle environment-->
+    <springProfile name="mysql">
         <logger name="cn.kiwipeach.blog.mapper" level="debug"/>
     </springProfile>
-    <!-- 日志级别TRACE<DEBUG<INFO<WARN<ERROR -->
-    <springProfile name="mysql-active">
+    <springProfile name="mysql">
         <root level="INFO">
             <appender-ref ref="CONSOLE_APPENDER"/>
-            <!--<appender-ref ref="ROLL_APPENDER"/>-->
         </root>
     </springProfile>
-    <springProfile name="oracle-active">
+    <springProfile name="oracle">
+        <logger name="cn.kiwipeach.blog.mapper" level="debug"/>
+    </springProfile>
+    <springProfile name="oracle">
         <root level="INFO">
-            <!--<appender-ref ref="ROLL_APPENDER"/>-->
             <appender-ref ref="CONSOLE_APPENDER"/>
         </root>
     </springProfile>
 
+    <!--my mysql||oracle environment-->
+    <springProfile name="mysql-dev">
+        <logger name="cn.kiwipeach.blog.mapper" level="debug"/>
+    </springProfile>
+    <springProfile name="mysql-dev">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE_APPENDER"/>
+        </root>
+    </springProfile>
+    <springProfile name="oracle-dev">
+        <logger name="cn.kiwipeach.blog.mapper" level="debug"/>
+    </springProfile>
+    <springProfile name="oracle-dev">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE_APPENDER"/>
+        </root>
+    </springProfile>
+
+
+    <!--#######################################生产环境配置###########################################-->
+    <!--default oracle&mysql environment-->
+    <springProfile name="mysql">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE_APPENDER"/>
+        </root>
+    </springProfile>
     <springProfile name="oracle">
         <root level="INFO">
             <appender-ref ref="CONSOLE_APPENDER"/>
-            <!--<appender-ref ref="ROLL_APPENDER"/>-->
         </root>
     </springProfile>
-    <springProfile name="mysql">
-        <root level="WARN">
-            <appender-ref ref="CONSOLE_APPENDER"/>
-            <!--<appender-ref ref="ROLL_APPENDER"/>-->
+   <!-- my mysql&oracle environment-->
+    <springProfile name="mysql-production">
+        <root level="INFO">
+            <appender-ref ref="ROLL_APPENDER"/>
         </root>
     </springProfile>
+    <springProfile name="oracle-production">
+        <root level="INFO">
+            <appender-ref ref="ROLL_APPENDER"/>
+        </root>
+    </springProfile>
+
 
 </configuration>

@@ -54,7 +54,7 @@ public class CommentReplyController {
     public AjaxResponse<Boolean> createBlogComment(
             CommentReplyParam commentReply,
             @CurrentUser AccessToken accessToken) {
-        return new AjaxResponse<>(iCommentReplyService.createBlogComment(commentReply, accessToken));
+        return iCommentReplyService.createBlogComment(commentReply, accessToken);
     }
 
 
@@ -70,7 +70,7 @@ public class CommentReplyController {
     public AjaxResponse<Boolean> createCommentReply(
             CommentReplyParam commentReply,
             @CurrentUser AccessToken accessToken) {
-        return new AjaxResponse<>(iCommentReplyService.createCommentReply(commentReply, accessToken));
+        return iCommentReplyService.createCommentReply(commentReply, accessToken);
     }
 
 
@@ -87,8 +87,7 @@ public class CommentReplyController {
     public AjaxResponse<IPage<CommentReply>> pageQuery(Page page,
                                                        @RequestParam(required = true, value = "queryType") String queryType,
                                                        @RequestParam(required = true, value = "parentId") String parentId) {
-        IPage iPage = iCommentReplyService.queryCommentByPage(page, parentId, queryType);
-        return AjaxResponse.success(iPage);
+        return iCommentReplyService.queryCommentByPage(page, parentId, queryType);
     }
 
 

@@ -22,7 +22,6 @@ import cn.kiwipeach.blog.param.CommentReplyParam;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.kiwipeach.blog.shiro.token.AccessToken;
-import org.springframework.cache.annotation.Cacheable;
 
 /**
  * 评论 服务接口类
@@ -39,7 +38,7 @@ public interface ICommentReplyService extends IService<CommentReply> {
      * @param accessToken  当前登录用户
      * @return 返回评论结果
      */
-    boolean createBlogComment(CommentReplyParam commentReply, AccessToken accessToken);
+    AjaxResponse<Boolean> createBlogComment(CommentReplyParam commentReply, AccessToken accessToken);
 
 
     /**
@@ -49,7 +48,7 @@ public interface ICommentReplyService extends IService<CommentReply> {
      * @param accessToken  当前登录用户
      * @return
      */
-    boolean createCommentReply(CommentReplyParam commentReply, AccessToken accessToken);
+    AjaxResponse<Boolean> createCommentReply(CommentReplyParam commentReply, AccessToken accessToken);
 
 
     /**
@@ -61,7 +60,7 @@ public interface ICommentReplyService extends IService<CommentReply> {
      * @return 返回博客评论分页信息
      */
     //@Cacheable(value = {"BLOG_COMMENT_REPLY"}, key = "'page_'+#type+'_'+#parentId+'_'+#page.current+'_'+#page.size")
-    IPage<BlogCommentVO> queryCommentByPage(IPage<BlogCommentVO> page, String parentId, String type);
+    AjaxResponse<IPage<BlogCommentVO>> queryCommentByPage(IPage<BlogCommentVO> page, String parentId, String type);
 
     /**
      * 修改博客评论回复的点赞数

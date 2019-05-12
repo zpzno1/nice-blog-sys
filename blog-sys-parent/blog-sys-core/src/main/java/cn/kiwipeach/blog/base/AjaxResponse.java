@@ -15,6 +15,7 @@
  */
 package cn.kiwipeach.blog.base;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -27,7 +28,7 @@ import java.util.Date;
  * @author kiwipeach [1099501218@qq.com]
  * @create 2018/07/11
  */
-public class AjaxResponse<T> {
+public class AjaxResponse<T> implements Serializable {
     //region 分页默认值
     private static final String DEFAULT_RESPONSE_SUCCESS_CODE = "0";
     private static final String DEFAULT_RESPONSE_MSG = "请求成功";

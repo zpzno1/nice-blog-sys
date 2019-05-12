@@ -33,7 +33,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 public abstract class AdminBlogServiceAdapter  extends ServiceImpl<BlogMapper, Blog> implements IBlogService  {
 
     @Override
-    public IPage<BlogInfoVO> pageQuery(IPage<BlogInfoVO> page, String categoryId, String tagName) {
+    public AjaxResponse<IPage<BlogInfoVO>> pageQuery(IPage<BlogInfoVO> page, String categoryId, String tagName) {
         return null;
     }
 
@@ -43,7 +43,7 @@ public abstract class AdminBlogServiceAdapter  extends ServiceImpl<BlogMapper, B
     }
 
     @Override
-    public IPage<ArchiveBlogTimelineVO> archiveBlogQuery(IPage<ArchiveBlogTimelineVO> page, String pattern) {
+    public AjaxResponse<IPage<ArchiveBlogTimelineVO>> archiveBlogQuery(IPage<ArchiveBlogTimelineVO> page, String pattern) {
         return null;
     }
 

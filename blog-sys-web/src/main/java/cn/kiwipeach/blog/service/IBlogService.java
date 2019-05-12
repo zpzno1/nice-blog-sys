@@ -42,7 +42,7 @@ public interface IBlogService extends IService<Blog> {
      * @return 博客列表
      */
     @Cacheable(value = {"INDEX_BLOG_LIST"}, key = "'page_'+#page.current+'_'+#page.size+'_'+#categoryId+'_'+#tagName")
-    IPage<BlogInfoVO> pageQuery(IPage<BlogInfoVO> page, String categoryId, String tagName);
+    AjaxResponse<IPage<BlogInfoVO>> pageQuery(IPage<BlogInfoVO> page, String categoryId, String tagName);
 
     /**
      * 查询博客单条记录
@@ -62,7 +62,7 @@ public interface IBlogService extends IService<Blog> {
      * @return 返回归档博客
      */
     @Cacheable(value = {"ARCHIVE_TIME_LINE"}, key = "'page_'+#pattern+'_'+#page.current+'_'+#page.size")
-    IPage<ArchiveBlogTimelineVO> archiveBlogQuery(IPage<ArchiveBlogTimelineVO> page, String pattern);
+    AjaxResponse<IPage<ArchiveBlogTimelineVO>> archiveBlogQuery(IPage<ArchiveBlogTimelineVO> page, String pattern);
 
     /**
      * 博客点赞接口

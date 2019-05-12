@@ -15,6 +15,7 @@
  */
 package cn.kiwipeach.blog.service.impl;
 
+import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.BlogCategory;
 import cn.kiwipeach.blog.domain.vo.CategoryTreeVO;
 import cn.kiwipeach.blog.mapper.BlogCategoryMapper;
@@ -39,7 +40,7 @@ public class BlogCategoryServiceImpl extends ServiceImpl<BlogCategoryMapper, Blo
     private BlogCategoryMapper blogCategoryMapper;
 
     @Override
-    public List<CategoryTreeVO> queryBlogCategoryTree() {
+    public AjaxResponse<List<CategoryTreeVO>> queryBlogCategoryTree() {
         List<CategoryTreeVO> categoryTreeVOS = blogCategoryMapper.selectCategoryTree();
         //合并树形分类中的叶子的统计和名称
         for (CategoryTreeVO categoryTreeVO : categoryTreeVOS) {
@@ -47,6 +48,6 @@ public class BlogCategoryServiceImpl extends ServiceImpl<BlogCategoryMapper, Blo
                 categoryTreeVO.setName(categoryTreeVO.getName() + "(" + categoryTreeVO.getCount() + ")");
             }
         }
-        return categoryTreeVOS;
+        return AjaxResponse.success(categoryTreeVOS);
     }
 }

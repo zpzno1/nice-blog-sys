@@ -44,8 +44,7 @@ public class BlogCategoryController {
     @GetMapping("tree/query")
     @ResponseBody
     public AjaxResponse<List<CategoryTreeVO>> queryBlogCategoryTree() {
-        List<CategoryTreeVO> blogCategories = iBlogCategoryService.queryBlogCategoryTree();
-        return AjaxResponse.success(blogCategories);
+        return iBlogCategoryService.queryBlogCategoryTree();
     }
 
 
