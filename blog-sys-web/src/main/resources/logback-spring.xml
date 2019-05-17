@@ -68,12 +68,12 @@
     <!--default oracle&mysql environment 暂时使用info级别，待日后访问量大了以后再适当调高-->
     <springProfile name="mysql">
         <root level="INFO">
-            <appender-ref ref="CONSOLE_APPENDER"/>
+            <appender-ref ref="ROLL_APPENDER"/>
         </root>
     </springProfile>
     <springProfile name="oracle">
         <root level="INFO">
-            <appender-ref ref="CONSOLE_APPENDER"/>
+            <appender-ref ref="ROLL_APPENDER"/>
         </root>
     </springProfile>
 </configuration>
