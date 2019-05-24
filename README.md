@@ -94,7 +94,7 @@ qiniu:
 nice-blog-sys/blog-sys-web/src/main/java/cn/kiwipeach/blog/BlogWebApplication.java
 
 #jar包运行
-nohup java -Xms513m -Xmx1024m -jar /webapp/NiceBlog.jar --spring.profiles.active=mysql ->/weblogs/nice-blog-sys/nice-blog-sys.out &
+nohup java -Xms513m -Xmx1024m -jar /webapp/NiceBlog.jar --spring.profiles.active=mysql- ->/weblogs/nice-blog-sys/nice-blog-sys.out &
 ```
 
 ## 系统运行截图
