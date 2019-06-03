@@ -18,11 +18,11 @@ package cn.kiwipeach.blog.mapper;
 
 import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO;
+import cn.kiwipeach.blog.domain.vo.BlogInfoDetailVO;
 import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
@@ -51,7 +51,7 @@ public interface BlogMapper extends BaseMapper<Blog> {
      * @param blogId 博客编号
      * @return 返回博客详情信息
      */
-    BlogInfoVO selectBlog(String blogId);
+    BlogInfoDetailVO selectBlog(String blogId);
 
     /**
      * 查询上一篇博客

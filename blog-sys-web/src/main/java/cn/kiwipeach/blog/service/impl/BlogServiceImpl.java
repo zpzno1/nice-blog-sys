@@ -18,6 +18,7 @@ package cn.kiwipeach.blog.service.impl;
 import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO;
+import cn.kiwipeach.blog.domain.vo.BlogInfoDetailVO;
 import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
 import cn.kiwipeach.blog.domain.vo.TagVO;
 import cn.kiwipeach.blog.mapper.BlogArchiveMapper;
@@ -69,8 +70,8 @@ public class BlogServiceImpl extends BlogServiceAdapter {
     }
 
     @Override
-    public BlogInfoVO queryById(String blogId) {
-        BlogInfoVO blogInfoVO = blogMapper.selectBlog(blogId);
+    public BlogInfoDetailVO queryById(String blogId) {
+        BlogInfoDetailVO blogInfoVO = blogMapper.selectBlog(blogId);
         dealTagsName(blogInfoVO);
         Blog nextBlog = blogMapper.selectNextBlog(new Page<>(2, 1), blogId);
         // 处理最后一篇博客下一篇问题

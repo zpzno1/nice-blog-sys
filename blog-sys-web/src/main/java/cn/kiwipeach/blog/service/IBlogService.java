@@ -18,6 +18,7 @@ package cn.kiwipeach.blog.service;
 import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO;
+import cn.kiwipeach.blog.domain.vo.BlogInfoDetailVO;
 import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -51,7 +52,7 @@ public interface IBlogService extends IService<Blog> {
      * @return 返回博客信息
      */
     @Cacheable(value = {"BLOG_DETAIL_INFO"}, key = "'blog_id_'+#blogId")
-    BlogInfoVO queryById(String blogId);
+    BlogInfoDetailVO queryById(String blogId);
 
 
     /**

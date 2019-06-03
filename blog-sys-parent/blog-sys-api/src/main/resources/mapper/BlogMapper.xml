@@ -32,7 +32,7 @@
         <result column="CATE_ID" property="cateId"/>
         <result column="CATEGORY_NAME" property="categoryName"/>
         <result column="TITLE" property="title"/>
-        <result column="CONTENT" property="content"/>
+       <!-- <result column="CONTENT" property="content"/>-->
         <result column="STAR_COUNT" property="starCount"/>
         <result column="COMMENT_COUNT" property="commentCount"/>
         <result column="VIEW_COUNT" property="viewCount"/>
@@ -42,6 +42,10 @@
         <result column="CONTENT_TYPE" property="contentType"/>
         <result column="INTRODUCTION" property="introduction"/>
         <result column="ICON_URL" property="iconUrl"/>
+    </resultMap>
+
+    <resultMap id="blogInfoDetailVOResultMap" type="cn.kiwipeach.blog.domain.vo.BlogInfoDetailVO" extends="blogInfoVOResultMap">
+
     </resultMap>
     <!--分页查询博客信息-->
     <select id="selectByPage" resultMap="blogInfoVOResultMap">
@@ -68,7 +72,7 @@
     </select>
 
     <!--查询博客详情信息-->
-    <select id="selectBlog" resultMap="blogInfoVOResultMap">
+    <select id="selectBlog" resultMap="blogInfoDetailVOResultMap">
         SELECT b.ID, b.USER_ID, u.NICK_NAME, b.CATE_ID, c.NAME AS CATEGORY_NAME
             , b.TITLE, b.CONTENT, b.STAR_COUNT, b.COMMENT_COUNT, b.VIEW_COUNT
             , b.TOP, b.CREATE_TIME, b.UPDATE_TIME, b.CONTENT_TYPE, b.INTRODUCTION

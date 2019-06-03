@@ -18,6 +18,7 @@ package cn.kiwipeach.blog.service.adapter;
 import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.Blog;
 import cn.kiwipeach.blog.domain.vo.ArchiveBlogTimelineVO;
+import cn.kiwipeach.blog.domain.vo.BlogInfoDetailVO;
 import cn.kiwipeach.blog.domain.vo.BlogInfoVO;
 import cn.kiwipeach.blog.mapper.BlogMapper;
 import cn.kiwipeach.blog.service.IBlogService;
@@ -38,7 +39,7 @@ public abstract class AdminBlogServiceAdapter  extends ServiceImpl<BlogMapper, B
     }
 
     @Override
-    public BlogInfoVO queryById(String blogId) {
+    public BlogInfoDetailVO queryById(String blogId) {
         return null;
     }
 
