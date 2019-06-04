@@ -16,14 +16,14 @@
   height:51px;
   border:none;
   text-indent:100%;
-  background:url(../img/ui.totop.png) no-repeat left top;
+  background:url(http://img.kiwipeach.cn/ui.totop.png) no-repeat left top;
   /*解决被覆盖的bug*/
   z-index: 999;
 }
 
 
 #toTopHover {
-  background:url(../img/ui.totop.png) no-repeat left -51px;
+  background:url(http://img.kiwipeach.cn/ui.totop.png) no-repeat left -51px;
   width:51px;
   height:51px;
   display:block;

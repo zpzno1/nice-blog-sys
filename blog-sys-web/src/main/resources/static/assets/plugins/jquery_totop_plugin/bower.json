@@ -6,6 +6,6 @@
   "main": [
    "js/jquery.ui.totop.js",
 	"css/ui-totop.css",
-	"img/ui.totop.png"
+	"http://img.kiwipeach.cn/ui.totop.png"
   ]
 }
