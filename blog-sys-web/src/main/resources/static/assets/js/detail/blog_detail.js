@@ -279,7 +279,6 @@ function loadCommentReplyRequest(param, $blogCommentContainer) {
  * 发表博客评论或者回复
  */
 function makeBlogCommentRequest(requestData) {
-    debugger
     $.ajax({
         url: requestData.commentUrl,
         method: 'post',

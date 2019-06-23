@@ -66,6 +66,7 @@
     <!--kiwipeach开发环境-->
     <springProfile name="mysql-dev">
         <logger name="cn.kiwipeach.blog.mapper" level="debug"/>
+        <logger name="org.kiwipeach.blog" level="debug"/>
     </springProfile>
     <springProfile name="mysql-dev">
         <root level="INFO">

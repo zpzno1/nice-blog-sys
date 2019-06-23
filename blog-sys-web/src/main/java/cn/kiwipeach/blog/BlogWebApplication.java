@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,7 @@ import javax.annotation.PostConstruct;
 @SpringBootApplication(scanBasePackages = {"cn.kiwipeach.blog", "org.kiwipeach.blog"})
 @EnableCaching
 @Slf4j
+@ServletComponentScan(basePackages = "org.kiwipeach.blog.filter")
 //@ImportResource(locations = {"classpath:spring-shiro.xml"})
 public class BlogWebApplication extends SpringBootServletInitializer {
 

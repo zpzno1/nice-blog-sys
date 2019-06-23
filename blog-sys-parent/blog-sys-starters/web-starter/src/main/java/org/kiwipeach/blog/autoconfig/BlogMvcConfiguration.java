@@ -16,9 +16,12 @@
 package org.kiwipeach.blog.autoconfig;
 
 import cn.kiwipeach.blog.mapper.BlogMapper;
+import org.kiwipeach.blog.filter.xss.XssSqlFilter;
 import org.kiwipeach.blog.interceptor.BlogViewCountInterceptor;
 import org.kiwipeach.blog.resolver.CurrentUserMethodArgumentResolver;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.data.redis.core.ValueOperations;
@@ -27,7 +30,10 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * springmvc拓展类,拓展拦截器，过滤器，监听器等等组件。
@@ -75,4 +81,22 @@ public class BlogMvcConfiguration implements WebMvcConfigurer {
         //super.addArgumentResolvers(argumentResolvers);
         argumentResolvers.add(new CurrentUserMethodArgumentResolver());
     }
+
+    /**
+     * xss过滤拦截器
+     */
+    @Bean
+    public FilterRegistrationBean xssFilterRegistrationBean() {
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+        filterRegistrationBean.setFilter(new XssSqlFilter());
+        filterRegistrationBean.setOrder(1);
+        filterRegistrationBean.setEnabled(true);
+        filterRegistrationBean.setUrlPatterns(Arrays.asList("/*"));
+        Map<String, String> initParameters = new HashMap<>();
+        initParameters.put("excludeUrlPatterns", "/favicon.ico,/assets/*,/assets_admin/*");
+        filterRegistrationBean.setInitParameters(initParameters);
+        return filterRegistrationBean;
+    }
+
+
 }
