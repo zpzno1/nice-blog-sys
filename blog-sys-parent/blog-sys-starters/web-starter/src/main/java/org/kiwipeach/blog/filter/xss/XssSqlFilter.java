@@ -16,7 +16,6 @@
 package org.kiwipeach.blog.filter.xss;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.connector.RequestFacade;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -43,13 +42,14 @@ public class XssSqlFilter implements Filter {
 
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain) throws IOException, ServletException {
-        String curReqestUrl = ((RequestFacade) request).getRequestURI();
-        if (isNeedtoDoXss(curReqestUrl)) {
-            log.trace("执行xss过滤:{}", curReqestUrl);
+        //String curReqestUrl = ((RequestFacade) request).getRequestURI();
+        String contextPath = request.getServletContext().getContextPath();
+        if (isNeedtoDoXss(contextPath)) {
+            log.trace("执行xss过滤:{}", contextPath);
             chain.doFilter(new BlogHttpServletRequestWrapper(
                     (HttpServletRequest) request), response);
         } else {
-            log.trace("忽略xss过滤：{}", curReqestUrl);
+            log.trace("忽略xss过滤：{}", contextPath);
             chain.doFilter(request, response);
         }
     }
