@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weblogic-web-app>
+    <!--weblogic9时-->
+    <!--<context-root>/</context-root>
+    <container-descriptor>
+        <prefer-web-inf-classes>true</prefer-web-inf-classes>
+    </container-descriptor>-->
+
+    <!-- WebLogic10 时 使用 -->
+    <container-descriptor>
+        <prefer-application-packages>
+            <package-name>antlr.*</package-name>
+            <package-name>org.hibernate.*</package-name>
+            <package-name>javax.persistence.*</package-name>
+        </prefer-application-packages>
+    </container-descriptor>
+    <!-- <container-descriptor>
+         <prefer-application-packages>
+             <package-name>javax.persistence.*</package-name>
+             <package-name>org.slf4j.*</package-name>
+         </prefer-application-packages>
+         <prefer-application-resources>
+             <resource-name>javax.persistence.*</resource-name>
+             <resource-name>org/slf4j/impl/StaticLoggerBinder.class</resource-name>
+         </prefer-application-resources>
+     </container-descriptor>
+     <session-descriptor>
+         <cookie-path>/</cookie-path>
+     </session-descriptor>-->
+</weblogic-web-app>
