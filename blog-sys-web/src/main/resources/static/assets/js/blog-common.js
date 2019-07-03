@@ -43,7 +43,7 @@
             }
             //系统异常：未登录
             if (res.code == '401') {
-                toastr.error('提示信息，当前用户未登录，请进行登陆操作！');
+                toastr.info('提示信息，当前用户未登录，请进行登陆操作！');
             } else if (res.code == '403') {
                 //系统异常：未授权
                 toastr.error('你没有访问该资源的权限，请联系管理员(1099501218@qq.com)！');
@@ -51,7 +51,7 @@
                 return data;
             } else if (res.code != '0') {
                 //业务异常：BlogException类型
-                toastr.error("提示信息：" + res.msg);
+                toastr.info("提示信息：" + res.msg);
             }
             return data;
         },

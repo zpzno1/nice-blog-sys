@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登录成功页面</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@1.11.2/dist/jquery.min.js"></script>
+</head>
+<body style="text-align: center">
+<h5>您已成功登录此系统，请耐心等待页面跳转...</h5>
+</body>
+
+<script type="text/javascript">
+    $(function () {
+        window.opener.thirdLoginWindow.close();
+        window.opener.location.reload();
+    });
+
+</script>
+</html>

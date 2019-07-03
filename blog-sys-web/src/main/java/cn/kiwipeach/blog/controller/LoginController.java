@@ -132,13 +132,10 @@ public class LoginController {
             }
         }
         SavedRequest savedRequest = WebUtils.getSavedRequest(request);
-        // 被拦截的地址
-        String targetUrl = "/login/success";
         if (savedRequest != null) {
-            targetUrl = savedRequest.getRequestUrl();
+            log.info("重新登录授权访问路径:{}", savedRequest.getRequestUrl());
         }
-        log.info("{}平台登陆成功:{}", targetUrl);
-        return "redirect:" + targetUrl;
+        return "redirect:/login/success";
     }
 
 
@@ -230,7 +227,7 @@ public class LoginController {
 
     @GetMapping("login/success")
     public String toLoginSuccessPage() {
-        return "redirect:/";
+        return "redirect:/blog/loginSuccess.html";
     }
 
     @GetMapping("login/fail")
@@ -241,6 +238,12 @@ public class LoginController {
     //@GetMapping("/unauthorized")
     //public String toUnauthorizedPage() {
     //    return "shiro/unauthorized";
+    //}
+
+
+    //@GetMapping("user/logout")
+    //public String userLogout(@RequestParam(value = "logoutUrl", defaultValue = "/") String logoutUrl) {
+    //    return "redirect:" + logoutUrl;
     //}
 
 

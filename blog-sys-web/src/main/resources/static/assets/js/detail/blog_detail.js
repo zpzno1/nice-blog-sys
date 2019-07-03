@@ -34,7 +34,7 @@ function blogCommentClick(target) {
         url: '/user',
         success: function (res) {
             if (res.data == null) {
-                toastr.error("登陆后才能进行评论喔~");
+                toastr.info("登陆后才能进行评论喔~");
             } else {
                 var requestData = new Object();
                 requestData.parentId = $(target).attr('comment-parentId');

@@ -17,6 +17,7 @@ package org.kiwipeach.blog.shiro.config;
 
 import org.kiwipeach.blog.shiro.credential.BlogCredentialsMatcher;
 import org.kiwipeach.blog.shiro.factory.ResourceFilterMapFactory;
+import org.kiwipeach.blog.shiro.filter.ShiroLogoutFilter;
 import org.kiwipeach.blog.shiro.realam.CustomShiroRealm;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
@@ -39,7 +40,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.web.filter.DelegatingFilterProxy;
 
+import javax.servlet.Filter;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -97,6 +100,10 @@ public class ShiroConfiguration {
         //加载权限规则
         Map<String, String> filterChainDefinitionMap = resourceFilterMapFactory.loadResourceAccessRules();
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+        //自定义退出过滤器
+        Map<String, Filter> mapFilters = new HashMap<>();
+        mapFilters.put("logout", new ShiroLogoutFilter());
+        shiroFilterFactoryBean.setFilters(mapFilters);
         return shiroFilterFactoryBean;
     }
 

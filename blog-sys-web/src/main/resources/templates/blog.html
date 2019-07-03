@@ -125,7 +125,8 @@
     </div>
     <a href="https://gitee.com/kiwipeach/nice-blog-sys" target="_blank" title="Fork My Project">
         <img src="https://gitee.com/KiWiPeach/nice-blog-sys/widgets/widget_1.svg" width="70" height="70"
-             viewBox="0 0 250 250" style="fill:#fff;color:#9c27b0;position: absolute;top: 0;border: 0;left: 0; -moz-transform:rotate(270deg); -webkit-transform:rotate(270deg); transform:rotate(270deg); filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2);">
+             viewBox="0 0 250 250"
+             style="fill:#fff;color:#9c27b0;position: absolute;top: 0;border: 0;left: 0; -moz-transform:rotate(270deg); -webkit-transform:rotate(270deg); transform:rotate(270deg); filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2);">
     </a>
 </nav>
 
@@ -255,18 +256,20 @@
         </h4>
         <div class="card-body">
             <span class="badge-pill badge-dark"><a href="http://www.javacoffee.club"
-                                                                        target="_blank"
-                                                                        class="text-white">Maodun</a></span>
+                                                   target="_blank"
+                                                   class="text-white">Maodun</a></span>
             <span class="badge-pill badge-dark"><a href="http://youngxhui.top/" target="_blank"
-                                                                        class="text-white">youngxhui</a></span>
+                                                   class="text-white">youngxhui</a></span>
             <span class="badge-pill badge-dark"><a href="http://blog.didispace.com/" target="_blank"
-                                                                        class="text-white">程序员DD</a></span>
+                                                   class="text-white">程序员DD</a></span>
             <span class="badge-pill badge-dark"><a href="http://itmuch.com/" target="_blank"
-                                                                        class="text-white">Spring Cloud|周立</a></span>
+                                                   class="text-white">Spring Cloud|周立</a></span>
             <span class="badge-pill badge-dark"><a href="https://www.bysocket.com/" target="_blank"
-                                                                        class="text-white">泥瓦匠BYSocket</a></span>
+                                                   class="text-white">泥瓦匠BYSocket</a></span>
             <span class="badge-pill badge-dark"><a href="https://fookwood.com/" target="_blank"
-                                                                        class="text-white">闷瓜蛋子的博客</a></span>
+                                                   class="text-white">闷瓜蛋子的博客</a></span>
+            <span class="badge-pill badge-dark"><a href="https://www.qiucode.cn/" target="_blank"
+                                                   class="text-white">秋码博客</a></span>
         </div>
     </div>
     <!--友链部分:end-->
@@ -298,16 +301,26 @@
                     $content = $('<div style="font-size: 20px;">' +
                         '<img src="' + res.data.headUrl + '"class="img-raised rounded-circle img-fluid" style="width: 60px;height: 60px;">' +
                         '<p>亲爱的 <span style="font-size: 18px;font-weight: bold">“' + res.data.nickName + '”</span>欢迎光临</p>' +
-                        '<p><a href="/user/logout"  data-toggle="tooltip" data-html="true" title="<b>欢迎您下次光临~~</b>">安全退出</a></p>' +
+                        '<p><a href="javascript:;" onclick="logoutClick(this)"  data-toggle="tooltip" data-html="true" title="<b>欢迎您下次光临~~</b>">安全退出</a></p>' +
                         '</div><');
                 } else {
                     //登陆注册按钮
                     $content = $('<button class="btn btn-primary btn-round" data-toggle="modal"data-target="#loginModal"><i class="fas fa-sign-in-alt fa-lg"></i> 登录 </button> ' +
-                        '<button class="btn btn-primary btn-round" data-toggle="modal"data-target="#signupModal"><i class="fa fa-registered fa-lg"></i> 注册 </button>');
+                        '<button class="btn btn-primary btn-round" onclick="registerClick();"><i class="fa fa-registered fa-lg"></i> 注册 </button>');
                 }
                 $('#user_login_div').html($content);
             }
         });
+
+        /*注册监听*/
+        function registerClick() {
+            toastr.info('用户注册功能暂未开放！');
+        }
+
+        /*退出监听*/
+        function logoutClick(target) {
+            window.location.href = '/user/logout?logoutUrl=' + encodeURIComponent(window.location.href);
+        }
     </script>
 </div>
 
@@ -373,7 +386,7 @@
     <script src="https://cdn.bootcss.com/tocbot/4.7.0/tocbot.min.js"></script>
     <!--/*博客slimscroll滚动条插件*/-->
     <!--/*注册步骤插件*/-->
-   <!-- <script type="text/javascript" th:src="@{/assets/plugins/smartwizard/dist/js/jquery.smartWizard.min.js}"></script>-->
+    <!-- <script type="text/javascript" th:src="@{/assets/plugins/smartwizard/dist/js/jquery.smartWizard.min.js}"></script>-->
     <!--/*sweetalert*/-->
     <script src="https://cdn.bootcss.com/sweetalert/2.1.2/sweetalert.min.js"></script>
     <!--/*pagination*/-->
@@ -395,19 +408,22 @@
                         <div class="card-header card-header-primary text-center col-md-12">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i
                                     class="fas fa-times fa-sm"></i></button>
-                            <h4 class="card-title">用户登陆x</h4>
+                            <h4 class="card-title">用户登陆</h4>
                             <div class="social-line" style="font-size: 30px;">
-                                <a href="#pablo" th:href="@{/qq/login}" class="btn btn-just-icon btn-link">
+                                <a href="javascript:;" th:attr="data-url=@{/qq/login}" onclick="thirdLoginClick(this)"
+                                   class="btn btn-just-icon btn-link">
                                     <svg class="alibaba-icon">
                                         <use xlink:href="#icon-QQ"></use>
                                     </svg>
                                 </a>
-                                <a href="#pablo" th:href="@{/github/login}" class="btn btn-just-icon btn-link">
+                                <a href="javascript:;" th:attr="data-url=@{/github/login}"
+                                   onclick="thirdLoginClick(this)" class="btn btn-just-icon btn-link">
                                     <svg class="alibaba-icon">
                                         <use xlink:href="#icon-GitHub"></use>
                                     </svg>
                                 </a>
-                                <a href="#pablo" th:href="@{/gitee/login}" class="btn btn-just-icon btn-link">
+                                <a href="javascript:;" th:attr="data-url=@{/gitee/login}"
+                                   onclick="thirdLoginClick(this)" class="btn btn-just-icon btn-link">
                                     <svg class="alibaba-icon">
                                         <use xlink:href="#icon-mayun"></use>
                                     </svg>
@@ -467,6 +483,19 @@
                             });
                             return false;//阻止自动提交，必须return false;
                         })
+
+                        /**
+                         * 方法登录点击
+                         */
+                        function thirdLoginClick(target) {
+                            var loginUrl = $(target).attr('data-url');
+                            window.thirdLoginWindow = blog_util.openwindow({
+                                url: loginUrl,
+                                name: '三方登录窗口授权',
+                                iWidth: 1200,
+                                iHeight: 600
+                            });
+                        }
                     </script>
                 </div>
             </div>

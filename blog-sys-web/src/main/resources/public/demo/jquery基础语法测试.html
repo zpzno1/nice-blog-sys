@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性节点测试</title>
+    <script type="application/javascript" src="../../static/assets/plugins/jquery/dist/jquery.js"></script>
+</head>
+<body>
+<div class="selected">测试div</div>
+<p>Hello</p>
+<div><span>Hello Again</span></div>
+<p>And Again</p>
+<script>
+    console.log('$("p").prev()=', $("p").prev());
+    console.log('$("p").prev("div")=', $("p").prev('.selected'));
+</script>
+</body>
+</html>

@@ -31,7 +31,7 @@ public class SqlHelper {
             "char|declare|sitename|net user|xp_cmdshell|;|or|-|+|,|like'|and|exec|execute|insert|create|drop|" +
             "table|from|grant|use|group_concat|column_name|" +
             "information_schema.columns|table_schema|union|where|select|delete|update|order|by|count|" +
-            "chr|mid|master|truncate|char|declare|or|;|-|--|,|like|//|/|%|#";
+            "chr|mid|master|truncate|char|declare|or|;|-|--|,|like|%|#";
 
     public static String sqlEncode(String value) {
         String paramValue = value;
