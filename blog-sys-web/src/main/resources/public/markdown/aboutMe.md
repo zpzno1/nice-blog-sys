@@ -6,7 +6,7 @@
 ## 趣味编程
 ```java
     /**
-     * 描述：如果有问题，尽管去问，否则你永远不知道答案是什么
+     * description：say less and do more.
      *
      * @author kiwipeach
      * @email 1099501218@qq.com
@@ -14,29 +14,16 @@
      * @create 2019-04-01
      */
      public static void main(String[] args) {
-        Question yourQuestion = new YourPersonQuestion("怎么学习一门新技术，最近在学SpringBoot要怎么提升自己？");
-        System.out.println("你的问题是否得到了解决呢?"+ askQuestion(yourQuestion));
+        System.out.println("Hello World!");
      }
-     
-    public static boolean askQuestion(Question yourQuestion){
-          boolean isQuestionResolved = false;
-          while(!isQuestionResolved){
-                 if(Baidu.searchResult(yourQuestion)){
-                    isQuestionResolved = true;
-                    break;
-                 }else if(Google.searchResult(yourQuestion)){
-                     isQuestionResolved = true;
-                    break;
-                 }else if(JoinQQGroup("679722876(Java开源博客)")){
-                    isQuestionResolved = true;
-                     break;
-                 }else{
-                     //可能通过其他途径再也找不到答案了
-                      isQuestionResolved = false;
-                      break;
-                 }
-             }
-          return isQuestionResolved;
-    }
    
 ```
+
+## 互加友链
+
+ 互换链接请先在您的站点中添加本站信息，并在下方留言，并表明你的站点名称比如(kiwipeach's blog)，我会定期进行更新维护,[友链传送门](http://www.kiwipeach.cn/blog/detail/100)。
+
+
+
+
+

@@ -49,7 +49,7 @@ public class CommentReplyController {
      * @param accessToken  当前登录用户
      * @return 返回评论结果
      */
-    @PostMapping("comment/create")
+    @PostMapping("comment/add")
     @ResponseBody
     public AjaxResponse<Boolean> createBlogComment(
             CommentReplyParam commentReply,
@@ -65,7 +65,7 @@ public class CommentReplyController {
      * @param accessToken  当前登录用户
      * @return
      */
-    @PostMapping("reply/create")
+    @PostMapping("reply/add")
     @ResponseBody
     public AjaxResponse<Boolean> createCommentReply(
             CommentReplyParam commentReply,

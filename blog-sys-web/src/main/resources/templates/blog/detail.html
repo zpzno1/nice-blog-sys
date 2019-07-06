@@ -243,7 +243,7 @@
                             </button>
                             <!--评论按钮-->
                                 <button id="commentReplyBtn" comment-type="B_BLOG_COMMENT"
-                                        th:attr="comment-url='/commentReply/comment/create',comment-passiveUserId=${blogDetail.getUserId()},comment-parentId=${blogDetail.getId()},comment-count=${blogDetail.getStarCount()}" class="btn btn-primary btn-round" style="font-size: 18px;"
+                                        th:attr="comment-url='/commentReply/comment/add',comment-passiveUserId=${blogDetail.getUserId()},comment-parentId=${blogDetail.getId()},comment-count=${blogDetail.getStarCount()}" class="btn btn-primary btn-round" style="font-size: 18px;"
                                         onclick="blogCommentClick(this)">
                                     <i class="fas fa-comment"></i>([[${blogDetail.getCommentCount()}]])
                                 </button>
@@ -437,7 +437,7 @@
                     <!--加载用户信息-->
 
                     <!--bootstrap4文章导航:begin-->
-                    <div id="outline_div" class="post-nav hidden-xs side-outline hidden-sm"
+                    <div id="outline_div" class="post-nav side-outline"
                          style="display: block; position: relative;width: 300px;">
                         <div class="panel panel-default widget-outline">
                             <div class="panel-body">
@@ -515,7 +515,7 @@
                         <div class="form-group">
                             <label for="commentMessageText">请输入内容：</label>
                             <textarea id="commentMessageText" class="form-control comment_reply_textarea"
-                                      placeholder="评论支持markdown语法"></textarea>
+                                      placeholder="快来写两句评论吧！"></textarea>
                         </div>
                         <!--<div class="form-group">
                             <label for="exampleFormControlInput1">请输入验证码：</label>

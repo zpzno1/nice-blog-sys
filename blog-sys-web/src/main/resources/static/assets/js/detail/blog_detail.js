@@ -321,7 +321,7 @@ function makeBlogCommentRequest(requestData) {
  */
 function _generate_blog_comment_item(item) {
     //FIXME 需要动态的在此绑定事件
-    var commentItem = '<div  class="card" comment-id="' + item.id + '" comment-url="/commentReply/reply/create" comment-parentId="' + item.id + '" comment-passiveUserId="' + item.activeUserId + '" comment-count="'+item.starCount+'">' +
+    var commentItem = '<div  class="card" comment-id="' + item.id + '" comment-url="/commentReply/reply/add" comment-parentId="' + item.id + '" comment-passiveUserId="' + item.activeUserId + '" comment-count="'+item.starCount+'">' +
         '                <div class="card-body comment-body animated fadeInLeft">' +
         '                    <div class="author">' +
         '                        <a href="#pablo">' +
@@ -402,7 +402,7 @@ function _renderCommentReplyContaner(res, $target) {
  * @private
  */
 function _generate_comment_reply_item(item) {
-    var commentReplyItemDom = '<div class="card" comment-url="/commentReply/reply/create" comment-id="'+item.id+'" comment-passiveUserId="' + item.activeUserId + '" comment-count="'+item.starCount+'" style="background: #f9f7f7;margin: 3px 0px 3px 0px">' +
+    var commentReplyItemDom = '<div class="card" comment-url="/commentReply/reply/add" comment-id="'+item.id+'" comment-passiveUserId="' + item.activeUserId + '" comment-count="'+item.starCount+'" style="background: #f9f7f7;margin: 3px 0px 3px 0px">' +
         '                             <div class="card-body" style="padding: 10px 0px 0px 15px">' +
         '                                 <div class="author">' +
         '                                     <a href="#pablo">' +
