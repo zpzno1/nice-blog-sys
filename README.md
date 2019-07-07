@@ -26,15 +26,16 @@ https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg"></a>
 
 ## 项目特点
 
-- 最新的技术选型,使用SpirngBoot最新版本(当前2.1.3.RELEASE)，关注我就等于关注最新SpringBoot整合技巧方案，(*^__^*).....
-- 项目技术选型[maven，spring-boot,mybatis-plus,shiro,thymeleaf,bootstrap4，jquery....]
-- 支持多平台(q、github、gitee)社交账号登陆及本地系统账号登录。
-- Shiro做安全权限验证，博客资源链接能做安全过滤，权限管理,对于私密链接有保障。
-- 使用了Redis缓存，提升博客网站的性能。
-- 博客系统同时支持MySQL和Oracle数据库。
-- 独具特色的评论回复功能，增强博客的互动性。
-- 采用国内七牛云图床，简单、稳定、易用。
-- 持续开源更新，站长亲自撸码，经久不衰的持续更新。
+-   :tw-1f1e6: 大胆的采用了SpringBoot当前最新版本（2.1.3.RELEASE），敢做第一个吃螃蟹的人 。
+-   :tw-1f1e7:  时下较为流行的技术，可让你的博客技术栈始终保持子在主流前沿地位[spring-boot,mybatis-plus,shiro,thymeleaf,bootstrap4...]
+-   :tw-1f1e8:  支持多社交账号登陆(q、github、gitee)及本地系统账号登录，记录每一个与你交流的伙伴。
+-  :tw-1f1e9: Shiro做安全权限验证，博客资源链接能做安全过滤，权限管理,对于私密链接有保障。
+-  :tw-1f1ea: Redis应用缓存，简洁严谨的代码逻辑，恰到好处的性能优化，我很专业  。
+-  :tw-1f1eb: 博客系统同时支持MySQL和Oracle数据库，敢问还有谁 :joy: 。
+-  :tw-1f1ec: 独具特色的评论回复功能，增强博客的互动性。
+-  :tw-1f1ed: 采用国内七牛云图床，简单、稳定、易用，解决系统静态资源相应国过慢问题。
+-  :tw-1f1ee: 持续开源更新，站长亲自撸码，经久不衰的持续更新，有我在，你还怕不会动手么 :no_mouth: 。
+-  :tw-1f1ef: 这是我的服务器配置`1 vCPU 2 GiB 1Mbps`，配置够低了吧？但低配置并不代表你的站点就会是低性能，差体验，而是缺少解决方案和技术。
 
 ## 安装教程
 
