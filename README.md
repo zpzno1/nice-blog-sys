@@ -9,8 +9,6 @@
 
 <p align="center">
   <a href="https://gitee.com/KiWiPeach/nice-blog-sys"><img alt="Build Status" src="https://img.shields.io/hexpm/l/plug.svg"></a>
-    <a href="https://gitee.com/KiWiPeach/nice-blog-sys"><img alt="Build Status" src="
-https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg"></a>
 <a target="_blank" href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">
 		<img src="https://img.shields.io/badge/JDK-1.8+-green.svg" ></img>
 	</a>
@@ -24,7 +22,7 @@ https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg"></a>
 
  纯Java编写的开源博客系统，力求以`便捷轻巧、高性能、外形Nice`为目标，适用于个人快速搭建博客平台。我不完美，但向往远方。
  - 博客后台部分功能仍不非常齐全，但是前台用户访问模块，已基本完善，至于不完善的部分，有兴趣的朋友可以一起加群讨论，或者您也可以直接fork pr本项目
- - 博客代码全部开源，部分项目启动参数配置需要自行更换，线上只依赖jdk、mysql(oracle)、redis即可快速搭建。
+ - 博客代码全部开源，环境只依赖jdk、mysql(oracle)、redis，本地只需要配置简单的项目启动参数基本本地运行。
 ## 在线演示
 
 [在线演示地址](http://www.kiwipeach.cn) 
@@ -33,7 +31,7 @@ https://img.shields.io/shippable/5444c5ecb904a4b21567b0ff.svg"></a>
 
 -   :tw-1f1e6: 大胆的采用了SpringBoot当前最新版本（2.1.3.RELEASE），敢做第一个吃螃蟹的人 。
 -   :tw-1f1e7: 时下较为流行的技术，可让你的系统技术栈始终新颖。[spring-boot,mybatis-plus,shiro,thymeleaf,bootstrap4...]
--   :tw-1f1e8:  支持多社交账号登陆(q、github、gitee)及本地系统账号登录，记录每一个与你交流的伙伴。
+-   :tw-1f1e8:  支持多社交账号登陆(qq、github、gitee)及本地系统账号登录，记录每一个与你交流的伙伴。
 -  :tw-1f1e9: Shiro做安全权限验证，博客资源链接能做安全过滤，权限管理,对于私密链接有保障。
 -  :tw-1f1ea: Redis应用缓存，简洁严谨的代码逻辑，恰到好处的性能优化，我很专业  。
 -  :tw-1f1eb: 博客系统同时支持MySQL和Oracle数据库，敢问还有谁 :joy: 。
@@ -101,7 +99,7 @@ nice-blog-sys/blog-sys-web/src/main/java/cn/kiwipeach/blog/BlogWebApplication.ja
 ```
 
 ```shell
-#jar包运行
+#jar包运行，推荐启动参数
 nohup java -Xms512m -Xmx1024m -jar /webapp/NiceBlog.jar  --spring.profiles.active=mysql-production ->/weblogs/nice-blog-sys/nice-blog-sys.out &
 ```
 
