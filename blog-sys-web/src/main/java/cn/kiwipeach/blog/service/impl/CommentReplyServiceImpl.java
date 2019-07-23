@@ -30,6 +30,8 @@ import org.kiwipeach.blog.utils.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Objects;
@@ -55,6 +57,10 @@ public class CommentReplyServiceImpl extends ServiceImpl<CommentReplyMapper, Com
 
     @Override
     public AjaxResponse<Boolean> createBlogComment(CommentReplyParam commentReply, AccessToken accessToken) {
+        //信息校验
+        if (StringUtils.isEmpty(commentReply.getContent())) {
+            throw new BlogException("-COMMENT-002","博客评论内容不能为空");
+        }
         // 0) 查找当前登录用户信息
         AccessToken currentUser = UserUtil.getCurrentUser();
         commentReply.setActiveUserId(currentUser.getId());
@@ -72,6 +78,10 @@ public class CommentReplyServiceImpl extends ServiceImpl<CommentReplyMapper, Com
 
     @Override
     public AjaxResponse<Boolean> createCommentReply(CommentReplyParam commentReply, AccessToken accessToken) {
+        //信息校验
+        if (StringUtils.isEmpty(commentReply.getContent())) {
+            throw new BlogException("-COMMENT-002","博客回复内容不能为空");
+        }
         // 1)插入回复内容
         commentReply.setType("B_COMMENT_REPLY");
         if (commentReplyMapper.insert(commentReply) == 0) {
