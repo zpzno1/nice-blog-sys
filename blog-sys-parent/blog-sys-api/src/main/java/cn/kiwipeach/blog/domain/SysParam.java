@@ -48,7 +48,7 @@ public class SysParam implements Serializable {
      * 参数值
      */
     @TableField("VALUE")
-    private Integer value;
+    private String value;
 
     /**
      * 是否可用[0:不可用 1可用]
@@ -100,11 +100,11 @@ public class SysParam implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    public Integer getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(String value) {
         this.value = value;
     }
     public Integer getEnable() {

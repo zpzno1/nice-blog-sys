@@ -1,3 +1,13 @@
+*{
+    /*内容大小写不转换*/
+    text-transform: none;
+}
+.btn{
+    text-transform: none;
+}
+.badge {
+    text-transform: none;
+}
 .navbar-nav .nav-item a span {
     font-size: 16px;
     font-family: "微软雅黑", "Microsoft YaHei", Helvetica, "Helvetica Neue", Tahoma, Arial, sans-serif;

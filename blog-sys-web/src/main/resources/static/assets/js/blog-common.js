@@ -63,6 +63,8 @@
         },
         complete: function () {
             layer.close(this.layerIndex);
+            //保险起见
+            // layer.closeAll();
         },
     });
 
@@ -209,11 +211,6 @@
                             // 如果当前节点为叶子节点，那么就要加载分类博客
                             if (!treeNode.isParent) {
                                 blog_common.http.showBlogPage({categoryId: treeNode.id})
-                            }
-                            if (treeNode.level == 0) {
-                                var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-                                zTree.expandNode(treeNode);
-                                return false;
                             }
                             return true;
                         }

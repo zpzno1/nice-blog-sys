@@ -332,7 +332,7 @@ function _generate_blog_comment_item(item) {
         '                        </a>' +
         '                    </div>' +
         '                    <h6 class="card-title">' +
-        '                        <a href="#pablo">' + item.content + '</a>' +
+        '                        <a href="#pablo" style="text-transform: none;">' + item.content + '</a>' +
         '                    </h6>' +
         '<div class="collapse">' +
         '<div id="comment-reply-' + item.id + '" class="commentReplyContainer"></div>' +

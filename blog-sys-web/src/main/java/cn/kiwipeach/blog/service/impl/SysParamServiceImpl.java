@@ -16,10 +16,17 @@
 package cn.kiwipeach.blog.service.impl;
 
 import cn.kiwipeach.blog.domain.SysParam;
+import cn.kiwipeach.blog.domain.vo.FriendLinkVO;
 import cn.kiwipeach.blog.mapper.SysParamMapper;
 import cn.kiwipeach.blog.service.ISysParamService;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 系统参数 服务实现类
@@ -30,4 +37,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysParamServiceImpl extends ServiceImpl<SysParamMapper, SysParam> implements ISysParamService {
 
+    @Override
+    public List<FriendLinkVO> queryFriendListLink() {
+        SysParam one = getOne(new QueryWrapper<SysParam>().eq("name","friendList"));
+        return JSONArray.parseArray(one.getValue(), FriendLinkVO.class);
+    }
 }

@@ -16,8 +16,18 @@
 package cn.kiwipeach.blog.controller;
 
 
+import cn.kiwipeach.blog.base.AjaxResponse;
+import cn.kiwipeach.blog.domain.SysParam;
+import cn.kiwipeach.blog.domain.vo.FriendLinkVO;
+import cn.kiwipeach.blog.service.ISysParamService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * 系统参数 前端控制器
@@ -28,5 +38,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/sysParam")
 public class SysParamController {
+
+    @Autowired
+    private ISysParamService iSysParamService;
+
+    /**
+     * 友链参数获取
+     * @return 返回友链列表信息
+     */
+    @GetMapping("all")
+    @ResponseBody
+    public AjaxResponse<List<SysParam>> allSysParam() {
+        return AjaxResponse.success(iSysParamService.list(new QueryWrapper<SysParam>()));
+    }
+
+
+    /**
+     * 友链参数获取
+     * @return 返回友链列表信息
+     */
+    @GetMapping("friendList")
+    @ResponseBody
+    public AjaxResponse<List<FriendLinkVO>> friendListLink() {
+        return AjaxResponse.success(iSysParamService.queryFriendListLink());
+    }
 
 }

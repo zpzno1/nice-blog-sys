@@ -25,6 +25,7 @@
                 return;
                 // swal("你没有访问该资源的权限，请联系管理员(1099501218@qq.com)！");
             }
+            // layer.closeAll()
             //通常服务调用失败错误提示
             toastr.error("提示信息：" + res.msg);
         },

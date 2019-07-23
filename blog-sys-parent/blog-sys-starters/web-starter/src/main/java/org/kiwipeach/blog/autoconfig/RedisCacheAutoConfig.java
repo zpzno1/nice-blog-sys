@@ -85,6 +85,8 @@ public class RedisCacheAutoConfig {
         redisCacheConfigurationMap.put("ARCHIVE_TIME_LINE", this.getRedisCacheConfigurationWithTtl(60 * 2));
         /*博客点赞时间120内不能重复点赞*/
         redisCacheConfigurationMap.put("BLOG_START_COUNT", this.getRedisCacheConfigurationWithTtl(60 * 2));
+        /*博客友链1小时*/
+        redisCacheConfigurationMap.put("FRIEND_LINKlIST", this.getRedisCacheConfigurationWithTtl(60 * 60));
         return redisCacheConfigurationMap;
     }
 

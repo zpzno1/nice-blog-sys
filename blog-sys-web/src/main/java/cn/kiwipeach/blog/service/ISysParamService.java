@@ -16,7 +16,11 @@
 package cn.kiwipeach.blog.service;
 
 import cn.kiwipeach.blog.domain.SysParam;
+import cn.kiwipeach.blog.domain.vo.FriendLinkVO;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.cache.annotation.Cacheable;
+
+import java.util.List;
 
 /**
  * 系统参数 服务接口类
@@ -26,4 +30,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ISysParamService extends IService<SysParam> {
 
+    @Cacheable(value = {"FRIEND_LINKlIST"}, key = "'dataSet'")
+    List<FriendLinkVO> queryFriendListLink();
 }
