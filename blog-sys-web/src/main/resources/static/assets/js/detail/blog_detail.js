@@ -34,7 +34,8 @@ function blogCommentClick(target) {
         url: '/user',
         success: function (res) {
             if (res.data == null) {
-                toastr.info("登陆后才能进行评论喔~");
+                // toastr.info("登陆后才能进行评论喔~");
+                $('#loginModal').modal({show:true});
             } else {
                 var requestData = new Object();
                 requestData.parentId = $(target).attr('comment-parentId');
@@ -85,7 +86,8 @@ function commentReplyClick(target) {
         url: '/user',
         success: function (res) {
             if (res.data == null) {
-                toastr.error("登陆后才能进行评论喔~");
+                // toastr.error("登陆后才能进行评论喔~");
+                $('#loginModal').modal({show:true});
             } else {
                 var realTarget = $(target).parent().parent().parent();
                 var requestData = new Object();
@@ -112,7 +114,8 @@ function replyReplyClick(target) {
         url: '/user',
         success: function (res) {
             if (res.data == null) {
-                toastr.error("登陆后才能进行评论喔~");
+                // toastr.error("登陆后才能进行评论喔~");
+                $('#loginModal').modal({show:true});
             } else {
                 var realTarget = $(target).parent().parent().parent();
                 debugger

@@ -15,8 +15,9 @@
  */
 package cn.kiwipeach.blog.demo;
 
-import cn.kiwipeach.blog.enums.PlatForm;
+import cn.kiwipeach.blog.enums.BlogSys;
 import cn.kiwipeach.blog.enums.CodeValueEnum;
+import cn.kiwipeach.blog.exception.BlogException;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -71,7 +72,7 @@ public class DemoTest {
 
     @Test
     public void testEnum() {
-        PlatForm platform = PlatForm.QQ;
+        BlogSys platform = BlogSys.QQ;
         System.out.println(platform);
         System.out.println(platform.toString().equals("qq"));
 
@@ -110,9 +111,37 @@ public class DemoTest {
 
 
     @Test
-    public void 获取格式化时间(){
+    public void 获取格式化时间() {
         LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Shanghai"));
-        log.info("{}年{}月{}日 {}时{}分{}秒 星期{}",now.getYear(),now.getMonth(),now.getDayOfMonth(),now.getHour(),now.getMinute(),now.getSecond(),now.getDayOfWeek());
+        log.info("{}年{}月{}日 {}时{}分{}秒 星期{}", now.getYear(), now.getMonth(), now.getDayOfMonth(), now.getHour(), now.getMinute(), now.getSecond(), now.getDayOfWeek());
+    }
+
+    @Test
+    public void 测试线程是否会影响返回值() throws InterruptedException {
+        try {
+            System.out.println(threadReturnValue());
+        } catch (Exception e) {
+            log.info("异常");
+        }
+        //阻塞程序
+        Thread.sleep(400000);
+    }
+
+    public String threadReturnValue() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    log.info("线程开始");
+                    Thread.sleep(3000);
+                    if (true) throw new BlogException("-fdsafds","消息测试");
+                    log.info("线程结束");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        return "kiwipeach";
     }
 
 }

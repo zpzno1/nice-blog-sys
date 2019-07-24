@@ -18,23 +18,31 @@ package cn.kiwipeach.blog.service.impl;
 import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.CommentReply;
 import cn.kiwipeach.blog.domain.vo.BlogCommentVO;
+import cn.kiwipeach.blog.email.EmailBody;
+import cn.kiwipeach.blog.email.EmailContentDatasource;
+import cn.kiwipeach.blog.enums.EmailContentType;
 import cn.kiwipeach.blog.exception.BlogException;
 import cn.kiwipeach.blog.mapper.BlogMapper;
 import cn.kiwipeach.blog.mapper.CommentReplyMapper;
 import cn.kiwipeach.blog.param.CommentReplyParam;
 import cn.kiwipeach.blog.service.ICommentReplyService;
+import cn.kiwipeach.blog.service.IEmailService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.kiwipeach.blog.shiro.token.AccessToken;
 import org.kiwipeach.blog.utils.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import java.util.List;
-import java.util.Objects;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -53,13 +61,18 @@ public class CommentReplyServiceImpl extends ServiceImpl<CommentReplyMapper, Com
     private CommentReplyMapper commentReplyMapper;
     @Autowired
     private ValueOperations<String, Object> valueOperations;
+    @Autowired
+    private IEmailService iEmailService;
+
+    @Value("${blog.shiro.cookie.domain}")
+    private String website;
 
 
     @Override
     public AjaxResponse<Boolean> createBlogComment(CommentReplyParam commentReply, AccessToken accessToken) {
-        //信息校验
+        // 入参信息校验
         if (StringUtils.isEmpty(commentReply.getContent())) {
-            throw new BlogException("-COMMENT-002","博客评论内容不能为空");
+            throw new BlogException("-COMMENT-002", "博客评论内容不能为空");
         }
         // 0) 查找当前登录用户信息
         AccessToken currentUser = UserUtil.getCurrentUser();
@@ -73,6 +86,8 @@ public class CommentReplyServiceImpl extends ServiceImpl<CommentReplyMapper, Com
         if (updateBlogCommentCount(commentReply.getParentId()) == false) {
             throw new BlogException("-COMMENT-002", "博客评论统计更新失败！");
         }
+        // 3) 邮件通知站长
+        notifyWebsiteMaster(commentReply.getContent(), commentReply.getBlogId(), "http://www.kiwipeach.cn/");
         return AjaxResponse.success(true);
     }
 
@@ -80,7 +95,7 @@ public class CommentReplyServiceImpl extends ServiceImpl<CommentReplyMapper, Com
     public AjaxResponse<Boolean> createCommentReply(CommentReplyParam commentReply, AccessToken accessToken) {
         //信息校验
         if (StringUtils.isEmpty(commentReply.getContent())) {
-            throw new BlogException("-COMMENT-002","博客回复内容不能为空");
+            throw new BlogException("-COMMENT-002", "博客回复内容不能为空");
         }
         // 1)插入回复内容
         commentReply.setType("B_COMMENT_REPLY");
@@ -97,7 +112,34 @@ public class CommentReplyServiceImpl extends ServiceImpl<CommentReplyMapper, Com
         if (commentReplyMapper.updateById(curCommentReply) == 0) {
             throw new BlogException("-COMMENT-002", "博客评论回复统计失败！");
         }
+        // 4) FIXME 邮件通知站长(可以做成异步)
+        notifyWebsiteMaster(commentReply.getContent(), commentReply.getBlogId(), "http://www.kiwipeach.cn/");
         return AjaxResponse.success(true);
+    }
+
+    /**
+     * 将评论和回复邮件通知给站长
+     *
+     * @param content 邮件内容
+     */
+    private void notifyWebsiteMaster(String content, String blogId, String website) {
+        //开启一个线程专门发送邮件内容
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                AccessToken currentUser = UserUtil.getCurrentUser();
+                Set<String> paramSet = new LinkedHashSet<>();
+                paramSet.add(currentUser.getNickName());
+                //例如：http://www.kiwipeach.cn/blog/detail/103
+                paramSet.add(new StringBuffer(website).append("blog/detail/").append(blogId).toString());
+                paramSet.add(content);
+                paramSet.add(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));
+                EmailBody emailBody = new EmailBody(Arrays.asList("liuburu@qq.com"), "Nice Blog Sys 新的评论回复通知", paramSet);
+                //如果是模板邮件，一定不要忘记执行这句代码
+                emailBody.setEmailContentType(EmailContentType.MESSAGE_FORMAT_OF_BLOG_COMMENT_REPLY);
+                iEmailService.sendEmail(emailBody);
+            }
+        }).start();
     }
 
 

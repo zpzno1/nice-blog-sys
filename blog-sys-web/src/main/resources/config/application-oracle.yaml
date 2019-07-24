@@ -164,4 +164,12 @@ qiniu:
   markdown-domain: http://md.kiwipeach.cn
   expire-time: 3600
 
-# 8)博客应用缓存配置
+# 8)邮件服务配置（支持163邮箱和qq邮箱服务）
+email:
+  host: smtp.qq.com
+  port: 465
+  user-name: 1099501218@qq.com
+  password: <?>
+  ssl-on-connect: true
+
+# 9)博客应用缓存配置

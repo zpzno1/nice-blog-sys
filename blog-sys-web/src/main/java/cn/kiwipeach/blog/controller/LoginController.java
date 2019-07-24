@@ -18,7 +18,7 @@ package cn.kiwipeach.blog.controller;
 import cn.kiwipeach.blog.anno.AccessLog;
 import cn.kiwipeach.blog.base.AjaxResponse;
 import cn.kiwipeach.blog.domain.SysUser;
-import cn.kiwipeach.blog.enums.PlatForm;
+import cn.kiwipeach.blog.enums.BlogSys;
 import cn.kiwipeach.blog.exception.BlogException;
 import cn.kiwipeach.blog.service.ILoginService;
 import cn.kiwipeach.blog.service.ISysUserService;
@@ -147,13 +147,13 @@ public class LoginController {
      */
     private ILoginService decideLoginService(String platform) {
         ILoginService loginService = null;
-        if (PlatForm.QQ.toString().equalsIgnoreCase(platform)) {
+        if (BlogSys.QQ.toString().equalsIgnoreCase(platform)) {
             loginService = qqLoginService;
-        } else if (PlatForm.GITHUB.toString().equalsIgnoreCase(platform)) {
+        } else if (BlogSys.GITHUB.toString().equalsIgnoreCase(platform)) {
             loginService = githubLoginService;
-        } else if (PlatForm.GITEE.toString().equalsIgnoreCase(platform)) {
+        } else if (BlogSys.GITEE.toString().equalsIgnoreCase(platform)) {
             loginService = giteeLoginService;
-        } else if (PlatForm.SYSTEM.toString().equals(platform)) {
+        } else if (BlogSys.SYSTEM.toString().equals(platform)) {
             loginService = systemLoginService;
         } else {
             throw new IllegalArgumentException("非法入参:" + platform);

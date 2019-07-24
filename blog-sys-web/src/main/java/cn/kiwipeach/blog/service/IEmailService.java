@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 kiwipeach(1099501218@qq.com).
+ * Copyright 2019 liuburu@qq.com.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,22 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package cn.kiwipeach.blog.enums;
+package cn.kiwipeach.blog.service;
+
+import cn.kiwipeach.blog.email.EmailBody;
 
 /**
- * <code,value> 类型的枚举，用来存放系统开发时候出现的编码
+ * 描述：邮件发送相关服务类
  *
  * @author kiwipeach
- * @create 2019-01-30
+ * @create 2019-07-23
  */
-public enum PlatForm {
+public interface IEmailService {
 
-    /*平台常量*/
-    QQ,
-    GITHUB,
-    GITEE,
-    SYSTEM,
-    ;
-
+    /**
+     * 发送邮件信息
+     *
+     * @param emailBody 邮件信息体
+     * @return 是否发送成功
+     */
+    boolean sendEmail(EmailBody emailBody);
 
 }

@@ -19,7 +19,7 @@ import cn.kiwipeach.blog.domain.SysRole;
 import cn.kiwipeach.blog.domain.SysUser;
 import cn.kiwipeach.blog.domain.vo.RolePermissionVO;
 import cn.kiwipeach.blog.domain.vo.UserRoleVO;
-import cn.kiwipeach.blog.enums.PlatForm;
+import cn.kiwipeach.blog.enums.BlogSys;
 import cn.kiwipeach.blog.exception.BlogException;
 import cn.kiwipeach.blog.mapper.*;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
@@ -75,7 +75,7 @@ public class CustomShiroRealm extends AuthorizingRealm {
         //TODO 从数据库中查找到了一条用户
         String platform = targetToken.getPlatform();
         AccessToken dbAccessToken = null;
-        if (PlatForm.SYSTEM.toString().equalsIgnoreCase(platform)) {
+        if (BlogSys.SYSTEM.toString().equalsIgnoreCase(platform)) {
             Wrapper<SysUser> queryWrapper = new QueryWrapper<SysUser>().eq("USER_NAME", targetToken.getUserName()).eq("PLATFORM", platform);
             SysUser sysUser = sysUserMapper.selectOne(queryWrapper);
             try {
