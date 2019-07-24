@@ -21,11 +21,10 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.util.ResourceUtils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -96,12 +95,15 @@ public class EmailBody {
      *
      * @return 返回邮件模板字符串
      */
-    public String readEmailHtmlTemplete() {
+    public String readEmailHtmlTemplete() throws IOException {
         if (this.emailContentType.equals(EmailContentType.SIMPLE_TEXT)) {
             throw new BlogException("-EMAIL_SEND_001", "博客类型参数错误：EmailContentType");
         }
         String templeteFileName = this.emailContentType.getContentTemplete();
-        InputStream inputStream = ClassLoader.getSystemResourceAsStream(templeteFileName);
+        //ClassPathResource classPathResource = new ClassPathResource("classpath:" + templeteFileName);
+        //log.warn("邮件模板文件是否存在?{}", classPathResource.getFile().exists());
+        //InputStream inputStream = classPathResource.getInputStream();
+        InputStream inputStream = this.getClass().getResourceAsStream(templeteFileName);
         BufferedReader fileReader = new BufferedReader(new InputStreamReader(inputStream));
         StringBuffer buffer = new StringBuffer();
         String line = "";

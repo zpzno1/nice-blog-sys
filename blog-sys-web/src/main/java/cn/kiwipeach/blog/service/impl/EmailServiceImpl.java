@@ -118,6 +118,7 @@ public class EmailServiceImpl implements IEmailService {
         } catch (EmailException e) {
             throw new BlogException("-EMAIL_SEND_001", e.getLocalizedMessage());
         } catch (Exception e) {
+            log.error("邮件发送失败：", e);
             throw new BlogException("-EMAIL_SEND_001", e.getLocalizedMessage());
         }
     }

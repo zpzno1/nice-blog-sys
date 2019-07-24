@@ -77,7 +77,7 @@
     <!--#######################################生产环境配置###########################################-->
     <!--default oracle&mysql environment 暂时使用info级别，待日后访问量大了以后再适当调高-->
     <springProfile name="mysql-production">
-        <root level="DEBUG">
+        <root level="INFO">
             <appender-ref ref="ROLL_APPENDER"/>
         </root>
     </springProfile>

@@ -24,8 +24,8 @@ package cn.kiwipeach.blog.enums;
 public enum EmailContentType {
     //SIMPLE_TEXT(简单文本类型)，ATTACHMENT_FILE(带附件邮件类型)，MESSAGE_FORMAT_OF_XXX(格式化消息类型，带有模板配置路径和参数个数信息)
     SIMPLE_TEXT("", 0),
-    MESSAGE_FORMAT_OF_BLOG_COMMENT_REPLY("email/blog_comment_reply.html", 3),
-    MESSAGE_FORMAT_OF_SITE_STATISTICS("email/site_statistics.html", 6),
+    MESSAGE_FORMAT_OF_BLOG_COMMENT_REPLY("/email/blog_comment_reply.html", 3),
+    MESSAGE_FORMAT_OF_SITE_STATISTICS("/email/site_statistics.html", 6),
     ;
 
     /**

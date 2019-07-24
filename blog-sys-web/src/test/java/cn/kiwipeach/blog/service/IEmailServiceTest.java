@@ -1,5 +1,6 @@
 package cn.kiwipeach.blog.service;
 
+import cn.hutool.core.io.resource.ClassPathResource;
 import cn.kiwipeach.blog.BlogWebApplicationTests;
 import cn.kiwipeach.blog.email.EmailBody;
 import cn.kiwipeach.blog.email.EmailContentDatasource;
@@ -9,7 +10,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ResourceUtils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -20,6 +26,25 @@ public class IEmailServiceTest extends BlogWebApplicationTests {
 
     @Autowired
     private IEmailService iEmailService;
+
+    @Test
+    public void testClassFile() throws IOException {
+        //获取文件
+        File file = new File(ResourceUtils.getFile("classpath:email/blog_comment_reply.html").getPath());
+        log.warn("文件是否存在：{}", file.exists());
+
+        //获取文件流
+        ClassPathResource classPathResource = new ClassPathResource("classpath:email/blog_comment_reply.html");
+        InputStream stream = classPathResource.getStream();
+        log.warn("stream流是否为空？{}", stream == null);
+        stream.close();
+
+        //获取jar包中的
+        InputStream inputStream = EmailBody.class.getResourceAsStream("/email/blog_comment_reply.html");
+        log.warn("stream流是否为空？{}", inputStream == null);
+        inputStream.close();
+
+    }
 
     @Test
     public void 发送带有格式的Html邮件() throws Exception {
