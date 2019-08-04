@@ -19,11 +19,11 @@
             <artifactId>druid</artifactId><!--duird数据源-->
             <version>${druid.version}</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>cn.kiwipeach</groupId>
-            <artifactId>ojdbc6</artifactId><!--oracle数据库驱动-->
+            <artifactId>ojdbc6</artifactId>&lt;!&ndash;oracle数据库驱动，请自行维护该jar包，因为maven中央库没有收录&ndash;&gt;
             <version>${oracle.version}</version>
-        </dependency>
+        </dependency>-->
         <!--项目模块依赖-->
         <dependency>
             <groupId>javax.servlet</groupId>
