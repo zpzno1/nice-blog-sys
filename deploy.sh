@@ -27,6 +27,6 @@ else
       echo "no nice-blog-sys pid alive"
 fi
 #nohup java -Xms512m -Xmx1024m -jar $TARGET_JAR_PATH  --spring.profiles.active=mysql-production ->$WEB_LOGFILE &
-nohup java -Xms512m -Xmx1024m -jar $TARGET_JAR_PATH  --spring.config.location=~/application-production.yaml ->$WEB_LOGFILE &
+nohup java -Xms512m -Xmx1024m -jar $TARGET_JAR_PATH  --spring.config.location=~/application-mysql-production.yaml ->$WEB_LOGFILE &
 echo "[构建结果:]  BUILD SUCCESS!"
 
