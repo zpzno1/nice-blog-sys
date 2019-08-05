@@ -80,6 +80,9 @@
         <root level="INFO">
             <appender-ref ref="ROLL_APPENDER"/>
         </root>
+        <root level="INFO">
+            <appender-ref ref="CONSOLE_APPENDER"/>
+        </root>
     </springProfile>
     <springProfile name="oracle-production">
         <root level="INFO">
