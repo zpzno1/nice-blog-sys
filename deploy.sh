@@ -15,17 +15,18 @@ mvn clean compile package
 
 # 3) springboot服务重启
 
-echo "[step 3:]  重启springboot进城服务"
+echo "[step 3:]  重启nice-blog-sys服务"
 blog_sys_pid=`ps -ef | grep java| grep $TARGET_JAR_PATH |awk '{print $2}'`
 
 if [ -n "$blog_sys_pid" ]
 then
       kill -9 $blog_sys_pid
-      echo $blog_sys_pid "nice-blog-sys process is killed success...."
+      echo $blog_sys_pid "nice-blog-sys 进程成功关闭...."
 else
       echo "no nice-blog-sys pid alive"
 fi
 nohup java -Xms512m -Xmx1024m -jar $TARGET_JAR_PATH  --spring.profiles.active=mysql-production ->$WEB_LOGFILE &
+echo $blog_sys_pid "nice-blog-sys 进程成功启动...."
 
-echo "[构建执行完毕:]  BUILD SUCCESS!"
+echo "[构建执行完毕:]  BUILD AND DEPLOY SUCCESS!"
 exit 0;
