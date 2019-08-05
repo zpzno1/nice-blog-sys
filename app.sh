@@ -5,7 +5,7 @@ TARGET_JAR_PATH=$SOURCE_CODE_PATH/blog-sys-web/target/NiceBlog.jar
 
 #使用说明，用来提示输入参数
 usage() {
-    echo "Usage: sh 执行脚本.sh [start|stop|restart|status]"
+    echo "Usage: sh app.sh [start|stop|restart|status]"
     exit 1
 }
 
@@ -44,6 +44,7 @@ start() {
        package
        echo "[step 2]: ${APP_NAME} SUCCESS BUILD CODE(源码构建成功)."
        nohup java -Xms512m -Xmx1024m -jar ${TARGET_JAR_PATH}  --spring.profiles.active=mysql-production ->/dev/null 2>&1 &
+       is_exist
        echo "[step 3]: ${APP_NAME} SUCCESS RUNNING AND THE PID IS ${pid}(服务启动成功)."
 	fi
 }
