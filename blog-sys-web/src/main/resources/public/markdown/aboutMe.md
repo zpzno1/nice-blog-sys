@@ -21,7 +21,7 @@
 
 ## 互加友链
 
-   **请在指定的链接下方留言（[友链传送门](http://www.kiwipeach.cn/blog/detail/100)），并简单地描述您的站点信息，例如(`http://www.kiwipeach.cn(kiwipeach's blog)`)，我会及时更新维护到友链栏目。注：如果您的博客链接被我无意间查看发现不能访问或者未检测到本站友链信息，经系统定时检测后将会自动取消友链显示资格，需恢复后重新留言申请访问。**
+   **请在指定的链接下方留言（[友链传送门](http://www.kiwipeach.cn/blog/detail/100)），并简单地描述您的站点信息，例如(`http://www.kiwipeach.cn(kiwipeach's blog)`)，我会及时更新维护到友链栏目。**
 
 
 

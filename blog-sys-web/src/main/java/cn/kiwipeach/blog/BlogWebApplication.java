@@ -29,7 +29,6 @@ public class BlogWebApplication extends SpringBootServletInitializer {
     @PostConstruct
     public void sysInitBanner() {
         log.warn("系统访问前台[qq,github,gitee]:http://{}", domain);
-        //log.info("系统访问后台[qq,github,gitee]:http://www.kiwipeach.cn/amdin/index.html");
         log.warn("系统duird监控[admin/123456]:http://{}/druid", domain);
     }
 
@@ -39,9 +38,9 @@ public class BlogWebApplication extends SpringBootServletInitializer {
     }
 
     public static void main(String[] args) {
-//		SpringApplication app = new SpringApplication(BlogWebApplication.class);
-//		app.setBannerMode(Banner.Mode.CONSOLE);
-//		app.run(args);
+		//SpringApplication app = new SpringApplication(BlogWebApplication.class);
+		//app.setBannerMode(Banner.Mode.CONSOLE);
+		//app.run(args);
         SpringApplication.run(BlogWebApplication.class, args);
     }
 }
