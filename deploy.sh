@@ -2,7 +2,9 @@
 #jenkins打包成war包之后存放的目录
 SOURCE_CODE_PATH="/webapp/nice-blog-sys"
 TARGET_JAR_PATH=$SOURCE_CODE_PATH/blog-sys-web/target/NiceBlog.jar
-WEB_LOGFILE=/weblogs/nice-blog-sys/nice-blog-sys.out
+#WEB_LOGFILE=/weblogs/nice-blog-sys/nice-blog-sys.out
+WEB_LOGFILE=/dev/null
+
 
 # 1) 拉取gitee代码
 echo "[step 1:]  从gitee上拉取代码"
@@ -25,7 +27,7 @@ then
 else
       echo "no nice-blog-sys pid alive"
 fi
-nohup java -Xms512m -Xmx1024m -jar $TARGET_JAR_PATH  --spring.profiles.active=mysql-production ->$WEB_LOGFILE &
+nohup java -Xms512m -Xmx1024m -jar $TARGET_JAR_PATH  --spring.profiles.active=mysql-production ->$WEB_LOGFILE 2>&1 &
 echo $blog_sys_pid "nice-blog-sys 进程成功启动...."
 
 echo "[构建执行完毕:]  BUILD AND DEPLOY SUCCESS!"
