@@ -1,8 +1,9 @@
 # 端口
 server:
-  port: 80
+  port: 8080
   servlet:
     context-path: /
+
 
 
 # 1)系统启动广告
@@ -25,9 +26,10 @@ spring:
     allow-bean-definition-overriding: true
   datasource:
     username: <?>
+    #密码生成规则，参考：cn.kiwipeach.blog.DruidEncryptTest
     password: <?>
-    url: jdbc:oracle:thin:@localhost:1521:ORCL
-    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:mysql://<?>:3306/KIWIPEACH?userUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
 
     initialSize: 5
@@ -36,7 +38,8 @@ spring:
     maxWait: 60000
     timeBetweenEvictionRunsMillis: 60000
     minEvictableIdleTimeMillis: 300000
-    validationQuery: SELECT 1 FROM DUAL
+    #    validationQuery: SELECT 1 FROM DUAL
+    #    validationQuery: SELECT 1
     testWhileIdle: true
     testOnBorrow: false
     testOnReturn: false
@@ -64,9 +67,10 @@ spring:
         max-wait: -1ms
         max-idle: 8
         min-idle: 0
-    timeout: 5000
+    #        10s中没有响应则抛出异常：RedisCommandTimeoutException
+    timeout: 10000
     port: 6379
-    database: 0
+    database: 8
 
 # 4)mybatis-plus配置
 mybatis-plus:
@@ -87,7 +91,7 @@ mybatis-plus:
       #逻辑删除配置
       logic-delete-value: 0
       logic-not-delete-value: 1
-      db-type: oracle
+      db-type: mysql
     refresh: true
     #自定义填充策略接口实现
     #meta-object-handler: com.baomidou.springboot.xxx
@@ -96,6 +100,7 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
+    database-id: mysql
 
 # 5)shiro配置
 blog:
