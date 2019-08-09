@@ -8,36 +8,11 @@ spring:
   main:
     # 当有自定义bean的时候，是否允许覆盖springboot的默认bean，默认为false
     allow-bean-definition-overriding: true
-#  datasource:
-#    username: root
-#    password: Cnzg8hutIv6NPHhylRPqjvC7OkQOqdb543vwfW5JCfsBnBDtMctnENGO3MfMF3VJo8Q/Ixou8Q/6d2hipLBEew==
-#    url: jdbc:mysql://120.79.212.45:3306/KIWIPEACH?userUnicode=true&characterEncoding=utf-8
-#    driver-class-name: com.mysql.jdbc.Driver
-#    type: com.alibaba.druid.pool.DruidDataSource
-#
-#    initialSize: 5
-#    minIdle: 5
-#    maxActive: 20
-#    maxWait: 60000
-#    timeBetweenEvictionRunsMillis: 60000
-#    minEvictableIdleTimeMillis: 300000
-#    #    validationQuery: SELECT 1 FROM DUAL
-#    validationQuery: SELECT 1
-#    testWhileIdle: true
-#    testOnBorrow: false
-#    testOnReturn: false
-#    poolPreparedStatements: true
-#    filters: config,stat,wall,slf4j
-#    maxPoolPreparedStatementPerConnectionSize: 20
-#    useGlobalDataSourceStat: true
-#    connectionProperties: config.decrypt=true;druid.stat.logSlowSql=true;druid.stat.slowSqlMillis=200;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMDHEqPdRifJ9Y0ci1y3Lt6q1XVXwLJlYYnDnT4O6vTI6fpvsC0msjEUVtHaUUDEgFgv0ekPSuCq68zq4+r8LYkCAwEAAQ==
-
-# 3)数据源配置
   datasource:
-    username: kiwipeach
+    username: root
     password: Cnzg8hutIv6NPHhylRPqjvC7OkQOqdb543vwfW5JCfsBnBDtMctnENGO3MfMF3VJo8Q/Ixou8Q/6d2hipLBEew==
-    url: jdbc:oracle:thin:@localhost:1521:ORCL
-    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:mysql://120.79.212.45:3306/KIWIPEACH?userUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
 
     initialSize: 5
@@ -46,16 +21,41 @@ spring:
     maxWait: 60000
     timeBetweenEvictionRunsMillis: 60000
     minEvictableIdleTimeMillis: 300000
-    validationQuery: SELECT 1 FROM DUAL
+    #    validationQuery: SELECT 1 FROM DUAL
+    validationQuery: SELECT 1
     testWhileIdle: true
     testOnBorrow: false
     testOnReturn: false
     poolPreparedStatements: true
-    #    filters: config,stat,wall,slf4j
-    filters: config,stat,wall
+    filters: config,stat,wall,slf4j
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
     connectionProperties: config.decrypt=true;druid.stat.logSlowSql=true;druid.stat.slowSqlMillis=200;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMDHEqPdRifJ9Y0ci1y3Lt6q1XVXwLJlYYnDnT4O6vTI6fpvsC0msjEUVtHaUUDEgFgv0ekPSuCq68zq4+r8LYkCAwEAAQ==
+
+# 3)数据源配置
+#  datasource:
+#    username: kiwipeach
+#    password: Cnzg8hutIv6NPHhylRPqjvC7OkQOqdb543vwfW5JCfsBnBDtMctnENGO3MfMF3VJo8Q/Ixou8Q/6d2hipLBEew==
+#    url: jdbc:oracle:thin:@localhost:1521:ORCL
+#    driver-class-name: oracle.jdbc.driver.OracleDriver
+#    type: com.alibaba.druid.pool.DruidDataSource
+#
+#    initialSize: 5
+#    minIdle: 5
+#    maxActive: 20
+#    maxWait: 60000
+#    timeBetweenEvictionRunsMillis: 60000
+#    minEvictableIdleTimeMillis: 300000
+#    validationQuery: SELECT 1 FROM DUAL
+#    testWhileIdle: true
+#    testOnBorrow: false
+#    testOnReturn: false
+#    poolPreparedStatements: true
+#    #    filters: config,stat,wall,slf4j
+#    filters: config,stat,wall
+#    maxPoolPreparedStatementPerConnectionSize: 20
+#    useGlobalDataSourceStat: true
+#    connectionProperties: config.decrypt=true;druid.stat.logSlowSql=true;druid.stat.slowSqlMillis=200;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMDHEqPdRifJ9Y0ci1y3Lt6q1XVXwLJlYYnDnT4O6vTI6fpvsC0msjEUVtHaUUDEgFgv0ekPSuCq68zq4+r8LYkCAwEAAQ==
 
 #mybatis
 mybatis-plus:
