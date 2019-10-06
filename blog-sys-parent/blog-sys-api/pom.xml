@@ -34,11 +34,11 @@
             <version>${druid.version}</version>
         </dependency>
         <!--oracle驱动问题请自行解决，如果您选择的是MySQL数据库，可忽略-->
-       <!-- <dependency>
-            <groupId>cn.kiwipeach</groupId>
-            <artifactId>ojdbc6</artifactId>&lt;!&ndash;oracle数据库驱动&ndash;&gt;
-            <version>${oracle.version}</version>
-        </dependency>-->
+        <!-- <dependency>
+             <groupId>cn.kiwipeach</groupId>
+             <artifactId>ojdbc6</artifactId>&lt;!&ndash;oracle数据库驱动&ndash;&gt;
+             <version>${oracle.version}</version>
+         </dependency>-->
 
         <!--Cannot resolve com.mysq.jdbc.Connection.ping method.  Will use 'SELECT 1' instead.-->
         <dependency>
@@ -65,6 +65,13 @@
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity</artifactId>
             <version>1.7</version>
+        </dependency>
+        <!--servlet支持-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>

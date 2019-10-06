@@ -30,7 +30,7 @@ public class DruidEncryptTest {
      */
     @Test
     public void encryptPassword() throws Exception {
-        String password = "你的密码";
+        String password = "root";
         String[] arr = ConfigTools.genKeyPair(512);
         System.out.println("privateKey:" + arr[0]);
         System.out.println("publicKey:" + arr[1]);

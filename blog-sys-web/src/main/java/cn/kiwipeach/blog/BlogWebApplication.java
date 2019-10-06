@@ -16,7 +16,8 @@ import javax.annotation.PostConstruct;
 
 
 @EnableTransactionManagement
-@SpringBootApplication(scanBasePackages = {"cn.kiwipeach.blog", "org.kiwipeach.blog"})
+//@SpringBootApplication(scanBasePackages = {"cn.kiwipeach.blog", "org.kiwipeach.blog"})
+@SpringBootApplication(scanBasePackages = {"cn.kiwipeach.blog"})
 @EnableCaching
 @Slf4j
 @ServletComponentScan(basePackages = "org.kiwipeach.blog.filter")

@@ -5,7 +5,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages = "cn.kiwipeach.blog")
+@SpringBootApplication(scanBasePackages = {"cn.kiwipeach.blog"})
 @MapperScan(value = "cn.kiwipeach.blog.mapper")
 public class BlogApiApplication {
 
